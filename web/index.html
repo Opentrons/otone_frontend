@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	    <link href="./css/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet">
+
+	    <link rel="icon" type="image/png" href="./images/favicon.png" >
+
+		<title>OT.One</title>
+
+		<link rel="stylesheet" href="./css/main.css">
+		<script type="text/javascript" src="./js/jquery-1.10.0.min.js"></script>
+		<script type="text/javascript" src="./js/autobahn.min.js"></script>
+		<script type="text/javascript" src="./js/loadFiles.js"></script>
+		<script type="text/javascript" src="./js/createJobFile.js"></script>
+		<script type="text/javascript" src="./js/fileSaver.js"></script>
+		<script type="text/javascript" src="./js/blob.js"></script>
+		<script type="text/javascript" src="./js/main.js"></script>
+		<script type="text/javascript" src="./js/ot.js"></script>
+		<script type="text/javascript" src="./js/ui.js"></script>
+	</head>
+	<body>
+		<div class="container" style="padding-top:20px;">
+			<nav class="navbar navbar-default" style="margin-bottom:30px;">
+			  <div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" style="font-family:\"Trons-Strong\"" href="http://opentrons.com" target="_blank">
+			      	OpenTrons
+			      </a>
+			      <ul class="nav navbar-nav navbar-left">
+			        <li>
+			        	<a href="https://github.com/opentrons" target="_blank">v0.3.1pipy</a>
+			        </li>
+			      </ul>
+			    </div>
+
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav navbar-right">
+			        <li>
+			        	<a href="#" id="status">Good</a>
+			        </li>
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</nav>
+
+			<div id="main_container">
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<div class="UI-block center-block">
+							<div class="btn-group" role="group" aria-label="...">
+								<button type="button" id="deckLink" class="btn btn-default active" onclick="changeTab('deck');">Deck</button>
+								<button type="button" id="pipetteLink" class="btn btn-default" onclick="changeTab('pipette');">Pipette</button>
+								<button type="button" id="configLink" class="btn btn-default" onclick="changeTab('config');">Config</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<div class="UI-block center-block" id="dragDiv">
+							<button disabled="true" type="button" class="btn" id="runButton">Process File</button>
+
+							<span id="fileName">
+							[empty]
+							</span>
+							<button type="button" class="btn tron-white" onclick="pause()">Pause</button>
+							<button type="button" class="btn tron-white" onclick="resume()">Resume</button>
+							<button type="button" class="btn tron-white" onclick="erase()">Erase</button>
+						</div>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<div class="UI-block center-block">
+							<span style="padding-left:10px;padding-right:10px;">Home:</span>
+							<button type="button" class="btn tron-white" onclick="home()">ALL</button>
+							<button type="button" class="btn tron-white" onclick="home('{x:true}')">X</button>
+							<button type="button" class="btn tron-white" onclick="home('{y:true}')">Y</button>
+							<button type="button" class="btn tron-white" onclick="home('{z:true}')">Z</button>
+							<button type="button" class="btn tron-white" onclick="home('{a:true}')">A</button>
+							<button type="button" class="btn tron-white" onclick="home('{b:true}')">B</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="pipette_container" style="display:none">
+				<div class="row">
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<div class="UI-block center-block">
+							<h3 class="UI-Title" class="UI-Title">Jog Axis (A-B)</h3>
+							<div style="padding-left:10px">
+								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
+									<button onclick="step('a',-1)" class="btn tron-blue step-btn">
+										<span>&#8593;</span>
+									</button>
+									<div style="height:30px"></div>
+									<button onclick="step('a',1)" class="btn tron-blue step-btn">
+										<span>&#8595;</span>
+									</button>
+								</div>
+								<div style="position:relative;display:inline-block;margin-left:30px;">
+									<button onclick="step('b',-1)" class="btn tron-black step-btn">
+										<span>&#8593;</span>
+									</button>
+									<div style="height:30px"></div>
+									<button onclick="step('b',1)" class="btn tron-black step-btn">
+										<span>&#8595;</span>
+									</button>
+								</div>
+								<br /><br />
+								<div style="padding-left:30px;">
+									<span style="margin-left:-20px">A: <code class="code-pos" id="position_a">0.0</code></span>
+									<span style="margin-left:20px">B: <code class="code-pos" id="position_b">0.0</code></span>
+								</div>
+								<br />
+								<div class="btn-group" role="group" aria-label="..." id="stepSize_ab">
+									<button type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'ab',2);">2mm</button>
+									<button type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'ab',0.5);">0.5mm</button>
+									<button type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'ab',0.1);">0.1mm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<div class="UI-block center-block">
+							<h3 class="UI-Title">Plunger Positions</h3>
+							<img src="./images/plunger_labels.png" class="plunger-label" />
+							<div style="display:inline-block;">
+								<div style="height:21px"></div>
+								<div class="btn-group btn-group-sm">
+									<button type="button" class="btn tron-blue" onclick="movePipette('a','top')">A-Top</button>
+									<button type="button" class="btn dropdown-toggle tron-blue" data-toggle="dropdown" aria-expanded="false">
+										<span class="caret"></span>
+										<span class="sr-only"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#" onclick="calibrate('a','top')">Overwrite A-Top</a></li>
+									</ul>
+								</div>
+								<br /><br />
+								<div class="btn-group btn-group-sm">
+									<button type="button" class="btn tron-blue" onclick="movePipette('a','blowout')">A-Blowout</button>
+									<button type="button" class="btn dropdown-toggle tron-blue" data-toggle="dropdown" aria-expanded="false">
+										<span class="caret"></span>
+										<span class="sr-only"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#" onclick="calibrate('a','blowout')">Overwrite A-Blowout</a></li>
+									</ul>
+								</div>
+								<br /><br />
+								<div class="btn-group btn-group-sm">
+									<button type="button" class="btn tron-blue" onclick="movePipette('a','droptip')">A-Droptip</button>
+									<button type="button" class="btn dropdown-toggle tron-blue" data-toggle="dropdown" aria-expanded="false">
+										<span class="caret"></span>
+										<span class="sr-only"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#" onclick="calibrate('a','droptip')">Overwrite A-Droptip</a></li>
+									</ul>
+								</div>
+							</div>
+							<div style="display:inline-block">
+								<div class="btn-group btn-group-sm">
+									<button type="button" class="btn tron-black" onclick="movePipette('b','top')">B-Top</button>
+									<button type="button" class="btn dropdown-toggle tron-black" data-toggle="dropdown" aria-expanded="false">
+										<span class="caret"></span>
+										<span class="sr-only"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#" onclick="calibrate('b','top')">Overwrite B-Top</a></li>
+									</ul>
+								</div>
+								<br /><br />
+								<div class="btn-group btn-group-sm">
+									<button type="button" class="btn tron-black" onclick="movePipette('b','blowout')">B-Blowout</button>
+									<button type="button" class="btn dropdown-toggle tron-black" data-toggle="dropdown" aria-expanded="false">
+										<span class="caret"></span>
+										<span class="sr-only"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#" onclick="calibrate('b','blowout')">Overwrite B-Blowout</a></li>
+									</ul>
+								</div>
+								<br /><br />
+								<div class="btn-group btn-group-sm">
+									<button type="button" class="btn tron-black" onclick="movePipette('b','droptip')">B-Droptip</button>
+									<button type="button" class="btn dropdown-toggle tron-black" data-toggle="dropdown" aria-expanded="false">
+										<span class="caret"></span>
+										<span class="sr-only"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#" onclick="calibrate('b','droptip')">Overwrite B-Droptip</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<div class="UI-block center-block">
+						<h3 class="UI-Title">Calibrate Volume</h3>
+							<div style="margin-left:20px;">
+								<h4 style="padding-top:10px;">
+									<span>Testing uL: </span>
+									<select type="text" id="volume_a">
+										<option value="1000">1000</option>
+										<option value="500">500</option>
+										<option value="200">200</option>
+										<option value="100">100</option>
+										<option value="50">50</option>
+										<option value="25">25</option>
+										<option value="10">10</option>
+										<option value="5">5</option>
+									</select>
+								</h4>
+								<br />	
+								<div style="display:inline-block">
+									<div>A (uL): <code id="pipetteVolume_a">null</code></div>
+									<br />
+									<div class="btn-group btn-group-sm">
+										<button type="button" class="btn tron-blue" onclick="moveVolume('a')">A-Pipette</button>
+										<button type="button" class="btn dropdown-toggle tron-blue" data-toggle="dropdown" aria-expanded="false">
+											<span class="caret"></span>
+											<span class="sr-only"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="#" onclick="saveVolume('a')">Overwrite A-Volume</a></li>
+										</ul>
+									</div>
+									<br /><br />
+									<button type="button" class="btn btn-sm tron-blue" onclick="shakePipette('a')">Shake</button>
+									<br /><br />
+									<button type="button" class="btn btn-sm tron-blue" onclick="pickupTip('a')">Pickup-Tip</button>
+								</div>
+								<div style="display:inline-block;text-align:right;margin-left:50px">
+									<div style="margin-right:5px;">B (uL): <code id="pipetteVolume_b">null</code></div>
+									<br />
+									<div class="btn-group btn-group-sm">
+										<button type="button" class="btn tron-black" onclick="moveVolume('b')">B-Pipette</button>
+										<button type="button" class="btn dropdown-toggle tron-black" data-toggle="dropdown" aria-expanded="false">
+											<span class="caret"></span>
+											<span class="sr-only"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="#" onclick="saveVolume('b')">Overwrite B-Volume</a></li>
+										</ul>
+									</div>
+									<br /><br />
+									<button type="button" class="btn btn-sm tron-black" onclick="shakePipette('b')">Shake</button>
+									<br /><br />
+									<button type="button" class="btn btn-sm tron-black" onclick="pickupTip('b')">Pickup-Tip</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="deck_container">
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<div class="UI-block center-block">
+							<h3 class="UI-Title">Jog Axis (X-Y-Z)</h3>
+							<div style="padding-left:20px">
+								<div style="position:relative;margin-top:10px;display:inline-block">
+									<button onclick="step('y',-1)" class="btn tron-grey step-btn step-up">
+										<span>&#8593;</span>
+									</button>
+									<br />
+									<button onclick="step('x',-1)" class="btn tron-grey step-btn step-left">
+										<span>&#8592;</span>
+									</button>
+									<button onclick="step('x',1)" class="btn tron-grey step-btn step-right">
+										<span>&#8594;</span>
+									</button>
+									<br />
+									<button onclick="step('y',1)" class="btn tron-grey step-btn step-down">
+										<span>&#8595;</span>
+									</button>
+								</div>
+								<div style="position:relative;margin-top:10px;margin-left:0px;display:inline-block">
+									<button onclick="step('z',-1)" class="btn tron-white step-btn step-up" style="margin-left:20px;">
+										<span>&#8593;</span>
+									</button>
+									<div style="height:40px;"></div>
+									<button onclick="step('z',1)" class="btn tron-white step-btn step-down" style="margin-left:20px;">
+										<span>&#8595;</span>
+									</button>
+								</div>
+								<br /><br />
+								<div style="padding-left:3%;">
+									<span>X: <code class="code-pos" id="position_x">0.0</code></span>
+									<span style="margin-left:20px;">Y: <code class="code-pos" id="position_y">0.0</code></span>
+									<span style="margin-left:20px;">Z: <code class="code-pos" id="position_z">0.0</code></span>
+								</div>
+								<br />
+								<div class="btn-group" role="group" aria-label="..." id="stepSize_xyz">
+									<button type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'xyz',10);">10mm</button>
+									<button type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'xyz',2);">2mm</button>
+									<button type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.5);">0.5mm</button>
+									<button type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.1);">0.1mm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-8 col-sm-8 col-md-8">
+						<div class="UI-block">
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<h3 class="UI-Title">Container Positions</h3>
+									<div class="container-scroll">
+										<table id="containerMenu" class="table table-stripped">
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-xs-3 col-sm-3 col-md-3">
+									<h4>Pipette A</h4>
+									<div class="btn-group btn-group-sm">
+										<button type="button" class="btn tron-blue" onclick="movetoContainer('a')">Move To ...</button>
+										<button type="button" class="btn dropdown-toggle tron-blue" data-toggle="dropdown" aria-expanded="false">
+											<span class="caret"></span>
+											<span class="sr-only"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="#" onclick="saveContainer('a')">Overwrite Position</a></li>
+										</ul>
+									</div>
+									<div style="margin-top:20px;padding-left:10px;">
+										<p>X: <code id="containerpos_x_a">0</code></p>
+										<p>Y: <code id="containerpos_y_a">0</code></p>
+										<p>Z: <code id="containerpos_z_a">0</code></p>
+									</div>
+								</div>
+								<div class="col-xs-3 col-sm-3 col-md-3">
+									<h4>Pipette B</h4>
+									<div class="btn-group btn-group-sm">
+										<button type="button" class="btn tron-black" onclick="movetoContainer('b')">Move To ...</button>
+										<button type="button" class="btn tron-black dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											<span class="caret"></span>
+											<span class="sr-only"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="#" onclick="saveContainer('b')">Overwrite Position</a></li>
+										</ul>
+									</div>
+									<div style="margin-top:20px;padding-left:10px;">
+										<p>X: <code id="containerpos_x_b">0</code></p>
+										<p>Y: <code id="containerpos_y_b">0</code></p>
+										<p>Z: <code id="containerpos_z_b">0</code></p>
+									</div>
+								</div>
+								<div style="display:inline-block;height:20px;width:40px"></div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<h4 style="display:inline;height:100%;vertical-align:middle;margin-right:10px">Move to Slot</h4>
+									<div style="display:inline-block">
+										<button class="btn tron-grey slot-btn" onclick="moveSlot('A3')">3</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('B3')">6</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('C3')">9</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('D3')">12</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('E3')">15</button>
+										<br />
+										<button class="btn tron-grey slot-btn" onclick="moveSlot('A2')">2</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('B2')">5</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('C2')">8</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('D2')">11</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('E2')">14</button>
+										<br />
+										<button class="btn tron-grey slot-btn" onclick="moveSlot('A1')">1</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('B1')">4</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('C1')">7</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('D1')">10</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('E1')">13</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div id="config_container" style="display:none">
+				<div class="row">
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<div class="UI-block center-block">
+							<h3 class="UI-Title" class="UI-Title">Wireless Settings</h3>
+							<div style="padding-left:10px">
+								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
+									<div style="margin-left:20px;">
+										<h4>Wifi Network: </h4>
+                                                                                <span id="wifi_essid_span">[none]</span>
+										<h4>WiFi IP Address: </h4>
+										<a href="#" id="wifi_ip">[none]</a>
+										<h4>Ethernet IP Address: </h4>
+										<a href="#" id="eth_ip">[none]</a>
+										<h4 style="padding-top:10px;">
+											<select type="text" id="wifiSelect" onchange="selectMode();">
+												<option value="WIFI">WIFI</option>
+												<option value="AP">AP</option>
+											</select>
+										</h4>
+									</div>
+									<div id="wifi_container" style="display: block;">
+										<select type="text" id="encrSelect">
+											<option value="None">NONE</option>
+											<option value="WPA">WPA</option>
+										</select>
+										<button class="btn tron-blue" id="wifiModeButton" onclick="scanWIFI()">Scan Networks</button>
+									</div>
+									<select type="text" id="wifiNets">
+									</select>
+									</br>
+									</br>
+									<span id="ssid_span">SSID:</span>
+									<input type="text" id="ssid_input" />
+									</br>
+									</br>
+									<span id="passphrase_span">Passphrase:</span>
+									<input type="text" id="passphrase_input" />
+								</div>
+								<button class="btn tron-blue" id="wifiModeButton" onclick="setWifiMode()">Set Mode</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<div class="UI-block center-block">
+							<h3 class="UI-Title" class="UI-Title">Power</h3>
+							<div style="padding-left:10px">
+								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
+									<button class="btn tron-blue" id="rebootButton" onclick="reboot()">Reboot</button>
+								</div>
+								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
+									<button class="btn tron-blue" id="poweroffButton" onclick="poweroff()">Poweroff</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<div class="UI-block center-block">
+							<h3 class="UI-Title" class="UI-Title">Hostname</h3>
+							<div style="padding-left:10px">
+								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
+									<input type="text" id="hostname_input" />
+									<button class="btn tron-blue" id="hostnameButton" onclick="changeHostname()">Change Hostname</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<div class="UI-block center-block">
+							<h3 class="UI-Title" class="UI-Title">Update</h3>
+							<div style="padding-left:10px">
+								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
+									<span id="update_span" >Update [Something]</span>
+									<button class="btn tron-blue" id="updateButton" onclick="update()">Update</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<a href="#" onclick="toggleDebug(this)">Debug Monitor</a>
+			</div>
+			<br />
+
+			<div id="debug_container" style="display:none">
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div class="UI-block center-block">
+							<div id="debug-console">
+								<div id="debugCommandContainer">
+									<h4>Send G-code</h4>
+									<textarea id="debugCommandInput"></textarea>
+									<button class="btn tron-blue" id="debugCommandButton" onclick="sendDebugCommand()">Send</button>
+								</div>
+								<div id="print">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="./css/bootstrap-3.3.4-dist/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="./css/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+	</body>
+</html>

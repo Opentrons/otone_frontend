@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	    <link href="../css/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet">
+
+	    <link rel="icon" type="image/png" href="../images/favicon.png" >
+
+		<title>OT.One Configuration</title>
+
+		<link rel="stylesheet" href="../css/main.css">
+		<script type="text/javascript" src="../js/autobahn.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.10.0.min.js"></script>
+		<script type="text/javascript" src="../js/main.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.10.0.min.js"></script>
+		<!--<script type="text/javascript" src="../js/config.js"></script>-->
+		<script type="text/javascript" src="../js/ot.js"></script>
+		<script type="text/javascript" src="../js/ui.js"></script>
+	</head>
+	<body>
+		<div class="container" style="padding-top:20px;">
+			<div id="main_container">
+				<div class="row">
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<div class="UI-block center-block">
+							<h3 class="UI-Title">Wireless Mode</h3>
+							<div style="margin-left:20px;">
+								<h4 style="padding-top:10px;">
+									<select type="text" id="wifiSelect" onchange="selectMode();">
+										<option value="WIFI">WIFI</option>
+										<option value="AP">AP</option>
+									</select>
+								</h4>
+							</div>
+							<div id="wifi_container" style="display: block;">
+								<select type="text" id="encrSelect">
+									<option value="None">NONE</option>
+									<option value="WPA">WPA</option>
+								<button class="btn tron-blue" id="wifiModeButton" onclick="scanWIFI()">Scan Networks</button>
+								</div>
+								</select>
+								<select type="text" id="wifiNets">
+								</select>
+								</br>
+								</br>
+								<span id="ssid_span">SSID:</span>
+								<input type="text" id="ssid_textarea" />
+								</br>
+								</br>
+								<span id="passphrase_span">Passphrase:</span>
+								<input type="text" id="passphrase_textarea" />
+							</div>
+							<button class="btn tron-blue" id="wifiModeButton" onclick="setWifiMode()">Set Mode</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../css/bootstrap-3.3.4-dist/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../css/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+	</body>
+</html>
