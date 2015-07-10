@@ -901,3 +901,11 @@ function poweroff(){
   };
   sendMessage(msg);
 }
+
+function update(data){
+  var msg = {
+    'type' : 'update',
+    'data' : data
+  };
+  sendMessage(msg);
+}
