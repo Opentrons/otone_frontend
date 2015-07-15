@@ -55,6 +55,16 @@ code {
 	border: 1px solid #ccc;
 }
 
+
+.navbar-brand img{
+	padding:5px;
+	height:45px;
+	width:auto;
+}
+.navbar-brand{
+	padding:5px 10px;
+}
+
 .tron-blue {
 	background-color: #0f3ffb;
 	color:#fdfdfd;
