@@ -40,7 +40,7 @@
 			      </a>
 			      <ul class="nav navbar-nav navbar-left">
 			        <li>
-			        	<a href="https://github.com/opentrons" target="_blank">v0.3.1pipy</a>
+			        	<a href="https://github.com/opentrons" target="_blank">v0.3.2pipy</a>
 			        </li>
 			      </ul>
 			    </div>
@@ -124,9 +124,15 @@
 								</div>
 								<br />
 								<div class="btn-group" role="group" aria-label="..." id="stepSize_ab">
-									<button type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'ab',2);">2mm</button>
-									<button type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'ab',0.5);">0.5mm</button>
-									<button type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'ab',0.1);">0.1mm</button>
+									<div>
+										<button type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'ab',10);">10mm</button>
+										<button type="button" value="5" class="btn btn-default" onclick="changeStepSize(this,'ab',5);">5mm</button>
+										<button type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'ab',2);">2mm</button>
+									</div>
+									<div>
+										<button type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'ab',0.5);">0.5mm</button>
+										<button type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'ab',0.1);">0.1mm</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -307,10 +313,21 @@
 								</div>
 								<br />
 								<div class="btn-group" role="group" aria-label="..." id="stepSize_xyz">
-									<button type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'xyz',10);">10mm</button>
-									<button type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'xyz',2);">2mm</button>
-									<button type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.5);">0.5mm</button>
-									<button type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.1);">0.1mm</button>
+									<div>
+										<button type="button" value="100" class="btn btn-default" onclick="changeStepSize(this,'xyz',100);">100mm</button>
+										<button type="button" value="50" class="btn btn-default" onclick="changeStepSize(this,'xyz',50);">50mm</button>
+										<button type="button" value="20" class="btn btn-default" onclick="changeStepSize(this,'xyz',20);">20mm</button>
+										<button type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'xyz',10);">10mm</button>
+									</div>
+									<div>
+										<button type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'xyz',2);">2mm</button>
+										<button type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.5);">0.5mm</button>
+										<button type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.1);">0.1mm</button>
+									</div>
+									<div>
+										<button type="button" value="91" class="btn btn-default" onclick="changeStepSize(this,'xyz',91);">91mm</button>
+										<button type="button" value="135" class="btn btn-default" onclick="changeStepSize(this,'xyz',135);">135mm</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -367,23 +384,23 @@
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<h4 style="display:inline;height:100%;vertical-align:middle;margin-right:10px">Move to Slot</h4>
 									<div style="display:inline-block">
-										<button class="btn tron-grey slot-btn" onclick="moveSlot('A3')">3</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('B3')">6</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('C3')">9</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('D3')">12</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('E3')">15</button>
+										<button class="btn tron-grey slot-btn" onclick="moveSlot('A3')">A3</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('B3')">B3</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('C3')">C3</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('D3')">D3</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('E3')">E3</button>
 										<br />
-										<button class="btn tron-grey slot-btn" onclick="moveSlot('A2')">2</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('B2')">5</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('C2')">8</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('D2')">11</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('E2')">14</button>
+										<button class="btn tron-grey slot-btn" onclick="moveSlot('A2')">A2</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('B2')">B2</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('C2')">C2</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('D2')">D2</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('E2')">E2</button>
 										<br />
-										<button class="btn tron-grey slot-btn" onclick="moveSlot('A1')">1</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('B1')">4</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('C1')">7</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('D1')">10</button>
-										<button class="btn tron-white slot-btn" onclick="moveSlot('E1')">13</button>
+										<button class="btn tron-grey slot-btn" onclick="moveSlot('A1')">A1</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('B1')">B1</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('C1')">C1</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('D1')">D1</button>
+										<button class="btn tron-white slot-btn" onclick="moveSlot('E1')">E1</button>
 									</div>
 								</div>
 							</div>
@@ -402,11 +419,11 @@
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
 									<div style="margin-left:20px;">
 										<h4>Wifi Network: </h4>
-                                                                                <span id="wifi_essid_span">[none]</span>
+                                        <span id="wifi_essid_span">[none]</span>
 										<h4>WiFi IP Address: </h4>
-										<a href="#" id="wifi_ip">[none]</a>
+										<a href="http://opentrons1" id="wifi_ip">[none]</a>
 										<h4>Ethernet IP Address: </h4>
-										<a href="#" id="eth_ip">[none]</a>
+										<a href="http://opentrons1.local" id="eth_ip">[none]</a>
 										<h4 style="padding-top:10px;">
 											<select type="text" id="wifiSelect" onchange="selectMode();">
 												<option value="WIFI">WIFI</option>
@@ -415,13 +432,13 @@
 										</h4>
 									</div>
 									<div id="wifi_container" style="display: block;">
-										<select type="text" id="encrSelect">
+										<select type="text" id="encrSelect" style="display: none;">
 											<option value="None">NONE</option>
 											<option value="WPA">WPA</option>
 										</select>
 										<button class="btn tron-blue" id="wifiModeButton" onclick="scanWIFI()">Scan Networks</button>
 									</div>
-									<select type="text" id="wifiNets">
+									<select type="text" id="wifiNets" style="display: none;">
 									</select>
 									</br>
 									</br>
@@ -431,8 +448,8 @@
 									</br>
 									<span id="passphrase_span">Passphrase:</span>
 									<input type="text" id="passphrase_input" />
+									<button class="btn tron-blue" id="wifiModeButton" onclick="setWifiMode()">Set Mode</button>
 								</div>
-								<button class="btn tron-blue" id="wifiModeButton" onclick="setWifiMode()">Set Mode</button>
 							</div>
 						</div>
 					</div>
@@ -455,6 +472,8 @@
 							<div style="padding-left:10px">
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
 									<input type="text" id="hostname_input" />
+								</div>
+								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
 									<button class="btn tron-blue" id="hostnameButton" onclick="changeHostname()">Change Hostname</button>
 								</div>
 							</div>
@@ -465,44 +484,44 @@
 							<h3 class="UI-Title" class="UI-Title">Update</h3>
 							<div style="padding-left:10px">
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
-									<span id="update_span" >Update All</span>
 									<button class="btn tron-blue" id="updateAllButton" onclick="update('all')">Update</button>
+									<span id="update_span" >Update All</span>
 								</div>
 							</div>
 							<div style="padding-left:10px">
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
-									<span id="update_span" >Update Firmware</span>
 									<button class="btn tron-blue" id="updateFirmwareButton" onclick="update('firmware')">Update</button>
+									<span id="update_span" >Update Firmware</span>
 								</div>
 							</div>
 							<div style="padding-left:10px">
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
-									<span id="update_span" >Update Frontend</span>
 									<button class="btn tron-blue" id="updateFrontendButton" onclick="update('frontend')">Update</button>
+									<span id="update_span" >Update Frontend</span>
 								</div>
 							</div>
 							<div style="padding-left:10px">
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
-									<span id="update_span" >Update Backend</span>
 									<button class="btn tron-blue" id="updateBackendButton" onclick="update('backend')">Update</button>
+									<span id="update_span" >Update Backend</span>
 								</div>
 							</div>
 							<div style="padding-left:10px">
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
-									<span id="update_span" >Update Central</span>
 									<button class="btn tron-blue" id="updateCentralButton" onclick="update('central')">Update</button>
+									<span id="update_span" >Update Central</span>
 								</div>
 							</div>
 							<div style="padding-left:10px">
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
-									<span id="update_span" >Update Data</span>
 									<button class="btn tron-blue" id="updateDataButton" onclick="update('data')">Update</button>
+									<span id="update_span" >Update Data</span>
 								</div>
 							</div>
 							<div style="padding-left:10px">
 								<div style="position:relative;margin-top:10px;display:inline-block;padding-left:20px;">
-									<span id="update_span" >Update Scripts</span>
 									<button class="btn tron-blue" id="updateScriptsButton" onclick="update('scripts')">Update</button>
+									<span id="update_span" >Update Scripts</span>
 								</div>
 							</div>
 						</div>
