@@ -150,7 +150,7 @@ function handleContainers (newContainers) {
     if(theContainerLocations.a[name].z < highestSpot){
       highestSpot = theContainerLocations.a[name].z;
       console.log('highestSpot('+name+'-a.1):'+highestSpot)
-      console.log('theContainerLocations.a['+name'] = '+theContainerLocations.a[name].z)
+      console.log('theContainerLocations.a['+name+'] = '+theContainerLocations.a[name].z)
     }
     if(theContainerLocations.b[name].z < highestSpot){
       highestSpot = theContainerLocations.b[name].z;
@@ -207,7 +207,7 @@ function handleContainers (newContainers) {
     if(theContainerLocations.b[name].z < highestSpot){
       highestSpot = theContainerLocations.b[name].z;
       console.log('highestSpot('+name+'-b.2):'+highestSpot)
-      console.log('theContainerLocations.b['+name'] = '+theContainerLocations.b[name].z)
+      console.log('theContainerLocations.b['+name+'] = '+theContainerLocations.b[name].z)
     }
 
   }
