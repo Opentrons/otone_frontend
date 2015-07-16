@@ -121,8 +121,6 @@ function handleContainers (newContainers) {
     if(!foundIt) {
       var tempRow = document.createElement('tr');
       var tempDatum = document.createElement('td');
-      var PA = document.createElement('td');
-      var PB = document.createElement('td');
 
       var clickEvent = (function(){
         var option = tempDatum;
@@ -137,13 +135,8 @@ function handleContainers (newContainers) {
       tempDatum.value = nameA;
       tempDatum.innerHTML = nameA;
 
-      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button><button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button>";
-      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button><button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button>";
       
       tempRow.appendChild(tempDatum);
-      tempRow.appendChild(PA);
-      tempRow.appendChild(PB);
-
       containerMenu.appendChild(tempRow);
     }
 
@@ -171,17 +164,6 @@ function handleContainers (newContainers) {
     if(!foundIt) {
       var tempRow = document.createElement('tr');
       var tempDatum = document.createElement('td');
-      var PA = document.createElement('td');
-      var PB = document.createElement('td');
-
-      tempDatum.classList.add("col-md-4");
-      PA.classList.add("col-md-4");
-      PB.classList.add("col-md-4");
-      tempDatum.classList.add("col-sm-4");
-      PA.classList.add("col-sm-4");
-      PB.classList.add("col-sm-4");
-
-
 
       var clickEvent = (function(){
         var option = tempDatum;
@@ -195,12 +177,7 @@ function handleContainers (newContainers) {
       var containerOption = document.createElement('option');
       tempDatum.value = name;
       tempDatum.innerHTML = name;
-      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a')\" disabled>Save</button><button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a')\" style=\"display:none;\"disabled>Move To</button>";
-      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b')\" disabled>Save</button><button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b')\" style=\"display:none;\"disabled>Move To</button>";
-
       tempRow.appendChild(tempDatum);
-      tempRow.appendChild(PA);
-      tempRow.appendChild(PB);
       containerMenu.appendChild(tempRow);
     }
 
@@ -211,10 +188,6 @@ function handleContainers (newContainers) {
     }
 
   }
-
-
-
-
 
 
   console.log('highestSpot(1):'+highestSpot)
