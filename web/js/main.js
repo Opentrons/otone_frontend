@@ -72,7 +72,7 @@ window.addEventListener ('load', function () {
 /////////////////////////////////
 
 var theContainerLocations = {};
-var highestSpot = 0;
+var highestSpot = 5;
 
 function handleContainers (newContainers) {
 
@@ -100,8 +100,67 @@ function handleContainers (newContainers) {
   }
 
   highestSpot = 99999;
+  for(var nameA in theContainerLocations.a) {
+    var foundIt = false;
+    for(var k = 0; k < kidOptions.length; k++) {
+      if(kidOptions[k].children[0].innerHTML===name) {
+        foundIt = true;
+        break;
+      }
+    }
+    if(!foundIt) {
+      for(var nameB in theContainerLocations.b) {
+        for(var l = 0; l < kidOptions.length; l++) {
+          if(kidOptions[l].children[0].innerHTML===nameB) {
+            foundIt = true;
+            break;
+          }
+        }
+      }
+    }
+    if(!foundIt) {
+      var tempRow = document.createElement('tr');
+      var tempDatum = document.createElement('td');
+      var PA = document.createElement('td');
+      var PB = document.createElement('td');
 
-  for(var name in theContainerLocations.a) {
+      var clickEvent = (function(){
+        var option = tempDatum;
+        return function(e) {
+          selectContainer(option);
+        }
+      })();
+
+      tempDatum.addEventListener('click',clickEvent);
+
+      var containerOption = document.createElement('option');
+      tempDatum.value = nameA;
+      tempDatum.innerHTML = nameA;
+
+      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button><button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button>";
+      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button><button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button>";
+      
+      tempRow.appendChild(tempDatum);
+      tempRow.appendChild(PA);
+      tempRow.appendChild(PB);
+
+      containerMenu.appendChild(tempRow);
+    }
+
+    if(theContainerLocations.a[name].z < highestSpot){
+      highestSpot = theContainerLocations.a[name].z;
+      console.log('highestSpot('+name+'-a.1):'+highestSpot)
+      console.log('theContainerLocations.a['+name'] = '+theContainerLocations.a[name].z)
+    }
+    if(theContainerLocations.b[name].z < highestSpot){
+      highestSpot = theContainerLocations.b[name].z;
+      console.log('highestSpot('+name+'-b.1):'+highestSpot)
+      console.log('theContainerLocations.b['+name'] = '+theContainerLocations.b[name].z)
+    }
+  }
+
+  
+  for(var name in theContainerLocations.b) {
     var foundIt = false;
     for(var k = 0; k < kidOptions.length; k++) {
       if(kidOptions[k].children[0].innerHTML===name) {
@@ -112,6 +171,17 @@ function handleContainers (newContainers) {
     if(!foundIt) {
       var tempRow = document.createElement('tr');
       var tempDatum = document.createElement('td');
+      var PA = document.createElement('td');
+      var PB = document.createElement('td');
+
+      tempDatum.classList.add("col-md-4");
+      PA.classList.add("col-md-4");
+      PB.classList.add("col-md-4");
+      tempDatum.classList.add("col-sm-4");
+      PA.classList.add("col-sm-4");
+      PB.classList.add("col-sm-4");
+
+
 
       var clickEvent = (function(){
         var option = tempDatum;
@@ -125,15 +195,35 @@ function handleContainers (newContainers) {
       var containerOption = document.createElement('option');
       tempDatum.value = name;
       tempDatum.innerHTML = name;
+      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a')\" disabled>Save</button><button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a')\" style=\"display:none;\"disabled>Move To</button>";
+      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b')\" disabled>Save</button><button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b')\" style=\"display:none;\"disabled>Move To</button>";
+
       tempRow.appendChild(tempDatum);
+      tempRow.appendChild(PA);
+      tempRow.appendChild(PB);
       containerMenu.appendChild(tempRow);
     }
 
-    if(theContainerLocations.a[name].z < highestSpot) highestSpot = theContainerLocations.a[name].z;
+    if(theContainerLocations.b[name].z < highestSpot){
+      highestSpot = theContainerLocations.b[name].z;
+      console.log('highestSpot('+name+'-b.2):'+highestSpot)
+      console.log('theContainerLocations.b['+name'] = '+theContainerLocations.b[name].z)
+    }
+
   }
 
+
+
+
+
+
+  console.log('highestSpot(1):'+highestSpot)
   if(highestSpot>200) {
-    highestSpot = 0;
+    highestSpot = 5;
+  }
+  console.log('highestSpot(2):'+highestSpot)
+  if(highestSpot<5) {
+    highestSpot = 5;
   }
 }
 
