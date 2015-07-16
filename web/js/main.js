@@ -195,7 +195,7 @@ function movetoContainer (axis) {
   
   var thisLoc = theContainerLocations[axis][contName];
   
-  if(!isNaN(thisLoc.x) && !isNan(thisLoc.y) && !isNaN(thisLoc.z)) {
+  if(!isNaN(thisLoc.x) && !isNaN(thisLoc.y) && !isNaN(thisLoc.z)) {
 
     var moveArray = [];
 
