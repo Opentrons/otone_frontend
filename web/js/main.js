@@ -850,12 +850,17 @@ function step (axis, multiplyer) {
 
   var allAxis = 'xyzab';
 
+  conosle.log("multiplyer is: "+multiplyer)
+  console.log("it's a number? "+!isNaN(multiplyer))
+
   if(axis && !isNaN(multiplyer) && allAxis.indexOf(axis) >= 0) {
     var stepSize;
     if(axis==='a' || axis==='b') stepSize = document.getElementById('stepSize_ab').value;
     else stepSize = document.getElementById('stepSize_xyz').value;
+    conole.log('stepSize is '+stepSize)
     if(!isNaN(stepSize)) {
       stepSize *= multiplyer;
+      console.log("new stepSize: "+stepSize)
       msg.data[axis] = stepSize;
       sendMessage(msg);
     }
