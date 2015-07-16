@@ -423,6 +423,11 @@ var timeSentJob = undefined;
 function sendMessage (msg) {
   console.log('sendMessage('+msg+')');
   try{
+    console.log('msg: '+JSON.stringify(msg))
+  } catch(e) {
+
+  }
+  try{
     globalConnection.session.publish('com.opentrons.browser_to_robot',[JSON.stringify(msg)]);
   } catch(e){
     console.log(e)
