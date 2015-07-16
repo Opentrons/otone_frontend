@@ -155,7 +155,7 @@ function handleContainers (newContainers) {
     if(theContainerLocations.b[name].z < highestSpot){
       highestSpot = theContainerLocations.b[name].z;
       console.log('highestSpot('+name+'-b.1):'+highestSpot)
-      console.log('theContainerLocations.b['+name'] = '+theContainerLocations.b[name].z)
+      console.log('theContainerLocations.b['+name+'] = '+theContainerLocations.b[name].z)
     }
   }
 
