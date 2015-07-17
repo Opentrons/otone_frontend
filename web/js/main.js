@@ -73,7 +73,7 @@ window.addEventListener ('load', function () {
 
 var theContainerLocations = {};
 var highestSpot = 5;
-var connection = 'offline'
+var internetConnection = 'offline'
 
 function handleContainers (newContainers) {
 
@@ -414,7 +414,7 @@ var socketHandler = {
     }
   },
   'connection' : function(data) {
-    connection=data;
+    internetConnection=data;
   }
 };
 
@@ -996,7 +996,7 @@ function setConnection (string,color) {
 }
 
 function checkConnection () {
-  if connection !== 'online'{
+  if (internetConnection !== 'online'){
     setConnection('offline', 'red');
   } else {
     setConnection('online', 'green');
