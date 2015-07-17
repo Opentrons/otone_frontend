@@ -73,6 +73,7 @@ window.addEventListener ('load', function () {
 
 var theContainerLocations = {};
 var highestSpot = 5;
+var connection = 'offline'
 
 function handleContainers (newContainers) {
 
@@ -411,6 +412,9 @@ var socketHandler = {
     } else {
       document.getElementById('wifi_essid_span').innerHTML = data;
     }
+  },
+  'connection' : function(data) {
+    connection=data;
   }
 };
 
@@ -981,4 +985,20 @@ function update(data){
     'data' : data
   };
   sendMessage(msg);
+}
+
+function setConnection (string,color) {
+  if (string) {
+    document.getElementById('connection').innerHTML = string;
+    document.getElementById('connection').style.color = color;
+  }
+  setTimeout(checkConnection, 10000);
+}
+
+function checkConnection () {
+  if connection !== 'online'{
+    setConnection('offline', 'red');
+  } else {
+    setConnection('online', 'green');
+  }
 }
