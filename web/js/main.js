@@ -413,7 +413,7 @@ var socketHandler = {
       document.getElementById('wifi_essid_span').innerHTML = data;
     }
   },
-  'connection' : function(data) {
+  'internet' : function(data) {
     internetConnection=data;
   }
 };
