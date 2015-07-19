@@ -973,6 +973,10 @@ function setWifiMode() {
     }
   };
   sendMessage(msg);
+  document.getElementById('ssid_input').value = '';
+  document.getElementById('passphrase_input').value = '';
+  document.getElementById('wifi_essid_span').innerHTML = '[pending...]'
+  document.getElementById('wifi_ip').innerHTML = '[pending...]';
 }
 
 function scanWIFI() {
@@ -1021,7 +1025,7 @@ function setConnection (string,color) {
     document.getElementById('connection').innerHTML = string;
     document.getElementById('connection').style.color = color;
   }
-  setTimeout(checkConnection, 10000);
+  setTimeout(checkConnection, 4000);
 }
 
 function checkConnection () {
