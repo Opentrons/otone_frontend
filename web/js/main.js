@@ -63,6 +63,17 @@ window.addEventListener ('load', function () {
         console.log(error);
       }
     });
+
+    connection.session.subscribe('com.opentrons.robot_to_browser_ctrl', function(str) {
+      try{
+        var msg = JSON.parse(str);
+        if(msg.type && socketHandler[msg.type]) socketHandler[msg.type](msg.data);
+        else console.log('error handling message (3): '+str);
+      } catch(error) {
+        console.log('error handling message (4)');
+        console.log(error);
+      }
+    });
   };
   connection.open();
 });
@@ -415,6 +426,24 @@ var socketHandler = {
   },
   'internet' : function(data) {
     internetConnection=data;
+  },
+  'per_data' : function(data) {
+    internetConnection=data.internet
+    if(data.wifi_essid==""){
+      document.getElementById('wifi_essid').innerHTML = '[none]';
+    }else{
+      document.getElementById('wifi_essid').innerHTML = data.wifi_essid;
+    }
+    if(data.wifi_ip==""){
+      document.getElementById('wifi_ip').innerHTML = '[none]';
+    }else{
+      document.getElementById('wifi_ip').innerHTML = data.wifi_ip;
+    }
+    if(data.eth_ip==""){
+      document.getElementById('eth_ip').innerHTML = '[none]';
+    }else{
+      document.getElementById('eth_ip').innerHTML = data.eth_ip;
+    }
   }
 };
 
