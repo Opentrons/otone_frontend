@@ -1025,7 +1025,7 @@ function setConnection (string,color) {
     document.getElementById('connection').innerHTML = string;
     document.getElementById('connection').style.color = color;
   }
-  setTimeout(checkConnection, 4000);
+  setTimeout(checkConnection, 2000);
 }
 
 function checkConnection () {
