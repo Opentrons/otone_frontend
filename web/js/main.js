@@ -435,14 +435,14 @@ var socketHandler = {
       document.getElementById('wifi_essid_span').innerHTML = data.wifi_essid;
     }
     if(data.wifi_ip==""){
-      document.getElementById('wifi_ip_span').innerHTML = '[none]';
+      document.getElementById('wifi_ip').innerHTML = '[none]';
     }else{
-      document.getElementById('wifi_ip_span').innerHTML = data.wifi_ip;
+      document.getElementById('wifi_ip').innerHTML = data.wifi_ip;
     }
     if(data.eth_ip==""){
-      document.getElementById('eth_ip_span').innerHTML = '[none]';
+      document.getElementById('eth_ip').innerHTML = '[none]';
     }else{
-      document.getElementById('eth_ip_span').innerHTML = data.eth_ip;
+      document.getElementById('eth_ip').innerHTML = data.eth_ip;
     }
   }
 };
