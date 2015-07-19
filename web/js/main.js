@@ -1031,3 +1031,17 @@ function checkConnection () {
     setConnection('online', 'green');
   }
 }
+
+function toggleWiFiMenu() {
+  if (document.getElementById('wifi_settings_div').style.display == 'inline-block'){
+    document.getElementById('wifi_settings_div').style.display = 'none';
+    document.getElementById('hostname_div').style.display = 'none';
+  }else{
+    document.getElementById('wifi_settings_div').style.display = 'inline-block';
+    document.getElementById('hostname_div').style.display = 'inline-block';
+  }
+}
+
+function updatePiConfigs() {
+  update('piconfigs');
+}
