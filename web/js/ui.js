@@ -80,3 +80,12 @@ function changeStepSize(source, axisLabel, value) {
 /////////////////////////////////
 /////////////////////////////////
 /////////////////////////////////
+
+
+window.addEventListener ('load', function () {
+	changeStepSize(document.getElementById('defaultXYZStepSizeBtn'),'xyz',20);
+	changeStepSize(document.getElementById('defaultABStepSizeBtn'),'ab',2);
+});
+
+//document.getElementById('defaultXYZStepSizeBtn').click();
+//document.getElementById('defaultABStepSizeBtn').click();
