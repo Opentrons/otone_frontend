@@ -15,6 +15,9 @@ window.addEventListener ('load', function () {
     wsuri = (document.location.protocol === "http:" ? "ws:" : "wss:") + "//" + document.location.host + "/ws";
   }
 
+  document.getElementById('defaultXYZStepSizeBtn').click();
+  document.getElementById('defaultABStepSizeBtn').click();
+
   // Initialize the WAMP connection to the Router
   var connection = new autobahn.Connection({
     url: wsuri,

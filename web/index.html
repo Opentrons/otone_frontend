@@ -127,7 +127,7 @@
 									<div>
 										<button type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'ab',10);">10mm</button>
 										<button type="button" value="5" class="btn btn-default" onclick="changeStepSize(this,'ab',5);">5mm</button>
-										<button type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'ab',2);">2mm</button>
+										<button id="defaultABStepSizeBtn" type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'ab',2);">2mm</button>
 									</div>
 									<div>
 										<button type="button" value="1" class="btn btn-default" onclick="changeStepSize(this,'ab',1);">1mm</button>
@@ -317,7 +317,7 @@
 									<div>
 										<button type="button" value="100" class="btn btn-default" onclick="changeStepSize(this,'xyz',100);">100mm</button>
 										<button type="button" value="50" class="btn btn-default" onclick="changeStepSize(this,'xyz',50);">50mm</button>
-										<button type="button" value="20" class="btn btn-default" onclick="changeStepSize(this,'xyz',20);">20mm</button>
+										<button id="defaultXYZStepSizeBtn" type="button" value="20" class="btn btn-default" onclick="changeStepSize(this,'xyz',20);">20mm</button>
 										<button type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'xyz',10);">10mm</button>
 									</div>
 									<div>
@@ -493,8 +493,9 @@
 										<a href="http://opentrons1.local" id="eth_ip">[none]</a>
 										<h4 style="padding-top:10px;">
 											<select type="text" id="wifiSelect" onchange="selectMode();">
-												<option value="WIFI">WIFI</option>
-												<option value="AP">AP</option>
+												<oprion value="NONE">OFF</option>
+												<option value="WIFI">WiFi Network</option>
+												<option value="AP">Access Point</option>
 											</select>
 										</h4>
 									</div>
@@ -509,7 +510,7 @@
 									</select>
 									</br>
 									</br>
-									<span id="ssid_span">SSID:</span>
+									<span id="ssid_span">Network Name:</span>
 									<input type="text" id="ssid_input" />
 									</br>
 									</br>
