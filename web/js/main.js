@@ -1033,14 +1033,37 @@ function setConnection (string,color) {
 function checkConnection () {
   if (internetConnection !== 'online'){
     setConnection('offline', 'red');
+    disableUpdateButtons();
   } else {
     if(conn_timer>10){
       setConnection('offline', 'red');
       internetConnection = 'offline'
+      disableUpdateButtons();
     }else{
       setConnection('online', 'green');
+      enableUpdateButtons();
     }
   }
+}
+
+function enableUpdateButtons() {
+  document.getElementById('updateAllButton').disabled="false"
+  document.getElementById('updateFirmwareButton').disabled="false"
+  document.getElementById('updateFrontendButton').disabled="false"
+  document.getElementById('updateCentralButton').disabled="false"
+  document.getElementById('updateBackendButton').disabled="false"
+  document.getElementById('updateDataButton').disabled="false"
+  document.getElementById('updateScriptsButton').disabled="false"
+}
+
+function disableUpdateButtons() {
+  document.getElementById('updateAllButton').disabled="true"
+  document.getElementById('updateFirmwareButton').disabled="true"
+  document.getElementById('updateFrontendButton').disabled="true"
+  document.getElementById('updateCentralButton').disabled="true"
+  document.getElementById('updateBackendButton').disabled="true"
+  document.getElementById('updateDataButton').disabled="true"
+  document.getElementById('updateScriptsButton').disabled="true"
 }
 
 function toggleWiFiMenu() {
@@ -1055,4 +1078,11 @@ function toggleWiFiMenu() {
 
 function updatePiConfigs() {
   update('piconfigs');
+}
+
+function shareInternet(){
+  var msg = {
+    'type' : 'shareinet'
+  };
+  sendMessage(msg);
 }
