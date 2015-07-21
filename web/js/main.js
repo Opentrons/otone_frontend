@@ -1047,23 +1047,23 @@ function checkConnection () {
 }
 
 function enableUpdateButtons() {
-  document.getElementById('updateAllButton').disabled="false"
-  document.getElementById('updateFirmwareButton').disabled="false"
-  document.getElementById('updateFrontendButton').disabled="false"
-  document.getElementById('updateCentralButton').disabled="false"
-  document.getElementById('updateBackendButton').disabled="false"
-  document.getElementById('updateDataButton').disabled="false"
-  document.getElementById('updateScriptsButton').disabled="false"
+  document.getElementById('updateAllButton').disabled=false
+  document.getElementById('updateFirmwareButton').disabled=false
+  document.getElementById('updateFrontendButton').disabled=false
+  document.getElementById('updateCentralButton').disabled=false
+  document.getElementById('updateBackendButton').disabled=false
+  document.getElementById('updateDataButton').disabled=false
+  document.getElementById('updateScriptsButton').disabled=false
 }
 
 function disableUpdateButtons() {
-  document.getElementById('updateAllButton').disabled="true"
-  document.getElementById('updateFirmwareButton').disabled="true"
-  document.getElementById('updateFrontendButton').disabled="true"
-  document.getElementById('updateCentralButton').disabled="true"
-  document.getElementById('updateBackendButton').disabled="true"
-  document.getElementById('updateDataButton').disabled="true"
-  document.getElementById('updateScriptsButton').disabled="true"
+  document.getElementById('updateAllButton').disabled=true
+  document.getElementById('updateFirmwareButton').disabled=true
+  document.getElementById('updateFrontendButton').disabled=true
+  document.getElementById('updateCentralButton').disabled=true
+  document.getElementById('updateBackendButton').disabled=true
+  document.getElementById('updateDataButton').disabled=true
+  document.getElementById('updateScriptsButton').disabled=true
 }
 
 function toggleWiFiMenu() {
