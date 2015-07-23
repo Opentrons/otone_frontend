@@ -446,6 +446,12 @@ var socketHandler = {
     }else{
       document.getElementById('eth_ip').innerHTML = data.eth_ip;
     }
+  },
+  'limit' : function(data) {
+    if(data.startswith('min_')){
+      var ax = data;
+      alert('Minimum limit switch hit for '+data[-1:]+' axis!');
+    }
   }
 };
 
