@@ -448,7 +448,7 @@ var socketHandler = {
     }
   },
   'limit' : function(data) {
-    if(data.startswith('min_')){
+    if(data.slice(4)=='min_'){
       var ax = data;
       alert('Minimum limit switch hit for '+data.slice(-1)+' axis!');
     }
