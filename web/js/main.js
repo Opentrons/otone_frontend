@@ -51,6 +51,7 @@ window.addEventListener ('load', function () {
       robotStatus = status;
     });
 
+    console.log('about to publish com.opentrons.browser_ready TRUE');
     connection.session.publish('com.opentrons.browser_ready', [true]);
 
     connection.session.subscribe('com.opentrons.robot_to_browser', function(str) {
