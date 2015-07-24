@@ -454,6 +454,9 @@ var socketHandler = {
       var ax = data;
       alert('Minimum limit switch hit for '+data.slice(-1)+' axis!');
     }
+  },
+  'progress' : function(data) {
+    console.log('making progress... '+data);
   }
 };
 
