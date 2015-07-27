@@ -450,7 +450,7 @@ var socketHandler = {
   },
   'limit' : function(data) {
     console.log('limit... '+data.slice(0,4));
-    var dt = new Date();
+    var dt1 = new Date();
     var utcDate = dt1.toUTCString();
     if(data.slice(0,4)=="min_"){
       var ax = data;
