@@ -462,7 +462,7 @@ var socketHandler = {
   },
   'success' : function(data) {
     alert(data);
-  }
+  },
   'failure' : function(data) {
     alert(data);
   }
