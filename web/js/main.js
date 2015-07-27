@@ -1014,6 +1014,7 @@ function poweroff(){
 }
 
 function restart(){
+  setStatus('restarting...','blue')
   var msg = {
     'type' : 'restart'
   };
