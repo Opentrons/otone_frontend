@@ -1013,6 +1013,13 @@ function poweroff(){
   sendMessage(msg);
 }
 
+function restart(){
+  var msg = {
+    'type' : 'restart'
+  };
+  sendMessage(msg);
+}
+
 function update(data){
   setStatus('updating '+data+'...','blue');
   var msg = {
