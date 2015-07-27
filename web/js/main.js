@@ -943,29 +943,7 @@ function sendDebugCommand () {
   sendMessage(msg);
 }
 
-function updateCommand () {
-  var ssid = document.getElementById('ssidInput').value;
-  var pwd = document.getElementById('pwdInput').value;
 
-  var msg = {
-    'type' : 'update',
-    'data' : {
-      'ssid' : ssid,
-      'password' : pwd
-    }
-  };
-  var popupBlock = document.getElementById('popUpDiv');
-  while(popupBlock.firstChild){
-    popupBlock.removeChild(popupBlock.firstChild);
-  }
-  var updaterLabel = document.createElement('span');
-  popupBlock.appendChild(updaterLabel);
-  updaterLabel.innerHTML = "TRYING TO UPDATE...\r\nthis page will automatically refresh in 60 seconds";
-
-  setTimeout(function(){refresh();},60000);
-
-  sendMessage(msg);
-}
 
 function refresh () {
   window.location.reload();
@@ -1034,6 +1012,7 @@ function poweroff(){
 }
 
 function update(data){
+  setStatus('updating '+data+'...','blue')
   var msg = {
     'type' : 'update',
     'data' : data
