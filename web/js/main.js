@@ -450,6 +450,7 @@ var socketHandler = {
   },
   'limit' : function(data) {
     console.log('limit... '+data.slice(0,4));
+    setStatus('Minimum limit switch hit for '+data.slice(-1).toUpperCase()+' axis! Please home the machine.','red');
     var dt1 = new Date();
     var utcDate = dt1.toUTCString();
     if(data.slice(0,4)=="min_"){
