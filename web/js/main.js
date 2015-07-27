@@ -461,9 +461,11 @@ var socketHandler = {
     console.log('making progress... '+data);
   },
   'success' : function(data) {
+    setStatus(data,'green');
     alert(data);
   },
   'failure' : function(data) {
+    setStatus(data,'red');
     alert(data);
   }
 };
@@ -1012,7 +1014,7 @@ function poweroff(){
 }
 
 function update(data){
-  setStatus('updating '+data+'...','blue')
+  setStatus('updating '+data+'...','blue');
   var msg = {
     'type' : 'update',
     'data' : data
@@ -1079,6 +1081,7 @@ function updatePiConfigs() {
 }
 
 function shareInternet(){
+  setStatus('sharing internet...','blue');
   var msg = {
     'type' : 'shareinet'
   };
