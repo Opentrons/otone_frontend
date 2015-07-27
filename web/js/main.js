@@ -449,14 +449,22 @@ var socketHandler = {
     }
   },
   'limit' : function(data) {
-    console.log('limigt... '+data.slice(0,4));
+    console.log('limit... '+data.slice(0,4));
+    var dt = new Date();
+    var utcDate = dt1.toUTCString();
     if(data.slice(0,4)=="min_"){
       var ax = data;
-      alert('Minimum limit switch hit for '+data.slice(-1)+' axis!');
+      alert('Minimum limit switch hit for '+data.slice(-1).toUpperCase()+' axis!\n\nPlease home the machine.\n\n\n\n'+utcDate);
     }
   },
   'progress' : function(data) {
     console.log('making progress... '+data);
+  },
+  'success' : function(data) {
+    alert(data);
+  }
+  'failure' : function(data) {
+    alert(data);
   }
 };
 
