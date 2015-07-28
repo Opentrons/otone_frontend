@@ -107,7 +107,7 @@ function handleContainers (newContainers) {
   // why only a, what about b???
   for(var k = 0; k < kidOptions.length; k++) {
     var oldKidName = kidOptions[k].children[0].innerHTML;
-    if(!theContainerLocations.a[oldKidName]) {
+    if(!(theContainerLocations.a[oldKidName] || theContainerLocations.b[oldKidName])) {
       containerMenu.removeChild(kidOptions[k]);
       k--;
     }
@@ -115,14 +115,15 @@ function handleContainers (newContainers) {
 
   highestSpot = 99999;
   for(var nameA in theContainerLocations.a) {
+
     var foundIt = false;
     for(var k = 0; k < kidOptions.length; k++) {
-      if(kidOptions[k].children[0].innerHTML===name) {
+      if(kidOptions[k].children[0].innerHTML===nameA) {
         foundIt = true;
         break;
       }
     }
-    if(!foundIt) {
+    if(!foundIt){
       for(var nameB in theContainerLocations.b) {
         for(var l = 0; l < kidOptions.length; l++) {
           if(kidOptions[l].children[0].innerHTML===nameB) {
@@ -135,6 +136,9 @@ function handleContainers (newContainers) {
     if(!foundIt) {
       var tempRow = document.createElement('tr');
       var tempDatum = document.createElement('td');
+      var PA = document.createElement('td');
+      var PB = document.createElement('td');
+
 
       var clickEvent = (function(){
         var option = tempDatum;
@@ -148,26 +152,23 @@ function handleContainers (newContainers) {
       var containerOption = document.createElement('option');
       tempDatum.value = nameA;
       tempDatum.innerHTML = nameA;
+      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button><button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button>";
+      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button><button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button>";
 
-      
+
       tempRow.appendChild(tempDatum);
+      //switched append order to reflect center-left 
+      tempRow.appendChild(PB);
+      tempRow.appendChild(PA);
+
       containerMenu.appendChild(tempRow);
     }
 
-    if(theContainerLocations.a[nameA].z < highestSpot){
-      highestSpot = theContainerLocations.a[nameA].z;
-      console.log('highestSpot('+nameA+'-a.1):'+highestSpot)
-      console.log('theContainerLocations.a['+nameB+'] = '+theContainerLocations.a[nameA].z)
-    }
-    if(theContainerLocations.b[nameB].z < highestSpot){
-      highestSpot = theContainerLocations.b[nameB].z;
-      console.log('highestSpot('+nameB+'-b.1):'+highestSpot)
-      console.log('theContainerLocations.b['+nameB+'] = '+theContainerLocations.b[nameB].z)
-    }
+    if(theContainerLocations.a[nameA].z < highestSpot) highestSpot = theContainerLocations.a[nameA].z;
+    if(theContainerLocations.b[nameA].z < highestSpot) highestSpot = theContainerLocations.b[nameA].z;
   }
-
-  
   for(var name in theContainerLocations.b) {
+
     var foundIt = false;
     for(var k = 0; k < kidOptions.length; k++) {
       if(kidOptions[k].children[0].innerHTML===name) {
@@ -178,6 +179,15 @@ function handleContainers (newContainers) {
     if(!foundIt) {
       var tempRow = document.createElement('tr');
       var tempDatum = document.createElement('td');
+      var PA = document.createElement('td');
+      var PB = document.createElement('td');
+
+      tempDatum.classList.add("col-md-4");
+      PA.classList.add("col-md-4");
+      PB.classList.add("col-md-4");
+      tempDatum.classList.add("col-sm-4");
+      PA.classList.add("col-sm-4");
+      PB.classList.add("col-sm-4");
 
       var clickEvent = (function(){
         var option = tempDatum;
@@ -191,7 +201,13 @@ function handleContainers (newContainers) {
       var containerOption = document.createElement('option');
       tempDatum.value = name;
       tempDatum.innerHTML = name;
+      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a')\" disabled>Save</button><button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a')\" style=\"display:none;\"disabled>Move To</button>";
+      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b')\" disabled>Save</button><button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b')\" style=\"display:none;\"disabled>Move To</button>";
+
       tempRow.appendChild(tempDatum);
+      //switched append order to reflect center-left 
+      tempRow.appendChild(PB);
+      tempRow.appendChild(PA);
       containerMenu.appendChild(tempRow);
     }
 
@@ -201,6 +217,7 @@ function handleContainers (newContainers) {
       console.log('theContainerLocations.b['+name+'] = '+theContainerLocations.b[name].z)
     }
 
+    if(theContainerLocations.b[name].z < highestSpot) highestSpot = theContainerLocations.b[name].z;
   }
 
 
@@ -212,23 +229,57 @@ function handleContainers (newContainers) {
   if(highestSpot<5) {
     highestSpot = 5;
   }
+  // call function that cuts out the 'save' buttons for unused containers (defined in loadFiles.js)
+  setPipetteContainers(CURRENT_PROTOCOL, PIPETTES); // uses global variables CURRENT_PROTOCOL, PIPETTES
 }
 
-////////////
-////////////
-////////////
+//////////////////////////////
+//////////////////////////////
+//////////////////////////////
 
 var currentSelectedContainer = undefined;
+var firstTD = undefined;
+var secondTD = undefined;
 
 function selectContainer(currentDiv) {
 
   if(currentSelectedContainer) {
     currentSelectedContainer.classList.remove('tron-grey');
+    firstTD = currentSelectedContainer.nextSibling;
+    secondTD = firstTD.nextSibling;
+    
+    var moveBtnA = firstTD.lastChild;
+    var saveBtnA = firstTD.firstChild;
+
+    var moveBtnB = secondTD.lastChild;
+    var saveBtnB = secondTD.firstChild;
+
+    moveBtnA.disabled = true;
+    moveBtnB.disabled = true;
+    saveBtnA.disabled = true;
+    saveBtnB.disabled = true;
+
   }
 
   if(currentDiv) {
     currentSelectedContainer = currentDiv;
     currentSelectedContainer.classList.add('tron-grey');
+    firstTD = currentSelectedContainer.nextSibling;
+    secondTD = firstTD.nextSibling;
+    
+    var moveBtnA = firstTD.lastChild;
+    var saveBtnA = firstTD.firstChild;
+
+    var moveBtnB = secondTD.lastChild;
+    var saveBtnB = secondTD.firstChild;
+
+
+    moveBtnA.disabled = false;
+    moveBtnB.disabled = false;
+    saveBtnA.disabled = false;
+    saveBtnB.disabled = false;
+    
+    
 
     var axis = ['a','b'];
     var coords = ['x','y','z'];
@@ -237,8 +288,12 @@ function selectContainer(currentDiv) {
       for(var n=0;n<coords.length;n++) {
         var val = theContainerLocations[axis[i]][currentSelectedContainer.value][coords[n]];
 
+
         if(val!=null) val = val.toFixed(1);
         else val = 'none';
+
+
+
         document.getElementById('containerpos_'+coords[n]+'_'+axis[i]).innerHTML = val;
       }
     }
@@ -256,6 +311,18 @@ function saveContainer (axis) {
 
   var contName = currentSelectedContainer.value;
 
+  if(axis == 'a'){
+    
+    var moveBtn = secondTD.lastChild;
+    moveBtn.style.display = 'inline-block';
+  
+  } else {
+
+    var moveBtn = firstTD.lastChild;
+    moveBtn.style.display = 'inline-block';
+
+  }
+
   calibrateContainer(axis, contName);
 
   setTimeout(function(){
@@ -268,6 +335,7 @@ function saveContainer (axis) {
 ////////////
 
 function movetoContainer (axis) {
+
   var contName = currentSelectedContainer.value;
   
   var thisLoc = theContainerLocations[axis][contName];
@@ -630,7 +698,10 @@ function setSpeed (axis,value) {
 ////////////
 ////////////
 
-function calibrate (axis, property) {
+function calibrate (axis, property, current) {
+
+  var showMe = current.parentNode.children[1];
+  showMe.style.visibility = 'visible';
 
   var msg = {
     'type' : 'calibrate',
@@ -749,7 +820,7 @@ function moveSlot(slotName) {
 ////////////
 
 function moveVolume (axis) {
-  var volumeMenu = document.getElementById('volume_'+axis);
+  var volumeMenu = document.getElementById('volume_testing');
   var volume = volumeMenu ? volumeMenu.value : undefined;
 
   console.log(volume);
@@ -814,7 +885,7 @@ function moveVolume (axis) {
 
 function saveVolume (axis) {
 
-  var volumeMenu = document.getElementById('volume_'+axis);
+  var volumeMenu = document.getElementById('volume_testing');
   var volume = volumeMenu ? volumeMenu.value : undefined;
 
   if(volume) {

@@ -59,6 +59,9 @@ window.addEventListener('load',function(){
 	parent_xyz.selectedStep = parent_xyz.children[1];
 	parent_xyz.value = parent_xyz.selectedStep.value;
 	parent_xyz.selectedStep.classList.add('active');
+
+
+	toggleJog('b');
 });
 
 function changeStepSize(source, axisLabel, value) {
@@ -74,6 +77,50 @@ function changeStepSize(source, axisLabel, value) {
 	buttonParent.selectedStep = source;
 
 	buttonParent.selectedStep.classList.add('active');
+
+}
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
+function toggleJog(jogGroup){
+	var parentJog = document.getElementById("jogAB");
+	var a = document.getElementById("jogA");
+	var b = document.getElementById("jogB");
+
+	var aBtns = document.getElementsByClassName("a");
+	var bBtns = document.getElementsByClassName("b");
+
+	if (jogGroup =='a'){	
+		if(!a.classList.contains("tron-blue")){	
+		a.classList.add('tron-blue');
+		}
+		if(b.classList.contains("tron-black")){	
+		b.classList.remove('tron-black');
+		}
+		for(var i=0; i<aBtns.length; i++){
+			aBtns[i].disabled=false;
+			bBtns[i].disabled=true;
+		}		
+	}
+	if (jogGroup =='b'){
+		if(a.classList.contains("tron-blue")){	
+		a.classList.remove('tron-blue');
+		}
+		if(!b.classList.contains("tron-black")){	
+		b.classList.add('tron-black');
+		}	
+		for(var i=0; i<bBtns.length; i++){
+			bBtns[i].disabled=false;
+			aBtns[i].disabled=true;
+		}			
+	}
+	
+	
+
+	
+
 
 }
 

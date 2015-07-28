@@ -13,7 +13,7 @@
 
 html,body,.container{
 	font-family: "Tron-Normal";
-	width:1050px !important;
+	min-width:1050px !important;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -29,11 +29,11 @@ code {
 	background-color: #f8f8f8;
 
 	padding-left:10px;
-	padding-right:0px;
+	padding-right:10px;
 	padding-top:10px;
 	padding-bottom:10px;
 
-	margin-bottom:30px;
+	margin-bottom:15px;
 
 	border-radius: 4px;
 	border: 1px solid #e7e7e7;
@@ -45,17 +45,27 @@ code {
 
 .container-scroll{
 	border:1px solid #ddd;
-	height:233px;
+	height:338px;
 	overflow-y:scroll;
 	overflow-x:hidden;
 	background-color: white;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
 .btn{
 	border: 1px solid #ccc;
 }
 
-
+/*
 .navbar-brand img{
 	padding:5px;
 	height:45px;
@@ -64,6 +74,7 @@ code {
 .navbar-brand{
 	padding:5px 10px;
 }
+*/
 
 .tron-blue {
 	background-color: #0f3ffb;
@@ -72,7 +83,7 @@ code {
 
 .tron-blue:hover, .tron-blue:active, .tron-blue:focus {
 	color:white;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	box-shadow: 1px 1px 1px #888888;
 }
 
@@ -83,7 +94,7 @@ code {
 
 .tron-red:hover, .tron-red:active, .tron-red:focus {
 	color:white;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	box-shadow: 1px 1px 1px #888888;
 }
 
@@ -94,7 +105,7 @@ code {
 
 .tron-black:hover, .tron-black:active, .tron-black:focus {
 	color:white;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	box-shadow: 1px 1px 1px #888888;
 }
 
@@ -105,7 +116,7 @@ code {
 
 .tron-white:hover, .tron-white:active, .tron-white:focus {
 	color:#000;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	box-shadow: 1px 1px 1px #888888;
 }
 
@@ -116,7 +127,7 @@ code {
 
 .tron-grey:hover, .tron-grey:active, .tron-grey:focus {
 	color:#fdfdfd;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	box-shadow: 1px 1px 1px #888888;
 }
 
@@ -148,18 +159,10 @@ code {
 }
 
 .plunger-label{
-	display:inline-block;
 
-	width:155px;
-	height:100%;
-	vertical-align: top;
+	width:100%;
+	height:auto;
 
-	margin-top:14px;
-	margin-bottom:10px;
-	margin-right:-5px;
-	margin-left:10px;
-
-	opacity:0.2;
 }
 
 #fileName {
@@ -172,6 +175,7 @@ code {
 	height:100%;
 	vertical-align: middle;
 
+	padding-top:12px;
 	margin-left:10px;
 	margin-right:10px;
 }
@@ -202,8 +206,8 @@ code {
 }
 
 .slot-btn{
-	width:30px;
-	height:20px;
+	width:20px;
+	height:30px;
 
 	font-size:12px;
 	line-height: 12px;
@@ -213,3 +217,51 @@ code {
 
 	text-align:center;
 }
+
+.nav-tabs{
+	margin-bottom: 15px;
+
+}
+
+.deck{
+	min-height: 470px;
+	height:100%;
+}
+
+.nav-tabs li a{
+	height:52px;
+	padding:15px 30px;
+}
+#stepSize_xyz .btn-group>.btn{
+	width:42px;
+}
+
+.btn-group>.btn:first-child, .btn-group>.btn:last-child{
+	border-radius: 0px 0px 0px 0px;
+	-moz-border-radius: 0px 0px 0px 0px;
+	-webkit-border-radius: 0px 0px 0px 0px;
+
+}
+
+td{
+	overflow: hidden;
+}
+
+.navbar-brand img{
+	height:40px;
+	width:auto;
+
+}
+.navbar-brand{
+	padding:5px 10px;
+}
+
+#jogA, #jogB{
+	width:50%;
+}
+
+.pipette-panel{
+	min-height:341px;
+}
+
+
