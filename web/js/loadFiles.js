@@ -223,7 +223,7 @@ function loadDefaultContainers() {
     }
   }
 
-  var containersFilepath = './data/containers.json';
+  var containersFilepath = '/home/pi/otone_data/containers.json';
 
   getAJAX(containersFilepath,onContainers);
 }
