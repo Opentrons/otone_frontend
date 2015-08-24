@@ -1227,18 +1227,18 @@ function checkConnection () {
 
 function enableUpdateButtons() {
   document.getElementById('updateAllButton').disabled=false
-  document.getElementById('updateFirmwareButton').disabled=false
-  document.getElementById('updateFrontendButton').disabled=false
-  document.getElementById('updateBackendButton').disabled=false
-  document.getElementById('updateScriptsButton').disabled=false
+  document.getElementById('updateotone_firmwareButton').disabled=false
+  document.getElementById('updateotone_frontendButton').disabled=false
+  document.getElementById('updateotone_backendButton').disabled=false
+  document.getElementById('updateotone_scriptsButton').disabled=false
 }
 
 function disableUpdateButtons() {
   document.getElementById('updateAllButton').disabled=true
-  document.getElementById('updateFirmwareButton').disabled=true
-  document.getElementById('updateFrontendButton').disabled=true
-  document.getElementById('updateBackendButton').disabled=true
-  document.getElementById('updateScriptsButton').disabled=true
+  document.getElementById('updateotone_firmwareButton').disabled=true
+  document.getElementById('updateotone_frontendButton').disabled=true
+  document.getElementById('updateotone_backendButton').disabled=true
+  document.getElementById('updateotone_scriptsButton').disabled=true
 }
 
 function toggleWiFiMenu() {
