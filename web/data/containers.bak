@@ -11,6 +11,202 @@
         }
       }
     },
+    "tube-rack-.75ml": {
+      "locations": {
+        "A1": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "A2": {
+          "x": 18,
+          "y": 0,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "A3": {
+          "x": 36,
+          "y": 0,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "A4": {
+          "x": 54,
+          "y": 0,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "B1": {
+          "x": 0,
+          "y": 18,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "B2": {
+          "x": 18,
+          "y": 18,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "B3": {
+          "x": 36,
+          "y": 18,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "B4": {
+          "x": 54,
+          "y": 18,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "C1": {
+          "x": 0,
+          "y": 36,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "C2": {
+          "x": 18,
+          "y": 36,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "C3": {
+          "x": 36,
+          "y": 36,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "C4": {
+          "x": 54,
+          "y": 36,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "D1": {
+          "x": 0,
+          "y": 54,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "D2": {
+          "x": 18,
+          "y": 54,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "D3": {
+          "x": 36,
+          "y": 54,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "D4": {
+          "x": 54,
+          "y": 54,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "E1": {
+          "x": 0,
+          "y": 72,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "E2": {
+          "x": 18,
+          "y": 72,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "E3": {
+          "x": 36,
+          "y": 72,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "E4": {
+          "x": 54,
+          "y": 72,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "F1": {
+          "x": 0,
+          "y": 90,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "F2": {
+          "x": 18,
+          "y": 90,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "F3": {
+          "x": 36,
+          "y": 90,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        },
+        "F4": {
+          "x": 54,
+          "y": 90,
+          "z": 0,
+          "depth": 20,
+          "diameter": 6,
+          "total-liquid-volume": 750
+        }
+      }
+    },
     "e-gelgol": {
       "origin-offset": {
         "x": 13.5,

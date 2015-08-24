@@ -30,6 +30,8 @@
 
 */
 
+
+debug = true;
 /////////////////////////////////
 /////////////////////////////////
 /////////////////////////////////
@@ -146,9 +148,9 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
     if(_pipettes[toolName].points) {
       // an array of objects, each object has a "f1" and an "f2" volume number
       // take the old points, and sort them in accending order
-      _pipettes[toolName].points.sort(function (a,b) {
-        return a.f1-b.f1;
-      });
+      _pipettes[toolName].points.sort(
+        function (a,b) {return a.f1-b.f1;}
+      );
     }
     
     var _trashcontainerName = _pipettes[toolName]['trash-container'].container.trim();
@@ -487,12 +489,12 @@ var createPipetteGroup = {
 
     // always add a percentage onto distribute, to compensate for the curve when dispensing
     // defaults to 0%
-    console.log('totalVolume: '+totalVolume);
+    if(debug===true) console.log('totalVolume(1): '+totalVolume);
     totalVolume += (totalVolume * theTool['distribute-percentage']);
 
     if(totalVolume>theTool.volume) totalVolume = Number(theTool.volume);
 
-    console.log('totalVolume: '+totalVolume);
+    if(debug===true) console.log('totalVolume(2): '+totalVolume);
 
     var fromParams = JSON.parse(JSON.stringify(distributeGroup.from));
     fromParams.volume = totalVolume * -1; // negative because we're sucking up

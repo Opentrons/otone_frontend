@@ -4,6 +4,9 @@
 
 var globalConnection;
 var robotStatus = false;
+var debug = true;
+var verbose = false;
+var str_last = "";
 
 window.addEventListener ('load', function () {
 
@@ -36,29 +39,37 @@ window.addEventListener ('load', function () {
     // javascript to the other clients (ie python)
 
     connection.session.subscribe('com.opentrons.robot_ready', function(status){
-      console.log('robotReady called');
-      console.log('robotStatus: '+robotStatus);
-      console.log('status: '+status);
-      if((robotStatus==false) && (status==true)){
-        console.log('going to send calibration request');
+      if(debug===true) {
+        console.log('robotReady called');
+        console.log('robotStatus: '+robotStatus);
+        console.log('status: '+status);
+        if((robotStatus==false) && (status==true)){
+          console.log('going to send calibration request');
+       }
       }
       var msg = {
-        'type' : 'calibrate',
-        'data' : ''
+        'type' : 'getCalibrations'
       };
-      console.log('msg stringified... '+JSON.stringify(msg));
+      if(debug===true) console.log('msg stringified... '+JSON.stringify(msg));
       connection.session.publish('com.opentrons.browser_to_robot', [JSON.stringify(msg)]);
       robotStatus = status;
     });
 
-    console.log('about to publish com.opentrons.browser_ready TRUE');
+    if(debug===true) console.log('about to publish com.opentrons.browser_ready TRUE');
     connection.session.publish('com.opentrons.browser_ready', [true]);
 
     connection.session.subscribe('com.opentrons.robot_to_browser', function(str) {
       try{
+        if(debug===true){
+          if(verbose===true || str[0]!==str_last){
+            console.log('message on com.opentrons.robot_to_browser: '+str[0])
+          }
+        }
+        str_last = str[0];
         var msg = JSON.parse(str);
         if(msg.type && socketHandler[msg.type]) socketHandler[msg.type](msg.data);
         else console.log('error handling message (1): '+str);
+        
       } catch(error) {
         console.log('error handling message (2)');
         console.log(error);
@@ -152,8 +163,12 @@ function handleContainers (newContainers) {
       var containerOption = document.createElement('option');
       tempDatum.value = nameA;
       tempDatum.innerHTML = nameA;
-      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button><button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button>";
-      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button><button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button>";
+      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
+      <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button> \
+      <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
+      <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button> \
+      <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
 
 
       tempRow.appendChild(tempDatum);
@@ -201,8 +216,12 @@ function handleContainers (newContainers) {
       var containerOption = document.createElement('option');
       tempDatum.value = name;
       tempDatum.innerHTML = name;
-      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a')\" disabled>Save</button><button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a')\" style=\"display:none;\"disabled>Move To</button>";
-      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b')\" disabled>Save</button><button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b')\" style=\"display:none;\"disabled>Move To</button>";
+      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a')\" disabled>Save</button> \
+      <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a')\" style=\"display:none;\"disabled>Move To</button> \
+      <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b')\" disabled>Save</button> \
+      <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b')\" style=\"display:none;\"disabled>Move To</button> \
+      <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
 
       tempRow.appendChild(tempDatum);
       //switched append order to reflect center-left 
@@ -213,24 +232,28 @@ function handleContainers (newContainers) {
 
     if(theContainerLocations.b[name].z < highestSpot){
       highestSpot = theContainerLocations.b[name].z;
-      console.log('highestSpot('+name+'-b.2):'+highestSpot)
-      console.log('theContainerLocations.b['+name+'] = '+theContainerLocations.b[name].z)
+      if(debug===true){
+        console.log('highestSpot('+name+'-b.2):'+highestSpot);
+        console.log('theContainerLocations.b['+name+'] = '+theContainerLocations.b[name].z);
+      }
     }
 
     if(theContainerLocations.b[name].z < highestSpot) highestSpot = theContainerLocations.b[name].z;
   }
 
 
-  console.log('highestSpot(1):'+highestSpot)
+  if(debug===true) console.log('highestSpot(1):'+highestSpot)
   if(highestSpot>200) {
     highestSpot = 5;
   }
-  console.log('highestSpot(2):'+highestSpot)
+  if(debug===true) console.log('highestSpot(2):'+highestSpot)
   if(highestSpot<5) {
     highestSpot = 5;
   }
   // call function that cuts out the 'save' buttons for unused containers (defined in loadFiles.js)
-  setPipetteContainers(CURRENT_PROTOCOL, PIPETTES); // uses global variables CURRENT_PROTOCOL, PIPETTES
+  if(CURRENT_PROTOCOL && CURRENT_PROTOCOL.head) {
+    setPipetteContainers(CURRENT_PROTOCOL, PIPETTES); // uses global variables CURRENT_PROTOCOL, PIPETTES
+  }
 }
 
 //////////////////////////////
@@ -248,16 +271,22 @@ function selectContainer(currentDiv) {
     firstTD = currentSelectedContainer.nextSibling;
     secondTD = firstTD.nextSibling;
     
-    var moveBtnA = firstTD.lastChild;
-    var saveBtnA = firstTD.firstChild;
-
-    var moveBtnB = secondTD.lastChild;
-    var saveBtnB = secondTD.firstChild;
+    console.log(firstTD);
+    var moveBtnB = firstTD.lastChild.previousElementSibling;
+    var saveBtnB = firstTD.firstChild;
+    console.log(secondTD);
+    var moveBtnA = secondTD.lastChild.previousElementSibling;
+    var saveBtnA = secondTD.firstChild;
 
     moveBtnA.disabled = true;
     moveBtnB.disabled = true;
     saveBtnA.disabled = true;
     saveBtnB.disabled = true;
+
+    var resetBtnB = firstTD.lastChild;
+    var resetBtnA = secondTD.lastChild;
+    resetBtnB.disabled = true;
+    resetBtnA.disabled = true;
 
   }
 
@@ -267,17 +296,31 @@ function selectContainer(currentDiv) {
     firstTD = currentSelectedContainer.nextSibling;
     secondTD = firstTD.nextSibling;
     
-    var moveBtnA = firstTD.lastChild;
-    var saveBtnA = firstTD.firstChild;
+    var moveBtnB = firstTD.lastChild.previousElementSibling;
+    var saveBtnB = firstTD.firstChild;
 
-    var moveBtnB = secondTD.lastChild;
-    var saveBtnB = secondTD.firstChild;
+    var moveBtnA = secondTD.lastChild.previousElementSibling;
+    var saveBtnA = secondTD.firstChild;
 
 
     moveBtnA.disabled = false;
     moveBtnB.disabled = false;
     saveBtnA.disabled = false;
     saveBtnB.disabled = false;
+
+
+    console.log('currentDiv: ',currentDiv);
+    console.log("TIPRACK_ORIGIN['a']: ",TIPRACK_ORIGIN['a']);
+    console.log("TIPRACK_ORIGIN['b']: ",TIPRACK_ORIGIN['b']);
+    if(currentDiv.value === TIPRACK_ORIGIN['a']){
+      var resetBtnA = secondTD.lastChild;
+      resetBtnA.disabled = false;
+    }
+    if(currentDiv.value === TIPRACK_ORIGIN['b']){
+      var resetBtnB = firstTD.lastChild;
+      resetBtnB.disabled = false;
+    }
+    
     
     
 
@@ -303,23 +346,34 @@ function selectContainer(currentDiv) {
   }
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function saveContainer (axis) {
 
   var contName = currentSelectedContainer.value;
 
+  firstTD = currentSelectedContainer.nextSibling;
+  secondTD = firstTD.nextSibling;
+  
   if(axis == 'a'){
     
-    var moveBtn = secondTD.lastChild;
+    var moveBtn = secondTD.lastChild.previousElementSibling;
     moveBtn.style.display = 'inline-block';
+    if(contName === TIPRACK_ORIGIN['a']){
+      var resetBtn = secondTD.lastChild;
+      resetBtn.style.display = 'inline-block';
+    }
   
   } else {
 
-    var moveBtn = firstTD.lastChild;
+    var moveBtn = firstTD.lastChild.previousElementSibling;
     moveBtn.style.display = 'inline-block';
+    if(contName === TIPRACK_ORIGIN['b']){
+      var resetBtn = firstTD.lastChild;
+      resetBtn.style.display = 'inline-block';
+    }
 
   }
 
@@ -330,9 +384,9 @@ function saveContainer (axis) {
   },500);
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function movetoContainer (axis) {
 
@@ -381,8 +435,9 @@ var socketHandler = {
       if(data.string!==previousMessage) {
 
         if(data.string.indexOf('{')>=0){
+          msg = data.string.slice(data.string.indexOf('{'));
           try {
-            var coordMessage = JSON.parse(data.string);
+            var coordMessage = JSON.parse(msg);
             if(!isNaN(coordMessage.x)) {
               document.getElementById('position_x').innerHTML = coordMessage.x.toFixed(1);
               robotState.x = coordMessage.x;
@@ -438,7 +493,8 @@ var socketHandler = {
   })(),
 
   'coordinates' : function (data) {
-    console.log(data);
+    if(debug===true) console.log(data);
+    //just for debugging?
   },
   'status' : function (data) {
     setStatus(data.string,data.color);
@@ -517,7 +573,7 @@ var socketHandler = {
     }
   },
   'limit' : function(data) {
-    console.log('limit... '+data.slice(0,4));
+    if(debug===true) console.log('limit... '+data.slice(0,4));
     setStatus('Minimum limit switch hit for '+data.slice(-1).toUpperCase()+' axis! Please home the machine.','red');
     var dt1 = new Date();
     var utcDate = dt1.toUTCString();
@@ -527,7 +583,8 @@ var socketHandler = {
     }
   },
   'progress' : function(data) {
-    console.log('making progress... '+data);
+    //not currently being used
+    if(debug===true) console.log('making progress... '+data);
   },
   'success' : function(data) {
     setStatus(data,'green');
@@ -546,7 +603,7 @@ var timeSentJob = undefined;
 /////////////////////////////////
 
 function sendMessage (msg) {
-  console.log('sendMessage('+msg+')');
+  if(debug===true) console.log('sendMessage('+msg+')');
   try{
     console.log('msg: '+JSON.stringify(msg))
   } catch(e) {
@@ -650,9 +707,9 @@ function resume () {
   sendMessage(msg);
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function erase () {
 
@@ -669,9 +726,9 @@ function erase () {
   sendMessage(msg);
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function setSpeed (axis,value) {
 
@@ -704,7 +761,7 @@ function calibrate (axis, property, current) {
   showMe.style.visibility = 'visible';
 
   var msg = {
-    'type' : 'calibrate',
+    'type' : 'calibratePipette',
     'data' : {
       'axis' : axis,
       'property' : property
@@ -722,9 +779,9 @@ function calibrate (axis, property, current) {
   }
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function movePipette(axis,property) {
 
@@ -768,9 +825,9 @@ function shakePipette(axis) {
   });
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 var slotPositions = {
   'numbers' : {
@@ -815,15 +872,15 @@ function moveSlot(slotName) {
   }
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function moveVolume (axis) {
   var volumeMenu = document.getElementById('volume_testing');
   var volume = volumeMenu ? volumeMenu.value : undefined;
 
-  console.log(volume);
+  if(debug===true) console.log('volume '+volume);
 
   if(volume) {
 
@@ -835,7 +892,7 @@ function moveVolume (axis) {
     if(!isNaN(totalPipetteVolume)) {
       var plungerPercentage = volume / totalPipetteVolume;
 
-      console.log('moving to '+plungerPercentage);
+      if(debug===true) console.log('moving to '+plungerPercentage);
 
       sendMessage({
         'type' : 'movePlunger',
@@ -879,9 +936,9 @@ function moveVolume (axis) {
 }
 
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function saveVolume (axis) {
 
@@ -895,14 +952,14 @@ function saveVolume (axis) {
     var distanceFromBottom = robotState.pipettes[axis].bottom - robotState[axis];
     var percentageFromBottom = distanceFromBottom / totalDistance;
 
-    console.log('saved at '+percentageFromBottom);
+    if(debug===true) console.log('saved at '+percentageFromBottom);
 
     // determine the number of uL this pipette can do based of percentage
     var totalVolume = volume / percentageFromBottom;
 
     if(!isNaN(totalVolume) && totalVolume>0) {
 
-      console.log('pipetteVolume_'+axis);
+      if(debug===true) console.log('pipetteVolume_'+axis);
       document.getElementById('pipetteVolume_'+axis).innerHTML = totalVolume.toFixed(2);
       robotState.pipettes[axis].volume = totalVolume;
 
@@ -920,9 +977,9 @@ function saveVolume (axis) {
   }
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function pickupTip(axis) {
   if(CURRENT_PROTOCOL && CURRENT_PROTOCOL.head) {
@@ -951,17 +1008,17 @@ function pickupTip(axis) {
   }
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function calibrateContainer (axis, containerName) {
   if ('ab'.indexOf(axis)>=0) {
     var msg = {
-      'type' : 'calibrate',
+      'type' : 'calibrateContainer',
       'data' : {
         'axis' : axis,
-        'property' : containerName
+        'name' : containerName
       }
     };
 
@@ -969,9 +1026,9 @@ function calibrateContainer (axis, containerName) {
   }
 }
 
-////////////
-////////////
-////////////
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function step (axis, multiplyer) {
   var msg = {
@@ -983,17 +1040,19 @@ function step (axis, multiplyer) {
 
   var allAxis = 'xyzab';
 
-  console.log("multiplyer is: "+multiplyer)
-  console.log("it's a number? "+!isNaN(multiplyer))
+  if(debug===true){
+    console.log("multiplyer is: "+multiplyer);
+    console.log("it's a number? "+!isNaN(multiplyer));
+  }
 
   if(axis && !isNaN(multiplyer) && allAxis.indexOf(axis) >= 0) {
     var stepSize;
     if(axis==='a' || axis==='b') stepSize = document.getElementById('stepSize_ab').value;
     else stepSize = document.getElementById('stepSize_xyz').value;
-    console.log('stepSize is '+stepSize)
+    if(debug===true) console.log('stepSize is '+stepSize);
     if(!isNaN(stepSize)) {
       stepSize *= multiplyer;
-      console.log("new stepSize: "+stepSize)
+      if(debug===true) console.log("new stepSize: "+stepSize);
       msg.data[axis] = stepSize;
       sendMessage(msg);
     }
@@ -1033,6 +1092,10 @@ function selectMode() {
   // Interface stuff
 }
 
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function setWifiMode() {
   var mode = document.getElementById('wifiSelect').value;
   var ssid = document.getElementById('ssid_input').value;
@@ -1052,6 +1115,10 @@ function setWifiMode() {
   document.getElementById('wifi_ip').innerHTML = '[pending...]';
 }
 
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function scanWIFI() {
    var msg = {
       'type' : 'wifiscan',
@@ -1059,6 +1126,10 @@ function scanWIFI() {
    };
    sendMessage(msg);
 }
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function changeHostname() {
   var hostname = document.getElementById('hostname_input').value;
@@ -1071,12 +1142,20 @@ function changeHostname() {
   }
 }
 
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function reboot(){
   var msg = {
     'type' : 'reboot'
   };
   sendMessage(msg);
 }
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function poweroff(){
   var msg = {
@@ -1085,6 +1164,10 @@ function poweroff(){
   sendMessage(msg);
 }
 
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function restart(){
   setStatus('restarting...','blue')
   var msg = {
@@ -1092,6 +1175,10 @@ function restart(){
   };
   sendMessage(msg);
 }
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function update(data){
   setStatus('updating '+data+'...','blue');
@@ -1102,6 +1189,10 @@ function update(data){
   sendMessage(msg);
 }
 
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function setConnection (string,color) {
   if (string) {
     document.getElementById('connection').innerHTML = string;
@@ -1109,6 +1200,10 @@ function setConnection (string,color) {
   }
   setTimeout(checkConnection, 2000);
 }
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function checkConnection () {
   if (internetConnection !== 'online'){
@@ -1126,13 +1221,15 @@ function checkConnection () {
   }
 }
 
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function enableUpdateButtons() {
   document.getElementById('updateAllButton').disabled=false
   document.getElementById('updateFirmwareButton').disabled=false
   document.getElementById('updateFrontendButton').disabled=false
-  document.getElementById('updateCentralButton').disabled=false
   document.getElementById('updateBackendButton').disabled=false
-  document.getElementById('updateDataButton').disabled=false
   document.getElementById('updateScriptsButton').disabled=false
 }
 
@@ -1140,9 +1237,7 @@ function disableUpdateButtons() {
   document.getElementById('updateAllButton').disabled=true
   document.getElementById('updateFirmwareButton').disabled=true
   document.getElementById('updateFrontendButton').disabled=true
-  document.getElementById('updateCentralButton').disabled=true
   document.getElementById('updateBackendButton').disabled=true
-  document.getElementById('updateDataButton').disabled=true
   document.getElementById('updateScriptsButton').disabled=true
 }
 
@@ -1156,14 +1251,30 @@ function toggleWiFiMenu() {
   }
 }
 
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function updatePiConfigs() {
   update('piconfigs');
 }
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 function shareInternet(){
   setStatus('sharing internet...','blue');
   var msg = {
     'type' : 'shareinet'
+  };
+  sendMessage(msg);
+}
+
+
+function relativeCoords(){
+  var msg = {
+    'type' : 'relativeCoords'
   };
   sendMessage(msg);
 }
