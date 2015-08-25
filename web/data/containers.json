@@ -8321,6 +8321,7 @@
               "diameter": 6.4,
                      "total-liquid-volume": 400
             }
+        }
         },
         "384-plate": {
           "origin-offset": {
@@ -8715,5 +8716,4 @@
           }
         }
     }
-}
 }
