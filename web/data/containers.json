@@ -400,7 +400,7 @@
         "M24":{"x":54,"y":103.5,"z":0  , "depth":9.5 , "diameter":3.1  , "total-liquid-volume":55},
         "N24":{"x":58.5,"y":103.5,"z":0  , "depth":9.5 , "diameter":3.1  , "total-liquid-volume":55},
         "O24":{"x":63,"y":103.5,"z":0  , "depth":9.5 , "diameter":3.1  , "total-liquid-volume":55},
-        "P24":{"x":67.5,"y":103.5,"z":0  , "depth":9.5 , "diameter":3.1  , "total-liquid-volume":55},
+        "P24":{"x":67.5,"y":103.5,"z":0  , "depth":9.5 , "diameter":3.1  , "total-liquid-volume":55}
         }
       }
     },
