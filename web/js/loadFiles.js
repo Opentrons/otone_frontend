@@ -409,6 +409,8 @@ function loadDefaultContainers() {
     try {
       var blob = JSON.parse(this.responseText);
       var newContainers = blob.containers;
+      console.log('newContainers...');
+      console.log(newContainers);
       if (newContainers) {
         saveContainers(newContainers);
       }
@@ -435,6 +437,8 @@ function saveContainers(newContainers) {
     var stringedCont = undefined;
     try {
       stringedCont = JSON.stringify(cont);
+      console.log('stringedCont');
+      console.log(stringedCont)
     }
     catch (error) {
       //
