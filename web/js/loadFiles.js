@@ -433,6 +433,7 @@ var labware_from_db  = {};
 
 function saveContainers(newContainers) {
   for(var n in newContainers) {
+    console.log('newContainer n = '+n);
     var cont = newContainers[n];
     var stringedCont = undefined;
     try {
@@ -444,6 +445,7 @@ function saveContainers(newContainers) {
       //
     }
     if(cont.locations && stringedCont) {
+      console.log('saving cont '+cont+' to labware_from_db');
       labware_from_db[n] = stringedCont;
     }
   }
