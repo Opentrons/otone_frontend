@@ -276,15 +276,6 @@ function handleContainers (newContainers) {
         }
       }
 
-
-
-      PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a')\" disabled>Save</button> \
-      <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a')\" style=\"display:none;\"disabled>Move To</button> \
-      <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
-      PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b')\" disabled>Save</button> \
-      <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b')\" style=\"display:none;\"disabled>Move To</button> \
-      <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
-
       tempRow.appendChild(tempDatum);
       //switched append order to reflect center-left 
       tempRow.appendChild(PB);
