@@ -246,7 +246,7 @@ function handleContainers (newContainers) {
       tempDatum.value = name;
       tempDatum.innerHTML = name;
 
-      if(theContainerLocations.b[name].x!==null && theContainerLocations.b[name].y!==null && theContainerLocations.b[nameb].z!==null){
+      if(theContainerLocations.b[name].x!==null && theContainerLocations.b[name].y!==null && theContainerLocations.b[name].z!==null){
 
         PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
         <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:inline-block;\" disabled>Move To</button> \
