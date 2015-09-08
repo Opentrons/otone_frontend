@@ -562,9 +562,9 @@ var socketHandler = {
 
       try{
         document.getElementById('pipetteVolume_'+axis).innerHTML = robotState.pipettes[axis].volume.toFixed(2);
-        document.getElementById('btn_top_'+axis).visibility = 'visible'
-        document.getElementById('btn_blowout_'+axis).visibility = 'visible'
-        document.getElementById('btn_droptip_'+axis).visibility = 'visible'
+        document.getElementById('btn_top_'+axis).style.visibility = "visible"
+        document.getElementById('btn_blowout_'+axis).style.visibility = "visible"
+        document.getElementById('btn_droptip_'+axis).style.visibility = "visible"
       }
       catch(e){}
     }
