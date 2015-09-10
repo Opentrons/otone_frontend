@@ -215,7 +215,9 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
             // for when we're using a multi-channel, get rid of of the older tips
             for(var n=0;n<howManyTips-1;n++) {
               var tempTip = myRacks[i]['clean-tips'].splice(0,1)[0];
-              myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(tempTip)));
+              if(tempTip!=undefined){
+                myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(tempTip)));
+              }
             }
             break;
           }
