@@ -48,6 +48,11 @@ window.addEventListener ('load', function () {
        }
       }
       var msg = {
+        'type' : 'getContainers'
+      };
+      if(debug===true) console.log('msg stringified... '+JSON.stringify(msg));
+      connection.session.publish('com.opentrons.browser_to_robot', [JSON.stringify(msg)]);
+      var msg = {
         'type' : 'getCalibrations'
       };
       if(debug===true) console.log('msg stringified... '+JSON.stringify(msg));
@@ -567,6 +572,15 @@ var socketHandler = {
         document.getElementById('btn_droptip_'+axis).style.visibility = "visible"
       }
       catch(e){}
+    }
+  },
+  'containers' : function (data) {
+    var blob = JSON.parse(this.responseText);
+    var newContainers = blob.containers;
+    console.log('newContainers...');
+    console.log(newContainers);
+    if (newContainers) {
+      saveContainers(newContainers);
     }
   },
   'containerLocations' : function (data) {
