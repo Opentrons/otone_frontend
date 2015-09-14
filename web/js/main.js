@@ -486,6 +486,7 @@ var lineLimit = 500; // If this number is too big bad things happen
 var socketHandler = {
   'position' : (function(){
     return function (data) {
+      console.log(data);
       if(data.string.indexOf('{')>=0){
         msg = data.string.slice(data.string.indexOf('{'));
         try {
