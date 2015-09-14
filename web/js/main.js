@@ -487,34 +487,32 @@ var socketHandler = {
   'position' : (function(){
     return function (data) {
       console.log(data);
-      if(data.string.indexOf('{')>=0){
-        msg = data.string.slice(data.string.indexOf('{'));
-        try {
-          var coordMessage = JSON.parse(msg);
-          if(!isNaN(coordMessage.x)) {
-            document.getElementById('position_x').innerHTML = coordMessage.x.toFixed(1);
-            robotState.x = coordMessage.x;
-          }
-          if(!isNaN(coordMessage.y)) {
-            document.getElementById('position_y').innerHTML = coordMessage.y.toFixed(1);
-            robotState.y = coordMessage.y;
-          }
-          if(!isNaN(coordMessage.z)) {
-            document.getElementById('position_z').innerHTML = coordMessage.z.toFixed(1);
-            robotState.z = coordMessage.z;
-          }
-          if(!isNaN(coordMessage.a)) {
-            document.getElementById('position_a').innerHTML = coordMessage.a.toFixed(1);
-            robotState.a = coordMessage.a;
-          }
-          if(!isNaN(coordMessage.b)) {
-            document.getElementById('position_b').innerHTML = coordMessage.b.toFixed(1);
-            robotState.b = coordMessage.b;
-          }
+      msg = data.string;
+      try {
+        var coordMessage = JSON.parse(msg);
+        if(!isNaN(coordMessage.x)) {
+          document.getElementById('position_x').innerHTML = coordMessage.x.toFixed(1);
+          robotState.x = coordMessage.x;
         }
-        catch(e) {
-          console.log(e);
+        if(!isNaN(coordMessage.y)) {
+          document.getElementById('position_y').innerHTML = coordMessage.y.toFixed(1);
+          robotState.y = coordMessage.y;
         }
+        if(!isNaN(coordMessage.z)) {
+          document.getElementById('position_z').innerHTML = coordMessage.z.toFixed(1);
+          robotState.z = coordMessage.z;
+        }
+        if(!isNaN(coordMessage.a)) {
+          document.getElementById('position_a').innerHTML = coordMessage.a.toFixed(1);
+          robotState.a = coordMessage.a;
+        }
+        if(!isNaN(coordMessage.b)) {
+          document.getElementById('position_b').innerHTML = coordMessage.b.toFixed(1);
+          robotState.b = coordMessage.b;
+        }
+      }
+      catch(e) {
+        console.log(e);
       }
     }
   })(),
