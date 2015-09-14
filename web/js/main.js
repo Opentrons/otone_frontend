@@ -484,6 +484,39 @@ var lineCount = 0;
 var lineLimit = 500; // If this number is too big bad things happen
 
 var socketHandler = {
+  'position' : (function(){
+    return function (data) {
+      if(data.string.indexOf('{')>=0){
+        msg = data.string.slice(data.string.indexOf('{'));
+        try {
+          var coordMessage = JSON.parse(msg);
+          if(!isNaN(coordMessage.x)) {
+            document.getElementById('position_x').innerHTML = coordMessage.x.toFixed(1);
+            robotState.x = coordMessage.x;
+          }
+          if(!isNaN(coordMessage.y)) {
+            document.getElementById('position_y').innerHTML = coordMessage.y.toFixed(1);
+            robotState.y = coordMessage.y;
+          }
+          if(!isNaN(coordMessage.z)) {
+            document.getElementById('position_z').innerHTML = coordMessage.z.toFixed(1);
+            robotState.z = coordMessage.z;
+          }
+          if(!isNaN(coordMessage.a)) {
+            document.getElementById('position_a').innerHTML = coordMessage.a.toFixed(1);
+            robotState.a = coordMessage.a;
+          }
+          if(!isNaN(coordMessage.b)) {
+            document.getElementById('position_b').innerHTML = coordMessage.b.toFixed(1);
+            robotState.b = coordMessage.b;
+          }
+        }
+        catch(e) {
+          console.log(e);
+        }
+      }
+    }
+  })(),
   'smoothie' : (function(){
 
     var previousMessage = undefined;
@@ -492,7 +525,7 @@ var socketHandler = {
 
       if(data.string!==previousMessage) {
 
-        if(data.string.indexOf('{')>=0){
+        /*if(data.string.indexOf('{')>=0){
           msg = data.string.slice(data.string.indexOf('{'));
           try {
             var coordMessage = JSON.parse(msg);
@@ -520,7 +553,7 @@ var socketHandler = {
           catch(e) {
             console.log(e);
           }
-        }
+        }*/
 
         previousMessage = data.string;
 
