@@ -489,7 +489,7 @@ var socketHandler = {
       console.log(data);
       msg = data.string;
       try {
-        var coordMessage = JSON.parse(msg);
+        var coordMessage = msg;
         if(!isNaN(coordMessage.x)) {
           document.getElementById('position_x').innerHTML = coordMessage.x.toFixed(1);
           robotState.x = coordMessage.x;
