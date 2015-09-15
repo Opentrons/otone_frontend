@@ -6,9 +6,9 @@ It's a browser user interface served from the OT.One and it uses Autobahn|JS for
 # The OT.One Components
 
 The three components of the OpenTrons OT.One software are:
-* Frontend (otone_frontend)
-* Backend (otone_backend)
-* Scripts (otone_scripts)
+* Frontend (/home/pi/otone_frontend)
+* Backend (/home/pi/otone_backend)
+* Scripts (/home/pi/otone_scripts)
 
 Additionally, SmoothiewareOT is OpenTrons' version of the Smoothieware firmware running on the Smoothieboard motorcontroller board.
 
