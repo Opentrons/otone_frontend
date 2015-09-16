@@ -11,6 +11,6 @@ The three components of the OpenTrons OT.One software are:
 * [Backend](http://github.com/OpenTrons/otone_backend) (/home/pi/otone_backend)
 * [Scripts](http://github.com/OpenTrons/otone_scripts) (/home/pi/otone_scripts)
 
-Additionally, SmoothiewareOT is OpenTrons' version of the Smoothieware firmware running on the Smoothieboard motorcontroller board.
+Additionally, [SmoothiewareOT](https://github.com/Opentrons/SmoothiewareOT) is OpenTrons' version of the Smoothieware firmware running on the Smoothieboard motorcontroller board.
 
 All three components run together and are started with the script *start.sh* in otone_scripts. The *start.sh* script is called on startup.
