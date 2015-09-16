@@ -607,7 +607,7 @@ var socketHandler = {
     }
   },
   'containers' : function (data) {
-    var blob = JSON.parse(this.responseText);
+    var blob = JSON.parse(data);
     var newContainers = blob.containers;
     console.log('newContainers...');
     console.log(newContainers);
