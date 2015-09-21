@@ -174,14 +174,15 @@ function handleContainers (newContainers) {
         
         PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
         <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:inline-block;\" disabled>Move To</button> \
-        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button> \
+        <button type=\"button\" class=\"btn tron-grey\" onclick=\"overrideDepth();\" style=\"display:inline-block;\" disabled>OD</button>";
       
       } else {
         
         PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
         <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button> \
-        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
-      
+        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button> \
+        <button type=\"button\" class=\"btn tron-grey\" onclick=\"overrideDepth();\" style=\"display:none;\" disabled>OD</button>";
       }
 
       if (nameA in theContainerLocations.b){
@@ -189,13 +190,15 @@ function handleContainers (newContainers) {
 
           PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
           <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:inline-block;\" disabled>Move To</button> \
-          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button> \
+          <button type=\"button\" class=\"btn tron-grey\" onclick=\"overrideDepth();\" style=\"display:inline-block;\" disabled>OD</button>";
 
         } else {
           
           PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
           <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button> \
-          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button> \
+          <button type=\"button\" class=\"btn tron-grey\" onclick=\"overrideDepth();\" style=\"display:none;\" disabled>OD</button>";
 
         }
       }
@@ -255,13 +258,15 @@ function handleContainers (newContainers) {
 
         PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
         <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:inline-block;\" disabled>Move To</button> \
-        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button> \
+        <button type=\"button\" class=\"btn tron-grey\" onclick=\"overrideDepth();\" style=\"display:inline-block;\" disabled>OD</button>";
 
       } else {
         
         PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
         <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button> \
-        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button> \
+        <button type=\"button\" class=\"btn tron-grey\" onclick=\"overrideDepth();\" style=\"display:none;\" disabled>OD</button>";
 
       }
 
@@ -270,13 +275,15 @@ function handleContainers (newContainers) {
          
           PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
           <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:inline-block;\" disabled>Move To</button> \
-          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button> \
+          <button type=\"button\" class=\"btn tron-grey\" onclick=\"overrideDepth();\" style=\"display:inline-block;\" disabled>OD</button>";
         
         } else {
           
           PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
           <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button> \
-          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button> \
+          <button type=\"button\" class=\"btn tron-grey\" onclick=\"overrideDepth();\" style=\"display:none;\" disabled>OD</button>";
         
         }
       }
@@ -330,10 +337,10 @@ function selectContainer(currentDiv) {
     secondTD = firstTD.nextSibling;
     
     console.log(firstTD);
-    var moveBtnB = firstTD.lastChild.previousElementSibling;
+    var moveBtnB = firstTD.lastChild.previousElementSibling.previousElementSibling;
     var saveBtnB = firstTD.firstChild;
     console.log(secondTD);
-    var moveBtnA = secondTD.lastChild.previousElementSibling;
+    var moveBtnA = secondTD.lastChild.previousElementSibling.previousElementSibling;
     var saveBtnA = secondTD.firstChild;
 
     moveBtnA.disabled = true;
@@ -341,11 +348,17 @@ function selectContainer(currentDiv) {
     saveBtnA.disabled = true;
     saveBtnB.disabled = true;
 
-    var resetBtnB = firstTD.lastChild;
-    var resetBtnA = secondTD.lastChild;
+    var resetBtnB = firstTD.lastChild.previousElementSibling;
+    var resetBtnA = secondTD.lastChild.previousElementSibling;
+
     resetBtnB.disabled = true;
     resetBtnA.disabled = true;
 
+    var odBtnB = firstTD.lastChild;
+    var odBtnA = secondtD.lastChild;
+
+    odBtnB.disabled = true;
+    odBtnA.disabled = true;
   }
 
   if(currentDiv) {
@@ -371,15 +384,19 @@ function selectContainer(currentDiv) {
     console.log("TIPRACK_ORIGIN['a']: ",TIPRACK_ORIGIN['a']);
     console.log("TIPRACK_ORIGIN['b']: ",TIPRACK_ORIGIN['b']);
     if(currentDiv.value === TIPRACK_ORIGIN['a']){
-      var resetBtnA = secondTD.lastChild;
+      var resetBtnA = secondTD.lastChild.previousElementSibling;
       resetBtnA.disabled = false;
     }
     if(currentDiv.value === TIPRACK_ORIGIN['b']){
-      var resetBtnB = firstTD.lastChild;
+      var resetBtnB = firstTD.lastChild.previousElementSibling;
       resetBtnB.disabled = false;
     }
     
-    
+    var odBtnB = firstTD.lastChild;
+    var odBtnA = secondtD.lastChild;
+
+    odBtnB.disabled = false;
+    odBtnA.disabled = false;
     
 
     var axis = ['a','b'];
@@ -1126,6 +1143,25 @@ function calibrateContainer (axis, containerName) {
 
     sendMessage(msg);
   }
+}
+
+
+function overrideDepth () {
+  var contName = currentSelectedContainer.value;
+
+  var thisLoc = theContainerLocations[axis][contName];
+
+  new_depth = robotState.z - thisLoc.z
+
+  var msg = {
+    'type' : 'containerDepthOverride',
+    'data' : {
+      'name' : contName,
+      'depth' : new_depth
+    }
+  };
+
+  sendMessage(msg);
 }
 
 /////////////////////////////////
