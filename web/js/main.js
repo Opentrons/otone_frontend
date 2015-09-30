@@ -342,7 +342,7 @@ function selectContainer(currentDiv) {
     saveBtnB.disabled = true;
 
     var resetBtnB = firstTD.firstChild.nextElementSibling.nextElementSibling;
-    var resetBtnA = secondTD.firstChild.nextElementSibling;.nextElementSibling;
+    var resetBtnA = secondTD.firstChild.nextElementSibling.nextElementSibling;
 
     resetBtnB.disabled = true;
     resetBtnA.disabled = true;
