@@ -416,6 +416,7 @@ function saveContainer (axis) {
     
     var moveBtn = secondTD.firstChild.nextElementSibling;
     moveBtn.style.display = 'inline-block';
+    console.log('TIPRACKS[a][0]: '+TIPRACKS['a'][0]);
     if(TIPRACKS['a'][0]==contName){
       var resetBtn = moveBtn.nextElementSibling;
       resetBtn.style.display = 'inline-block';
@@ -425,6 +426,7 @@ function saveContainer (axis) {
 
     var moveBtn = firstTD.firstChild.nextElementSibling;
     moveBtn.style.display = 'inline-block';
+    console.log('TIPRACKS[b][0]: '+TIPRACKS['b'][0]);
     if(TIPRACKS['b'][0]==contName){
       var resetBtn = moveBtn.nextElementSibling;
       resetBtn.style.display = 'inline-block';
