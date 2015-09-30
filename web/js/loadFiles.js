@@ -77,11 +77,15 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
 
     var tipracks = headItems[tool]["tip-racks"];
     for(var j=0; j<tipracks.length; j++){ //add all tipracks
+      console.log('tipracks['+j+']: '+tipracks[j])
       if (typeof tipracks[j] == 'string'){
         containerUsage[tool][tipracks[j]] = true;
+        console.log('containerUsage['+tool+']['+tipracks[j]+'] = '+containerUsage[tool][tipracks[j]]);
       }else{
         containerUsage[tool][tipracks[j].container] = true;
+        console.log('containerUsage['+tool+']['+tipracks[j].container+'] = '+containerUsage[tool][tipracks[j].container]);
       }
+
       console.log('tipracks[j]: '+tipracks[j]);
     }
 
