@@ -436,7 +436,7 @@ function saveContainer (axis) {
     
     var moveBtn = secondTD.lastChild.previousElementSibling;
     moveBtn.style.display = 'inline-block';
-    if(contName === TIPRACK_ORIGIN['a']){
+    if(contName in TIPRACK_ORIGIN['a']){
       var resetBtn = secondTD.lastChild;
       resetBtn.style.display = 'inline-block';
     }
@@ -445,7 +445,7 @@ function saveContainer (axis) {
 
     var moveBtn = firstTD.lastChild.previousElementSibling;
     moveBtn.style.display = 'inline-block';
-    if(contName === TIPRACK_ORIGIN['b']){
+    if(contName in TIPRACK_ORIGIN['b']){
       var resetBtn = firstTD.lastChild;
       resetBtn.style.display = 'inline-block';
     }

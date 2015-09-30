@@ -250,7 +250,9 @@ function loadFile(e) {
               console.log("there be tip-racks");
               if (tempProtocol.head[k]['tip-racks'].length > 0){
                 console.log("and it be plural");
-                TIPRACK_ORIGIN[ax] = tempProtocol.head[k]['tip-racks'][0].container;
+                for (var tiprackElemObj in tempProtocol.head[k]['tip-racks']){
+                  TIPRACK_ORIGIN[ax][tiprackElemObj.container] = tiprackElemObj.container;
+                }
                 console.log("TIPRACK_ORIGIN[",ax,"] = ",TIPRACK_ORIGIN[ax]);
               }
             }
