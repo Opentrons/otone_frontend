@@ -66,12 +66,22 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     var groups = instructions[i].groups;
 
     //add trash, tiprack to each pipette
-    var trash = headItems[tool]["trash-container"]["container"];
+    var trash = ""
+    if ("container" in headItems[tool]["trash-container"]){
+      trash = headItems[tool]["trash-container"]["container"];
+    }else{
+      trash = headItems[tool]["trash-container"][0];
+    }
+    
     containerUsage[tool][trash] = true; //add trash container
 
     var tipracks = headItems[tool]["tip-racks"];
     for(var j=0; j<tipracks.length; j++){ //add all tipracks
-      containerUsage[tool][tipracks[j].container] = true;
+      if ("container" in tipracks[0]){
+        containerUsage[tool][tipracks[j].container] = true;
+      }else{
+        containerUsage[tool][tipracks[j]] = true;
+      }
     }
 
     //go through to add each liquid container
@@ -206,7 +216,7 @@ function setupDragBox(){
 
 var CURRENT_PROTOCOL = undefined;
 var _FILENAME = undefined;
-var TIPRACK_ORIGIN = {'a':{},'b':{}};
+var TIPRACK_ORIGIN = {'a':[],'b':[]};
 
 function loadFile(e) {
   var files = e.dataTransfer.files; // FileList object.
@@ -249,10 +259,9 @@ function loadFile(e) {
             if (tempProtocol.head[k]['tip-racks']){
               console.log("there be tip-racks: "+tempProtocol.head[k]['tip-racks']);
               if (tempProtocol.head[k]['tip-racks'].length > 0){
-                console.log("and it be plural");
-                for (var tiprackElemN in tempProtocol.head[k]['tip-racks']){
-                  console.log('teN: '+tempProtocol.head[k]['tip-racks'][tiprackElemN])
-                  //TIPRACK_ORIGIN[ax].tempProtocol.head[k]['tip-rackes'][tip] = tiprackElemObj.container;
+                for (var n in tempProtocol.head[k]['tip-racks']){
+                  console.log('tip-rack['+n+': '+tempProtocol.head[k]['tip-racks'][n])
+                  TIPRACK_ORIGIN[ax].push(tempProtocol.head[k]['tip-racks'][n])
                 }
                 console.log("TIPRACK_ORIGIN[",ax,"] = ",TIPRACK_ORIGIN[ax]);
               }
