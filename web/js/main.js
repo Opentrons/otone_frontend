@@ -380,9 +380,7 @@ function selectContainer(currentDiv) {
     saveBtnB.disabled = false;
 
 
-    console.log('currentDiv: ',currentDiv);
-    console.log("TIPRACKS['a']: ",TIPRACKS['a']);
-    console.log("TIPRACKS['b']: ",TIPRACKS['b']);
+    
     if(TIPRACKS['a'][0]==currentDiv.value){
       var resetBtnA = secondTD.lastChild.previousElementSibling;
       resetBtnA.disabled = false;

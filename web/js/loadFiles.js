@@ -261,10 +261,10 @@ function loadFile(e) {
               if (tempProtocol.head[k]['tip-racks'].length > 0){
                 for (var n in tempProtocol.head[k]['tip-racks']){
                   console.log('tip-rack['+n+': '+tempProtocol.head[k]['tip-racks'][n])
-                  if ("container" in tempProtocol.head[k]['tip-racks'][n]){
-                    TIPRACKS[ax].push(tempProtocol.head[k]['tip-racks'][n].container)
-                  }else{
+                  if (typeof tempProtocol.head[k]['tip-racks'][n] === 'string'){
                     TIPRACKS[ax].push(tempProtocol.head[k]['tip-racks'][n])
+                  }else{
+                    TIPRACKS[ax].push(tempProtocol.head[k]['tip-racks'][n].container)
                   }
                 }
                 console.log("TIPRACKS[",ax,"] = ",TIPRACKS[ax]);
