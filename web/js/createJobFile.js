@@ -222,7 +222,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
             newTipContainerName = "";
             if ('container' in myRacks[i]){
               newTipContainerName = myRacks[i].container;
-            else{
+            }else{
               newTipContainerName = myRacks[i];
             }
             myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
