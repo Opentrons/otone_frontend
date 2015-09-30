@@ -250,9 +250,9 @@ function loadFile(e) {
               console.log("there be tip-racks: "+tempProtocol.head[k]['tip-racks']);
               if (tempProtocol.head[k]['tip-racks'].length > 0){
                 console.log("and it be plural");
-                for (var tiprackElemObj in tempProtocol.head[k]['tip-racks']){
-                  console.log('tiprackElemObj: '+tiprackElemObj);
-                  TIPRACK_ORIGIN[ax][tiprackElemObj.container] = tiprackElemObj.container;
+                for (var tiprackElemN in tempProtocol.head[k]['tip-racks']){
+                  console.log('teN: '+tempProtocol.head[k]['tip-racks'][tiprackElemN])
+                  //TIPRACK_ORIGIN[ax].tempProtocol.head[k]['tip-rackes'][tip] = tiprackElemObj.container;
                 }
                 console.log("TIPRACK_ORIGIN[",ax,"] = ",TIPRACK_ORIGIN[ax]);
               }
