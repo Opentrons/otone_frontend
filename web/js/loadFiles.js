@@ -216,14 +216,14 @@ function setupDragBox(){
 
 var CURRENT_PROTOCOL = undefined;
 var _FILENAME = undefined;
-var TIPRACKS = undefined // tip rack origin is just first tiprack in list
+var TIPRACKS = {'a':[],'b':[]}; // tip rack origin is just first tiprack in list
 
 function loadFile(e) {
   var files = e.dataTransfer.files; // FileList object.
 
   if(files[0]){
     var _F = files[0];
-    TIPRACKS = {'a':[],'b':[]};
+    TIPRACKS = {'a':[],'b':[]}; // clear tipracks
     _FILENAME = _F.name;
 
     document.getElementById('fileName').innerHTML = _FILENAME.split('.')[0];
