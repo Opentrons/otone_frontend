@@ -409,8 +409,8 @@ function saveContainer (axis) {
 
   var contName = currentSelectedContainer.value;
 
-  firstTD = currentSelectedContainer.nextSibling;
-  secondTD = firstTD.nextSibling;
+  firstTD = currentSelectedContainer.nextElementSibling;
+  secondTD = firstTD.nextElementSibling;
   
   if(axis == 'a'){
     
