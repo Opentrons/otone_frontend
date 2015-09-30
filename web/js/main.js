@@ -355,7 +355,7 @@ function selectContainer(currentDiv) {
     resetBtnA.disabled = true;
 
     var odBtnB = firstTD.lastChild;
-    var odBtnA = secondtD.lastChild;
+    var odBtnA = secondTD.lastChild;
 
     odBtnB.disabled = true;
     odBtnA.disabled = true;
@@ -393,7 +393,7 @@ function selectContainer(currentDiv) {
     }
     
     var odBtnB = firstTD.lastChild;
-    var odBtnA = secondtD.lastChild;
+    var odBtnA = secondTD.lastChild;
 
     odBtnB.disabled = false;
     odBtnA.disabled = false;
