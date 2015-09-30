@@ -216,14 +216,16 @@ function setupDragBox(){
 
 var CURRENT_PROTOCOL = undefined;
 var _FILENAME = undefined;
-var TIPRACK_ORIGIN = {'a':[],'b':[]};
+var TIPRACK_ORIGIN = {'a':'','b':''};
+var TIPRACKS = undefined
 
 function loadFile(e) {
   var files = e.dataTransfer.files; // FileList object.
 
   if(files[0]){
     var _F = files[0];
-
+    TIPRACKS = {'a':[],'b':[]};
+    TIP
     _FILENAME = _F.name;
 
     document.getElementById('fileName').innerHTML = _FILENAME.split('.')[0];
@@ -261,7 +263,11 @@ function loadFile(e) {
               if (tempProtocol.head[k]['tip-racks'].length > 0){
                 for (var n in tempProtocol.head[k]['tip-racks']){
                   console.log('tip-rack['+n+': '+tempProtocol.head[k]['tip-racks'][n])
-                  TIPRACK_ORIGIN[ax].push(tempProtocol.head[k]['tip-racks'][n])
+                  if "container" in tempProtocol.head[k]['tip-racks'][n]{
+                    TIPRACK_ORIGIN[ax].push(tempProtocol.head[k]['tip-racks'][n].container)
+                  }else{
+                    TIPRACK_ORIGIN[ax].push(tempProtocol.head[k]['tip-racks'][n])
+                  }
                 }
                 console.log("TIPRACK_ORIGIN[",ax,"] = ",TIPRACK_ORIGIN[ax]);
               }

@@ -381,13 +381,13 @@ function selectContainer(currentDiv) {
 
 
     console.log('currentDiv: ',currentDiv);
-    console.log("TIPRACK_ORIGIN['a']: ",TIPRACK_ORIGIN['a']);
-    console.log("TIPRACK_ORIGIN['b']: ",TIPRACK_ORIGIN['b']);
-    if(TIPRACK_ORIGIN['a'].indexOf(currentDiv.value)>=0){
+    console.log("TIPRACKS['a']: ",TIPRACKS['a']);
+    console.log("TIPRACKS['b']: ",TIPRACKS['b']);
+    if(TIPRACKS['a'][0]==currentDiv.value){
       var resetBtnA = secondTD.lastChild.previousElementSibling;
       resetBtnA.disabled = false;
     }
-    if(TIPRACK_ORIGIN['b'].indexOf(currentDiv.value)>=0){
+    if(TIPRACKS['b'][0]==currentDiv.value){
       var resetBtnB = firstTD.lastChild.previousElementSibling;
       resetBtnB.disabled = false;
     }
@@ -436,7 +436,7 @@ function saveContainer (axis) {
     
     var moveBtn = secondTD.lastChild.previousElementSibling;
     moveBtn.style.display = 'inline-block';
-    if(TIPRACK_ORIGIN['a'].indexOf(contName)){
+    if(TIPRACKS['a'][0]==contName){
       var resetBtn = secondTD.lastChild;
       resetBtn.style.display = 'inline-block';
     }
@@ -445,7 +445,7 @@ function saveContainer (axis) {
 
     var moveBtn = firstTD.lastChild.previousElementSibling;
     moveBtn.style.display = 'inline-block';
-    if(TIPRACK_ORIGIN['b'].indexOf(contName)>=0){
+    if(TIPRACKS['b'][0]==contName){
       var resetBtn = firstTD.lastChild;
       resetBtn.style.display = 'inline-block';
     }

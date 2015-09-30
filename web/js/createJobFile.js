@@ -153,8 +153,12 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
       );
     }
     
-    var _trashcontainerName = _pipettes[toolName]['trash-container'].container.trim();
-
+    var _trashcontainerName = "";
+    if ('container' in _pipettes[toolName]['trash-container']){
+      _trashcontainerName = _pipettes[toolName]['trash-container'].container.trim();
+    }else{
+      _trashcontainerName = _pipettes[toolName]['trash-container'][0];
+    }
     if(_trashcontainerName && _deck[_trashcontainerName]){
       var trashLabware = _deck[_trashcontainerName].labware;
       if(trashLabware) {
@@ -175,7 +179,13 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         _rackParams['clean-tips'] = [];
         _rackParams['dirty-tips'] = [];
 
-        var containerName = _rackParams.container.trim();
+        var containerName = "";
+        if ('container' in _rackParams){
+          containerName = _rackParams.container.trim();
+        }else{
+          containerName = _rackParams.trim();
+        }
+        
         var labwareName = _deck[containerName].labware.trim();
 
         if(labware_from_db[labwareName]) {
@@ -209,7 +219,12 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
             var howManyTips = this['multi-channel'] ? 8 : 1;
             if(isNaN(howManyTips)) howManyTips = 1;
             newTipLocation = myRacks[i]['clean-tips'].splice(0,1)[0];
-            newTipContainerName = myRacks[i].container;
+            newTipContainerName = "";
+            if ('container' in myRacks[i]){
+              newTipContainerName = myRacks[i].container;
+            else{
+              newTipContainerName = myRacks[i];
+            }
             myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
 
             // for when we're using a multi-channel, get rid of of the older tips
