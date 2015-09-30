@@ -154,10 +154,10 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
     }
     
     var _trashcontainerName = "";
-    if ('container' in _pipettes[toolName]['trash-container']){
-      _trashcontainerName = _pipettes[toolName]['trash-container'].container.trim();
-    }else{
+    if (typeof _pipettes[toolName]['trash-container'][0] == 'string'){
       _trashcontainerName = _pipettes[toolName]['trash-container'][0];
+    }else{
+      _trashcontainerName = _pipettes[toolName]['trash-container'].container.trim();
     }
     if(_trashcontainerName && _deck[_trashcontainerName]){
       var trashLabware = _deck[_trashcontainerName].labware;

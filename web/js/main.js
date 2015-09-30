@@ -341,8 +341,8 @@ function selectContainer(currentDiv) {
     saveBtnA.disabled = true;
     saveBtnB.disabled = true;
 
-    var resetBtnB = firstTD.firstChild.nextElementSibling.nextElementSibling;
-    var resetBtnA = secondTD.firstChild.nextElementSibling.nextElementSibling;
+    var resetBtnB = moveBtnB.nextElementSibling;
+    var resetBtnA = moveBtnA.nextElementSibling;
 
     resetBtnB.disabled = true;
     resetBtnA.disabled = true;
@@ -370,11 +370,11 @@ function selectContainer(currentDiv) {
     console.log("TIPRACKS['a']: ",TIPRACKS['a']);
     console.log("TIPRACKS['b']: ",TIPRACKS['b']);
     if(TIPRACKS['a'][0]==currentDiv.value){
-      var resetBtnA = secondTD.firstChild.nextElementSibling.nextElementSibling;
+      var resetBtnA = moveBtnA.nextElementSibling;
       resetBtnA.disabled = false;
     }
     if(TIPRACKS['b'][0]==currentDiv.value){
-      var resetBtnB = firstTD.firstChild.nextElementSibling.nextElementSibling;
+      var resetBtnB = moveBtnB.nextElementSibling;
       resetBtnB.disabled = false;
     }
     
@@ -417,7 +417,7 @@ function saveContainer (axis) {
     var moveBtn = secondTD.firstChild.nextElementSibling;
     moveBtn.style.display = 'inline-block';
     if(TIPRACKS['a'][0]==contName){
-      var resetBtn = secondTD.lastChild;
+      var resetBtn = moveBtn.nextElementSibling;
       resetBtn.style.display = 'inline-block';
     }
   
@@ -426,7 +426,7 @@ function saveContainer (axis) {
     var moveBtn = firstTD.firstChild.nextElementSibling;
     moveBtn.style.display = 'inline-block';
     if(TIPRACKS['b'][0]==contName){
-      var resetBtn = firstTD.firstChild.nextElementSibling.nextElementSibling;
+      var resetBtn = moveBtn.nextElementSibling;
       resetBtn.style.display = 'inline-block';
     }
 
