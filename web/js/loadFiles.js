@@ -132,14 +132,17 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
   for(var i=0; i<containers.length; i++){
 
     var rowBlocks = containers[i].children;
+    console.log('rowBlocks: '+rowBlocks);
     
     rowBlocks[1].children[0].style.display = 'inline-block'; //make both visible by default
     rowBlocks[2].children[0].style.display = 'inline-block';
 
     var name = rowBlocks[0].innerHTML;
+    console.log('name: '+name);
 
     if(pipettes["Left"] != false){ // pipette exists
       if(!(name in containerUsage[pipettes["Left"]])) { // containerUsage does not contain this key for this pipette
+        console.log('not found LEFT!');
         rowBlocks[1].children[0].style.display = 'none'; 
       }
     } else {
@@ -148,6 +151,7 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     
     if(pipettes["Center"] != false){ // pipette exists
       if(!(name in containerUsage[pipettes["Center"]])) { // containerUsage does not contain this key for this pipette
+        console.log('not found CENTER!');
         rowBlocks[2].children[0].style.display = 'none'; 
       }
     } else {
