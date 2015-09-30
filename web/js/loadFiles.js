@@ -67,20 +67,20 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
 
     //add trash, tiprack to each pipette
     var trash = ""
-    if ("container" in headItems[tool]["trash-container"]){
-      trash = headItems[tool]["trash-container"]["container"];
-    }else{
+    if (typeof headItems[tool]["trash-container"] === 'string'){
       trash = headItems[tool]["trash-container"][0];
+    }else{
+      trash = headItems[tool]["trash-container"].container;
     }
     
     containerUsage[tool][trash] = true; //add trash container
 
     var tipracks = headItems[tool]["tip-racks"];
     for(var j=0; j<tipracks.length; j++){ //add all tipracks
-      if ("container" in tipracks[0]){
-        containerUsage[tool][tipracks[j].container] = true;
-      }else{
+      if (typeof tipracks[0] == 'string'){
         containerUsage[tool][tipracks[j]] = true;
+      }else{
+        containerUsage[tool][tipracks[j].container] = true;
       }
     }
 
