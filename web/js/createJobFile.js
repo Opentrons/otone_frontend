@@ -226,7 +226,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
             if(isNaN(howManyTips)) howManyTips = 1;
             newTipLocation = myRacks[tr]['clean-tips'].splice(0,1)[0];
             newTipContainerName = "";
-            newTipContainerName = myRacks[i].container;
+            newTipContainerName = myRacks[tr].container;
             console.log('newTipContainerName: '+newTipContainerName);
             myRacks[tr]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
 
