@@ -173,7 +173,7 @@ function handleContainers (newContainers) {
       if(theContainerLocations.a[nameA].x!==null && theContainerLocations.a[nameA].y!==null && theContainerLocations.a[nameA].z!==null){
         
         PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
-        <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:inline-block;\" disabled>Move To</button> \
+        <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" disabled>Move To</button> \
         <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
       
       } else {
@@ -187,7 +187,7 @@ function handleContainers (newContainers) {
         if(theContainerLocations.b[nameA].x!==null && theContainerLocations.b[nameA].y!==null && theContainerLocations.b[nameA].z!==null){
 
           PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
-          <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:inline-block;\" disabled>Move To</button> \
+          <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" disabled>Move To</button> \
           <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
 
         } else {
@@ -253,7 +253,7 @@ function handleContainers (newContainers) {
       if(theContainerLocations.b[name].x!==null && theContainerLocations.b[name].y!==null && theContainerLocations.b[name].z!==null){
 
         PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
-        <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:inline-block;\" disabled>Move To</button> \
+        <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" disabled>Move To</button> \
         <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
 
       } else {
@@ -268,7 +268,7 @@ function handleContainers (newContainers) {
         if(theContainerLocations.a[name].x!==null && theContainerLocations.a[name].y!==null && theContainerLocations.a[name].z!==null){
          
           PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
-          <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:inline-block;\" disabled>Move To</button> \
+          <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" disabled>Move To</button> \
           <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
         
         } else {
