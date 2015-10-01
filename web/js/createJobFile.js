@@ -181,8 +181,8 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         }else{
           containerName = _tr_array[_rack].container.trim();
         }
-        _tr_objs[containerName]['container'] = containerName;
         _tr_objs[containerName] = {};
+        _tr_objs[containerName]['container'] = containerName;
         _tr_objs[containerName]['clean-tips'] = [];
         _tr_objs[containerName]['dirty-tips'] = [];
         
