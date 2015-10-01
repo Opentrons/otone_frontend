@@ -253,7 +253,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         if(!newTipLocation) {
           for(var i=0;i<this['tip-racks'].length;i++) {
             tr = this['tip-racks'][i];
-            myRacks[tr]['clean-tips'] = myRacks[i]['dirty-tips'];
+            myRacks[tr]['clean-tips'] = myRacks[tr]['dirty-tips'];
             myRacks[tr]['dirty-tips'] = [];
           }
 
