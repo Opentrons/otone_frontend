@@ -134,7 +134,9 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     var rowBlocks = containers[i].children;
     for (var x in rowBlocks){
       console.log('rowBlocks['+x+']: '+rowBlocks[x]);
+      console.log(rowBlocks[x]);
       console.log('children: '+rowBlocks[i].children);
+      console.log(rowBlocks[x].children);
       for (var y in rowBlocks[1].children[y]){
         console.log('child['+y+']: '+rowBlock[1].children[i]);
       }
