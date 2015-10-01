@@ -135,8 +135,12 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     for (var x in rowBlocks){
       console.log(rowBlocks[x]);
     }
-    rowBlocks[1].children[0].style.display = 'inline-block'; //make both visible by default
-    rowBlocks[2].children[0].style.display = 'inline-block';
+    console.log('rowBlocks[1].children: '+rowBlocks[1].children);
+    console.log('rowBlocks[2].children: '+rowBlocks[2].children);
+    for(var i in rowBlocks[1].children){
+      rowBlocks[1].children[i].style.display = 'inline-block'; //make both visible by default  
+      rowBlocks[2].children[i].style.display = 'inline-block';
+    }
 
     var name = rowBlocks[0].innerHTML;
     console.log('name: '+name);
@@ -144,19 +148,27 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     if(pipettes["Left"] != false){ // pipette exists
       if(!(name in containerUsage[pipettes["Left"]])) { // containerUsage does not contain this key for this pipette
         console.log('not found LEFT!');
-        rowBlocks[1].children[0].style.display = 'none'; 
+        for(var i in rowBlocks[1].children){
+          rowBlocks[1].children[i].style.display = 'none'; 
+        }
       }
     } else {
-      rowBlocks[1].children[0].style.display = 'none'; 
+      for(var i in rowBlocks[1].children){
+        rowBlocks[1].children[i].style.display = 'none'; 
+      }
     }  
     
     if(pipettes["Center"] != false){ // pipette exists
       if(!(name in containerUsage[pipettes["Center"]])) { // containerUsage does not contain this key for this pipette
         console.log('not found CENTER!');
-        rowBlocks[2].children[0].style.display = 'none'; 
+        for(var i in rowBlocks[2].children){
+          rowBlocks[2].children[i].style.display = 'none';
+        }
       }
     } else {
-      rowBlocks[2].children[0].style.display = 'none'; 
+      for(var i in rowBlocks[2].children){
+        rowBlocks[2].children[i].style.display = 'none'; 
+      }
     } 
 
   } 
@@ -435,8 +447,8 @@ function loadDefaultContainers() {
     try {
       var blob = JSON.parse(this.responseText);
       var newContainers = blob.containers;
-      console.log('newContainers...');
-      console.log(newContainers);
+      //console.log('newContainers...');
+      //console.log(newContainers);
       if (newContainers) {
         saveContainers(newContainers);
       }
@@ -464,14 +476,14 @@ function saveContainers(newContainers) {
     var stringedCont = undefined;
     try {
       stringedCont = JSON.stringify(cont);
-      console.log('stringedCont');
-      console.log(stringedCont)
+      //console.log('stringedCont');
+      //console.log(stringedCont)
     }
     catch (error) {
       //
     }
     if(cont.locations && stringedCont) {
-      console.log('saving cont '+cont+' to labware_from_db');
+      //console.log('saving cont '+cont+' to labware_from_db');
       labware_from_db[n] = stringedCont;
     }
   }
