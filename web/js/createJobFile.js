@@ -135,6 +135,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
   for(var toolName in protocol.head) {
     _pipettes[toolName] = JSON.parse(JSON.stringify(protocol.head[toolName]));
+    _pipettes[toolName]['tip-rack-objs'] = {};  //doesn't exist in protocol.head[toolName]
 
     _pipettes[toolName]['current-plunger'] = 0;
 
@@ -247,9 +248,11 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
             myRacks[i]['dirty-tips'] = [];
           }
 
-          newTipLocation = myRacks[0]['clean-tips'].splice(0,1)[0];
-          newTipContainerName = myRacks[0].container;
-          myRacks[0]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
+          if(Object.keys(myRacks).length>0){
+            newTipLocation = myRacks[0]['clean-tips'].splice(0,1)[0];
+            newTipContainerName = myRacks[0].container;
+            myRacks[0]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
+          }
         }
 
         var moveArray = [];
