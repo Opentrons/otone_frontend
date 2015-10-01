@@ -155,10 +155,10 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
     }
     
     var _trashcontainerName = "";
-    if (typeof _pipettes[toolName]['trash-container'][0] == 'string'){
-      _trashcontainerName = _pipettes[toolName]['trash-container'][0];
+    if (Array.isArray(_pipettes[toolName]['trash-container']){
+      _trashcontainerName = _pipettes[toolName]['trash-container'][0].trim();
     }else{
-      _trashcontainerName = _pipettes[toolName]['trash-container'][0].container.trim();
+      _trashcontainerName = _pipettes[toolName]['trash-container'].container.trim();
     }
     if(_trashcontainerName && _deck[_trashcontainerName]){
       var trashLabware = _deck[_trashcontainerName].labware;
@@ -311,8 +311,12 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         var moveArray = [];
 
         // move to the trash location, and droptip
-        var trashContainerName = this['trash-container'].container;
-
+        var trashContainerName = "";
+        if(Array.isArray(this['trash-container'])){
+          trashContainerName = this['trash-container'][0];
+        }else{
+          trashContainerName = this['trash-container'].container;
+        }
         var trashLocation;
         for(var o in this['trash-container'].locations) {
           trashLocation = this['trash-container'].locations[o];
