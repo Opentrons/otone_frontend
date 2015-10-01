@@ -211,7 +211,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
       /////////
 
       _pipettes[toolName].pickupTip = function () {
-
+        console.log('_pipettes['+toolName+'].pickupTip called');
         var myRacks = this['tip-rack-objs'];
         console.log('myRacks: '+myRacks);
         console.log(myRacks);
@@ -247,6 +247,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
         // if we couldn't find a tip, copy over dirty tips to be clean ones
         // this assumes a human will be there to resupply new tips to the now 'dirty' locations
+        console.log('testing newTipLocation');
         if(!newTipLocation) {
           for(var i=0;i<this['tip-racks'].length;i++) {
             tr = this['tip-racks'][i];
@@ -448,8 +449,7 @@ var createPipetteGroup = {
       'command': 'pipette',
       'axis': theTool.axis,
       'locations': []
-    };
-
+    
     function _addMovements (_temp) {
       createdGroup.locations = createdGroup.locations.concat(_temp);
     }
