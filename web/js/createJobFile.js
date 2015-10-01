@@ -180,10 +180,10 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         _rackParams['dirty-tips'] = [];
 
         var containerName = "";
-        if ('container' in _rackParams){
-          containerName = _rackParams.container.trim();
-        }else{
+        if (typeof _rackParams[0] === 'string'){
           containerName = _rackParams.trim();
+        }else{
+          containerName = _rackParams.container.trim();
         }
         
         var labwareName = _deck[containerName].labware.trim();
@@ -220,10 +220,10 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
             if(isNaN(howManyTips)) howManyTips = 1;
             newTipLocation = myRacks[i]['clean-tips'].splice(0,1)[0];
             newTipContainerName = "";
-            if ('container' in myRacks[i]){
-              newTipContainerName = myRacks[i].container;
-            }else{
+            if (typeof myRacks[i][0] === 'string'){
               newTipContainerName = myRacks[i];
+            }else{
+              newTipContainerName = myRacks[i].container;
             }
             myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
 
