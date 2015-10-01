@@ -602,7 +602,9 @@ var socketHandler = {
         document.getElementById('btn_blowout_'+axis).style.visibility = "visible"
         document.getElementById('btn_droptip_'+axis).style.visibility = "visible"
       }
-      catch(e){}
+      catch(e){
+        console.log(e);
+      }
     }
   },
   'containers' : function (data) {
@@ -708,7 +710,7 @@ function sendMessage (msg) {
   try{
     console.log('msg: '+JSON.stringify(msg))
   } catch(e) {
-
+    console.log(e);
   }
   try{
     globalConnection.session.publish('com.opentrons.browser_to_robot',[JSON.stringify(msg)]);

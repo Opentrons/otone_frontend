@@ -260,6 +260,8 @@ function loadFile(e) {
       }
       catch(err){
         tempProtocol = undefined;
+        console.log(err);
+        alert(err.message);
       }
 
       if(tempProtocol) {
@@ -479,7 +481,7 @@ function saveContainers(newContainers) {
       //console.log(stringedCont)
     }
     catch (error) {
-      //
+      console.log(error);
     }
     if(cont.locations && stringedCont) {
       //console.log('saving cont '+cont+' to labware_from_db');
