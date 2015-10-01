@@ -134,17 +134,15 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     var rowBlocks = containers[i].children;
     for (var x in rowBlocks){
       console.log(rowBlocks[x]);
+      console.log('children: '+rowBlocks[i].children);
+      for (var y in rowBlocks[1].children[y]){
+        console.log('child['+y+']: '+rowBlock[1].children[i]);
+      }
     }
-    for (var y in rowBlocks[1].children[y]){
-      console.log('rb1c['+y+']: '+rowBlock[1].children[i]);
-    }
-    for (var y in rowBlocks[2].children[y]){
-      console.log('rb2c['+y+']: '+rowBlock[2].children[i]);
-    }
-    for(var i=0; i<2; i++){
-      rowBlocks[1].children[i].style.display = 'inline-block'; //make both visible by default  
-      rowBlocks[2].children[i].style.display = 'inline-block';
-    }
+    
+    rowBlocks[1].children.style.display = 'inline-block'; //make both visible by default  
+    rowBlocks[2].children.style.display = 'inline-block';
+    
 
     var name = rowBlocks[0].innerHTML;
     console.log('name: '+name);
@@ -152,27 +150,19 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     if(pipettes["Left"] != false){ // pipette exists
       if(!(name in containerUsage[pipettes["Left"]])) { // containerUsage does not contain this key for this pipette
         console.log('not found LEFT!');
-        for(var i in rowBlocks[1].children){
-          rowBlocks[1].children[i].style.display = 'none'; 
-        }
+        rowBlocks[1].children.style.display = 'none'; 
       }
     } else {
-      for(var i in rowBlocks[1].children){
-        rowBlocks[1].children[i].style.display = 'none'; 
-      }
+      rowBlocks[1].children.style.display = 'none';
     }  
     
     if(pipettes["Center"] != false){ // pipette exists
       if(!(name in containerUsage[pipettes["Center"]])) { // containerUsage does not contain this key for this pipette
         console.log('not found CENTER!');
-        for(var i in rowBlocks[2].children){
-          rowBlocks[2].children[i].style.display = 'none';
-        }
+        rowBlocks[2].children.style.display = 'none';
       }
     } else {
-      for(var i in rowBlocks[2].children){
-        rowBlocks[2].children[i].style.display = 'none'; 
-      }
+      rowBlocks[2].children.style.display = 'none'; 
     } 
 
   } 
