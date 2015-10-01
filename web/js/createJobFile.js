@@ -449,7 +449,8 @@ var createPipetteGroup = {
       'command': 'pipette',
       'axis': theTool.axis,
       'locations': []
-    
+    };
+
     function _addMovements (_temp) {
       createdGroup.locations = createdGroup.locations.concat(_temp);
     }
