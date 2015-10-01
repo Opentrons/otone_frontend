@@ -77,7 +77,7 @@ window.addEventListener ('load', function () {
         
       } catch(error) {
         console.log('error handling message (2)');
-        console.log(error);
+        console.log(error.message);
       }
     });
 
