@@ -157,7 +157,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
     if (typeof _pipettes[toolName]['trash-container'][0] == 'string'){
       _trashcontainerName = _pipettes[toolName]['trash-container'][0];
     }else{
-      _trashcontainerName = _pipettes[toolName]['trash-container'].container.trim();
+      _trashcontainerName = _pipettes[toolName]['trash-container'][0].container.trim();
     }
     if(_trashcontainerName && _deck[_trashcontainerName]){
       var trashLabware = _deck[_trashcontainerName].labware;
@@ -169,22 +169,22 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
       throw '"'+_trashcontainerName+'" not found in deck';
     }
 
-    var _tipracks = _pipettes[toolName]['tip-racks'];
+    var _tr_array = [];
+    _tr_array = _pipettes[toolName]['tip-racks'];
+    _tr_objs = {};
+    if(_tr_array.length>0) {
 
-    if(_tipracks) {
-
-      for(var _rack in _tipracks) {
-
-        var _rackParams = _tipracks[_rack];
-        _rackParams['clean-tips'] = [];
-        _rackParams['dirty-tips'] = [];
-
+      for(var _rack in _tr_array) {
         var containerName = "";
-        if (typeof _rackParams[0] === 'string'){
-          containerName = _rackParams.trim();
+        if (typeof _tr_array[_rack] === 'string'){
+          containerName = _tr_array[_rack].trim();
         }else{
-          containerName = _rackParams.container.trim();
+          containerName = _tr_array[_rack].container.trim();
         }
+        _tr_objs[containerName]['container'] = containerName;
+        _tr_objs[containerName] = {};
+        _tr_objs[containerName]['clean-tips'] = [];
+        _tr_objs[containerName]['dirty-tips'] = [];
         
         var labwareName = _deck[containerName].labware.trim();
 
@@ -192,13 +192,14 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
           // copy over all locations
           var _locations = JSON.parse(labware_from_db[labwareName]).locations;
           for(var locName in _locations) {
-            _rackParams['clean-tips'].push(_locations[locName]);
+            _tr_objs[containerName]['clean-tips'].push(_locations[locName]);
           }
         }
         else {
           throw '"'+labwareName+'" not found in labware definitions';
         }
       }
+      _pipettes[toolName]['tip-rack-objs'] = _tr_objs;
 
       /////////
       /////////
@@ -206,7 +207,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
       _pipettes[toolName].pickupTip = function () {
 
-        var myRacks = this['tip-racks'];
+        var myRacks = this['tip-rack-objs'];
 
         this.justPickedUp = true;
 
@@ -220,11 +221,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
             if(isNaN(howManyTips)) howManyTips = 1;
             newTipLocation = myRacks[i]['clean-tips'].splice(0,1)[0];
             newTipContainerName = "";
-            if (typeof myRacks[i][0] === 'string'){
-              newTipContainerName = myRacks[i];
-            }else{
-              newTipContainerName = myRacks[i].container;
-            }
+            newTipContainerName = myRacks[i].container;
             myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
 
             // for when we're using a multi-channel, get rid of of the older tips
