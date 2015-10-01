@@ -204,6 +204,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
       }
       _pipettes[toolName]['tip-rack-objs'] = _tr_objs;
       console.log('_pipettes['+toolName+'][tip-rack-objs]: '+_pipettes[toolName]['tip-rack-objs']);
+      console.log(_pipettes[toolName]['tip-rack-objs']);
 
       /////////
       /////////
@@ -213,6 +214,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
         var myRacks = this['tip-rack-objs'];
         console.log('myRacks: '+myRacks);
+        console.log(myRacks);
 
         this.justPickedUp = true;
 
