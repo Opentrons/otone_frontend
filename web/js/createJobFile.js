@@ -314,7 +314,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
         // move to the trash location, and droptip
         var trashContainerName = "";
-        if(Array.isArray(this['trash-container']))){
+        if( Array.isArray(this['trash-container']) ){
           trashContainerName = this['trash-container'][0];
         }else{
           trashContainerName = this['trash-container'].container;
