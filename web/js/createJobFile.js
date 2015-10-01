@@ -175,6 +175,8 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
     if(_tr_array.length>0) {
 
       for(var _rack in _tr_array) {
+        console.log('_rack: '+_rack);
+        console.log('_tr_array['+_rack+']: '+_tr_array[_rack]);
         var containerName = "";
         if (typeof _tr_array[_rack] === 'string'){
           containerName = _tr_array[_rack].trim();
@@ -216,12 +218,14 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         var newTipLocation;
         var newTipContainerName;
         for(var i=0;i<myRacks.length;i++) {
+          console.log('i:'+i);
           if(myRacks[i]['clean-tips'].length) {
             var howManyTips = this['multi-channel'] ? 8 : 1;
             if(isNaN(howManyTips)) howManyTips = 1;
             newTipLocation = myRacks[i]['clean-tips'].splice(0,1)[0];
             newTipContainerName = "";
             newTipContainerName = myRacks[i].container;
+            console.log('newTipContainerName: '+newTipContainerName);
             myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
 
             // for when we're using a multi-channel, get rid of of the older tips
