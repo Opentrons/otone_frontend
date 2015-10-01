@@ -156,7 +156,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
     
     var _trashcontainerName = "";
 
-    if (Array.isArray(_pipettes[toolName]['trash-container']){
+    if ( Array.isArray(_pipettes[toolName]['trash-container']) ){
       _trashcontainerName = _pipettes[toolName]['trash-container'][0].trim();
     }else{
       _trashcontainerName = _pipettes[toolName]['trash-container'].container.trim();
