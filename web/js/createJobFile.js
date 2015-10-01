@@ -218,22 +218,23 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         // and move it over the the 'dirty-tips' array
         var newTipLocation;
         var newTipContainerName;
-        for(var i=0;i<myRacks.length;i++) {
+        for(var i=0;i<this['tip-racks'].length;i++) {
+          tr = this['tip-racks'][i];
           console.log('i:'+i);
-          if(myRacks[i]['clean-tips'].length) {
+          if(myRacks[tr]['clean-tips'].length) {
             var howManyTips = this['multi-channel'] ? 8 : 1;
             if(isNaN(howManyTips)) howManyTips = 1;
-            newTipLocation = myRacks[i]['clean-tips'].splice(0,1)[0];
+            newTipLocation = myRacks[tr]['clean-tips'].splice(0,1)[0];
             newTipContainerName = "";
             newTipContainerName = myRacks[i].container;
             console.log('newTipContainerName: '+newTipContainerName);
-            myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
+            myRacks[tr]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
 
             // for when we're using a multi-channel, get rid of of the older tips
             for(var n=0;n<howManyTips-1;n++) {
-              var tempTip = myRacks[i]['clean-tips'].splice(0,1)[0];
+              var tempTip = myRacks[tr]['clean-tips'].splice(0,1)[0];
               if(tempTip!=undefined){
-                myRacks[i]['dirty-tips'].push(JSON.parse(JSON.stringify(tempTip)));
+                myRacks[tr]['dirty-tips'].push(JSON.parse(JSON.stringify(tempTip)));
               }
             }
             break;
@@ -243,15 +244,16 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         // if we couldn't find a tip, copy over dirty tips to be clean ones
         // this assumes a human will be there to resupply new tips to the now 'dirty' locations
         if(!newTipLocation) {
-          for(var i=0;i<myRacks.length;i++) {
-            myRacks[i]['clean-tips'] = myRacks[i]['dirty-tips'];
-            myRacks[i]['dirty-tips'] = [];
+          for(var i=0;i<this['tip-racks'].length;i++) {
+            tr = this['tip-racks'][i];
+            myRacks[tr]['clean-tips'] = myRacks[i]['dirty-tips'];
+            myRacks[tr]['dirty-tips'] = [];
           }
 
           if(Object.keys(myRacks).length>0){
-            newTipLocation = myRacks[0]['clean-tips'].splice(0,1)[0];
-            newTipContainerName = myRacks[0].container;
-            myRacks[0]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
+            newTipLocation = myRacks[this['tip-racks'][0]]['clean-tips'].splice(0,1)[0];
+            newTipContainerName = myRacks[this['tip-racks'][0]].container;
+            myRacks[this['tip-racks'][0]]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
           }
         }
 
