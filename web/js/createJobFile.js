@@ -408,15 +408,19 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         var newGroup;
 
         if(_group.transfer) {
+          console.log('making a transfer');
           newGroup = createPipetteGroup.transfer (_deck, currentPipette, _group.transfer);
         }
         else if(_group.distribute) {
+          console.log('making a distribute');
           newGroup = createPipetteGroup.distribute (_deck, currentPipette, _group.distribute);
         }
         else if(_group.consolidate) {
+          console.log('making a consolidate');
           newGroup = createPipetteGroup.consolidate (_deck, currentPipette, _group.consolidate);
         }
         else if(_group.mix) {
+          console.log('making a mix');
           newGroup = createPipetteGroup.mix (_deck, currentPipette, _group.mix);
         }
 
@@ -444,7 +448,7 @@ var createPipetteGroup = {
   /////////
 
   'transfer' : function (theDeck, theTool, transferArray) {
-
+    console.log('transfer called');
     var createdGroup = {
       'command': 'pipette',
       'axis': theTool.axis,
