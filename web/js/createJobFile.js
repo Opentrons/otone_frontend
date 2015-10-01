@@ -136,7 +136,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
   for(var toolName in protocol.head) {
     _pipettes[toolName] = JSON.parse(JSON.stringify(protocol.head[toolName]));
     _pipettes[toolName]['tip-rack-objs'] = {};  //doesn't exist in protocol.head[toolName]
-
+    _pipettes[toolName]['trash-container-objs'] = {};
     _pipettes[toolName]['current-plunger'] = 0;
 
     if(isNaN(_pipettes[toolName]['down-plunger-speed'])) _pipettes[toolName]['down-plunger-speed'] = 300;
@@ -155,6 +155,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
     }
     
     var _trashcontainerName = "";
+
     if (Array.isArray(_pipettes[toolName]['trash-container']){
       _trashcontainerName = _pipettes[toolName]['trash-container'][0].trim();
     }else{
@@ -163,7 +164,8 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
     if(_trashcontainerName && _deck[_trashcontainerName]){
       var trashLabware = _deck[_trashcontainerName].labware;
       if(trashLabware) {
-        _pipettes[toolName]['trash-container'].locations = JSON.parse(labware_from_db[trashLabware]).locations;
+        _pipettes[toolName]['trash-container-objs'][_trashcontainerName] = {};
+        _pipettes[toolName]['trash-container-objs'][_trashcontainerName].locations = JSON.parse(labware_from_db[trashLabware]).locations;
       }
     }
     else {
@@ -312,14 +314,14 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
         // move to the trash location, and droptip
         var trashContainerName = "";
-        if(Array.isArray(this['trash-container'])){
+        if(Array.isArray(this['trash-container']))){
           trashContainerName = this['trash-container'][0];
         }else{
           trashContainerName = this['trash-container'].container;
         }
         var trashLocation;
-        for(var o in this['trash-container'].locations) {
-          trashLocation = this['trash-container'].locations[o];
+        for(var o in this['trash-container-objs'][trashContainerName].locations) {
+          trashLocation = this['trash-container-objs'][trashContainerName].locations[o];
           break;
         }
 
