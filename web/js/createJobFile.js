@@ -182,10 +182,13 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         console.log('_tr_array['+_rack+']: '+_tr_array[_rack]);
         var containerName = "";
         if (typeof _tr_array[_rack] === 'string'){
+          console.log('a string');
           containerName = _tr_array[_rack].trim();
         }else{
+          console.log('not a string');
           containerName = _tr_array[_rack].container.trim();
         }
+        console.log('containerName: '+containerName);
         _tr_objs[containerName] = {};
         _tr_objs[containerName]['container'] = containerName;
         _tr_objs[containerName]['clean-tips'] = [];
@@ -227,6 +230,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         for(var i=0;i<this['tip-racks'].length;i++) {
           tr = this['tip-racks'][i];
           console.log('i:'+i);
+          console.log(tr);
           if(myRacks[tr]['clean-tips'].length) {
             var howManyTips = this['multi-channel'] ? 8 : 1;
             if(isNaN(howManyTips)) howManyTips = 1;
