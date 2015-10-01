@@ -135,9 +135,13 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     for (var x in rowBlocks){
       console.log(rowBlocks[x]);
     }
-    console.log('rowBlocks[1].children: '+rowBlocks[1].children);
-    console.log('rowBlocks[2].children: '+rowBlocks[2].children);
-    for(var i in rowBlocks[1].children){
+    for (var y in rowBlocks[1].children[y]){
+      console.log('rb1c['++']: '+rowBlock[1].children[i]);
+    }
+    for (var y in rowBlocks[2].children[y]){
+      console.log('rb2c['++']: '+rowBlock[2].children[i]);
+    }
+    for(var i=0; i<2; i++){
       rowBlocks[1].children[i].style.display = 'inline-block'; //make both visible by default  
       rowBlocks[2].children[i].style.display = 'inline-block';
     }
