@@ -133,15 +133,19 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
 
     var rowBlocks = containers[i].children;
     for (var x in rowBlocks){
-      console.log(rowBlocks[x]);
+      console.log('rowBlocks['+x+']: '+rowBlocks[x]);
       console.log('children: '+rowBlocks[i].children);
       for (var y in rowBlocks[1].children[y]){
         console.log('child['+y+']: '+rowBlock[1].children[i]);
       }
     }
     
-    rowBlocks[1].children.style.display = 'inline-block'; //make both visible by default  
-    rowBlocks[2].children.style.display = 'inline-block';
+    rowBlocks[1].children[0].style.display = 'inline-block'; //make both visible by default  
+    rowBlocks[1].children[1].style.display = 'inline-block';
+    rowBlocks[1].children[2].style.display = 'inline-block';
+    rowBlocks[2].children[0].style.display = 'inline-block';
+    rowBlocks[2].children[1].style.display = 'inline-block';
+    rowBlocks[2].children[2].style.display = 'inline-block';
     
 
     var name = rowBlocks[0].innerHTML;

@@ -64,7 +64,7 @@ window.addEventListener ('load', function () {
     connection.session.publish('com.opentrons.browser_ready', [true]);
 
     connection.session.subscribe('com.opentrons.robot_to_browser', function(str) {
-      try{
+      //try{
         if(debug===true){
           if(verbose===true || str[0]!==str_last){
             console.log('message on com.opentrons.robot_to_browser: '+str[0])
@@ -75,10 +75,10 @@ window.addEventListener ('load', function () {
         if(msg.type && socketHandler[msg.type]) socketHandler[msg.type](msg.data);
         else console.log('error handling message (1): '+str);
         
-      } catch(error) {
+      //} catch(error) {
         console.log('error handling message (2)');
         console.log(error.message);
-      }
+      //}
     });
 
     connection.session.subscribe('com.opentrons.robot_to_browser_ctrl', function(str) {
