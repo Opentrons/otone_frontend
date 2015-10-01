@@ -135,10 +135,10 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     
     rowBlocks[1].children[0].style.display = 'inline-block'; //make both visible by default  
     rowBlocks[1].children[1].style.display = 'inline-block';
-    rowBlocks[1].children[2].style.display = 'inline-block';
+    //rowBlocks[1].children[2].style.display = 'inline-block';
     rowBlocks[2].children[0].style.display = 'inline-block';
     rowBlocks[2].children[1].style.display = 'inline-block';
-    rowBlocks[2].children[2].style.display = 'inline-block';
+    //rowBlocks[2].children[2].style.display = 'inline-block';
     
 
     var name = rowBlocks[0].innerHTML;
