@@ -227,8 +227,8 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         // and move it over the the 'dirty-tips' array
         var newTipLocation;
         var newTipContainerName;
-        for(var i=0;i<this['tip-racks'].length;i++) {
-          tr = this['tip-racks'][i];
+        for(var i=0;i<Object.keys(myRacks).length;i++) {
+          tr = Object.keys(myRacks)[i];
           console.log('i:'+i);
           console.log(tr);
           if(myRacks[tr]['clean-tips'].length) {
@@ -255,16 +255,16 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         // this assumes a human will be there to resupply new tips to the now 'dirty' locations
         console.log('testing newTipLocation');
         if(!newTipLocation) {
-          for(var i=0;i<this['tip-racks'].length;i++) {
-            tr = this['tip-racks'][i];
+          for(var i in Object.keys(myRacks)) {
+            tr = Object.keys(myRacks)[i];
             myRacks[tr]['clean-tips'] = myRacks[tr]['dirty-tips'];
             myRacks[tr]['dirty-tips'] = [];
           }
 
           if(Object.keys(myRacks).length>0){
-            newTipLocation = myRacks[this['tip-racks'][0]]['clean-tips'].splice(0,1)[0];
-            newTipContainerName = myRacks[this['tip-racks'][0]].container;
-            myRacks[this['tip-racks'][0]]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
+            newTipLocation = myRacks[Object.keys(myRacks)[0]]['clean-tips'].splice(0,1)[0];
+            newTipContainerName = myRacks[Object.keys(myRacks)[0]].container;
+            myRacks[Object.keys(myRacks)[0]]['dirty-tips'].push(JSON.parse(JSON.stringify(newTipLocation)));
           }
         }
 
