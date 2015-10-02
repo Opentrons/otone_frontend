@@ -664,7 +664,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
   // create the rainbow to the FROM location
   var containerName = thisParams.container;
   if(theDeck[containerName] && theDeck[containerName].locations) {
-
+    console.log('the repetitions... '+thisParams.repetitions);
     var locationPos = theDeck[containerName].locations[thisParams.location];
 
     // don't update the volume yet if we're doing a MIX command (see below)
@@ -762,7 +762,6 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     // if it's a mix command, got through each repetition
     // then reset this well's volume to it's orginal level
     if(thisParams.repetitions) {
-      console.log('the repeitions... '+thisParams.repetitions);
       locationPos.updateVolume(Number(thisParams.volume * -1)); // undo the volume change we did above
 
       // then loop through the repetitions, moving the plunger each step
