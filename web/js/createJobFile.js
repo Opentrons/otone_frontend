@@ -618,9 +618,8 @@ var createPipetteGroup = {
   /////////
   /////////
 
-  'mix' : function (theDeck, theTool, mixArray) {
-    console.log('mixArray: '+mixArray);
-    console.log('mixArray.length: '+mixArray.length);
+  'mix' : function (theDeck, theTool, mixArrayObjs) {
+    
     var createdGroup = {
       'command': 'pipette',
       'axis': theTool.axis,
@@ -635,8 +634,8 @@ var createPipetteGroup = {
     _addMovements(pickupArray);
 
     // create a series of move commands to accomplish the transfer described in params
-    for(var i=0;i<mixArray.length;i++) {
-      var thisParam = JSON.parse(JSON.stringify(mixArray[i]));
+    for(var i=0;i<mixArrayObjs.length;i++) {
+      var thisParam = JSON.parse(JSON.stringify(mixArrayObjs[i]));
       thisParam.volume *= -1; // this is so we accomodate for the moving liquid surface height
       var mixMoveCommands = makePipettingMotion(theDeck, theTool, thisParam, true);
       _addMovements(mixMoveCommands);
@@ -660,7 +659,8 @@ var createPipetteGroup = {
 
 function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
   var moveArray = [];
-
+  console.log('thisParams...');
+  console.log(thisParams);
   // create the rainbow to the FROM location
   var containerName = thisParams.container;
   if(theDeck[containerName] && theDeck[containerName].locations) {
@@ -762,7 +762,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     // if it's a mix command, got through each repetition
     // then reset this well's volume to it's orginal level
     if(thisParams.repetitions) {
-
+      console.log('the repeitions... '+thisParams.repetitions);
       locationPos.updateVolume(Number(thisParams.volume * -1)); // undo the volume change we did above
 
       // then loop through the repetitions, moving the plunger each step
