@@ -619,7 +619,8 @@ var createPipetteGroup = {
   /////////
 
   'mix' : function (theDeck, theTool, mixArray) {
-
+    console.log('mixArray: '+mixArray);
+    console.log('mixArray.length: '+mixArray.length);
     var createdGroup = {
       'command': 'pipette',
       'axis': theTool.axis,
