@@ -668,7 +668,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     var locationPos = theDeck[containerName].locations[thisParams.location];
 
     // don't update the volume yet if we're doing a MIX command (see below)
-    locationPos.updateVolume(Number(thisParams.volume));
+    if(typeof locationPos.updateVolume === 'function') locationPos.updateVolume(Number(thisParams.volume));
 
     var specifiedOffset = thisParams['tip-offset'] || 0;
 
@@ -711,13 +711,13 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     moveArray.push({
       'x' : locationPos.x,
       'y' : locationPos.y,
-      'container' : containerName,
+      'container' : containerName
     });
 
     // go one mm above the position
     moveArray.push({
       'z' : 1,
-      'container' : containerName,
+      'container' : containerName
     });
 
     // then update the plunger's position to go ALMOST all the way down
@@ -738,7 +738,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     // then go to the 'liquid-level + offset' position
     moveArray.push({
       'z' : arriveDepth,
-      'container' : containerName,
+      'container' : containerName
     });
 
     // then update the plunger's position to go all the way down
@@ -762,7 +762,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     // if it's a mix command, got through each repetition
     // then reset this well's volume to it's orginal level
     if(thisParams.repetitions) {
-      locationPos.updateVolume(Number(thisParams.volume * -1)); // undo the volume change we did above
+      if (typeof locationPos.updateVolume === 'function') locationPos.updateVolume(Number(thisParams.volume * -1)); // undo the volume change we did above
 
       // then loop through the repetitions, moving the plunger each step
       for(var i=0;i<thisParams.repetitions;i++) {
@@ -837,7 +837,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     // go to the top of the well
     moveArray.push({
       'z' : 0,
-      'container' : containerName,
+      'container' : containerName
     });
 
     if(thisParams['blowout']) {
