@@ -8716,7 +8716,7 @@
           }
         },
         "24-plate": {
-            "origin-offset": {"x": 10, "y": 11},
+            "origin-offset": {"x": 13.3, "y": 17.5},
             "locations": {
                 "A1": {"x": 0.0,  "total-liquid-volume": 3400, "y": 0.0,  "depth": 3.25, "z": 0, "diameter": 15.62},
                 "A2": {"x": 0.0,  "total-liquid-volume": 3400, "y": 19.3, "depth": 3.25, "z": 0, "diameter": 15.62},
