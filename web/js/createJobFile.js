@@ -674,7 +674,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
 
     var arriveDepth;
 
-    var bottomLimit = (locationPos.depth - 0.2) * -1; // give it 0.2 mm minimum distance from bottom of well
+    var bottomLimit = locationPos.depth * -1;//(locationPos.depth - 0.2) * -1; // give it 0.2 mm minimum distance from bottom of well
 
     if(thisParams['liquid-tracking']===true) {
       arriveDepth = specifiedOffset-locationPos['current-liquid-offset'];
@@ -683,9 +683,9 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
       arriveDepth = bottomLimit + specifiedOffset;
     }
 
-    if(arriveDepth < bottomLimit) {
-      arriveDepth = bottomLimit;
-    }
+    //if(arriveDepth < bottomLimit) {
+    //  arriveDepth = bottomLimit;
+    //}
 
     moveArray.push({
       'speed' : theTool['down-plunger-speed']
