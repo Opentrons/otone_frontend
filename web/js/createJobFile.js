@@ -750,11 +750,11 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     }
 
     // if delay is called, pause before sucking up
-    if(!isNaN(thisParams['delay'])) {
-      moveArray.push({
-        'delay' : thisParams['delay']
-      });
-    }
+    //if(!isNaN(thisParams['delay'])) {
+    //  moveArray.push({
+    //    'delay' : thisParams['delay']
+    //  });
+    //}
 
     var plungerPercentage = getPercentage(thisParams.volume, theTool);
     var extraPercentage = 0;
@@ -804,7 +804,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
 
       if(extraPercentage!==0) {
 
-        var delaytime = 200; // default incase a delay wasn't initialized in the 'head'
+        var delaytime = 0.200; // default incase a delay wasn't initialized in the 'head'
         if(!isNaN(theTool['extra-pull-delay'])) delaytime = Math.abs(theTool['extra-pull-delay']);
 
         // let it pause before dispesning the 'extra-pull' liquid
