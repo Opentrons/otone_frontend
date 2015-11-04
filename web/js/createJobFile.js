@@ -148,7 +148,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
     if(_pipettes[toolName].points) {
       // an array of objects, each object has a "f1" and an "f2" volume number
-      // take the old points, and sort them in accending order
+      // take the old points, and sort them in ascending order
       _pipettes[toolName].points.sort(
         function (a,b) {return a.f1-b.f1;}
       );

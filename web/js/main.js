@@ -696,6 +696,10 @@ var socketHandler = {
   'failure' : function(data) {
     setStatus(data,'red');
     alert(data);
+  },
+  'delay' : function(data) {
+    var msg = 'Delaying, seconds remaining: '+data;
+    setStatus(msg, 'orange');
   }
 };
 
