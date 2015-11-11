@@ -672,7 +672,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
 
     var specifiedOffset = 0;
 
-    if (!isNaN(thisParams['tip-offset']){
+    if (!isNaN(thisParams['tip-offset'])){
       specifiedOffset = thisParams['tip-offset'];
     }
     console.log('specifiedOffset = '+specifiedOffset);
