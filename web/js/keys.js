@@ -39,10 +39,8 @@ var key_bindings = {
     // Pipette jogging
     "t a": "jogA",
     "t b": "jogB",
-    "a down": "btn-pipette-a-down",
-    "a up": "btn-pipette-a-up",
-    "b down": "btn-pipette-b-down",
-    "b up": "btn-pipette-b-up",
+    "shift+mod+down": "btn-pipette-active-down",
+    "shift+mod+up": "btn-pipette-active-up",
     // Change tab
     "t d": "tab-deck",
     "t p": "tab-pipette",
@@ -71,6 +69,11 @@ var key_bindings = {
 
 function moveIt(buttonId) {
     document.getElementById(buttonId).click();
+}
+
+var active_pipette = 'b';
+function stepActivePipette(active_pipette, step_size) {
+    step(active_pipette, step_size);
 }
 
 Mousetrap.bind('i d d q d', function() {

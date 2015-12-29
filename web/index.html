@@ -114,7 +114,7 @@
 				<fieldset>
 				<legend class="UI-Title">Jog Axis</legend>
 
-				<div class="btn-group btn-block" id="jogAB">
+				<div class="btn-group fblock" id="jogAB">
 					
 					<button type="button" class="btn col-lg-6 shortform pipette-Left" id="jogB" onclick="toggleJog('b');">Left</button>
 					<button type="button" class="btn col-lg-6 shortform pipette-Center" id="jogA" onclick="toggleJog('a');">Center</button>
@@ -122,6 +122,10 @@
 
 
 					<div style="padding-left:10px">
+                    	<div style="visibility:hidden;height:0px;width:0px;">
+                        	<button id="btn-pipette-active-up" onclick="stepActivePipette(active_pipette,-1)" class="btn step-btn"></button>
+                        	<button id="btn-pipette-active-down" onclick="stepActivePipette(active_pipette,1)" class="btn step-btn"></button>
+                        </div>
 						<div style="position:relative;margin-top:10px;display:inline-block;padding-left:30px;">
 							<button id="btn-pipette-b-up" onclick="step('b',-1)" class="btn tron-black step-btn b">
 							<span>&#8593;</span>

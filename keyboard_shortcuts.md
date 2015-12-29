@@ -13,8 +13,7 @@ Quick explanation of how to interpret the key commands:
 
  * __Up/Down/Left/Right:__ XY axis jogging
  * __Ctrl (Command on Mac) + Up/Down:__ Z axis jogging
- * __a, Up/Down:__ Jog the A (Center) pipette up or down
- * __b, Up/Down:__ Jog the B (Left) pipette up or down
+ * __Shift + Ctrl (Command on Mac) + Up/Down:__ Jog the active pippete
  * __t, a:__ Activate the A (Center) pipette
  * __t, b:__ Activate the B (Left) pipette
  * __Shift + [a-e], [1-3]:__ Navigate to slot A1, A2, ..., E3
@@ -42,4 +41,3 @@ Quick explanation of how to interpret the key commands:
  * The location of the keyboard shortcuts toggle button will probably need to move somewhere.
  * It'd be nice to include an easy way to edit the default for the machine, though this would likely require changing something outside the [otone_frontend](https://github.com/Opentrons/otone_frontend) repo.
  * Add a shortcut (and related html) for showing which keyboard commands are available, like exists on Gmail.
- * My biggest concern is the similarity of control of the regular XY jogging (just using the arrow keys) and the pipette jogging (tapping a or b THEN tapping an arrow key). If I personally run into problems with this, the alternative I'm currently thinking of is to use __Shift + Ctrl + Up/Down__ for the pipette, but it would require more complicated code to be able to identify which pipette is active (making a hidden button that clicks the active pipette's buttons is probably the way to go there).
