@@ -102,7 +102,8 @@ function toggleJog(jogGroup){
 		for(var i=0; i<aBtns.length; i++){
 			aBtns[i].disabled=false;
 			bBtns[i].disabled=true;
-		}		
+		}
+		active_pipette = jogGroup;
 	}
 	if (jogGroup =='b'){
 		if(a.classList.contains("tron-blue")){	
@@ -115,6 +116,7 @@ function toggleJog(jogGroup){
 			bBtns[i].disabled=false;
 			aBtns[i].disabled=true;
 		}			
+		active_pipette = jogGroup;
 	}
 	
 	
