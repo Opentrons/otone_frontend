@@ -22,7 +22,7 @@ var key_bindings = {
     "shift+9": "btn-deck-incr-91",
     "shift+0": "btn-deck-incr-135",
     // Homing
-    "home home": "btn-deck-home-home",
+    "home home": "btn-deck-all-home",
     "x home": "btn-deck-x-home",
     "y home": "btn-deck-y-home",
     "z home": "btn-deck-z-home",
