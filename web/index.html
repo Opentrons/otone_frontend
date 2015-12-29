@@ -18,6 +18,8 @@
 	<script type="text/javascript" src="./js/blob.js"></script>
 	<script type="text/javascript" src="./js/main.js"></script>
 	<script type="text/javascript" src="./js/ot.js"></script>
+	<script type="text/javascript" src="./js/mousetrap.js"></script>
+	<script type="text/javascript" src="./js/keys.js"></script>
 	<script type="text/javascript" src="./js/ui.js"></script>
 </head>
 
@@ -87,19 +89,19 @@
 		<div class="col-xs-4 col-sm-4  col-md-4  col-lg-4 ">
 		<div class="UI-block center-block">
 			<span style="padding-left:10px;padding-right:10px;">Home:</span>
-			<button type="button" class="btn tron-white" onclick="home()">ALL</button>
-			<button type="button" class="btn tron-white" onclick="home({x:true})">X</button>
-			<button type="button" class="btn tron-white" onclick="home({y:true})">Y</button>
-			<button type="button" class="btn tron-white" onclick="home({z:true})">Z</button>
-			<button type="button" class="btn tron-white" onclick="home({a:true})">A</button>
-			<button type="button" class="btn tron-white" onclick="home({b:true})">B</button>
+			<button id="btn-deck-all-home" type="button" class="btn tron-white" onclick="home()">ALL</button>
+			<button id="btn-deck-x-home" type="button" class="btn tron-white" onclick="home({x:true})">X</button>
+			<button id="btn-deck-y-home" type="button" class="btn tron-white" onclick="home({y:true})">Y</button>
+			<button id="btn-deck-z-home" type="button" class="btn tron-white" onclick="home({z:true})">Z</button>
+			<button id="btn-deck-a-home" type="button" class="btn tron-white" onclick="home({a:true})">A</button>
+			<button id="btn-deck-b-home" type="button" class="btn tron-white" onclick="home({b:true})">B</button>
 		</div>
 		</div>
 		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 			<ul class="nav nav-tabs ">
-				<li class="active" id="deckLink"><a href="#" onclick="changeTab('deck');">Deck</a></li>
-				<li id="pipetteLink"><a href="#" onclick="changeTab('pipette');">Pipette</a></li>
-				<li id="configLink"><a href="#" onclick="changeTab('config');">Config</a></li>
+				<li class="active" id="deckLink"><a id="tab-deck" href="#" onclick="changeTab('deck');">Deck</a></li>
+				<li id="pipetteLink"><a id="tab-pipette" href="#" onclick="changeTab('pipette');">Pipette</a></li>
+				<li id="configLink"><a id="tab-config" href="#" onclick="changeTab('config');">Config</a></li>
 			</ul>
 		</div>
 
@@ -121,22 +123,22 @@
 
 					<div style="padding-left:10px">
 						<div style="position:relative;margin-top:10px;display:inline-block;padding-left:30px;">
-							<button onclick="step('b',-1)" class="btn tron-black step-btn b">
+							<button id="btn-pipette-b-up" onclick="step('b',-1)" class="btn tron-black step-btn b">
 							<span>&#8593;</span>
 							</button>
 							<div style="height:30px">
 							</div>
-							<button onclick="step('b',1)" class="btn tron-black step-btn b">
+							<button id="btn-pipette-b-down" onclick="step('b',1)" class="btn tron-black step-btn b">
 							<span>&#8595;</span>
 							</button>
 						</div>
 						<div style="position:relative;display:inline-block;margin-left:30px;">
-							<button onclick="step('a',-1)" class="btn tron-blue step-btn a">
+							<button id="btn-pipette-a-up" onclick="step('a',-1)" class="btn tron-blue step-btn a">
 							<span>&#8593;</span>
 							</button>
 							<div style="height:30px">
 							</div>
-							<button onclick="step('a',1)" class="btn tron-blue step-btn a">
+							<button id="btn-pipette-a-down" onclick="step('a',1)" class="btn tron-blue step-btn a">
 							<span>&#8595;</span>
 							</button>
 						</div>
@@ -149,14 +151,14 @@
 						<br/>
 						<div class="btn-group" role="group" aria-label="..." id="stepSize_ab">
 							<div>
-								<button type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'ab',10);">10mm</button>
-								<button type="button" value="5" class="btn btn-default" onclick="changeStepSize(this,'ab',5);">5mm</button>
+								<button id="btn-pipette-incr-10" type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'ab',10);">10mm</button>
+								<button id="btn-pipette-incr-5" type="button" value="5" class="btn btn-default" onclick="changeStepSize(this,'ab',5);">5mm</button>
 								<button id="defaultABStepSizeBtn" type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'ab',2);">2mm</button>
 							</div>
 							<div>
-								<button type="button" value="1" class="btn btn-default" onclick="changeStepSize(this,'ab',1);">1mm</button>
-								<button type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'ab',0.5);">0.5mm</button>
-								<button type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'ab',0.1);">0.1mm</button>
+								<button id="btn-pipette-incr-1" type="button" value="1" class="btn btn-default" onclick="changeStepSize(this,'ab',1);">1mm</button>
+								<button id="btn-pipette-incr-05" type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'ab',0.5);">0.5mm</button>
+								<button id="btn-pipette-incr-01" type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'ab',0.1);">0.1mm</button>
 							</div>
 						</div>
 					</div>
@@ -392,28 +394,28 @@
 						<legend class="UI-Title">Jog Axis (X-Y-Z)</legend>
 
 							<div style="position:relative;margin-top:10px;display:inline-block; margin-left:10%">
-								<button onclick="step('y',-1)" class="btn tron-grey step-btn step-up">
+								<button id="btn-deck-up" onclick="step('y',-1)" class="btn tron-grey step-btn step-up">
 								<span>&#8593;</span>
 								</button>
 								<br/>
-								<button onclick="step('x',-1)" class="btn tron-grey step-btn step-left">
+								<button id="btn-deck-left" onclick="step('x',-1)" class="btn tron-grey step-btn step-left">
 								<span>&#8592;</span>
 								</button>
-								<button onclick="step('x',1)" class="btn tron-grey step-btn step-right">
+								<button id="btn-deck-right" onclick="step('x',1)" class="btn tron-grey step-btn step-right">
 								<span>&#8594;</span>
 								</button>
 								<br/>
-								<button onclick="step('y',1)" class="btn tron-grey step-btn step-down">
+								<button id="btn-deck-down" onclick="step('y',1)" class="btn tron-grey step-btn step-down">
 								<span>&#8595;</span>
 								</button>
 							</div>
 							<div style="position:relative;margin-top:10px;margin-left:0px;display:inline-block">
-								<button onclick="step('z',-1)" class="btn tron-white step-btn step-up" style="margin-left:20px;">
+								<button id="btn-deck-up-z" onclick="step('z',-1)" class="btn tron-white step-btn step-up" style="margin-left:20px;">
 								<span>&#8593;</span>
 								</button>
 								<div style="height:40px;">
 								</div>
-								<button onclick="step('z',1)" class="btn tron-white step-btn step-down" style="margin-left:20px;">
+								<button id="btn-deck-down-z"  onclick="step('z',1)" class="btn tron-white step-btn step-down" style="margin-left:20px;">
 								<span>&#8595;</span>
 								</button>
 							</div>
@@ -429,16 +431,16 @@
 							<fieldset>
 							<legend>Select Increment (mm)</legend>
 							<div id="stepSize_xyz" class="btn-group" role="group" aria-label="..."  >
-								<button type="button" value="100" class="btn btn-default" onclick="changeStepSize(this,'xyz',100);">100</button>
-								<button type="button" value="50" class="btn btn-default" onclick="changeStepSize(this,'xyz',50);">50</button>
+								<button id="btn-deck-incr-100" type="button" value="100" class="btn btn-default" onclick="changeStepSize(this,'xyz',100);">100</button>
+								<button id="btn-deck-incr-50" type="button" value="50" class="btn btn-default" onclick="changeStepSize(this,'xyz',50);">50</button>
 								<button id="defaultXYZStepSizeBtn" type="button" value="20" class="btn btn-default" onclick="changeStepSize(this,'xyz',20);">20</button>
-								<button type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'xyz',10);">10</button>
-								<button type="button" value="5" class="btn btn-default" onclick="changeStepSize(this,'xyz',5);">5</button>
-								<button type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'xyz',2);">2</button>
-								<button type="button" value="1" class="btn btn-default" onclick="changeStepSize(this,'xyz',1);">1</button>
-								<button type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.5);">0.5</button>
-								<button type="button" value="91" class="btn btn-default" onclick="changeStepSize(this,'xyz',91);">91</button>
-								<button type="button" value="135" class="btn btn-default" onclick="changeStepSize(this,'xyz',135);">135</button>
+								<button id="btn-deck-incr-10" type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'xyz',10);">10</button>
+								<button id="btn-deck-incr-5" type="button" value="5" class="btn btn-default" onclick="changeStepSize(this,'xyz',5);">5</button>
+								<button id="btn-deck-incr-2" type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'xyz',2);">2</button>
+								<button id="btn-deck-incr-1" type="button" value="1" class="btn btn-default" onclick="changeStepSize(this,'xyz',1);">1</button>
+								<button id="btn-deck-incr-05" type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.5);">0.5</button>
+								<button id="btn-deck-incr-91" type="button" value="91" class="btn btn-default" onclick="changeStepSize(this,'xyz',91);">91</button>
+								<button id="btn-deck-incr-135" type="button" value="135" class="btn btn-default" onclick="changeStepSize(this,'xyz',135);">135</button>
 							</div>
 							</fieldset>
 						</div>
@@ -453,23 +455,23 @@
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<div class="pull-right">
 
-							<button class="btn tron-grey slot-btn" onclick="moveSlot('A3')">A3</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('B3')">B3</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('C3')">C3</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('D3')">D3</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('E3')">E3</button>
+							<button id="btn-deck-slot-a3" class="btn tron-grey slot-btn" onclick="moveSlot('A3')">A3</button>
+							<button id="btn-deck-slot-b3" class="btn tron-white slot-btn" onclick="moveSlot('B3')">B3</button>
+							<button id="btn-deck-slot-c3" class="btn tron-white slot-btn" onclick="moveSlot('C3')">C3</button>
+							<button id="btn-deck-slot-d3" class="btn tron-white slot-btn" onclick="moveSlot('D3')">D3</button>
+							<button id="btn-deck-slot-e3" class="btn tron-white slot-btn" onclick="moveSlot('E3')">E3</button>
 							<br/>
-							<button class="btn tron-grey slot-btn" onclick="moveSlot('A2')">A2</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('B2')">B2</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('C2')">C2</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('D2')">D2</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('E2')">E2</button>
+							<button id="btn-deck-slot-a2" class="btn tron-grey slot-btn" onclick="moveSlot('A2')">A2</button>
+							<button id="btn-deck-slot-b2" class="btn tron-white slot-btn" onclick="moveSlot('B2')">B2</button>
+							<button id="btn-deck-slot-c2" class="btn tron-white slot-btn" onclick="moveSlot('C2')">C2</button>
+							<button id="btn-deck-slot-d2" class="btn tron-white slot-btn" onclick="moveSlot('D2')">D2</button>
+							<button id="btn-deck-slot-e2" class="btn tron-white slot-btn" onclick="moveSlot('E2')">E2</button>
 							<br/>
-							<button class="btn tron-grey slot-btn" onclick="moveSlot('A1')">A1</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('B1')">B1</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('C1')">C1</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('D1')">D1</button>
-							<button class="btn tron-white slot-btn" onclick="moveSlot('E1')">E1</button>
+							<button id="btn-deck-slot-a1" class="btn tron-grey slot-btn" onclick="moveSlot('A1')">A1</button>
+							<button id="btn-deck-slot-b1" class="btn tron-white slot-btn" onclick="moveSlot('B1')">B1</button>
+							<button id="btn-deck-slot-c1" class="btn tron-white slot-btn" onclick="moveSlot('C1')">C1</button>
+							<button id="btn-deck-slot-d1" class="btn tron-white slot-btn" onclick="moveSlot('D1')">D1</button>
+							<button id="btn-deck-slot-e1" class="btn tron-white slot-btn" onclick="moveSlot('E1')">E1</button>
 
 						</div>
 						</div>
@@ -677,6 +679,16 @@
 							</div>
 						</div>
 						</br>
+					</div>
+				</div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<div class="UI-block center-block">
+						<h3 class="UI-Title" class="UI-Title">Keyboard Shortcuts</h3>
+						<div style="padding-left:10px">
+							<div style="position:relative;margin-top:10px;display:inline-block;padding-left:10px;">
+								<button class="btn tron-grey" id="keyToggleButton" onclick="toggleKeyboardShortcuts()" style="width:150px">Toggle Shortcuts</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
