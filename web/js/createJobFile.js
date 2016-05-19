@@ -482,6 +482,7 @@ var createPipetteGroup = {
 
       fromParams.volume = volume * -1;
       toParams.volume = volume;
+      toParams.blowout = thisTransferParams.blowout;
 
       fromParams['extra-pull'] = thisTransferParams['extra-pull'];
 
@@ -604,6 +605,7 @@ var createPipetteGroup = {
 
     var toParams = consolidateGroup.to;
     toParams.volume = totalVolume; // positive because we're blowing out
+    toParams.blowout = consolidateGroup.blowout;
 
     var tempToArray = makePipettingMotion(theDeck, theTool, toParams, false);
     _addMovements(tempToArray); // adding the TO well last
