@@ -1017,7 +1017,7 @@ function moveVolume (axis) {
               'plunger' : 'blowout'
             },
             {
-              'plunger' : .95
+              'plunger' : 1
             },
             {
               'z' : 20,

@@ -726,27 +726,6 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
       'container' : containerName
     });
 
-    // then update the plunger's position to go ALMOST all the way down
-    // this helps prevent the plunger getting stuck, but will also cause bubbles...
-    if(shouldDropPlunger) {
-      for(var q=0;q<1;q++) {
-        theTool['current-plunger'] = .1;
-        moveArray.push({
-          'plunger' : theTool['current-plunger']
-        });
-        theTool['current-plunger'] = .95;
-        moveArray.push({
-          'plunger' : theTool['current-plunger']
-        });
-      }
-    }
-
-    // then go to the 'liquid-level + offset' position
-    moveArray.push({
-      'z' : arriveDepth,
-      'container' : containerName
-    });
-
     // then update the plunger's position to go all the way down
     if(shouldDropPlunger) {
       theTool['current-plunger'] = 1;
@@ -754,6 +733,12 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
         'plunger' : theTool['current-plunger']
       });
     }
+
+    // then go to the 'liquid-level + offset' position
+    moveArray.push({
+      'z' : arriveDepth,
+      'container' : containerName
+    });
 
     // if delay is called, pause before sucking up
     //if(!isNaN(thisParams['delay'])) {
