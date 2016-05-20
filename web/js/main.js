@@ -880,9 +880,9 @@ function calibrate (axis, property, current) {
   if(robotState.pipettes[axis] && !isNaN(robotState.pipettes[axis][property])) {
     robotState.pipettes[axis][property] = robotState[axis];
 
-    if(property==='blowout') {
-      robotState.pipettes[axis]['bottom'] = robotState.pipettes[axis]['blowout'] - 2;
-    }
+    // if(property==='bottom') {
+    //   robotState.pipettes[axis]['blowout'] = robotState.pipettes[axis]['bottom'] + 2;
+    // }
   }
 }
 
