@@ -728,6 +728,12 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
       'container' : containerName
     });
 
+    if(!isNaN(thisParams['delay'])) {
+      moveArray.push({
+        'delay' : thisParams['delay']
+      });
+    }
+
     // then update the plunger's position to go all the way down
     if(shouldDropPlunger) {
       theTool['current-plunger'] = 1;
@@ -741,13 +747,6 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
       'z' : arriveDepth,
       'container' : containerName
     });
-
-    // if delay is called, pause before sucking up
-    //if(!isNaN(thisParams['delay'])) {
-    //  moveArray.push({
-    //    'delay' : thisParams['delay']
-    //  });
-    //}
 
     var plungerPercentage = getPercentage(thisParams.volume, theTool);
     var extraPercentage = 0;
@@ -815,12 +814,6 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
           'plunger' : theTool['current-plunger']
         });
       }
-    }
-
-    if(!isNaN(thisParams['delay'])) {
-      moveArray.push({
-        'delay' : thisParams['delay']
-      });
     }
 
     moveArray.push({
