@@ -50,22 +50,27 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
   function createLiquidLocation (location) {
 
-    location['current-liquid-volume'] = 0;
-    location['current-liquid-offset'] = 0;
+    if(location) {
 
-    /////////
+      location['current-liquid-volume'] = 0;
+      location['current-liquid-offset'] = 0;
 
-    location.updateVolume = function (ingredientVolume) {
+      /////////
 
-      // then carry on as normal with linear calculation
-      this['current-liquid-volume'] += ingredientVolume;
-      var heightRatio = this['current-liquid-volume'] / this['total-liquid-volume'];
-      if(!isNaN(heightRatio)) {
-        location['current-liquid-offset'] = this.depth - (this.depth * heightRatio);
+      location.updateVolume = function (ingredientVolume) {
+
+        // then carry on as normal with linear calculation
+        this['current-liquid-volume'] += ingredientVolume;
+        var heightRatio = this['current-liquid-volume'] / this['total-liquid-volume'];
+        if(!isNaN(heightRatio)) {
+          location['current-liquid-offset'] = this.depth - (this.depth * heightRatio);
+        }
       }
+
+      /////////
+
     }
 
-    /////////
 
   }
 
@@ -115,7 +120,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
           var currentLocation = allLocations[ingredientPart.location];
           var ingredientVolume = ingredientPart.volume;
 
-          if(!isNaN(ingredientVolume) && currentLocation.updateVolume) {
+          if(!isNaN(ingredientVolume) && currentLocation && currentLocation.updateVolume) {
 
             // add the starting ingredients to their locations
             currentLocation.updateVolume(ingredientVolume);
@@ -667,10 +672,11 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
   var containerName = thisParams.container;
   if(theDeck[containerName] && theDeck[containerName].locations) {
     console.log('the repetitions... '+thisParams.repetitions);
+
     var locationPos = theDeck[containerName].locations[thisParams.location];
 
     // don't update the volume yet if we're doing a MIX command (see below)
-    if(typeof locationPos.updateVolume === 'function') locationPos.updateVolume(Number(thisParams.volume));
+    if(locationPos && typeof locationPos.updateVolume === 'function') locationPos.updateVolume(Number(thisParams.volume));
 
     var specifiedOffset = 0;
 
@@ -754,7 +760,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     // if it's a mix command, got through each repetition
     // then reset this well's volume to it's orginal level
     if(thisParams.repetitions) {
-      if (typeof locationPos.updateVolume === 'function') locationPos.updateVolume(Number(thisParams.volume * -1)); // undo the volume change we did above
+      if (locationPos && typeof locationPos.updateVolume === 'function') locationPos.updateVolume(Number(thisParams.volume * -1)); // undo the volume change we did above
 
       // then loop through the repetitions, moving the plunger each step
       for(var i=0;i<thisParams.repetitions;i++) {
