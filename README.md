@@ -1,3 +1,19 @@
+## To Use
+
+To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+git clone https://github.com/opentrons/otone_frontend
+
+# Go into the repository
+cd otone_frontend
+
+# Install dependencies and run the app
+npm install && npm start
+```
+
+
 # Frontend Component of the OpenTrons OT.One
 
 This is the frontend component the OpenTrons OT.One.
