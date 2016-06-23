@@ -1,8 +1,8 @@
-var $ = jQuery = require('jquery')
-var http       = require('http')
+const $ = jQuery = require('jquery')
+const http       = require('http')
     , CLogger  = require('node-clogger')
 
-var nightlife  = require('nightlife-rabbit')
+const nightlife  = require('nightlife-rabbit')
     , autobahn = require('autobahn')
 
 const electron = require('electron')
