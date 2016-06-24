@@ -1,11 +1,11 @@
 {
-  "app-bundle-id": "hr.creaticon.eatodo",
+  "appId": "ot.one.opentrons",
   "app-category-type": "public.app-category.productivity",
   "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico",
   "osx": {
     "title": "OT.One Desktop",
-    "background": "build/background.png",
-    "icon": "build/icon.icns",
+    "background": "build-assets/background.png",
+    "icon": "build-assets/icon.icns",
     "icon-size": 128,
     "contents": [
       {
