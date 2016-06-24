@@ -4,9 +4,13 @@
   "description": "This is the frontend component the OpenTrons OT.One. It's a browser user interface served from the OT.One and it uses Autobahn|JS for connection to the backend running Crossbar.io.",
   "main": "main.js",
   "scripts": {
-    "postinstall": "install-app-deps",
+    "clean": "rm -rf ./dist",
+    "clean:osx": "rm -rf ./dist/osx",
+    "clean:win": "rm -rf ./dist/win",
+
     "start": "electron . --enable-logging --remote-debugging-port=9222",
     "dev": "NODE_ENV='development' npm run start",
+
     "dist": "build -owl --x64 && build -wl --ia32",
     "prerelease:osx": "rm -rf release/osx && mkdirp release/osx",
     "release:osx": "cp -rv dist/osx/*.{dmg,zip} release/osx && PACKAGE_VERSION=$(cat app/package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && echo $PACKAGE_VERSION >> ./release/osx/VERSION",
@@ -15,6 +19,7 @@
     "prerelease:win64": "rm -rf release/win64 && mkdirp release/win64",
     "release:win64": "cp -v dist/win/{RELEASES,*.nupkg,*.exe} release/win64",
     "release": "npm run release:osx && npm run release:win32 && npm run release:win64",
+
     "deploy": "PACKAGE_VERSION=$(cat app/package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && aws s3 sync release/ s3://eatodo/updates/$PACKAGE_VERSION/ --acl public-read && aws s3 sync s3://eatodo/updates/$PACKAGE_VERSION/ s3://eatodo/updates/latest/ --delete --acl public-read",
     "all": "npm run dist && npm run release && npm run deploy",
     "reload": "live-reload app --port 35729"
@@ -31,34 +36,17 @@
     "electron-builder": "^5.6.2"
   },
   "build": {
-    "app-bundle-id": "hr.creaticon.eatodo",
-    "app-category-type": "public.app-category.productivity",
-    "iconUrl": "http://eatodo.s3.amazonaws.com/icon.ico",
-    "osx": {
-      "title": "OT.One Desktop",
-      "background": "build/background.png",
-      "icon": "build/icon.icns",
-      "icon-size": 128,
-      "contents": [
-        {
-          "x": 355,
-          "y": 125,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 155,
-          "y": 125,
-          "type": "file"
-        }
-      ]
-    }
+    "appId": "ot.one.opentrons",
+    "app-category-type": "public.app-category.productivity"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/OpenTrons/otone_frontend.git"
   },
-  "author": "",
+  "author": {
+    "name": "engineering@opentrons.com",
+    "email": "engineering@opentrons.com"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/OpenTrons/otone_frontend/issues"
