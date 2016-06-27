@@ -11,12 +11,7 @@ var str_last = "";
 window.addEventListener ('load', function () {
 
   // Initialize the server/router url based off where this file came from
-  var wsuri;
-  if (document.location.origin == "file://") {
-    wsuri = "ws://127.0.0.1:8080/ws";
-  } else {
-    wsuri = (document.location.protocol === "http:" ? "ws:" : "wss:") + "//" + document.location.host + "/ws";
-  }
+  var wsuri = "ws://127.0.0.1:8080/ws";
 
   // Initialize the WAMP connection to the Router
   var connection = new autobahn.Connection({
