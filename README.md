@@ -11,6 +11,9 @@ cd otone_frontend
 
 # Install dependencies and run the app
 npm install && npm start
+
+# To generate Windows, Mac, & Linux executables
+npm run dist
 ```
 
 
