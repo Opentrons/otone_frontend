@@ -23,13 +23,12 @@ window.addEventListener ('load', function () {
   globalConnection = connection;
 
   connection.onclose = function () {
-    setStatus('Warning: Browser not connected to the server','red');
+    // setStatus('Warning: Browser not connected to the server','red');
   };
 
   // When we open the connection, subscribe and register any protocols
   connection.onopen = function(session) {
-    setStatus('Browser connected to server','rgb(27,225,100)');
-    checkConnection();
+    setStatus('Connected to the Smoothieboard','rgb(27,225,100)');
     // Subscribe and register all function end points we offer from the 
     // javascript to the other clients (ie python)
 
@@ -1273,7 +1272,7 @@ function poweroff(){
 /////////////////////////////////
 
 function restart(){
-  setStatus('restarting...','blue')
+  // setStatus('restarting...','blue')
   var msg = {
     'type' : 'restart'
   };
@@ -1285,7 +1284,7 @@ function restart(){
 /////////////////////////////////
 
 function update(data){
-  setStatus('updating '+data+'...','blue');
+  //  setStatus('updating '+data+'...','blue');
   var msg = {
     'type' : 'update',
     'data' : data
@@ -1368,7 +1367,7 @@ function updatePiConfigs() {
 /////////////////////////////////
 
 function shareInternet(){
-  setStatus('sharing internet...','blue');
+  // setStatus('sharing internet...','blue');
   var msg = {
     'type' : 'shareinet'
   };
