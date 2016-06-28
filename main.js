@@ -61,7 +61,7 @@ function startWampRouter() {
 
 function startBackend() {
   const exec = require("child_process").exec;
-  backendProcess = exec("python /Users/andy/Documents/github/otone_backend/backend/otone_client.py");
+  backendProcess = exec("python ../otone_backend/backend/otone_client.py");
 }
 
 // This method will be called when Electron has finished
