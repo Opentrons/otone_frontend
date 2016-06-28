@@ -45,11 +45,28 @@ function startWampRouter() {
     });
 }
 
+function startBackend() {
+  // const spawn = require("child_process").spawn;
+  // const backend = spawn('python', ['./otone_backend/backend/otone_client.py'])
+  //
+  // backend.stdout.on('data', (data) => {
+  //   console.log(`stdout: ${data}`);
+  // });
+  //
+  // backend.stderr.on('data', (data) => {
+  //   console.log(`stderr: ${data}`);
+  // });
+
+  const exec = require("child_process").exec;
+  exec("python ./otone_backend/backend/otone_client.py");
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 app.on('ready', startWampRouter)
+app.on('ready', startBackend)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
