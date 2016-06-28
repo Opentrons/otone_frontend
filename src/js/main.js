@@ -580,7 +580,6 @@ var socketHandler = {
     //just for debugging?
   },
   'status' : function (data) {
-    setStatus(data.string,data.color);
   },
   'pipetteValues' : function (data) {
     for(var axis in data) {
@@ -672,12 +671,11 @@ var socketHandler = {
   },
   'limit' : function(data) {
     if(debug===true) console.log('limit... '+data.slice(0,4));
-    setStatus('Minimum limit switch hit for '+data.slice(-1).toUpperCase()+' axis! Please home the machine.','red');
     var dt1 = new Date();
     var utcDate = dt1.toUTCString();
     if(data.slice(0,4)=="min_"){
       var ax = data;
-      alert('Minimum limit switch hit for '+data.slice(-1).toUpperCase()+' axis!\n\nPlease home the machine.\n\n\n\n'+utcDate);
+      alert('Minimum limit switch hit for '+data.slice(-1).toUpperCase()+' axis!\nPlease home the machine.');
     }
   },
   'progress' : function(data) {
@@ -685,16 +683,13 @@ var socketHandler = {
     if(debug===true) console.log('making progress... '+data);
   },
   'success' : function(data) {
-    setStatus(data,'green');
     alert(data);
   },
   'failure' : function(data) {
-    setStatus(data,'red');
     alert(data);
   },
   'delay' : function(data) {
     var msg = 'Delaying, seconds remaining: '+data;
-    setStatus(msg, 'orange');
   }
 };
 
