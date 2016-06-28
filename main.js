@@ -13,6 +13,8 @@ const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
+let backendProcess = undefined
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -31,6 +33,18 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
+
+    // kill the 'otone_backend' process!!
+    if(backendProcess){
+      try{
+        backendProcess.kill()
+      }
+      catch(e){
+        console.log(e)
+      }
+    }
+
+    app.quit()
   })
 }
 
@@ -45,11 +59,17 @@ function startWampRouter() {
     });
 }
 
+function startBackend() {
+  const exec = require("child_process").exec;
+  backendProcess = exec("python ../otone_backend/backend/otone_client.py");
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 app.on('ready', startWampRouter)
+app.on('ready', startBackend)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

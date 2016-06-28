@@ -28,7 +28,7 @@ window.addEventListener ('load', function () {
 
   // When we open the connection, subscribe and register any protocols
   connection.onopen = function(session) {
-    setStatus('Connected to the Smoothieboard','rgb(27,225,100)');
+    setStatus('Waiting for connection...','rgb(100,100,100)');
     // Subscribe and register all function end points we offer from the 
     // javascript to the other clients (ie python)
 
