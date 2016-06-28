@@ -1,0 +1,1676 @@
+2016-06-28 15:39:56,650 - root - INFO - 
+
+OT.One Started
+2016-06-28 15:39:56,701 - asyncio - DEBUG - Using selector: KqueueSelector
+2016-06-28 15:39:56,731 - root - DEBUG - FileIO: json file: '/Users/andy/Documents/github/otone_backend/backend/data/sample_user_protocol.json' imported!
+2016-06-28 15:39:56,732 - root - INFO - subscriber.__init__ called
+2016-06-28 15:39:56,732 - root - INFO - publisher.__init__ called
+2016-06-28 15:39:56,732 - root - INFO - trying to make a connection...
+2016-06-28 15:39:56,801 - root - DEBUG - WampComponent.onJoin called
+2016-06-28 15:39:56,802 - root - DEBUG - instantiate_objects called
+2016-06-28 15:39:56,802 - root - DEBUG - FileIO: json file: '/Users/andy/Documents/github/otone_backend/backend/data/default_startup_protocol.json' imported!
+2016-06-28 15:39:56,803 - root - INFO - head.__init__ called
+2016-06-28 15:39:56,803 - root - INFO - smoothie_pyserial:
+	CB_Factory.__init__ called
+2016-06-28 15:39:56,803 - root - INFO - pipette.__init__ called
+2016-06-28 15:39:56,803 - root - INFO - tool.__init__ called
+2016-06-28 15:39:56,806 - root - INFO - pipette.__init__ called
+2016-06-28 15:39:56,807 - root - INFO - tool.__init__ called
+2016-06-28 15:39:56,807 - root - DEBUG - smoothie_pyserial.set_raw_callback called
+2016-06-28 15:39:56,808 - root - DEBUG - smoothie_pyserial.set_position_callback called
+2016-06-28 15:39:56,808 - root - DEBUG - smoothie_pyserial.set_limit_hit_callback called
+2016-06-28 15:39:56,808 - root - DEBUG - smoothie_pyserial.set_move_callback called
+2016-06-28 15:39:56,808 - root - INFO - the_queue.__init__ called
+2016-06-28 15:39:56,808 - root - DEBUG - smoothie_pyserial.connect
+2016-06-28 15:39:56,809 - root - DEBUG - head.load_pipette_values called
+2016-06-28 15:39:56,809 - root - DEBUG - FileIO: json file: '/Users/andy/Documents/github/otone_backend/backend/otone_data/pipette_calibrations.json' imported!
+2016-06-28 15:39:56,810 - root - DEBUG - old_values:
+
+2016-06-28 15:39:56,810 - root - DEBUG - OrderedDict([('a', OrderedDict([('axis', 'a'), ('blowout', 21), ('bottom', 19), ('bottom_distance', 2), ('droptip', 24), ('offset', [0, 0, 0]), ('resting', 0), ('theContainers', OrderedDict([('p200-rack', OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])), ('scale', OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])), ('trash', OrderedDict([('x', 120), ('y', 190), ('z', 100)])), ('trough', OrderedDict([('x', None), ('y', None), ('z', None)]))])), ('tip_rack_origin', ''), ('tip_racks', []), ('toolname', 'a_pipette'), ('tooltype', 'pipette'), ('top', 2.5), ('trash_container', []), ('volume', 10)])), ('b', OrderedDict([('axis', 'b'), ('blowout', 20.2), ('bottom', 18.2), ('bottom_distance', 2), ('droptip', 22.6), ('offset', [0, 0, 0]), ('resting', 0), ('theContainers', OrderedDict([('p200-rack', OrderedDict([('rel_x', 0.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 100.0), ('y', 300.0), ('z', 80.0)])), ('scale', OrderedDict([('rel_x', 150.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 250.0), ('y', 300.0), ('z', 80.0)])), ('trash', OrderedDict([('x', 145.997), ('y', 324), ('z', 54)])), ('trough', OrderedDict([('x', 100.0), ('y', 100.0), ('z', 14.999)]))])), ('tip_rack_origin', 'p200-rack'), ('tip_racks', [OrderedDict([('container', 'p200-rack')])]), ('toolname', 'b_pipette'), ('tooltype', 'pipette'), ('top', 1.8), ('trash_container', OrderedDict([('container', 'trash')])), ('volume', 206)]))])
+2016-06-28 15:39:56,810 - root - DEBUG - self.PIPETTES[b]:
+
+
+2016-06-28 15:39:56,810 - root - DEBUG - 'b_pipette'
+2016-06-28 15:39:56,810 - root - DEBUG - head string: 
+2016-06-28 15:39:56,810 - root - DEBUG - Head
+2016-06-28 15:39:56,811 - root - DEBUG - head representation: 
+2016-06-28 15:39:56,811 - root - DEBUG - Head(odict_keys(['p200', 'p1000']))
+2016-06-28 15:39:56,811 - root - DEBUG - Head configured!
+2016-06-28 15:39:56,811 - root - DEBUG - deck.__init__ called
+2016-06-28 15:39:56,814 - root - DEBUG - deck string: 
+2016-06-28 15:39:56,814 - root - DEBUG - Deck
+2016-06-28 15:39:56,815 - root - DEBUG - deck representation: 
+2016-06-28 15:39:56,815 - root - DEBUG - Deck(odict_keys([]))
+2016-06-28 15:39:56,815 - root - INFO - protocol_runner.__init__ called
+2016-06-28 15:39:56,815 - root - INFO - instruction_queue.__init__ called
+2016-06-28 15:39:56,815 - root - DEBUG - deck.configure_deck called
+2016-06-28 15:39:56,815 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:39:56,815 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:39:56,816 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:39:56,816 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:39:56,816 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:39:56,816 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:39:56,816 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:39:56,817 - root - DEBUG - Deck configured!
+2016-06-28 15:39:56,817 - root - DEBUG - ingredients.__init__ called
+2016-06-28 15:39:56,817 - root - DEBUG - ingredients.configure_ingredients called
+2016-06-28 15:39:56,817 - root - DEBUG - Ingredients imported!
+2016-06-28 15:39:56,817 - root - DEBUG - publisher.set_head called
+2016-06-28 15:39:56,817 - root - DEBUG - publisher.set_runner called
+2016-06-28 15:39:56,817 - root - DEBUG - subscriber.set_head called
+2016-06-28 15:39:56,818 - root - DEBUG - subscriber.set_runner called
+2016-06-28 15:39:56,818 - root - DEBUG - about to publish com.opentrons.robot_ready TRUE
+2016-06-28 15:39:56,820 - root - DEBUG - periodically_send_ip_addresses called
+2016-06-28 15:39:56,820 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:39:56,823 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:39:56,823 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:39:56,823 - root - DEBUG - publisher.send_message called
+2016-06-28 15:39:56,854 - root - CRITICAL - Traceback (most recent call last):
+  File "/Users/andy/Documents/github/otone_frontend/backend_env/lib/python3.5/site-packages/autobahn/wamp/websocket.py", line 88, in onMessage
+    for msg in self._serializer.unserialize(payload, isBinary):
+  File "/Users/andy/Documents/github/otone_frontend/backend_env/lib/python3.5/site-packages/autobahn/wamp/serializer.py", line 131, in unserialize
+    msg = Klass.parse(raw_msg)
+  File "/Users/andy/Documents/github/otone_frontend/backend_env/lib/python3.5/site-packages/autobahn/wamp/message.py", line 1036, in parse
+    raise ProtocolError("invalid type {0} for 'args' in ERROR".format(type(args)))
+autobahn.wamp.exception.ProtocolError: invalid type <class 'str'> for 'args' in ERROR
+
+2016-06-28 15:39:56,855 - root - INFO - error while trying to make a connection, sleeping for 5 seconds
+2016-06-28 15:40:01,856 - root - INFO - trying to make a connection...
+2016-06-28 15:40:01,859 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:01,859 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:01,859 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:01,859 - root - ERROR - error trying to send_message
+2016-06-28 15:40:01,859 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:01,870 - root - DEBUG - WampComponent.onJoin called
+2016-06-28 15:40:01,870 - root - DEBUG - instantiate_objects called
+2016-06-28 15:40:01,871 - root - DEBUG - FileIO: json file: '/Users/andy/Documents/github/otone_backend/backend/data/default_startup_protocol.json' imported!
+2016-06-28 15:40:01,871 - root - INFO - head.__init__ called
+2016-06-28 15:40:01,871 - root - INFO - smoothie_pyserial:
+	CB_Factory.__init__ called
+2016-06-28 15:40:01,871 - root - INFO - pipette.__init__ called
+2016-06-28 15:40:01,871 - root - INFO - tool.__init__ called
+2016-06-28 15:40:01,871 - root - INFO - pipette.__init__ called
+2016-06-28 15:40:01,871 - root - INFO - tool.__init__ called
+2016-06-28 15:40:01,871 - root - DEBUG - smoothie_pyserial.set_raw_callback called
+2016-06-28 15:40:01,871 - root - DEBUG - smoothie_pyserial.set_position_callback called
+2016-06-28 15:40:01,871 - root - DEBUG - smoothie_pyserial.set_limit_hit_callback called
+2016-06-28 15:40:01,871 - root - DEBUG - smoothie_pyserial.set_move_callback called
+2016-06-28 15:40:01,872 - root - INFO - the_queue.__init__ called
+2016-06-28 15:40:01,872 - root - DEBUG - smoothie_pyserial.connect
+2016-06-28 15:40:01,872 - root - DEBUG - head.load_pipette_values called
+2016-06-28 15:40:01,872 - root - DEBUG - FileIO: json file: '/Users/andy/Documents/github/otone_backend/backend/otone_data/pipette_calibrations.json' imported!
+2016-06-28 15:40:01,872 - root - DEBUG - old_values:
+
+2016-06-28 15:40:01,872 - root - DEBUG - OrderedDict([('a', OrderedDict([('axis', 'a'), ('blowout', 21), ('bottom', 19), ('bottom_distance', 2), ('droptip', 24), ('offset', [0, 0, 0]), ('resting', 0), ('theContainers', OrderedDict([('p200-rack', OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])), ('scale', OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])), ('trash', OrderedDict([('x', 120), ('y', 190), ('z', 100)])), ('trough', OrderedDict([('x', None), ('y', None), ('z', None)]))])), ('tip_rack_origin', ''), ('tip_racks', []), ('toolname', 'a_pipette'), ('tooltype', 'pipette'), ('top', 2.5), ('trash_container', []), ('volume', 10)])), ('b', OrderedDict([('axis', 'b'), ('blowout', 20.2), ('bottom', 18.2), ('bottom_distance', 2), ('droptip', 22.6), ('offset', [0, 0, 0]), ('resting', 0), ('theContainers', OrderedDict([('p200-rack', OrderedDict([('rel_x', 0.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 100.0), ('y', 300.0), ('z', 80.0)])), ('scale', OrderedDict([('rel_x', 150.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 250.0), ('y', 300.0), ('z', 80.0)])), ('trash', OrderedDict([('x', 145.997), ('y', 324), ('z', 54)])), ('trough', OrderedDict([('x', 100.0), ('y', 100.0), ('z', 14.999)]))])), ('tip_rack_origin', 'p200-rack'), ('tip_racks', [OrderedDict([('container', 'p200-rack')])]), ('toolname', 'b_pipette'), ('tooltype', 'pipette'), ('top', 1.8), ('trash_container', OrderedDict([('container', 'trash')])), ('volume', 206)]))])
+2016-06-28 15:40:01,872 - root - DEBUG - self.PIPETTES[b]:
+
+
+2016-06-28 15:40:01,873 - root - DEBUG - 'b_pipette'
+2016-06-28 15:40:01,873 - root - DEBUG - head string: 
+2016-06-28 15:40:01,873 - root - DEBUG - Head
+2016-06-28 15:40:01,873 - root - DEBUG - head representation: 
+2016-06-28 15:40:01,873 - root - DEBUG - Head(odict_keys(['p200', 'p1000']))
+2016-06-28 15:40:01,873 - root - DEBUG - Head configured!
+2016-06-28 15:40:01,873 - root - DEBUG - deck.__init__ called
+2016-06-28 15:40:01,873 - root - DEBUG - deck string: 
+2016-06-28 15:40:01,873 - root - DEBUG - Deck
+2016-06-28 15:40:01,873 - root - DEBUG - deck representation: 
+2016-06-28 15:40:01,873 - root - DEBUG - Deck(odict_keys([]))
+2016-06-28 15:40:01,873 - root - INFO - protocol_runner.__init__ called
+2016-06-28 15:40:01,874 - root - INFO - instruction_queue.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - deck.configure_deck called
+2016-06-28 15:40:01,874 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - deck_module.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - Deck configured!
+2016-06-28 15:40:01,874 - root - DEBUG - ingredients.__init__ called
+2016-06-28 15:40:01,874 - root - DEBUG - ingredients.configure_ingredients called
+2016-06-28 15:40:01,874 - root - DEBUG - Ingredients imported!
+2016-06-28 15:40:01,874 - root - DEBUG - publisher.set_head called
+2016-06-28 15:40:01,875 - root - DEBUG - publisher.set_runner called
+2016-06-28 15:40:01,875 - root - DEBUG - subscriber.set_head called
+2016-06-28 15:40:01,875 - root - DEBUG - subscriber.set_runner called
+2016-06-28 15:40:01,875 - root - DEBUG - about to publish com.opentrons.robot_ready TRUE
+2016-06-28 15:40:01,876 - root - DEBUG - periodically_send_ip_addresses called
+2016-06-28 15:40:01,876 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:01,877 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:01,877 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:01,877 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:01,908 - root - DEBUG - subscriber.dispatch_message called
+2016-06-28 15:40:01,908 - root - DEBUG - 
+message: {"type":"getContainers"}
+2016-06-28 15:40:01,909 - root - DEBUG - 	dictum[type]: getContainers
+2016-06-28 15:40:01,909 - root - DEBUG - subscriber.dispatch called
+2016-06-28 15:40:01,909 - root - DEBUG - type_: getContainers,  data: None
+2016-06-28 15:40:01,909 - root - DEBUG - deck.publish_containers called
+2016-06-28 15:40:01,909 - root - DEBUG - deck.get_containers called
+2016-06-28 15:40:01,918 - asyncio - ERROR - Task was destroyed but it is pending!
+task: <Task pending coro=<onJoin() running at /Users/andy/Documents/github/otone_backend/backend/otone_client.py:125> wait_for=<Future pending cb=[Task._wakeup()]>>
+2016-06-28 15:40:01,936 - root - DEBUG - FileIO: json file: '/Users/andy/Documents/github/otone_backend/backend/otone_data/containers.json' imported!
+2016-06-28 15:40:01,936 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:02,038 - root - DEBUG - subscriber.dispatch_message called
+2016-06-28 15:40:02,038 - root - DEBUG - 
+message: {"type":"getCalibrations"}
+2016-06-28 15:40:02,038 - root - DEBUG - 	dictum[type]: getCalibrations
+2016-06-28 15:40:02,038 - root - DEBUG - subscriber.dispatch called
+2016-06-28 15:40:02,038 - root - DEBUG - type_: getCalibrations,  data: None
+2016-06-28 15:40:02,038 - root - DEBUG - subscriber.get_calibrations called
+2016-06-28 15:40:02,038 - root - DEBUG - head.publish_calibrations called
+2016-06-28 15:40:02,038 - root - DEBUG - head.get_deck called
+2016-06-28 15:40:02,038 - root - DEBUG - self.PIPETTES[a].theContainers: OrderedDict([('p200-rack', OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])), ('scale', OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])), ('trash', OrderedDict([('x', 120), ('y', 190), ('z', 100)])), ('trough', OrderedDict([('x', None), ('y', None), ('z', None)]))])
+2016-06-28 15:40:02,038 - root - DEBUG - self.PIPETTES[a].theContainers[OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])]
+2016-06-28 15:40:02,039 - root - DEBUG - self.PIPETTES[a].theContainers[OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])]
+2016-06-28 15:40:02,039 - root - DEBUG - self.PIPETTES[a].theContainers[OrderedDict([('x', 120), ('y', 190), ('z', 100)])]
+2016-06-28 15:40:02,039 - root - DEBUG - self.PIPETTES[a].theContainers[OrderedDict([('x', None), ('y', None), ('z', None)])]
+2016-06-28 15:40:02,039 - root - DEBUG - self.PIPETTES[b].theContainers: OrderedDict([('p200-rack', OrderedDict([('rel_x', 0.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 100.0), ('y', 300.0), ('z', 80.0)])), ('scale', OrderedDict([('rel_x', 150.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 250.0), ('y', 300.0), ('z', 80.0)])), ('trash', OrderedDict([('x', 145.997), ('y', 324), ('z', 54)])), ('trough', OrderedDict([('x', 100.0), ('y', 100.0), ('z', 14.999)]))])
+2016-06-28 15:40:02,039 - root - DEBUG - self.PIPETTES[b].theContainers[OrderedDict([('rel_x', 0.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 100.0), ('y', 300.0), ('z', 80.0)])]
+2016-06-28 15:40:02,039 - root - DEBUG - self.PIPETTES[b].theContainers[OrderedDict([('rel_x', 150.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 250.0), ('y', 300.0), ('z', 80.0)])]
+2016-06-28 15:40:02,039 - root - DEBUG - self.PIPETTES[b].theContainers[OrderedDict([('x', 145.997), ('y', 324), ('z', 54)])]
+2016-06-28 15:40:02,039 - root - DEBUG - self.PIPETTES[b].theContainers[OrderedDict([('x', 100.0), ('y', 100.0), ('z', 14.999)])]
+2016-06-28 15:40:02,039 - root - DEBUG - head.save_pipette_values called
+2016-06-28 15:40:02,040 - root - DEBUG - filetext: {
+    "a": {
+        "axis": "a",
+        "blowout": 21,
+        "bottom": 19,
+        "bottom_distance": 2,
+        "droptip": 24,
+        "offset": [
+            0,
+            0,
+            0
+        ],
+        "resting": 0,
+        "theContainers": {
+            "p200-rack": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "scale": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "trash": {
+                "x": 120,
+                "y": 190,
+                "z": 100
+            },
+            "trough": {
+                "x": null,
+                "y": null,
+                "z": null
+            }
+        },
+        "tip_rack_origin": "",
+        "tip_racks": [],
+        "toolname": "a_pipette",
+        "tooltype": "pipette",
+        "top": 2.5,
+        "trash_container": [],
+        "volume": 10
+    },
+    "b": {
+        "axis": "b",
+        "blowout": 20.2,
+        "bottom": 18.2,
+        "bottom_distance": 2,
+        "droptip": 22.6,
+        "offset": [
+            0,
+            0,
+            0
+        ],
+        "resting": 0,
+        "theContainers": {
+            "p200-rack": {
+                "rel_x": 0.0,
+                "rel_y": 0.0,
+                "rel_z": 0.0,
+                "x": 100.0,
+                "y": 300.0,
+                "z": 80.0
+            },
+            "scale": {
+                "rel_x": 150.0,
+                "rel_y": 0.0,
+                "rel_z": 0.0,
+                "x": 250.0,
+                "y": 300.0,
+                "z": 80.0
+            },
+            "trash": {
+                "x": 145.997,
+                "y": 324,
+                "z": 54
+            },
+            "trough": {
+                "x": 100.0,
+                "y": 100.0,
+                "z": 14.999
+            }
+        },
+        "tip_rack_origin": "p200-rack",
+        "tip_racks": [
+            {
+                "container": "p200-rack"
+            }
+        ],
+        "toolname": "b_pipette",
+        "tooltype": "pipette",
+        "top": 1.8,
+        "trash_container": {
+            "container": "trash"
+        },
+        "volume": 206
+    }
+}
+2016-06-28 15:40:02,040 - root - DEBUG - file_io.writeFile called, filetext: {
+    "a": {
+        "axis": "a",
+        "blowout": 21,
+        "bottom": 19,
+        "bottom_distance": 2,
+        "droptip": 24,
+        "offset": [
+            0,
+            0,
+            0
+        ],
+        "resting": 0,
+        "theContainers": {
+            "p200-rack": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "scale": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "trash": {
+                "x": 120,
+                "y": 190,
+                "z": 100
+            },
+            "trough": {
+                "x": null,
+                "y": null,
+                "z": null
+            }
+        },
+        "tip_rack_origin": "",
+        "tip_racks": [],
+        "toolname": "a_pipette",
+        "tooltype": "pipette",
+        "top": 2.5,
+        "trash_container": [],
+        "volume": 10
+    },
+    "b": {
+        "axis": "b",
+        "blowout": 20.2,
+        "bottom": 18.2,
+        "bottom_distance": 2,
+        "droptip": 22.6,
+        "offset": [
+            0,
+            0,
+            0
+        ],
+        "resting": 0,
+        "theContainers": {
+            "p200-rack": {
+                "rel_x": 0.0,
+                "rel_y": 0.0,
+                "rel_z": 0.0,
+                "x": 100.0,
+                "y": 300.0,
+                "z": 80.0
+            },
+            "scale": {
+                "rel_x": 150.0,
+                "rel_y": 0.0,
+                "rel_z": 0.0,
+                "x": 250.0,
+                "y": 300.0,
+                "z": 80.0
+            },
+            "trash": {
+                "x": 145.997,
+                "y": 324,
+                "z": 54
+            },
+            "trough": {
+                "x": 100.0,
+                "y": 100.0,
+                "z": 14.999
+            }
+        },
+        "tip_rack_origin": "p200-rack",
+        "tip_racks": [
+            {
+                "container": "p200-rack"
+            }
+        ],
+        "toolname": "b_pipette",
+        "tooltype": "pipette",
+        "top": 1.8,
+        "trash_container": {
+            "container": "trash"
+        },
+        "volume": 206
+    }
+}
+2016-06-28 15:40:02,041 - root - DEBUG - head.get_deck response: {'a': {'trough': OrderedDict([('x', None), ('y', None), ('z', None)]), 'p200-rack': OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)]), 'trash': OrderedDict([('x', 120), ('y', 190), ('z', 100)]), 'scale': OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])}, 'b': {'trough': OrderedDict([('x', 100.0), ('y', 100.0), ('z', 14.999)]), 'p200-rack': OrderedDict([('rel_x', 0.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 100.0), ('y', 300.0), ('z', 80.0)]), 'trash': OrderedDict([('x', 145.997), ('y', 324), ('z', 54)]), 'scale': OrderedDict([('rel_x', 150.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 250.0), ('y', 300.0), ('z', 80.0)])}}
+2016-06-28 15:40:02,041 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:02,041 - root - DEBUG - head.get_pipettes called
+2016-06-28 15:40:02,042 - root - DEBUG - head.get_pipettes response: {'a': {'blowout': 21, 'tooltype': 'pipette', 'resting': 0, 'tip_racks': [], 'theContainers': OrderedDict([('p200-rack', OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])), ('scale', OrderedDict([('rel_x', None), ('rel_y', None), ('rel_z', None), ('x', None), ('y', None), ('z', None)])), ('trash', OrderedDict([('x', 120), ('y', 190), ('z', 100)])), ('trough', OrderedDict([('x', None), ('y', None), ('z', None)]))]), 'offset': [0, 0, 0], 'trash_container': [], 'bottom': 19, 'top': 2.5, 'tip_rack_origin': '', 'volume': 10, 'toolname': 'a_pipette', 'axis': 'a', 'droptip': 24, 'bottom_distance': 2}, 'b': {'blowout': 20.2, 'tooltype': 'pipette', 'resting': 0, 'tip_racks': [OrderedDict([('container', 'p200-rack')])], 'theContainers': OrderedDict([('p200-rack', OrderedDict([('rel_x', 0.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 100.0), ('y', 300.0), ('z', 80.0)])), ('scale', OrderedDict([('rel_x', 150.0), ('rel_y', 0.0), ('rel_z', 0.0), ('x', 250.0), ('y', 300.0), ('z', 80.0)])), ('trash', OrderedDict([('x', 145.997), ('y', 324), ('z', 54)])), ('trough', OrderedDict([('x', 100.0), ('y', 100.0), ('z', 14.999)]))]), 'offset': [0, 0, 0], 'trash_container': OrderedDict([('container', 'trash')]), 'bottom': 18.2, 'top': 1.8, 'tip_rack_origin': 'p200-rack', 'volume': 206, 'toolname': 'b_pipette', 'axis': 'b', 'droptip': 22.6, 'bottom_distance': 2}}
+2016-06-28 15:40:02,042 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:02,864 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:02,864 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:02,865 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:02,880 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:02,880 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:02,880 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:03,861 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:03,868 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:03,868 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:03,868 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:03,877 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:03,885 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:03,885 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:03,885 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:04,871 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:04,871 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:04,871 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:04,889 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:04,890 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:04,890 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:05,862 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:05,874 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:05,875 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:05,875 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:05,878 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:05,894 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:05,894 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:05,895 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:06,880 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:06,880 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:06,880 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:06,897 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:06,898 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:06,898 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:07,863 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:07,879 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:07,882 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:07,883 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:07,883 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:07,903 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:07,904 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:07,904 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:08,886 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:08,886 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:08,886 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:08,908 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:08,908 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:08,909 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:09,866 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:09,880 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:09,889 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:09,889 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:09,889 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:09,911 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:09,911 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:09,911 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:10,891 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:10,892 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:10,892 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:10,913 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:10,914 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:10,914 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:11,868 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:11,882 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:11,895 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:11,895 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:11,895 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:11,918 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:11,918 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:11,919 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:12,898 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:12,898 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:12,898 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:12,923 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:12,923 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:12,923 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:13,868 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:13,883 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:13,901 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:13,901 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:13,901 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:13,925 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:13,926 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:13,926 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:14,904 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:14,904 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:14,904 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:14,932 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:14,932 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:14,932 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:15,871 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:15,885 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:15,908 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:15,908 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:15,908 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:15,936 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:15,936 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:15,936 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:16,911 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:16,911 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:16,911 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:16,943 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:16,944 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:16,944 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:17,872 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:17,887 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:17,914 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:17,914 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:17,914 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:17,947 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:17,947 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:17,947 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:18,917 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:18,918 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:18,918 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:18,950 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:18,950 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:18,950 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:19,874 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:19,889 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:19,921 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:19,921 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:19,921 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:19,957 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:19,957 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:19,958 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:20,924 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:20,924 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:20,924 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:20,966 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:20,966 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:20,966 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:21,878 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:21,890 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:21,927 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:21,927 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:21,927 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:21,969 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:21,970 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:21,970 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:22,934 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:22,934 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:22,934 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:22,974 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:22,975 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:22,975 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:23,880 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:23,892 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:23,937 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:23,938 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:23,938 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:23,978 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:23,979 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:23,979 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:24,941 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:24,941 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:24,942 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:24,982 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:24,983 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:24,983 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:25,881 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:25,893 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:25,945 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:25,946 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:25,946 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:25,985 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:25,986 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:25,986 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:26,949 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:26,949 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:26,949 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:26,988 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:26,988 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:26,989 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:27,882 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:27,894 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:27,955 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:27,955 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:27,955 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:27,997 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:27,997 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:27,997 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:28,957 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:28,957 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:28,958 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:29,002 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:29,002 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:29,002 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:29,884 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:29,896 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:29,961 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:29,961 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:29,961 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:30,005 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:30,005 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:30,005 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:30,964 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:30,964 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:30,964 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:31,007 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:31,007 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:31,007 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:31,887 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:31,897 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:31,967 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:31,967 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:31,968 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:32,009 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:32,010 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:32,010 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:32,972 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:32,972 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:32,972 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:33,013 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:33,013 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:33,013 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:33,890 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:33,898 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:33,974 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:33,974 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:33,975 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:34,015 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:34,016 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:34,016 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:34,977 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:34,977 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:34,978 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:35,018 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:35,018 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:35,018 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:35,891 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:35,900 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:35,981 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:35,982 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:35,982 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:36,023 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:36,023 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:36,023 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:36,984 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:36,985 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:36,985 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:37,026 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:37,026 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:37,026 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:37,892 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:37,902 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:37,987 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:37,987 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:37,988 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:38,029 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:38,029 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:38,029 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:38,990 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:38,990 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:38,990 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:39,035 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:39,035 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:39,035 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:39,893 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:39,903 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:39,993 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:39,993 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:39,993 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:40,037 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:40,037 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:40,037 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:40,996 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:40,996 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:40,996 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:41,041 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:41,041 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:41,041 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:41,894 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:41,904 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:42,003 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:42,004 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:42,004 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:42,044 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:42,044 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:42,045 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:43,007 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:43,007 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:43,007 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:43,048 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:43,048 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:43,048 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:43,895 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:43,905 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:44,013 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:44,013 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:44,013 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:44,055 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:44,055 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:44,055 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:45,015 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:45,016 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:45,016 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:45,061 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:45,061 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:45,061 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:45,896 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:45,907 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:46,019 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:46,019 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:46,019 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:46,066 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:46,066 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:46,066 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:47,024 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:47,024 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:47,024 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:47,072 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:47,072 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:47,072 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:47,900 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:47,908 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:48,027 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:48,027 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:48,027 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:48,077 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:48,078 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:48,078 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:49,031 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:49,031 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:49,031 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:49,083 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:49,083 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:49,083 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:49,901 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:49,909 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:50,037 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:50,037 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:50,037 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:50,085 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:50,085 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:50,085 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:51,042 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:51,043 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:51,043 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:51,091 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:51,091 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:51,091 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:51,902 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:51,912 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:52,045 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:52,045 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:52,046 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:52,097 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:52,097 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:52,097 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:53,048 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:53,048 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:53,048 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:53,099 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:53,099 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:53,099 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:53,904 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:53,912 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:54,052 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:54,053 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:54,053 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:54,102 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:54,102 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:54,102 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:55,055 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:55,056 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:55,056 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:55,107 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:55,107 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:55,107 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:55,906 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:55,914 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:56,060 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:56,060 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:56,060 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:56,109 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:56,109 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:56,110 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:57,063 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:57,063 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:57,063 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:57,111 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:57,111 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:57,111 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:57,909 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:57,915 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:58,066 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:58,066 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:58,066 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:58,115 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:58,115 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:58,116 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:59,069 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:59,069 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:59,069 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:59,118 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:40:59,118 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:40:59,118 - root - DEBUG - publisher.send_message called
+2016-06-28 15:40:59,909 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:40:59,916 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:00,076 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:00,076 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:00,077 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:00,121 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:00,121 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:00,121 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:01,079 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:01,079 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:01,079 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:01,123 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:01,123 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:01,123 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:01,911 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:01,917 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:02,082 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:02,082 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:02,082 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:02,130 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:02,130 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:02,130 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:03,086 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:03,086 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:03,086 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:03,133 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:03,133 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:03,133 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:03,912 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:03,918 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:04,090 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:04,090 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:04,090 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:04,136 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:04,137 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:04,137 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:05,093 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:05,093 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:05,093 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:05,141 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:05,141 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:05,141 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:05,914 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:05,919 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:06,097 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:06,097 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:06,097 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:06,144 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:06,144 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:06,144 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:07,103 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:07,103 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:07,103 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:07,147 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:07,147 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:07,147 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:07,916 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:07,920 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:08,106 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:08,106 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:08,106 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:08,150 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:08,150 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:08,150 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:09,108 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:09,109 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:09,109 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:09,155 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:09,156 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:09,156 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:09,917 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:09,921 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:10,112 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:10,112 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:10,112 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:10,161 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:10,162 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:10,162 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:11,115 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:11,115 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:11,115 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:11,165 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:11,166 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:11,166 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:11,920 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:11,922 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:12,118 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:12,118 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:12,118 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:12,168 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:12,168 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:12,168 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:13,124 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:13,124 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:13,125 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:13,171 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:13,171 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:13,171 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:13,924 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:13,924 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:14,131 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:14,131 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:14,131 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:14,174 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:14,174 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:14,174 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:15,133 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:15,134 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:15,134 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:15,179 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:15,179 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:15,180 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:15,924 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:15,925 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:16,138 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:16,138 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:16,138 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:16,182 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:16,182 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:16,183 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:17,141 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:17,141 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:17,141 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:17,185 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:17,185 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:17,185 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:17,925 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:17,926 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:18,146 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:18,146 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:18,146 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:18,188 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:18,188 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:18,188 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:19,151 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:19,151 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:19,151 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:19,191 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:19,191 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:19,191 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:19,927 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:19,928 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:20,154 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:20,155 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:20,155 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:20,194 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:20,195 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:20,195 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:21,158 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:21,159 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:21,159 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:21,197 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:21,197 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:21,197 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:21,928 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:21,929 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:22,162 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:22,162 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:22,162 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:22,201 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:22,201 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:22,201 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:23,164 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:23,165 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:23,165 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:23,206 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:23,207 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:23,207 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:23,929 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:23,929 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:24,168 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:24,169 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:24,169 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:24,210 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:24,210 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:24,210 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:25,172 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:25,173 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:25,173 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:25,214 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:25,215 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:25,215 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:25,930 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:25,931 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:26,178 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:26,178 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:26,179 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:26,218 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:26,218 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:26,218 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:27,181 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:27,181 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:27,182 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:27,221 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:27,221 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:27,221 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:27,936 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:27,936 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:28,183 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:28,184 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:28,184 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:28,225 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:28,225 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:28,225 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:29,188 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:29,188 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:29,188 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:29,230 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:29,230 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:29,230 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:29,937 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:29,937 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:30,191 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:30,192 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:30,192 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:30,233 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:30,234 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:30,234 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:31,196 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:31,196 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:31,196 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:31,236 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:31,236 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:31,236 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:31,938 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:31,938 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:32,199 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:32,199 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:32,199 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:32,239 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:32,239 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:32,239 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:33,202 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:33,202 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:33,202 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:33,242 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:33,243 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:33,243 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:33,938 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:33,939 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:34,205 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:34,205 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:34,206 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:34,246 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:34,246 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:34,246 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:35,208 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:35,208 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:35,208 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:35,249 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:35,249 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:35,249 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:35,942 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:35,942 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:36,210 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:36,211 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:36,211 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:36,254 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:36,254 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:36,254 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:37,213 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:37,214 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:37,214 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:37,257 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:37,257 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:37,258 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:37,944 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:37,944 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:38,218 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:38,218 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:38,219 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:38,261 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:38,261 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:38,261 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:39,221 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:39,222 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:39,222 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:39,265 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:39,265 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:39,265 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:39,945 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:39,946 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:40,224 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:40,225 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:40,225 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:40,268 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:40,268 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:40,268 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:41,227 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:41,227 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:41,228 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:41,270 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:41,271 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:41,271 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:41,946 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:41,947 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:42,230 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:42,231 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:42,231 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:42,273 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:42,274 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:42,274 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:43,235 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:43,235 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:43,235 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:43,276 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:43,276 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:43,276 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:43,951 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:43,951 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:44,242 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:44,242 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:44,243 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:44,283 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:44,283 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:44,283 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:45,245 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:45,245 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:45,245 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:45,288 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:45,288 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:45,288 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:45,952 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:45,953 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:46,248 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:46,249 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:46,249 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:46,291 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:46,291 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:46,291 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:47,254 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:47,254 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:47,255 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:47,294 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:47,294 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:47,294 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:47,953 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:47,953 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:48,257 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:48,257 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:48,258 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:48,297 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:48,297 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:48,297 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:49,263 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:49,263 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:49,263 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:49,303 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:49,303 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:49,304 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:49,955 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:49,955 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:50,268 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:50,268 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:50,268 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:50,307 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:50,307 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:50,307 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:51,271 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:51,272 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:51,272 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:51,310 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:51,310 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:51,310 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:51,957 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:51,957 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:52,275 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:52,275 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:52,275 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:52,314 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:52,314 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:52,314 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:53,278 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:53,278 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:53,278 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:53,317 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:53,318 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:53,318 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:53,961 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:53,962 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:54,282 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:54,282 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:54,282 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:54,321 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:54,322 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:54,322 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:55,284 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:55,285 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:55,285 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:55,325 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:55,325 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:55,325 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:55,963 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:55,963 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:56,289 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:56,289 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:56,289 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:56,328 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:56,329 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:56,329 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:57,296 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:57,296 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:57,296 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:57,331 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:57,331 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:57,331 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:57,965 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:57,965 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:58,299 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:58,299 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:58,299 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:58,334 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:58,334 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:58,335 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:59,305 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:59,306 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:59,306 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:59,338 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:41:59,338 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:41:59,338 - root - DEBUG - publisher.send_message called
+2016-06-28 15:41:59,966 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:41:59,967 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:00,309 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:00,309 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:00,309 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:00,342 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:00,343 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:00,343 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:01,312 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:01,313 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:01,313 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:01,345 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:01,345 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:01,345 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:01,968 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:01,968 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:02,318 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:02,318 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:02,318 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:02,349 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:02,349 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:02,349 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:03,322 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:03,322 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:03,323 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:03,351 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:03,352 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:03,352 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:03,971 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:03,971 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:04,325 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:04,326 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:04,326 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:04,355 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:04,355 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:04,355 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:05,329 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:05,329 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:05,329 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:05,358 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:05,358 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:05,358 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:05,972 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:05,972 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:06,332 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:06,332 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:06,332 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:06,365 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:06,365 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:06,365 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:07,336 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:07,336 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:07,336 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:07,367 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:07,368 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:07,368 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:07,975 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:07,975 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:08,341 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:08,341 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:08,341 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:08,371 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:08,371 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:08,371 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:09,343 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:09,344 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:09,344 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:09,374 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:09,374 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:09,374 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:09,976 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:09,977 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:10,349 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:10,349 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:10,349 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:10,377 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:10,377 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:10,377 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:11,354 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:11,354 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:11,354 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:11,379 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:11,380 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:11,380 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:11,978 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:11,978 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:12,357 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:12,357 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:12,357 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:12,383 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:12,384 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:12,384 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:13,359 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:13,359 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:13,360 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:13,387 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:13,387 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:13,387 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:13,982 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:13,982 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:14,362 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:14,362 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:14,362 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:14,394 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:14,394 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:14,394 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:15,365 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:15,366 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:15,366 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:15,396 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:15,397 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:15,397 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:15,984 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:15,984 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:16,368 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:16,368 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:16,368 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:16,400 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:16,400 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:16,400 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:17,371 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:17,371 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:17,372 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:17,403 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:17,403 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:17,404 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:17,986 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:17,987 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:18,375 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:18,375 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:18,375 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:18,407 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:18,408 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:18,408 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:19,378 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:19,378 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:19,378 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:19,410 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:19,410 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:19,410 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:19,988 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:19,989 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:20,381 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:20,381 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:20,381 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:20,413 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:20,413 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:20,413 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:21,384 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:21,385 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:21,385 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:21,416 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:21,416 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:21,416 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:21,990 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:21,990 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:22,390 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:22,390 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:22,390 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:22,419 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:22,419 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:22,419 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:23,394 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:23,394 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:23,394 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:23,423 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:23,423 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:23,423 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:23,996 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:23,996 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:24,396 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:24,396 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:24,397 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:24,428 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:24,429 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:24,429 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:25,400 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:25,400 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:25,400 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:25,431 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:25,431 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:25,431 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:25,999 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:25,999 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:26,402 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:26,402 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:26,403 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:26,438 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:26,438 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:26,438 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:27,406 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:27,406 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:27,406 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:27,444 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:27,445 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:27,445 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:28,003 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:28,003 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:28,409 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:28,409 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:28,410 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:28,447 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:28,448 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:28,448 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:29,415 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:29,415 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:29,415 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:29,450 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:29,450 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:29,450 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:30,008 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:30,008 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:30,418 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:30,418 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:30,419 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:30,453 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:30,454 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:30,454 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:31,423 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:31,424 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:31,424 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:31,458 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:31,458 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:31,458 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:32,009 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:32,010 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:32,427 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:32,427 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:32,427 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:32,462 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:32,462 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:32,462 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:33,430 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:33,430 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:33,430 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:33,466 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:33,466 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:33,466 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:34,011 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:34,012 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:34,432 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:34,433 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:34,433 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:34,471 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:34,471 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:34,471 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:35,435 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:35,435 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:35,435 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:35,478 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:35,478 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:35,478 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:36,012 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:36,013 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:36,437 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:36,438 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:36,438 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:36,482 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:36,482 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:36,483 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:37,441 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:37,441 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:37,442 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:37,486 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:37,486 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:37,486 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:38,017 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:38,018 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:38,444 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:38,444 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:38,444 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:38,489 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:38,489 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:38,489 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:39,447 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:39,447 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:39,447 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:39,493 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:39,493 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:39,493 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:40,021 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:40,021 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:40,451 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:40,451 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:40,451 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:40,496 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:40,496 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:40,496 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:41,454 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:41,454 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:41,454 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:41,499 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:41,499 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:41,499 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:42,022 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:42,023 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:42,458 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:42,458 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:42,458 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:42,503 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:42,503 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:42,503 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:43,461 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:43,461 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:43,461 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:43,506 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:43,507 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:43,507 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:44,027 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:44,027 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:44,463 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:44,463 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:44,463 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:44,509 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:44,510 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:44,510 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:45,466 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:45,466 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:45,466 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:45,514 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:45,514 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:45,515 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:46,027 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:46,028 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:46,468 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:46,469 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:46,469 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:46,518 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:46,518 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:46,518 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:47,471 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:47,472 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:47,472 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:47,520 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:47,521 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:47,521 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:48,028 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:48,029 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:48,476 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:48,476 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:48,477 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:48,523 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:48,523 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:48,523 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:49,479 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:49,479 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:49,479 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:49,527 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:49,527 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:49,527 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:50,029 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:50,030 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:50,481 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:50,482 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:50,482 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:50,530 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:50,531 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:50,531 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:51,484 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:51,484 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:51,484 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:51,535 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:51,535 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:51,535 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:52,030 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:52,030 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:52,490 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:52,490 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:52,490 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:52,541 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:52,542 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:52,542 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:53,494 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:53,494 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:53,494 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:53,545 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:53,545 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:53,545 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:54,032 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:54,033 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:54,499 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:54,499 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:54,499 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:54,549 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:54,549 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:54,550 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:55,504 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:55,504 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:55,504 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:55,552 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:55,553 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:55,553 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:56,034 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:56,035 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:56,507 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:56,507 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:56,507 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:56,558 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:56,558 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:56,558 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:57,510 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:57,510 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:57,510 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:57,561 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:57,562 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:57,562 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:58,038 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:58,039 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:42:58,513 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:58,513 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:58,513 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:58,564 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:58,564 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:58,564 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:59,516 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:59,516 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:59,516 - root - DEBUG - publisher.send_message called
+2016-06-28 15:42:59,566 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:42:59,567 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:42:59,567 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:00,041 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:43:00,041 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:43:00,520 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:00,520 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:00,521 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:00,572 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:00,572 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:00,573 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:01,524 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:01,524 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:01,524 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:01,575 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:01,576 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:01,576 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:02,043 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:43:02,043 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:43:02,528 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:02,528 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:02,529 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:02,579 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:02,579 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:02,579 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:03,531 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:03,531 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:03,532 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:03,582 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:03,583 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:03,583 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:04,047 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:43:04,047 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:43:04,535 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:04,535 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:04,535 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:04,589 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:04,589 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:04,590 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:05,538 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:05,538 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:05,538 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:05,592 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:05,592 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:05,592 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:06,051 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:43:06,051 - root - DEBUG - periodically_send_ip_addresses again...
+2016-06-28 15:43:06,541 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:06,541 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:06,541 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:06,594 - root - DEBUG - smoothie_pyserial.connect FAILED
+2016-06-28 15:43:06,594 - root - DEBUG - publisher.on_smoothie_disconnect called
+2016-06-28 15:43:06,594 - root - DEBUG - publisher.send_message called
+2016-06-28 15:43:07,178 - root - INFO - error while trying to make a connection, sleeping for 5 seconds
