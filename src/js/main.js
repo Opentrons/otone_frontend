@@ -580,6 +580,7 @@ var socketHandler = {
     //just for debugging?
   },
   'status' : function (data) {
+    setStatus(data.string,data.color);
   },
   'pipetteValues' : function (data) {
     for(var axis in data) {
