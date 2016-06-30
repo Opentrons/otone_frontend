@@ -3,6 +3,7 @@ if (require('electron-squirrel-startup')) return;
 const $ = jQuery = require('jquery')
 const http       = require('http')
     , CLogger  = require('node-clogger')
+const path = require('path')
 
 const nightlife  = require('nightlife-rabbit')
     , autobahn = require('autobahn')
@@ -38,6 +39,7 @@ function createWindow () {
     if(backendProcess){
       try{
         backendProcess.kill()
+        console.log('************** KILLED BACKEND ****************')
       }
       catch(e){
         console.log(e)
@@ -61,7 +63,7 @@ function startWampRouter() {
 
 function startBackend() {
   const exec = require("child_process").exec;
-  backendProcess = exec("python ../otone_backend/backend/otone_client.py");
+  backendProcess = exec("backend-dist/otone_client");
 }
 
 // This method will be called when Electron has finished

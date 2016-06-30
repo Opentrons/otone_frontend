@@ -30,3 +30,6 @@ node_modules
 # pychar
 .idea
 dist
+
+.node-version
+backend-dist/*
