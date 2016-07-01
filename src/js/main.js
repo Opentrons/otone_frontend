@@ -23,12 +23,10 @@ window.addEventListener ('load', function () {
   globalConnection = connection;
 
   connection.onclose = function () {
-    // setStatus('Warning: Browser not connected to the server','red');
   };
 
   // When we open the connection, subscribe and register any protocols
   connection.onopen = function(session) {
-    setStatus('Waiting for connection...','rgb(100,100,100)');
     // Subscribe and register all function end points we offer from the 
     // javascript to the other clients (ie python)
 
@@ -579,8 +577,16 @@ var socketHandler = {
     if(debug===true) console.log(data);
     //just for debugging?
   },
-  'status' : function (data) {
-    setStatus(data.string,data.color);
+  'status' : function (isConnected) {
+    if (isConnected===true) {
+      document.getElementById('status').innerHTML = 'Connected to the Smoothieboard';
+      document.getElementById('status').style.color = 'rgb(27,225,100)';
+    }
+    else if (isConnected===false) {
+      document.getElementById('status').innerHTML = 'Smoothieboard Disconnected';
+      document.getElementById('status').style.color = 'red';
+      document.getElementById('portname').innerHTML = 'No USB Selected' + '<span class="caret"></span>';
+    }
   },
   'pipetteValues' : function (data) {
     for(var axis in data) {
@@ -691,10 +697,43 @@ var socketHandler = {
   },
   'delay' : function(data) {
     var msg = 'Delaying, seconds remaining: '+data;
+  },
+  'portsList' : function(data) {
+    var theList = document.getElementById('portsList')
+    theList.innerHTML = ''
+    for(var i=0;i<data.length;i++){
+      var newLinkElement = document.createElement('a');
+      newLinkElement.innerHTML = data[i];
+      newLinkElement.href = '#';
+      newLinkElement.onclick = (function(){
+        var tPortName = data[i];
+        return function(){
+          setPort(tPortName);
+        }
+      })();
+
+      var newListElement = document.createElement('li');
+      newListElement.appendChild(newLinkElement);
+
+      theList.appendChild(newListElement)
+    }
   }
 };
 
 var timeSentJob = undefined;
+
+function setPort(portname){
+  document.getElementById('portname').innerHTML = portname + '<span class="caret"></span>';
+
+  document.getElementById('status').innerHTML = '';
+
+  var msg = {
+    'type' : 'connectPort',
+    'data' : portname
+  };
+
+  sendMessage(msg);
+}
 
 /////////////////////////////////
 /////////////////////////////////
@@ -715,17 +754,6 @@ function sendMessage (msg) {
   /*if(msg && socket && socket.isOpen) {
     socket.send(JSON.stringify(msg));
   }*/
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function setStatus (string,color) {
-  if (string) {
-    document.getElementById('status').innerHTML = string;
-    document.getElementById('status').style.color = color;
-  }
 }
 
 /////////////////////////////////
@@ -774,6 +802,19 @@ function home (axis) {
   var msg = {
     'type' : 'home',
     'data': axis
+  };
+
+  sendMessage(msg);
+}
+
+////////////
+////////////
+////////////
+
+function listPorts () {
+
+  var msg = {
+    'type' : 'listPorts'
   };
 
   sendMessage(msg);
@@ -1175,201 +1216,9 @@ function sendDebugCommand () {
   sendMessage(msg);
 }
 
-
-
-function refresh () {
-  window.location.reload();
-}
-
 /////////////////////////////////
 /////////////////////////////////
 /////////////////////////////////
-
-// ADDED FOR CONFIGURATION PAGE MOCKUP
-
-function selectMode() {
-  // Interface stuff
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function setWifiMode() {
-  var mode = document.getElementById('wifiSelect').value;
-  var ssid = document.getElementById('ssid_input').value;
-  var pswd = document.getElementById('passphrase_input').value;
-  var msg = {
-    'type' : 'wifimode',
-    'data' : {
-      'mode' : mode,
-      'ssid' : ssid,
-      'pswd' : pswd
-    }
-  };
-  sendMessage(msg);
-  document.getElementById('ssid_input').value = '';
-  document.getElementById('passphrase_input').value = '';
-  document.getElementById('wifi_essid_span').innerHTML = '[pending...]'
-  document.getElementById('wifi_ip').innerHTML = '[pending...]';
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function scanWIFI() {
-   var msg = {
-      'type' : 'wifiscan',
-      'data' : {}
-   };
-   sendMessage(msg);
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function changeHostname() {
-  var hostname = document.getElementById('hostname_input').value;
-  if(hostname.length>0) {
-    var msg = {
-      'type' : 'hostname',
-      'data' : hostname
-    };
-    sendMessage(msg);
-  }
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function reboot(){
-  var msg = {
-    'type' : 'reboot'
-  };
-  sendMessage(msg);
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function poweroff(){
-  var msg = {
-    'type' : 'poweroff'
-  };
-  sendMessage(msg);
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function restart(){
-  // setStatus('restarting...','blue')
-  var msg = {
-    'type' : 'restart'
-  };
-  sendMessage(msg);
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function update(data){
-  //  setStatus('updating '+data+'...','blue');
-  var msg = {
-    'type' : 'update',
-    'data' : data
-  };
-  sendMessage(msg);
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function setConnection (string,color) {
-  if (string) {
-    document.getElementById('connection').innerHTML = string;
-    document.getElementById('connection').style.color = color;
-  }
-  setTimeout(checkConnection, 2000);
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function checkConnection () {
-  if (internetConnection !== 'online'){
-    setConnection('offline', 'red');
-    disableUpdateButtons();
-  } else {
-    if(conn_timer>10){
-      setConnection('offline', 'red');
-      internetConnection = 'offline'
-      disableUpdateButtons();
-    }else{
-      setConnection('online', 'green');
-      enableUpdateButtons();
-    }
-  }
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function enableUpdateButtons() {
-  document.getElementById('updateAllButton').disabled=false
-  document.getElementById('updateFirmwareButton').disabled=false
-  document.getElementById('updateFrontendButton').disabled=false
-  document.getElementById('updateBackendButton').disabled=false
-  document.getElementById('updateScriptsButton').disabled=false
-}
-
-function disableUpdateButtons() {
-  document.getElementById('updateAllButton').disabled=true
-  document.getElementById('updateFirmwareButton').disabled=true
-  document.getElementById('updateFrontendButton').disabled=true
-  document.getElementById('updateBackendButton').disabled=true
-  document.getElementById('updateScriptsButton').disabled=true
-}
-
-function toggleWiFiMenu() {
-  if (document.getElementById('wifi_settings_div').style.display == 'inline-block'){
-    document.getElementById('wifi_settings_div').style.display = 'none';
-    document.getElementById('hostname_div').style.display = 'none';
-  }else{
-    document.getElementById('wifi_settings_div').style.display = 'inline-block';
-    document.getElementById('hostname_div').style.display = 'inline-block';
-  }
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function updatePiConfigs() {
-  update('piconfigs');
-}
-
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-function shareInternet(){
-  // setStatus('sharing internet...','blue');
-  var msg = {
-    'type' : 'shareinet'
-  };
-  sendMessage(msg);
-}
-
 
 function relativeCoords(){
   var msg = {
@@ -1377,3 +1226,7 @@ function relativeCoords(){
   };
   sendMessage(msg);
 }
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
