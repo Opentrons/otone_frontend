@@ -579,11 +579,11 @@ var socketHandler = {
   },
   'status' : function (isConnected) {
     if (isConnected===true) {
-      document.getElementById('status').innerHTML = 'Connected to the Smoothieboard';
+      document.getElementById('status').innerHTML = 'Connected';
       document.getElementById('status').style.color = 'rgb(27,225,100)';
     }
     else if (isConnected===false) {
-      document.getElementById('status').innerHTML = 'Smoothieboard Disconnected';
+      document.getElementById('status').innerHTML = 'Disconnected';
       document.getElementById('status').style.color = 'red';
       document.getElementById('portname').innerHTML = 'No USB Selected' + '<span class="caret"></span>';
     }
@@ -725,7 +725,8 @@ var timeSentJob = undefined;
 function setPort(portname){
   document.getElementById('portname').innerHTML = portname + '<span class="caret"></span>';
 
-  document.getElementById('status').innerHTML = '';
+  document.getElementById('status').innerHTML = 'waiting...';
+  document.getElementById('status').style.color = 'rgb(100,100,100)';
 
   var msg = {
     'type' : 'connectPort',
