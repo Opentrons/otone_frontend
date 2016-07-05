@@ -62,8 +62,8 @@ function startWampRouter() {
 }
 
 function startBackend() {
-  // const exec = require("child_process").exec;
-  // backendProcess = exec("backend-dist/otone_client");
+  const exec = require("child_process").exec;
+  backendProcess = exec(app.getAppPath() + "/backend-dist/otone_client " + app.getAppPath());
 }
 
 // This method will be called when Electron has finished
