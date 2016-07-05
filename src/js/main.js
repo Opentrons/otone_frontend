@@ -30,6 +30,8 @@ window.addEventListener ('load', function () {
     // Subscribe and register all function end points we offer from the 
     // javascript to the other clients (ie python)
 
+    setTimeout(listPorts,2000);
+
     connection.session.subscribe('com.opentrons.robot_ready', function(status){
       if(debug===true) {
         console.log('robotReady called');
