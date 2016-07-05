@@ -700,6 +700,9 @@ var socketHandler = {
     var msg = 'Delaying, seconds remaining: '+data;
   },
   'portsList' : function(data) {
+
+    resetPortList();
+
     var theList = document.getElementById('portsList')
 
     function add_port_list_element(name, on_click) {
@@ -849,8 +852,6 @@ function listPorts () {
   };
 
   sendMessage(msg);
-
-  resetPortList();
 }
 
 ////////////
