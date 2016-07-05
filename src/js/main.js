@@ -586,6 +586,7 @@ var socketHandler = {
       document.getElementById('status').innerHTML = 'Disconnected';
       document.getElementById('status').style.color = 'red';
       document.getElementById('portname').innerHTML = 'No USB Selected' + '<span class="caret"></span>';
+      resetPortList();
     }
   },
   'pipetteValues' : function (data) {
@@ -700,22 +701,29 @@ var socketHandler = {
   },
   'portsList' : function(data) {
     var theList = document.getElementById('portsList')
-    theList.innerHTML = ''
-    for(var i=0;i<data.length;i++){
+
+    function add_port_list_element(name, on_click) {
       var newLinkElement = document.createElement('a');
-      newLinkElement.innerHTML = data[i];
+      newLinkElement.innerHTML = name;
       newLinkElement.href = '#';
-      newLinkElement.onclick = (function(){
+      newLinkElement.onclick = on_click;
+
+      var newListElement = document.createElement('li');
+      newListElement.appendChild(newLinkElement);
+
+      theList.appendChild(newListElement);
+    }
+
+    for(var i=0;i<data.length;i++){
+
+      temp_on_click = (function(){
         var tPortName = data[i];
         return function(){
           setPort(tPortName);
         }
       })();
 
-      var newListElement = document.createElement('li');
-      newListElement.appendChild(newLinkElement);
-
-      theList.appendChild(newListElement)
+      add_port_list_element(data[i], temp_on_click);
     }
   }
 };
@@ -723,17 +731,20 @@ var socketHandler = {
 var timeSentJob = undefined;
 
 function setPort(portname){
-  document.getElementById('portname').innerHTML = portname + '<span class="caret"></span>';
 
-  document.getElementById('status').innerHTML = 'waiting...';
-  document.getElementById('status').style.color = 'rgb(100,100,100)';
+  if(portname){
+    document.getElementById('portname').innerHTML = portname + '<span class="caret"></span>';
 
-  var msg = {
-    'type' : 'connectPort',
-    'data' : portname
-  };
+    document.getElementById('status').innerHTML = 'waiting...';
+    document.getElementById('status').style.color = 'rgb(100,100,100)';
 
-  sendMessage(msg);
+    var msg = {
+      'type' : 'connectPort',
+      'data' : portname
+    };
+
+    sendMessage(msg);
+  }
 }
 
 /////////////////////////////////
@@ -812,6 +823,25 @@ function home (axis) {
 ////////////
 ////////////
 
+function resetPortList(){
+  var theList = document.getElementById('portsList')
+  theList.innerHTML = '';
+
+  var newLinkElement = document.createElement('a');
+  newLinkElement.innerHTML = '&#8635; refresh';
+  newLinkElement.href = '#';
+  newLinkElement.onclick = listPorts;
+
+  var newListElement = document.createElement('li');
+  newListElement.appendChild(newLinkElement);
+
+  theList.appendChild(newListElement);
+}
+
+////////////
+////////////
+////////////
+
 function listPorts () {
 
   var msg = {
@@ -819,6 +849,8 @@ function listPorts () {
   };
 
   sendMessage(msg);
+
+  resetPortList();
 }
 
 ////////////
