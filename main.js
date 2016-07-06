@@ -57,9 +57,9 @@ function startBackend() {
   const exec = require("child_process").exec;
 
   if (process.platform == "darwin") {
-    backendProcess = exec(app.getAppPath() + "/backend-dist/otone_client " + app.getAppPath());
+    backendProcess = exec(app.getAppPath() + "/backend-dist/mac/otone_client " + app.getAppPath());
   } else if (process.platform == "win32") {
-    backendProcess = exec(app.getAppPath() + "\\backend-dist\\otone_client.exe " + app.getAppPath());
+    backendProcess = exec(app.getAppPath() + "\\backend-dist\\win\\otone_client.exe " + app.getAppPath());
   }
 }
 
