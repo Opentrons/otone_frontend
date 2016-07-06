@@ -25,24 +25,26 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
-
-    if (backendProcess){
-      try {
-        if (process.platform == "darwin") {
-          backendProcess.kill()
-        } else if (process.platform == "win32") {
-          child_process.exec('taskkill /T /F /IM otone_client.exe');
-        }
-        console.log('************** KILLED BACKEND ****************')
-      }
-      catch(e){
-        console.log(e)
-      }
-    }
-
-    app.quit()
+    app.quit();
   })
 }
+
+app.on('before-quit', function(){
+
+  if (backendProcess){
+    try {
+      if (process.platform == "darwin") {
+        backendProcess.kill();
+      }
+      else if (process.platform == "win32") {
+        child_process.exec('taskkill /T /F /IM otone_client.exe');
+      }
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
+});
 
 function startWampRouter() {
     var router = nightlife.createRouter({
@@ -60,7 +62,7 @@ function startBackend() {
   } else if (process.platform == "win32") {
     if (process.platform == "win32") {
       child_process.exec('taskkill /T /F /IM otone_client.exe',function(error, stdout, stderr){
-        backendProcess = child_process.spawn(app.getAppPath() + "\\backend-dist\\win\\otone_client.exe ", [app.getAppPath()]);
+        backendProcess = child_process.execFile(app.getAppPath() + "\\backend-dist\\win\\otone_client.exe", [app.getAppPath()]);
       });
     }
   }
