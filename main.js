@@ -5,6 +5,7 @@ const http       = require('http')
 const path = require('path')
 const nightlife  = require('nightlife-rabbit')
     , autobahn = require('autobahn')
+const child_process = require("child_process")
 const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
@@ -30,7 +31,7 @@ function createWindow () {
         if (process.platform == "darwin") {
           backendProcess.kill()
         } else if (process.platform == "win32") {
-          require("child_process").exec('taskkill /pid ' + backendProcess.pid + ' /T /F')
+          child_process.exec('taskkill /pid ' + backendProcess.pid + ' /T /F')
         }
         console.log('************** KILLED BACKEND ****************')
       }
@@ -54,8 +55,6 @@ function startWampRouter() {
 }
 
 function startBackend() {
-  const exec = require("child_process").exec;
-
   if (process.platform == "darwin") {
     backendProcess = exec(app.getAppPath() + "/backend-dist/mac/otone_client " + app.getAppPath());
   } else if (process.platform == "win32") {
