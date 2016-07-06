@@ -36,9 +36,13 @@ function createWindow () {
     mainWindow = null
 
     // kill the 'otone_backend' process!!
-    if(backendProcess){
-      try{
-        backendProcess.kill()
+    if (backendProcess){
+      try {
+        if (process.platform == "darwin") {
+          backendProcess.kill()
+        } else if (process.platform == "win32") {
+          require("child_process").exec('taskkill /pid ' + backendProcess.pid + ' /T /F')
+        }
         console.log('************** KILLED BACKEND ****************')
       }
       catch(e){
@@ -63,7 +67,12 @@ function startWampRouter() {
 
 function startBackend() {
   const exec = require("child_process").exec;
-  backendProcess = exec(app.getAppPath() + "/backend-dist/otone_client " + app.getAppPath());
+
+  if (process.platform == "darwin") {
+    backendProcess = exec(app.getAppPath() + "/backend-dist/otone_client " + app.getAppPath());
+  } else if (process.platform == "win32") {
+    backendProcess = exec(app.getAppPath() + "\\backend-dist\\otone_client.exe " + app.getAppPath());
+  }
 }
 
 // This method will be called when Electron has finished
