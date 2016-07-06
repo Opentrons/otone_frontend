@@ -31,7 +31,7 @@ function createWindow () {
         if (process.platform == "darwin") {
           backendProcess.kill()
         } else if (process.platform == "win32") {
-          child_process.spawn('taskkill', ['/pid', backendProcess.pid, '/T', '/F'])
+          child_process.exec('taskkill /T /F /IM otone_client.exe');
         }
         console.log('************** KILLED BACKEND ****************')
       }
@@ -58,7 +58,11 @@ function startBackend() {
   if (process.platform == "darwin") {
     backendProcess = child_process.exec(app.getAppPath() + "/backend-dist/mac/otone_client " + app.getAppPath());
   } else if (process.platform == "win32") {
-    backendProcess = child_process.spawn(app.getAppPath() + "\\backend-dist\\win\\otone_client.exe ", [app.getAppPath()]);
+    if (process.platform == "win32") {
+      child_process.exec('taskkill /T /F /IM otone_client.exe',function(error, stdout, stderr){
+        backendProcess = child_process.spawn(app.getAppPath() + "\\backend-dist\\win\\otone_client.exe ", [app.getAppPath()]);
+      });
+    }
   }
 }
 
