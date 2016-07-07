@@ -62,7 +62,7 @@ function startBackend() {
   } else if (process.platform == "win32") {
     if (process.platform == "win32") {
       child_process.exec('taskkill /T /F /IM otone_client.exe',function(error, stdout, stderr){
-        backendProcess = child_process.execFile(app.getAppPath() + "\\backend-dist\\win\\otone_client.exe", [app.getAppPath()]);
+        backendProcess = child_process.spawn(app.getAppPath() + "\\backend-dist\\win\\otone_client.exe", [app.getAppPath()]);
       });
     }
   }
