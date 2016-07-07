@@ -22,9 +22,6 @@ window.addEventListener ('load', function () {
   // Make connection accessible across the entire document
   globalConnection = connection;
 
-  connection.onclose = function () {
-  };
-
   // When we open the connection, subscribe and register any protocols
   connection.onopen = function(session) {
     // Subscribe and register all function end points we offer from the 
