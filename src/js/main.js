@@ -30,8 +30,6 @@ window.addEventListener ('load', function () {
     // Subscribe and register all function end points we offer from the 
     // javascript to the other clients (ie python)
 
-    setTimeout(listPorts,2000);
-
     connection.session.subscribe('com.opentrons.robot_ready', function(status){
       if(debug===true) {
         console.log('robotReady called');
@@ -703,6 +701,18 @@ var socketHandler = {
   },
   'portsList' : function(data) {
 
+    setTimeout(function(){
+
+      if(data.length){
+        document.getElementById('status').innerHTML = 'Found ports';
+      }
+      else {
+        document.getElementById('status').innerHTML = 'No ports';
+      }
+      document.getElementById('status').style.color = 'rgb(100,100,100)';
+
+    }, 500);
+
     resetPortList();
 
     var theList = document.getElementById('portsList')
@@ -740,7 +750,7 @@ function setPort(portname){
   if(portname){
     document.getElementById('portname').innerHTML = portname + '<span class="caret"></span>';
 
-    document.getElementById('status').innerHTML = 'waiting...';
+    document.getElementById('status').innerHTML = 'Connecting...';
     document.getElementById('status').style.color = 'rgb(100,100,100)';
 
     var msg = {
@@ -848,6 +858,10 @@ function resetPortList(){
 ////////////
 
 function listPorts () {
+
+  document.getElementById('status').innerHTML = 'Searching...';
+  document.getElementById('status').style.color = 'rgb(100,100,100)';
+
 
   var msg = {
     'type' : 'listPorts'
