@@ -47,6 +47,8 @@ window.addEventListener ('load', function () {
       if(debug===true) console.log('msg stringified... '+JSON.stringify(msg));
       connection.session.publish('com.opentrons.browser_to_robot', [JSON.stringify(msg)]);
       robotStatus = status;
+
+      setTimeout(listPorts,1000);
     });
 
     if(debug===true) console.log('about to publish com.opentrons.browser_ready TRUE');
