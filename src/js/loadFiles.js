@@ -189,7 +189,7 @@ function console_log(string){ // makeshift "console" - console div is currently 
 
 function setupPlateInterface() {
   setupDragBox();
-  //loadDefaultContainers();
+  loadDefaultContainers();
 }
 
 window.addEventListener('load',setupPlateInterface);
