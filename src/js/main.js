@@ -36,11 +36,7 @@ window.addEventListener ('load', function () {
           console.log('going to send calibration request');
        }
       }
-      var msg = {
-        'type' : 'getContainers'
-      };
-      if(debug===true) console.log('msg stringified... '+JSON.stringify(msg));
-      connection.session.publish('com.opentrons.browser_to_robot', [JSON.stringify(msg)]);
+
       var msg = {
         'type' : 'getCalibrations'
       };
