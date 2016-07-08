@@ -44,19 +44,20 @@
 					<li>
 					<a href="https://github.com/opentrons" target="_blank">v1.1</a>
 					</li>
-					<li>
-					<a href="http://mix.bio" target="_blank">Mix.Bio</a>
-					</li>
-					<li>
-					<a href="http://editor.mix.bio" target="_blank">Protocol Editor</a>
-					</li>
 				</ul>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-					<a href="#" id="status">Good</a>
+					<a href="#" id="status"></a>
+					</li>
+					<li class="dropdown" style="margin-top:8px">
+					  <button id="portname" class="btn dropdown-toggle tron-blue" type="button" data-toggle="dropdown">No USB Selected
+					  <span class="caret"></span></button>
+					  <ul class="dropdown-menu" id="portsList">
+					  	<li><a href="#" onclick="listPorts()">&#8635; refresh</a></li>
+					  </ul>
 					</li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
