@@ -417,7 +417,24 @@ function createAndSend () {
           'data' : robotProtocol
         }
 
-        var shouldRun = confirm('Protocol file is ready to run. Proceed?\n\nDouble check:\nNo Tip on Pipette - Tubes Open - Tip Racks Full - Modules On`');
+        var confirmation_text = 'Protocol file is ready to run. Proceed?';
+        confirmation_text += '\n\n';
+        confirmation_text += 'Checklist:';
+        confirmation_text += '\n      -';
+        confirmation_text += 'Labware positions saved';
+        confirmation_text += '\n      -';
+        confirmation_text += 'Plungers calibrated';
+        confirmation_text += '\n      -';
+        confirmation_text += 'Tip rack is full';
+        confirmation_text += '\n      -';
+        confirmation_text += 'No tip is on pipette';
+        confirmation_text += '\n      -';
+        confirmation_text += 'Tubes are open';
+        confirmation_text += '\n      -';
+        confirmation_text += 'Modules are on';
+
+
+        var shouldRun = confirm(confirmation_text);
 
         if(shouldRun) {
           timeSentJob = new Date().getTime();
