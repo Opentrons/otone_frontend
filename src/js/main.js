@@ -692,8 +692,11 @@ var socketHandler = {
     alert(data);
   },
   'delay' : function(countdown) {
-    if(countdown > 0){
-      document.getElementById('status').innerHTML = 'Delay seconds left: '+Math.floor(countdown);
+    var seconds_left = Math.floor(countdown)
+    if(seconds_left > 0){
+      var temp_minutes = Math.floor(seconds_left / 60);
+      var temp_seconds = Math.floor(seconds_left % 60);
+      document.getElementById('status').innerHTML = 'Delaying '+temp_minutes+':'+temp_seconds;
       document.getElementById('status').style.color = 'rgb(225,100,27)';
     }
     else {
