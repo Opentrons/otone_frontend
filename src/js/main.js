@@ -375,7 +375,7 @@ function selectContainer(currentDiv) {
 
 
         if(val!=null) val = val.toFixed(1);
-        else val = 'none';
+        else val = 0;
 
 
 
