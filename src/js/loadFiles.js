@@ -41,7 +41,7 @@ function setPipetteNames(inputJSON){ // sets the names of the pipettes in the co
         } else {
           pip_divs[i].innerHTML = channel + ": " + pipette; // set the text to the new name
         }
-      } 
+      }
     }
   }
 }
@@ -92,7 +92,7 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
     //go through to add each liquid container
     for(var j=0; j<groups.length; j++){
       var move = groups[j];
-      
+
       for(var key in move){
 
         var action = move[key];
@@ -106,7 +106,7 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
 
         } else if(key == "distribute"){
           containerUsage[tool][action.from.container] = true;
-          
+
           for(var k=0; k<action.to.length; k++){
             containerUsage[tool][action.to[k].container] = true;
           }
@@ -132,14 +132,14 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
   for(var i=0; i<containers.length; i++){
 
     var rowBlocks = containers[i].children;
-    
-    rowBlocks[1].children[0].style.display = 'inline-block'; //make both visible by default  
+
+    rowBlocks[1].children[0].style.display = 'inline-block'; //make both visible by default
     rowBlocks[1].children[1].style.display = 'inline-block';
     //rowBlocks[1].children[2].style.display = 'inline-block';
     rowBlocks[2].children[0].style.display = 'inline-block';
     rowBlocks[2].children[1].style.display = 'inline-block';
     //rowBlocks[2].children[2].style.display = 'inline-block';
-    
+
 
     var name = rowBlocks[0].innerHTML;
     console.log('name: '+name);
@@ -155,8 +155,8 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
       rowBlocks[1].children[0].style.display = 'none';
       rowBlocks[1].children[1].style.display = 'none';
       rowBlocks[1].children[2].style.display = 'none';
-    }  
-    
+    }
+
     if(pipettes["Center"] != false){ // pipette exists
       if(!(name in containerUsage[pipettes["Center"]])) { // containerUsage does not contain this key for this pipette
         console.log('not found CENTER!');
@@ -168,9 +168,9 @@ function setPipetteContainers(inputJSON, pipettes){ // blanks out containers bas
       rowBlocks[2].children[0].style.display = 'none';
       rowBlocks[2].children[1].style.display = 'none';
       rowBlocks[2].children[2].style.display = 'none';
-    } 
+    }
 
-  } 
+  }
 
 }
 
@@ -293,11 +293,11 @@ function loadFile(e) {
                 console.log("TIPRACKS[",ax,"] = ",TIPRACKS[ax]);
               }
             }
-            
+
           }
           show_robot_new_info();
           configureHead(tempProtocol.head)
-          
+
 
           document.getElementById('runButton').removeEventListener('click',createAndSend);
           document.getElementById('runButton').addEventListener('click',createAndSend);
@@ -309,7 +309,7 @@ function loadFile(e) {
             document.getElementById('infoVersion').innerHTML= "<strong>Version:</strong> "+ tempProtocol.info.version;
             document.getElementById('infoDesc').innerHTML= "<strong>Description:</strong> " + tempProtocol.info.description;
             document.getElementById('infoRun').innerHTML= "<strong>Run Notes:</strong> " + tempProtocol.info['run-notes'];
-            
+
           }else if(!tempProtocol.info){
             document.getElementById('infoDesc').innerHTML="";
           }
@@ -417,7 +417,7 @@ function createAndSend () {
           'data' : robotProtocol
         }
 
-        var shouldRun = confirm('Send file to be run?');
+        var shouldRun = confirm(`Send file to be run?\n\nDouble check:\nNo Tip on Pipette - Tubes Open - Tip Racks Full - Modules On`);
 
         if(shouldRun) {
           timeSentJob = new Date().getTime();
