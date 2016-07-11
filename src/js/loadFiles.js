@@ -417,21 +417,17 @@ function createAndSend () {
           'data' : robotProtocol
         }
 
-        var confirmation_text = 'Protocol file is ready to run. Proceed?';
+        var confirmation_text = '\n\nMake sure:';
+        confirmation_text += '\n      -';
+        confirmation_text += 'No Tip on Pipette';
+        confirmation_text += '\n      -';
+        confirmation_text += 'Tubes Open';
+        confirmation_text += '\n      -';
+        confirmation_text += 'Tip Racks Full';
+        confirmation_text += '\n      -';
+        confirmation_text += 'Modules On';
         confirmation_text += '\n\n';
-        confirmation_text += 'Checklist:';
-        confirmation_text += '\n      -';
-        confirmation_text += 'Labware positions saved';
-        confirmation_text += '\n      -';
-        confirmation_text += 'Plungers calibrated';
-        confirmation_text += '\n      -';
-        confirmation_text += 'Tip rack is full';
-        confirmation_text += '\n      -';
-        confirmation_text += 'No tip is on pipette';
-        confirmation_text += '\n      -';
-        confirmation_text += 'Tubes are open';
-        confirmation_text += '\n      -';
-        confirmation_text += 'Modules are on';
+        confirmation_text += 'Proceed to run protocol?';
 
 
         var shouldRun = confirm(confirmation_text);
