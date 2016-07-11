@@ -691,8 +691,15 @@ var socketHandler = {
   'failure' : function(data) {
     alert(data);
   },
-  'delay' : function(data) {
-    var msg = 'Delaying, seconds remaining: '+data;
+  'delay' : function(countdown) {
+    if(countdown > 0){
+      document.getElementById('status').innerHTML = 'Delay seconds left: '+Math.floor(countdown);
+      document.getElementById('status').style.color = 'rgb(225,100,27)';
+    }
+    else {
+      document.getElementById('status').innerHTML = 'Connected';
+      document.getElementById('status').style.color = 'rgb(27,225,100)';
+    }
   },
   'portsList' : function(data) {
 
