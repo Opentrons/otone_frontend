@@ -734,7 +734,7 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
       'container' : containerName
     });
 
-    if(!isNaN(thisParams['delay'])) {
+    if(!isNaN(thisParams['delay']) && thisParams['delay']>0) {
       moveArray.push({
         'delay' : thisParams['delay']
       });
