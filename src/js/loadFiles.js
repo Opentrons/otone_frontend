@@ -408,23 +408,23 @@ function createAndSend () {
           'executable' : robotProtocol
         },undefined,2)], {type: "text/json;charset=utf-8"});
 
-        var shouldSave = confirm('File processed. Save it to disk?');
+        // var shouldSave = confirm('File processed. Save it to disk?');
 
-        if(shouldSave) saveAs(blob, savefilename);
+        // if(shouldSave) saveAs(blob, savefilename);
 
         var jobMsg = {
           'type' : 'instructions',
           'data' : robotProtocol
         }
 
-        var shouldRun = confirm(`Send file to be run?\n\nDouble check:\nNo Tip on Pipette - Tubes Open - Tip Racks Full - Modules On`);
+        var shouldRun = confirm('Protocol file is ready to run. Proceed?\n\nDouble check:\nNo Tip on Pipette - Tubes Open - Tip Racks Full - Modules On`');
 
         if(shouldRun) {
           timeSentJob = new Date().getTime();
           sendMessage(jobMsg);
         }
         else {
-          var shouldInfinity = confirm('Send file to be run FOR INFINITY?!?!?!?!?!');
+          var shouldInfinity = false;
           if(shouldInfinity) {
             jobMsg.type = 'infinity';
             sendMessage(jobMsg);
