@@ -696,12 +696,17 @@ var socketHandler = {
     if(seconds_left > 0){
       var temp_minutes = Math.floor(seconds_left / 60);
       var temp_seconds = Math.floor(seconds_left % 60);
-      document.getElementById('status').innerHTML = 'Delaying '+temp_minutes+':'+temp_seconds;
-      document.getElementById('status').style.color = 'rgb(225,100,27)';
+      document.getElementById('countdown').innerHTML = 'Delaying '+temp_minutes+':'+temp_seconds;
+
+      if(seconds_left % 2 == 0){
+        document.getElementById('countdown').style.color = '#777';
+      }
+      else {
+        document.getElementById('countdown').style.color = '#337ab7';
+      }
     }
     else {
-      document.getElementById('status').innerHTML = 'Connected';
-      document.getElementById('status').style.color = 'rgb(27,225,100)';
+      document.getElementById('countdown').innerHTML = '';
     }
   },
   'portsList' : function(data) {
