@@ -582,6 +582,8 @@ var socketHandler = {
       document.getElementById('status').style.color = 'red';
       document.getElementById('portname').innerHTML = 'No USB Selected' + '<span class="caret"></span>';
       resetPortList();
+
+      erase();
     }
   },
   'pipetteValues' : function (data) {
