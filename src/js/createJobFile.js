@@ -332,7 +332,7 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         }
 
         moveArray.push({
-          'z' : highestSpot - 100
+          'z' : highestSpot - 5
         });
 
         this['current-plunger'] = 0; // reset the plunger's current state
