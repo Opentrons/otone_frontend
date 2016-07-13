@@ -280,11 +280,6 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         this['current-plunger'] = 0; // reset the plunger's current state
 
         moveArray.push({
-          'z' : highestSpot - 5,
-          'plunger' : 'resting'
-        });
-
-        moveArray.push({
           'x' : newTipLocation.x,
           'y' : newTipLocation.y,
           'container' : newTipContainerName
@@ -338,7 +333,6 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         this['current-plunger'] = 0; // reset the plunger's current state
 
         moveArray.push({
-          'plunger' : 'resting',
           'x' : trashLocation.x,
           'y' : trashLocation.y,
           'container' : trashContainerName
@@ -352,6 +346,10 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         moveArray.push({
           'plunger' : 'droptip'
         });
+
+        moveArray.push({
+          'z' : highestSpot - 5
+        })
 
         return moveArray;
       };
