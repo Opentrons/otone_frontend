@@ -116,7 +116,7 @@ function handleContainers (newContainers) {
     }
   }
 
-  highestSpot = 99999;
+  highestSpot = 9999;
   for(var nameA in theContainerLocations.a) {
 
     var foundIt = false;
@@ -199,8 +199,23 @@ function handleContainers (newContainers) {
       containerMenu.appendChild(tempRow);
     }
 
-    if(theContainerLocations.a[nameA].z < highestSpot) highestSpot = theContainerLocations.a[nameA].z;
-    if(theContainerLocations.b[nameA].z < highestSpot) highestSpot = theContainerLocations.b[nameA].z;
+    if(CURRENT_PROTOCOL && CURRENT_PROTOCOL.deck && CURRENT_PROTOCOL.head){
+      for(var pipName in CURRENT_PROTOCOL.head){
+        var pipAxis = CURRENT_PROTOCOL.head[pipName].axis;
+        if(pipAxis=='a'){
+          for(var name in theContainerLocations[pipAxis]) {
+            if(CURRENT_PROTOCOL.deck[name]){
+              if(theContainerLocations[pipAxis][name].z !== null && !isNaN(Number(theContainerLocations[pipAxis][name].z))){
+                if(theContainerLocations[pipAxis][name].z < highestSpot) {
+                  highestSpot = theContainerLocations[pipAxis][name].z;
+                  console.log('\n\n\n\nHIGHEST SPOT: '+highestSpot+' from '+pipAxis+' on '+name)
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
   for(var name in theContainerLocations.b) {
 
@@ -274,26 +289,25 @@ function handleContainers (newContainers) {
       containerMenu.appendChild(tempRow);
     }
 
-    if(theContainerLocations.b[name].z < highestSpot){
-      highestSpot = theContainerLocations.b[name].z;
-      if(debug===true){
-        console.log('highestSpot('+name+'-b.2):'+highestSpot);
-        console.log('theContainerLocations.b['+name+'] = '+theContainerLocations.b[name].z);
+    if(CURRENT_PROTOCOL && CURRENT_PROTOCOL.deck && CURRENT_PROTOCOL.head){
+      for(var pipName in CURRENT_PROTOCOL.head){
+        var pipAxis = CURRENT_PROTOCOL.head[pipName].axis;
+        if(pipAxis=='b'){
+          for(var name in theContainerLocations[pipAxis]) {
+            if(CURRENT_PROTOCOL.deck[name]){
+              if(theContainerLocations[pipAxis][name].z !== null && !isNaN(Number(theContainerLocations[pipAxis][name].z))){
+                if(theContainerLocations[pipAxis][name].z < highestSpot) {
+                  highestSpot = theContainerLocations[pipAxis][name].z;
+                  console.log('HIGHEST SPOT: '+highestSpot+' from '+pipAxis+' on '+name)
+                }
+              }
+            }
+          }
+        }
       }
     }
-
-    if(theContainerLocations.b[name].z < highestSpot) highestSpot = theContainerLocations.b[name].z;
   }
 
-
-  if(debug===true) console.log('highestSpot(1):'+highestSpot)
-  if(highestSpot>200) {
-    highestSpot = 5;
-  }
-  if(debug===true) console.log('highestSpot(2):'+highestSpot)
-  if(highestSpot<5) {
-    highestSpot = 5;
-  }
   // call function that cuts out the 'save' buttons for unused containers (defined in loadFiles.js)
   if(CURRENT_PROTOCOL && CURRENT_PROTOCOL.head) {
     setPipetteContainers(CURRENT_PROTOCOL, PIPETTES); // uses global variables CURRENT_PROTOCOL, PIPETTES
@@ -576,6 +590,9 @@ var socketHandler = {
     if (isConnected===true) {
       document.getElementById('status').innerHTML = 'Connected';
       document.getElementById('status').style.color = 'rgb(27,225,100)';
+      if(current_portname){
+        document.getElementById('portname').innerHTML = current_portname + '<span class="caret"></span>';
+      }
     }
     else if (isConnected===false) {
       document.getElementById('status').innerHTML = 'Disconnected';
@@ -756,18 +773,21 @@ var socketHandler = {
 };
 
 var timeSentJob = undefined;
+var current_portname = '';
 
 function setPort(portname){
 
   if(portname){
-    document.getElementById('portname').innerHTML = portname + '<span class="caret"></span>';
+
+    current_portname = portname;
+    document.getElementById('portname').innerHTML = current_portname + '<span class="caret"></span>';
 
     document.getElementById('status').innerHTML = 'Connecting...';
     document.getElementById('status').style.color = 'rgb(100,100,100)';
 
     var msg = {
       'type' : 'connectPort',
-      'data' : portname
+      'data' : current_portname
     };
 
     sendMessage(msg);
