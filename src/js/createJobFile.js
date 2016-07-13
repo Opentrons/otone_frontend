@@ -757,21 +757,18 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     }
 
     // then update the plunger's position to go all the way down
-    // and go to the 'liquid-level + offset' position
     if(shouldDropPlunger) {
       theTool['current-plunger'] = 1;
       moveArray.push({
-        'plunger' : theTool['current-plunger'],
-        'z' : arriveDepth,
-        'container' : containerName
+        'plunger' : theTool['current-plunger']
       });
     }
-    else {
-      moveArray.push({
-        'z' : arriveDepth,
-        'container' : containerName
-      });
-    }
+
+    // and go to the 'liquid-level + offset' position
+    moveArray.push({
+      'z' : arriveDepth,
+      'container' : containerName
+    });
 
     var plungerPercentage = getPercentage(thisParams.volume, theTool);
     var extraPercentage = 0;
