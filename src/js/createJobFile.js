@@ -277,13 +277,10 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
 
         // now use the tip location, go over there, and grab the tip
 
-        moveArray.push({
-          'z' : 0
-        });
-
         this['current-plunger'] = 0; // reset the plunger's current state
 
         moveArray.push({
+          'z' : highestSpot - 5,
           'plunger' : 'resting'
         });
 
@@ -335,15 +332,13 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
         }
 
         moveArray.push({
-          'z' : 0
+          'z' : highestSpot - 100
         });
 
         this['current-plunger'] = 0; // reset the plunger's current state
-        moveArray.push({
-          'plunger' : 'resting'
-        });
 
         moveArray.push({
+          'plunger' : 'resting',
           'x' : trashLocation.x,
           'y' : trashLocation.y,
           'container' : trashContainerName
@@ -378,31 +373,31 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
   var _instructions = protocol.instructions;
 
   // first make the plunger go up and down for each pipette being used
-  for(var toolname in _pipettes) {
-    createdInstructions.push({
-      'tool' : _pipettes[toolname].tool,
-      'groups' : [
-        {
-          'command': 'pipette',
-          'axis': _pipettes[toolname].axis,
-          'locations': [
-            {
-              'plunger' : 'blowout'
-            },
-            {
-              'plunger' : 'resting'
-            },
-            {
-              'plunger' : 'blowout'
-            },
-            {
-              'plunger' : 'resting'
-            }
-          ]
-        }
-      ]
-    });
-  }
+  // for(var toolname in _pipettes) {
+  //   createdInstructions.push({
+  //     'tool' : _pipettes[toolname].tool,
+  //     'groups' : [
+  //       {
+  //         'command': 'pipette',
+  //         'axis': _pipettes[toolname].axis,
+  //         'locations': [
+  //           {
+  //             'plunger' : 'blowout'
+  //           },
+  //           {
+  //             'plunger' : 'resting'
+  //           },
+  //           {
+  //             'plunger' : 'blowout'
+  //           },
+  //           {
+  //             'plunger' : 'resting'
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   });
+  // }
 
 
   // then add all the instructions from the loaded protocol file
@@ -664,6 +659,8 @@ var createPipetteGroup = {
 /////////////////////////////////
 /////////////////////////////////
 
+var prev_containerName = undefined;
+
 function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
   var moveArray = [];
   console.log('thisParams...');
@@ -697,36 +694,57 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
       arriveDepth = bottomLimit + specifiedOffset;
     }
     console.log('arriveDepth = '+arriveDepth);
-    //if(arriveDepth < bottomLimit) {
-    //  arriveDepth = bottomLimit;
-    //}
+    if(arriveDepth<bottomLimit && bottomLimit!=0) {
+     arriveDepth = bottomLimit;
+    }
 
     moveArray.push({
       'speed' : theTool['down-plunger-speed']
     });
 
-    var rainbowHeight = highestSpot - 5;
+    var rainbowHeight = 0;
+
+    // make sure we're higher than a tip
     if(theTool.justPickedUp) {
-      rainbowHeight = 0;
+      moveArray.push({
+        'z' : highestSpot - 100 
+      });
       theTool.justPickedUp = false;
     }
-    moveArray.push({
-      'z' : rainbowHeight
-    });
+    // if same labware as before, just go 5mm above it
+    else if(prev_containerName===containerName) {
+      moveArray.push({
+        'z' : 5,
+        'container' : containerName
+      });
+    }
+    // else go 5mm above tallest labware
+    else {
+      moveArray.push({
+        'z' : highestSpot - 5
+      });
+    }
+
+    // save the container name for the next pipette motion
+    prev_containerName = containerName;
 
     // make sure the plunger is all the way up before going down
     if(shouldDropPlunger) {
       theTool['current-plunger'] = 0;
       moveArray.push({
-        'plunger' : 'resting'
+        'plunger' : 'resting',
+        'x' : locationPos.x,
+        'y' : locationPos.y,
+        'container' : containerName
       });
     }
-
-    moveArray.push({
-      'x' : locationPos.x,
-      'y' : locationPos.y,
-      'container' : containerName
-    });
+    else {
+      moveArray.push({
+        'x' : locationPos.x,
+        'y' : locationPos.y,
+        'container' : containerName
+      });
+    }
 
     // go one mm above the position
     moveArray.push({
@@ -741,18 +759,21 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     }
 
     // then update the plunger's position to go all the way down
+    // and go to the 'liquid-level + offset' position
     if(shouldDropPlunger) {
       theTool['current-plunger'] = 1;
       moveArray.push({
-        'plunger' : theTool['current-plunger']
+        'plunger' : theTool['current-plunger'],
+        'z' : arriveDepth,
+        'container' : containerName
       });
     }
-
-    // then go to the 'liquid-level + offset' position
-    moveArray.push({
-      'z' : arriveDepth,
-      'container' : containerName
-    });
+    else {
+      moveArray.push({
+        'z' : arriveDepth,
+        'container' : containerName
+      });
+    }
 
     var plungerPercentage = getPercentage(thisParams.volume, theTool);
     var extraPercentage = 0;
