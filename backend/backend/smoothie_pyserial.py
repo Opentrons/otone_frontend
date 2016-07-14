@@ -160,6 +160,7 @@ class Smoothie(object):
             """Callback when connection is lost
             """
             if self.outer.serial_port and self.outer.connected:
+                
                 self.outer.connected = False
                 self.outer.smoothieQueue = list()
                 self.outer.already_trying = False
@@ -220,6 +221,8 @@ class Smoothie(object):
             This method is called whenever the port is found to either not exist or throw an error
         """
 
+        self.connected = False
+
         if self.serial_port and self.serial_port.is_open:
             try:
                 self.serial_port.close()
@@ -250,17 +253,18 @@ class Smoothie(object):
     def send(self, string):
         """sends data to the smoothieboard using a transport
         """
-        logger.debug('smoothie_pyserial.send called')
-        self.on_raw_data('--> '+string)  #self
-        if self.serial_port and self.serial_port.is_open:
-            logger.debug('\n\tstring: {}'.format(string))
-            string = (string+'\r\n').encode('UTF-8')
-            try:
-                self.serial_port.write(string)
-            except serial.SerialException:
+        if self.connected:
+            logger.debug('smoothie_pyserial.send called')
+            self.on_raw_data('--> '+string)  #self
+            if self.serial_port and self.serial_port.is_open:
+                logger.debug('\n\tstring: {}'.format(string))
+                string = (string+'\r\n').encode('UTF-8')
+                try:
+                    self.serial_port.write(string)
+                except serial.SerialException:
+                    self.callbacker.connection_lost()
+            else:
                 self.callbacker.connection_lost()
-        else:
-            self.callbacker.connection_lost()
 
 
     def smoothie_handler(self, msg, data_):
@@ -391,10 +395,11 @@ class Smoothie(object):
     def try_add(self, cmd):
         """Add a command to the smoothieQueue
         """
-        logger.debug('smoothie_pyserial.try_add called')
-        self.smoothieQueue.append(cmd)
-        #if len(self.smoothieQueue) == 1:
-        self.try_step()
+        if self.connected:
+            logger.debug('smoothie_pyserial.try_add called')
+            self.smoothieQueue.append(cmd)
+            #if len(self.smoothieQueue) == 1:
+            self.try_step()
 
 
     def move(self, coords_list):
@@ -448,7 +453,7 @@ class Smoothie(object):
                             elif value > 0 and self.theState['direction'][n]>0:
                                 value = value + self.theState['direction'][n]
                                 self.theState['direction'][n] = 0
-                    cmd = cmd + str(value)
+                    cmd = cmd + str(float(value))
                     logger.debug('smoothie_pyserial:\n\tcmd: {}'.format(cmd))
 
 
@@ -582,15 +587,19 @@ class Smoothie(object):
             self.delay_handler.cancel()
             self.delay_handler = None
             self.delay_cancel()
-            #onOffString = self._dict['off'] + '\r\n' + self._dict['on']
+
+        self.delay_cancel()
 
         self.smoothieQueue = list()
 
-        self.try_add(self._dict['off'] + '\r\n')
-        time.sleep(0.2)
-        self.try_add(self._dict['on'] + '\r\n')
+        # send directly to smoothie board (bypass smoothie queue)
+        self.send(self._dict['off'] + '\r\n')
 
-        time.sleep(1)
+        # the smoothie seems to require some time after resetting
+        time.sleep(0.5)
+        
+        self.send(self._dict['on'] + '\r\n')
+        time.sleep(0.5)
 
 
     def set_speed(self, axis, value):

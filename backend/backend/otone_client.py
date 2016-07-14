@@ -196,7 +196,7 @@ def make_a_connection():
     """Attempt to create streaming transport connection and run event loop
     """
 
-    coro = loop.create_connection(transport_factory, '127.0.0.1', 8080)
+    coro = loop.create_connection(transport_factory, '127.0.0.1', 31947)
 
     disconnect_counter = 0
 
@@ -278,7 +278,7 @@ try:
     session_factory._myAppSession = None
 
     # TODO: should not be hardcoded but rather moved to setting file...
-    url = "ws://127.0.0.1:8080/ws"
+    url = "ws://127.0.0.1:31947/ws"
 
 
     serializers = []
