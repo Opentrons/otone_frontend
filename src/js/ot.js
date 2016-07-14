@@ -2,7 +2,7 @@ $(document).ready(function() {
 // Set up the URL to connect to 
 var wsuri;
 if (document.location.origin == "file://") {
-   wsuri = "ws://127.0.0.1:8080/ws";
+   wsuri = "ws://127.0.0.1:31947/ws";
 
 } else {
    wsuri = (document.location.protocol === "http:" ? "ws:" : "wss:") + "//" +
