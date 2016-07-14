@@ -32,11 +32,18 @@ before_install:
   - pip3 install -r requirements.txt
   - pip3 freeze
 
+  # Install node.js
+  - brew unlink node
+  - brew install node
+  - node --version
+  - npm --version
+
 # Build and pack Ardublockly
 install:
   - cd backend
   - pyinstaller otone_client_onefile.spec
   - ls -la dist/
+  - cp dist/otone_client ../backend-dist
 
 notifications:
   email:
