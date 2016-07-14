@@ -49,7 +49,7 @@ install:
 
   # Return to proj root
   - cd ..
-  - npm install && electron-packager ./ OpenTrons --ia32
+  - npm install && electron-packager ./ OpenTrons --ia32 --out releases
   - ls dist/
 
 notifications:
