@@ -69,5 +69,5 @@ deploy:
   upload-dir: mac
   acl: public_read
   on:
-    repo: opentrons/otone_backend
+    repo: OpenTrons/otone_backend
     all_branches: true
