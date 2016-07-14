@@ -1,0 +1,3 @@
+[submodule "otone_backend"]
+	path = otone_backend
+	url = https://github.com/OpenTrons/otone_backend
