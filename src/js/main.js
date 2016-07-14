@@ -588,6 +588,7 @@ var socketHandler = {
   },
   'status' : function (isConnected) {
     if (isConnected===true) {
+      document.getElementById('port_list').innerHTML = '';
       document.getElementById('status').innerHTML = 'Connected';
       document.getElementById('status').style.color = 'rgb(27,225,100)';
       if(current_portname){
@@ -595,6 +596,7 @@ var socketHandler = {
       }
     }
     else if (isConnected===false) {
+      document.getElementById('port_list').innerHTML = '';
       document.getElementById('status').innerHTML = 'Disconnected';
       document.getElementById('status').style.color = 'red';
       document.getElementById('portname').innerHTML = 'No USB Selected' + '<span class="caret"></span>';
@@ -733,14 +735,14 @@ var socketHandler = {
     setTimeout(function(){
 
       if(data.length){
-        document.getElementById('status').innerHTML = 'Found ports';
+        document.getElementById('port_list').innerHTML = 'Found ports';
       }
       else {
-        document.getElementById('status').innerHTML = 'No ports';
+        document.getElementById('port_list').innerHTML = 'No ports';
       }
-      document.getElementById('status').style.color = 'rgb(100,100,100)';
+      //document.getElementById('port_list').style.color = 'rgb(100,100,100)';
 
-    }, 500);
+    }, 250);
 
     resetPortList();
 
@@ -891,9 +893,7 @@ function resetPortList(){
 
 function listPorts () {
 
-  document.getElementById('status').innerHTML = 'Searching...';
-  document.getElementById('status').style.color = 'rgb(100,100,100)';
-
+  document.getElementById('port_list').innerHTML = 'Searching...';
 
   var msg = {
     'type' : 'listPorts'
