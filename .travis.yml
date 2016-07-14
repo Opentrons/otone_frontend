@@ -1,0 +1,58 @@
+# We are using the iOS build system to create Mac OS X python builds
+language: objective-c
+
+before_install:
+  # OS extra info
+  - uname -a
+  - python --version
+  - python -c "import struct; print(struct.calcsize('P') * 8)"
+  - pip freeze
+
+  # Install Python 2 and 3 with pip and check versions
+  - brew update
+  - brew install python3
+  - brew link --overwrite python3
+  - brew install python
+  - brew link --overwrite python
+  - PATH=/usr/local/bin:$PATH
+  - echo $PATH
+  - python --version
+  - python -c "import struct; print(struct.calcsize('P') * 8)"
+  - python3 --version
+  - python3 -c "import struct; print(struct.calcsize('P') * 8)"
+
+  - brew install libcouchbase
+
+  # Install Python packages (built with Python 3, tests for 2 and 3)
+  - pip3 install pyinstaller
+  - pyinstaller --version
+  - pip freeze
+  - pip3 freeze
+
+  - pip3 install -r requirements.txt
+  - pip3 freeze
+
+# Build and pack Ardublockly
+install:
+  - pyinstaller otone_client_onefile.spec
+  - ls -la dist/
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+# Deploy the build version in an S3 bucket
+deploy:
+  provider: s3
+  access_key_id: ....
+  secret_access_key:
+    secure: ...
+  bucket: otone-app-builds
+  skip_cleanup: true
+  local-dir: releases
+  upload-dir: mac
+  acl: public_read
+  on:
+    repo: opentrons/otone_backend
+    all_branches: true
