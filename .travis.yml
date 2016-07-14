@@ -60,9 +60,8 @@ notifications:
 # Deploy the build version in an S3 bucket
 deploy:
   provider: s3
-  access_key_id: ....
-  secret_access_key:
-    secure: ...
+  access_key_id: AKIAI55P3EZYDZJS5JFQ
+  secret_access_key: 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
   bucket: otone-app-builds
   skip_cleanup: true
   local-dir: releases
