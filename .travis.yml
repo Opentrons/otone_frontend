@@ -43,7 +43,14 @@ install:
   - cd backend
   - pyinstaller otone_client_onefile.spec
   - ls -la dist/
-  - cp dist/otone_client ../backend-dist
+
+  # Copy backend exe
+  - cp dist/otone_client ../backend-dist/
+
+  # Return to proj root
+  - cd ..
+  - npm install && electron-packager ./ OpenTrons --ia32
+  - ls dist/
 
 notifications:
   email:
