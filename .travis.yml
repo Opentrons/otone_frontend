@@ -10,8 +10,8 @@ before_install:
 
   # Install Python 2 and 3 with pip and check versions
   - brew update
-  - brew install python3
-  - brew link --overwrite python3
+  - brew install python34
+  - brew link --overwrite python34
   - brew install python
   - brew link --overwrite python
   - PATH=/usr/local/bin:$PATH
