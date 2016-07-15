@@ -938,12 +938,6 @@ function erase () {
     'type' : 'eraseJob'
   };
 
-  document.getElementById('fileName').innerHTML = '[empty]';
-  document.getElementById('runButton').disabled = true;
-  document.getElementById('runButton').classList.remove('tron-red');
-
-  CURRENT_PROTOCOL = undefined;
-
   sendMessage(msg);
 }
 
