@@ -88,7 +88,7 @@ logger = logging.getLogger('app')
 LOG_FORMAT ="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 
 file_handler = logging.handlers.RotatingFileHandler(
-    fname_data_logfile, maxBytes=20000, backupCount=2
+    fname_data_logfile, maxBytes=200000, backupCount=2
 )
 
 # Set up file logging
