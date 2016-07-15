@@ -299,7 +299,7 @@ class Smoothie(object):
             for key, value in data.items():
                 if key == "!!":
                     self.already_trying = False
-                    self.try_step()
+                    didStateChange = True
                 if ok_print:
                     if key in self.theState:
                         logger.debug('smoothie_pyserial:\n\ttheState[{0}] = {1}'.format(key,self.theState[key]))
