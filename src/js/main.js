@@ -1059,11 +1059,34 @@ var slotPositions = {
   }
 }
 
+var is_otPro = false;
+
+function set_is_otPro(_is_otPro){
+  is_otPro = _is_otPro;
+
+  var temp_slot_letters = ['a','b','c','d','e'];
+  for(var n=0;n<temp_slot_letters.length;n++){
+    var temp_id = 'btn-deck-slot-'+temp_slot_letters[n]+'3';
+    if(is_otPro){
+      document.getElementById(temp_id).style.display = "none";
+      document.getElementById('current_deckSize').innerHTML = 'Deck Size: OT.Pro';
+    }
+    else {
+      document.getElementById(temp_id).style.display = "inline-block";
+      document.getElementById('current_deckSize').innerHTML = 'Deck Size: OT.One';
+    }
+  }
+}
+
 function moveSlot(slotName) {
   var letter = slotName.charAt(0);
-  var number = slotName.charAt(1);
+  var number = Number(slotName.charAt(1));
 
-  var yPos = slotPositions.numbers[number];
+  if(is_otPro) {
+    number += 1;
+  }
+
+  var yPos = slotPositions.numbers[number+''];
   var xPos = slotPositions.letters[letter];
 
   if(xPos && yPos) {
