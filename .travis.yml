@@ -49,8 +49,10 @@ install:
 
   # Return to proj root
   - cd ..
-  - npm install && electron-packager ./ OpenTrons --ia32 --out releases
-  - ls dist/
+  - npm install
+  - npm install -g electron-packager
+  - electron-packager . OT --ia32 --macelectron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
+  - ls releases/
 
 notifications:
   email:
