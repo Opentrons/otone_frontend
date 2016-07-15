@@ -51,8 +51,9 @@ install:
   - cd ..
   - npm install
   - npm install -g electron-packager
-  - electron-packager . OT --ia32 --macelectron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
+  - electron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
   - ls releases/
+  - zip -r releases/OT-darwin-x64 releases/otone-app
 
 notifications:
   email:
@@ -71,5 +72,5 @@ deploy:
   upload-dir: mac
   acl: public_read
   on:
-    repo: OpenTrons/otone_backend
+    repo: OpenTrons/otone_frontend
     all_branches: true
