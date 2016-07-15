@@ -53,7 +53,7 @@ install:
   - npm install -g electron-packager
   - electron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
   - ls releases/
-  - zip -r releases/OT-darwin-x64 releases/otone-app
+  - zip -r releases/OpenTrons-darwin-x64 releases/otone-app
 
 notifications:
   email:
