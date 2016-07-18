@@ -98,7 +98,7 @@ class Smoothie(object):
         def read_loop():
             while True:
                 time.sleep(0.01)
-                if self.serial_port and self.serial_port.is_open:
+                if self.connected and self.serial_port and self.serial_port.is_open:
                     try:
                         data = self.serial_port.readline().decode('UTF-8')
                         if data:
@@ -115,7 +115,6 @@ class Smoothie(object):
                                     'Failed parsing data from smoothie board'
                                 )
                     except OSError:
-                        logger.info('Device disconnected/port closed')
                         self.callbacker.connection_lost()
                 else:
                     self.callbacker.connection_lost()
@@ -622,7 +621,7 @@ class Smoothie(object):
         """Send a raw command to the Smoothieboard
         """
         #self.try_add(string)
-        self.try_add(string)
+        self.send(string)
 
     def list_serial_ports(self):
         """ Lists serial port names
