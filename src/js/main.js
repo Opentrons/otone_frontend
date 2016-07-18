@@ -205,7 +205,7 @@ function handleContainers (newContainers) {
         if(pipAxis=='a'){
           for(var name in theContainerLocations[pipAxis]) {
             if(CURRENT_PROTOCOL.deck[name]){
-              if(theContainerLocations[pipAxis][name].z !== null && !isNaN(Number(theContainerLocations[pipAxis][name].z))){
+              if(Number(theContainerLocations[pipAxis][name].z) > 0){
                 if(theContainerLocations[pipAxis][name].z < highestSpot) {
                   highestSpot = theContainerLocations[pipAxis][name].z;
                   console.log('\n\n\n\nHIGHEST SPOT: '+highestSpot+' from '+pipAxis+' on '+name)
@@ -295,7 +295,7 @@ function handleContainers (newContainers) {
         if(pipAxis=='b'){
           for(var name in theContainerLocations[pipAxis]) {
             if(CURRENT_PROTOCOL.deck[name]){
-              if(theContainerLocations[pipAxis][name].z !== null && !isNaN(Number(theContainerLocations[pipAxis][name].z))){
+              if(Number(theContainerLocations[pipAxis][name].z) > 0){
                 if(theContainerLocations[pipAxis][name].z < highestSpot) {
                   highestSpot = theContainerLocations[pipAxis][name].z;
                   console.log('HIGHEST SPOT: '+highestSpot+' from '+pipAxis+' on '+name)
@@ -306,6 +306,10 @@ function handleContainers (newContainers) {
         }
       }
     }
+  }
+
+  if(highestSpot>80){
+    highestSpot = 80;
   }
 
   // call function that cuts out the 'save' buttons for unused containers (defined in loadFiles.js)
@@ -717,6 +721,8 @@ var socketHandler = {
     if(seconds_left > 0){
       var temp_minutes = Math.floor(seconds_left / 60);
       var temp_seconds = Math.floor(seconds_left % 60);
+      if(temp_minutes < 10) temp_minutes = '0' + temp_minutes;
+      if(temp_seconds < 10) temp_seconds = '0' + temp_seconds;
       document.getElementById('countdown').innerHTML = 'Delaying '+temp_minutes+':'+temp_seconds;
 
       if(seconds_left % 2 == 0){
