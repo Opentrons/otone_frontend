@@ -32,7 +32,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
-    "electron-builder": "^5.6.2",
     "live-reload": "^1.1.0",
     "spectron": "^3.2.6"
   },

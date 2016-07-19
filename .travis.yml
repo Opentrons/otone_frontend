@@ -1,0 +1,76 @@
+# We are using the iOS build system to create Mac OS X python builds
+language: objective-c
+
+before_install:
+  # OS extra info
+  - uname -a
+  - python --version
+  - python -c "import struct; print(struct.calcsize('P') * 8)"
+  - pip freeze
+
+  # Install Python 2 and 3 with pip and check versions
+  - brew update
+  - brew install python34
+  - brew link --overwrite python34
+  - brew install python
+  - brew link --overwrite python
+  - PATH=/usr/local/bin:$PATH
+  - echo $PATH
+  - python --version
+  - python -c "import struct; print(struct.calcsize('P') * 8)"
+  - python3 --version
+  - python3 -c "import struct; print(struct.calcsize('P') * 8)"
+
+  - brew install libcouchbase
+
+  # Install Python packages (built with Python 3, tests for 2 and 3)
+  - pip3 install pyinstaller
+  - pyinstaller --version
+  - pip freeze
+  - pip3 freeze
+
+  - pip3 install -r requirements.txt
+  - pip3 freeze
+
+  # Install node.js
+  - brew unlink node
+  - brew install node
+  - node --version
+  - npm --version
+
+# Build and pack Ardublockly
+install:
+  - cd backend
+  - pyinstaller otone_client_onefile.spec
+  - ls -la dist/
+
+  # Copy backend exe
+  - cp dist/otone_client ../backend-dist/mac/
+
+  # Return to proj root
+  - cd ..
+  - npm install
+  - npm install -g electron-packager
+  - electron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
+  - ls releases/
+  - zip -r releases/OpenTrons-darwin-x64 releases/otone-app
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+# Deploy the build version in an S3 bucket
+deploy:
+  provider: s3
+  access_key_id: AKIAJSWZAZ5YZNE3WFDQ
+  secret_access_key:
+    secure: Re361cco9KEyb0wwKdxn5HGVtaifnwjKqdl9yz4tQC3/ZUxnFtgnu62gkIRnsj1uKDQDtCUj3u3Spjhd1OxnXPeQpcGyc+dWhV2im3uYnumh6myn4P4CEyBdesqMTJsPtX78vbfPf2sCvAZe2YQPvqGnLs6r5CBwA24YDoJG0VTI5T3dbwK2wPKuydJ7epAeOQ+ZJSc28bVRR0HgDuVIfLYdNoIRmUSeV3AUtLnsttB02EvQsS065chAWDmlVZcBXBVjpb5MPkW6gEOAix80XCKD97GzDyg+IQ8T7GTG8ajw8JTFrTyuf16mV87qFAcQHejteBHDb25HxZWLFYcy2f1qGSASrRYs3LYpLKw3DqlnuwYZ7+jG8pzeebsgiTDXMqjSMJvK09TqcFSjhO3ZI3JqQh/uYtkgOm1uJu/kBbZT6jSXaioVlO7jvWap4X/bEtcJyQyLbwCW2hquDrSZtxx5hkPkiW0FtyUVgNlHnogJaGQictM5gSshmNRn8LRtWZ83HJTyOSum2Uhr01XmJ0xfJ+/UxRHr2sYkWeY9y7bj1hqFik3VNY5Euv/m0jL3515ouZko7nzpovrJzscp15MgrQEgAA2L0Nn1GBYtYzfQGakUSuDhj4igMRyKC/d1MtBl3NWCm/ETZjXheb0erjoN3F26ykwBBxEop8QHNgo=
+  bucket: otone-app-builds
+  skip_cleanup: true
+  local-dir: releases
+  upload-dir: mac
+  acl: public_read
+  on:
+    repo: OpenTrons/otone_frontend
+    all_branches: true
