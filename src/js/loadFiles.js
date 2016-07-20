@@ -460,7 +460,7 @@ function createAndSend () {
             confirm('infinity');
             jobMsg.type = 'infinity';
           }
-          sendMessage(jobMsg);s
+          sendMessage(jobMsg);
           timeSentJob = new Date().getTime();
 
           document.getElementById('runButton').disabled = true;

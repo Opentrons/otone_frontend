@@ -650,6 +650,9 @@ var socketHandler = {
     var seconds = Math.floor(difference/1000)%60;
     var minutes = Math.floor(difference/(1000*60));
     alert('Job finished in '+minutes+' minutes, '+seconds+' seconds');
+
+    document.getElementById('runButton').disabled = false;
+    document.getElementById('runButton').classList.add('tron-red');
   },
   'networks' : function(data) {
     alert(JSON.stringify(data));
@@ -939,6 +942,9 @@ function resume () {
 /////////////////////////////////
 
 function erase () {
+
+  document.getElementById('runButton').disabled = false;
+  document.getElementById('runButton').classList.add('tron-red');
 
   var msg = {
     'type' : 'eraseJob'
