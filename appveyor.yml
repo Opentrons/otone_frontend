@@ -40,7 +40,7 @@ install:
     - cmd: cd backend
 #    - cmd: "%PIP3% -m pip install --upgrade pip"
     - cmd: "%PIP3% install -r requirements.txt"
-    - cmd: pyinstaller --onfile --clean --windowed otone_client_onefile.spec
+    - cmd: pyinstaller --onefile --clean --windowed otone_client_onefile.spec
 
 build: off
 
