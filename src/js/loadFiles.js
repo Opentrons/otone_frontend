@@ -466,9 +466,6 @@ function createAndSend () {
           document.getElementById('runButton').disabled = true;
           document.getElementById('runButton').classList.remove('tron-red');
         }
-        else {
-          timeSentJob = undefined;
-        }
 
         shouldInfinity = false;
       }

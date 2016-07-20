@@ -780,7 +780,7 @@ var socketHandler = {
   }
 };
 
-var timeSentJob = undefined;
+var timeSentJob = new Date().getTime();
 var current_portname = '';
 
 function setPort(portname){
