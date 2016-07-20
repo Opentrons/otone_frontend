@@ -341,7 +341,7 @@ class Smoothie(object):
                 pos['c']=self.theState['c']
                 self.on_position_data(pos)
 
-            if didStateChange == True or self.theState['stat']==self.state_ready and self.already_trying == False:
+            if didStateChange == True and self.theState['stat']==self.state_ready and self.already_trying == False:
                 if len(self.smoothieQueue)>0:
                     self.try_step()
                 else:
