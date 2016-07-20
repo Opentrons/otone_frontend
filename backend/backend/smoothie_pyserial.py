@@ -131,7 +131,6 @@ class Smoothie(object):
         def connection_made(self):
             """Callback when a connection is made
             """
-            self.outer.connected = True
             logger.info("smoothie_pyserial:\n\tCB_Factory.connection_made called")
 
             self.smoothieQueue = list()
@@ -243,8 +242,8 @@ class Smoothie(object):
         and call :meth:`on_connect` callback
         """
         logger.debug('smoothie_pyserial.on_success_connecting called')
-        thestring = self._dict['setupFeedback']
-        self.try_add(thestring)#self  self._dict['setupFeedback'])
+        self.connected = True
+        self.send(self._dict['setupFeedback'])
         self.try_add('G91 G0Z-2 G0Z2 G0Z-2 G0Z2 G0Z-2 G0Z2')
         self.on_connect(self.theState)
 
