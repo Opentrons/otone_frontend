@@ -643,9 +643,10 @@ class Smoothie(object):
         result = []
         for port in ports:
             try:
-                s = serial.Serial(port)
-                s.close()
-                result.append(port)
+                if 'tty.usbmodem' in port or 'COM' in port:
+                    s = serial.Serial(port)
+                    s.close()
+                    result.append(port)
             except (OSError, serial.SerialException):
                 pass
         return result
