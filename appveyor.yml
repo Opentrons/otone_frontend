@@ -38,7 +38,7 @@ init:
 install:
     - cmd: cd
     - cmd: cd backend
-    - cmd: "%PYTHON3% pip install --upgrade pip setuptools"
+    - cmd: "%PYTHON3%\python pip install --upgrade pip setuptools"
     - cmd: "%PIP3% install -r requirements.txt"
     - cmd: pyinstaller --onefile --clean --windowed otone_client_onefile.spec
 
