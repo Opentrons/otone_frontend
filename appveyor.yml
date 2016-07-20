@@ -35,8 +35,8 @@ init:
     - cmd: node --version
     - cmd: npm --version
 
-
+install:
     - cmd: cd
-#    - cmd: cd backend
-#    - cmd: "%PIP3% install -r requirements.txt"
+    - cmd: cd backend
+    - cmd: "%PIP3% install -r requirements.txt"
 
