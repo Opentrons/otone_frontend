@@ -38,5 +38,9 @@ init:
 install:
     - cmd: cd
     - cmd: cd backend
+    - cmd: "%PIP3% -m pip install --upgrade pip"
     - cmd: "%PIP3% install -r requirements.txt"
+    - cmd: pyinstaller --onfile --clean --windowed otone_client_onefile.spec
+
+build: off
 
