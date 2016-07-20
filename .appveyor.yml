@@ -1,0 +1,39 @@
+environment:
+    nodejs_version: "0.12.7"
+    matrix:
+        - PYTHON: "C:\\Python27"
+          PYTHON_VERSION: "2.7.9"
+          PYTHON_ARCH: "32"
+          PYTHON3: "C:\\Python34"
+          PYTHON3_VERSION: "3.4.3"
+          PYTHON3_ARCH: "32"
+
+    PIP: C:\\Python27\Scripts\pip
+    PIP3: C:\\Python34\Scripts\pip
+
+    npm_config_arch: ia32
+
+platform: x86
+
+configuration: Release
+
+init:
+    - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
+    - cmd: wmic OS get OSArchitecture
+
+    - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
+    - cmd: "%PYTHON%\\python --version"
+    - cmd: "%PYTHON%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
+    - cmd: ECHO %PYTHON3% %PYTHON3_VERSION% %PYTHON3_ARCH%
+    - cmd: "%PYTHON3%\\python --version"
+    - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
+
+    - cmd: set PATH=%PYTHON%\scripts;%PYTHON3%\scripts;%PATH%
+    - cmd: ECHO Path - %PATH%
+
+    - ps: Install-Product node 5.1.0 x86
+    - cmd: node --version
+    - cmd: npm --version
+
+    - cmd: cd backend
+    - cmd: %PIP% install -r requirements.txt
