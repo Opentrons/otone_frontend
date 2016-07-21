@@ -205,7 +205,7 @@ function handleContainers (newContainers) {
         if(pipAxis=='a'){
           for(var name in theContainerLocations[pipAxis]) {
             if(CURRENT_PROTOCOL.deck[name]){
-              if(theContainerLocations[pipAxis][name].z !== null && !isNaN(Number(theContainerLocations[pipAxis][name].z))){
+              if(Number(theContainerLocations[pipAxis][name].z) > 0){
                 if(theContainerLocations[pipAxis][name].z < highestSpot) {
                   highestSpot = theContainerLocations[pipAxis][name].z;
                   console.log('\n\n\n\nHIGHEST SPOT: '+highestSpot+' from '+pipAxis+' on '+name)
@@ -295,7 +295,7 @@ function handleContainers (newContainers) {
         if(pipAxis=='b'){
           for(var name in theContainerLocations[pipAxis]) {
             if(CURRENT_PROTOCOL.deck[name]){
-              if(theContainerLocations[pipAxis][name].z !== null && !isNaN(Number(theContainerLocations[pipAxis][name].z))){
+              if(Number(theContainerLocations[pipAxis][name].z) > 0){
                 if(theContainerLocations[pipAxis][name].z < highestSpot) {
                   highestSpot = theContainerLocations[pipAxis][name].z;
                   console.log('HIGHEST SPOT: '+highestSpot+' from '+pipAxis+' on '+name)
@@ -306,6 +306,10 @@ function handleContainers (newContainers) {
         }
       }
     }
+  }
+
+  if(highestSpot>80){
+    highestSpot = 80;
   }
 
   // call function that cuts out the 'save' buttons for unused containers (defined in loadFiles.js)
@@ -646,6 +650,9 @@ var socketHandler = {
     var seconds = Math.floor(difference/1000)%60;
     var minutes = Math.floor(difference/(1000*60));
     alert('Job finished in '+minutes+' minutes, '+seconds+' seconds');
+
+    document.getElementById('runButton').disabled = false;
+    document.getElementById('runButton').classList.add('tron-red');
   },
   'networks' : function(data) {
     alert(JSON.stringify(data));
@@ -717,6 +724,8 @@ var socketHandler = {
     if(seconds_left > 0){
       var temp_minutes = Math.floor(seconds_left / 60);
       var temp_seconds = Math.floor(seconds_left % 60);
+      if(temp_minutes < 10) temp_minutes = '0' + temp_minutes;
+      if(temp_seconds < 10) temp_seconds = '0' + temp_seconds;
       document.getElementById('countdown').innerHTML = 'Delaying '+temp_minutes+':'+temp_seconds;
 
       if(seconds_left % 2 == 0){
@@ -774,7 +783,7 @@ var socketHandler = {
   }
 };
 
-var timeSentJob = undefined;
+var timeSentJob = new Date().getTime();
 var current_portname = '';
 
 function setPort(portname){
@@ -934,15 +943,12 @@ function resume () {
 
 function erase () {
 
+  document.getElementById('runButton').disabled = false;
+  document.getElementById('runButton').classList.add('tron-red');
+
   var msg = {
     'type' : 'eraseJob'
   };
-
-  document.getElementById('fileName').innerHTML = '[empty]';
-  document.getElementById('runButton').disabled = true;
-  document.getElementById('runButton').classList.remove('tron-red');
-
-  CURRENT_PROTOCOL = undefined;
 
   sendMessage(msg);
 }
@@ -1065,11 +1071,34 @@ var slotPositions = {
   }
 }
 
+var is_otPro = false;
+
+function set_is_otPro(_is_otPro){
+  is_otPro = _is_otPro;
+
+  var temp_slot_letters = ['a','b','c','d','e'];
+  for(var n=0;n<temp_slot_letters.length;n++){
+    var temp_id = 'btn-deck-slot-'+temp_slot_letters[n]+'3';
+    if(is_otPro){
+      document.getElementById(temp_id).style.display = "none";
+      document.getElementById('current_deckSize').innerHTML = 'Deck Size: OT.Pro';
+    }
+    else {
+      document.getElementById(temp_id).style.display = "inline-block";
+      document.getElementById('current_deckSize').innerHTML = 'Deck Size: OT.One';
+    }
+  }
+}
+
 function moveSlot(slotName) {
   var letter = slotName.charAt(0);
-  var number = slotName.charAt(1);
+  var number = Number(slotName.charAt(1));
 
-  var yPos = slotPositions.numbers[number];
+  if(is_otPro) {
+    number += 1;
+  }
+
+  var yPos = slotPositions.numbers[number+''];
   var xPos = slotPositions.letters[letter];
 
   if(xPos && yPos) {

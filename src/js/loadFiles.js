@@ -296,12 +296,7 @@ function loadFile(e) {
 
           }
           show_robot_new_info();
-          configureHead(tempProtocol.head)
-
-
-          document.getElementById('runButton').removeEventListener('click',createAndSend);
-          document.getElementById('runButton').addEventListener('click',createAndSend);
-
+          configureHead(tempProtocol.head);
 
           if(tempProtocol.info){
             document.getElementById('infoName').innerHTML= "<strong>File Name:</strong> "+ tempProtocol.info.name;
@@ -348,6 +343,26 @@ function configureHead(data) {
 
   sendMessage(socketMsg);
 }
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
+var shouldInfinity = false;
+
+function handleKeyboardEvent(e){
+  keyboardState = e;
+  if(e.shiftKey){
+    shouldInfinity = true
+  }
+  else {
+    shouldInfinity = false
+  }
+}
+
+window.addEventListener("keydown", handleKeyboardEvent, false);
+window.addEventListener("keypress", handleKeyboardEvent, false);
+window.addEventListener("keyup", handleKeyboardEvent, false);
 
 /////////////////////////////////
 /////////////////////////////////
@@ -417,35 +432,42 @@ function createAndSend () {
           'data' : robotProtocol
         }
 
-        var confirmation_text = '\n\nMake sure:';
-        confirmation_text += '\n      -';
-        confirmation_text += 'No Tip on Pipette';
-        confirmation_text += '\n      -';
-        confirmation_text += 'Tubes Open';
-        confirmation_text += '\n      -';
-        confirmation_text += 'Tip Racks Full';
-        confirmation_text += '\n      -';
-        confirmation_text += 'Modules On';
-        confirmation_text += '\n\n';
-        confirmation_text += 'Proceed to run protocol?';
+        var confirmation_text = '';
+
+        if(shouldInfinity){
+          confirmation_text += '\nWARNING: Protocol will run on loop\n'
+          confirmation_text += '\nTo cancel at any time, press Cancel\n';
+        }
+        else{
+          confirmation_text += '\nMake sure:\n';
+          confirmation_text += '\n      -';
+          confirmation_text += 'No Tip on Pipette';
+          confirmation_text += '\n      -';
+          confirmation_text += 'Tubes Open';
+          confirmation_text += '\n      -';
+          confirmation_text += 'Tip Racks Full';
+          confirmation_text += '\n      -';
+          confirmation_text += 'Modules On';
+          confirmation_text += '\n\n';
+          confirmation_text += 'Proceed to run protocol?';
+        }
 
 
         var shouldRun = confirm(confirmation_text);
 
         if(shouldRun) {
-          timeSentJob = new Date().getTime();
-          sendMessage(jobMsg);
-        }
-        else {
-          var shouldInfinity = false;
           if(shouldInfinity) {
+            confirm('infinity');
             jobMsg.type = 'infinity';
-            sendMessage(jobMsg);
           }
-          else {
-            timeSentJob = undefined;
-          }
+          sendMessage(jobMsg);
+          timeSentJob = new Date().getTime();
+
+          document.getElementById('runButton').disabled = true;
+          document.getElementById('runButton').classList.remove('tron-red');
         }
+
+        shouldInfinity = false;
       }
     }
   }
