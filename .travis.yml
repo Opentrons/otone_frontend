@@ -51,22 +51,21 @@ install:
   - zip -r releases/OpenTrons-darwin-x64 releases/Opentrons-darwin-x64
   - echo 'got this far...'
 
+
+# Deploy the build version in an S3 bucket
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: otone-app-builds
+  skip_cleanup: true
+  local-dir: releases
+  upload-dir: mac
+  acl: public_read
+
+
+
 notifications:
   email:
     on_success: change
     on_failure: change
-
-# Deploy the build version in an S3 bucket
-#deploy:
-#  provider: s3
-#  access_key_id: AKIAJSWZAZ5YZNE3WFDQ
-#  secret_access_key:
-#    secure: Re361cco9KEyb0wwKdxn5HGVtaifnwjKqdl9yz4tQC3/ZUxnFtgnu62gkIRnsj1uKDQDtCUj3u3Spjhd1OxnXPeQpcGyc+dWhV2im3uYnumh6myn4P4CEyBdesqMTJsPtX78vbfPf2sCvAZe2YQPvqGnLs6r5CBwA24YDoJG0VTI5T3dbwK2wPKuydJ7epAeOQ+ZJSc28bVRR0HgDuVIfLYdNoIRmUSeV3AUtLnsttB02EvQsS065chAWDmlVZcBXBVjpb5MPkW6gEOAix80XCKD97GzDyg+IQ8T7GTG8ajw8JTFrTyuf16mV87qFAcQHejteBHDb25HxZWLFYcy2f1qGSASrRYs3LYpLKw3DqlnuwYZ7+jG8pzeebsgiTDXMqjSMJvK09TqcFSjhO3ZI3JqQh/uYtkgOm1uJu/kBbZT6jSXaioVlO7jvWap4X/bEtcJyQyLbwCW2hquDrSZtxx5hkPkiW0FtyUVgNlHnogJaGQictM5gSshmNRn8LRtWZ83HJTyOSum2Uhr01XmJ0xfJ+/UxRHr2sYkWeY9y7bj1hqFik3VNY5Euv/m0jL3515ouZko7nzpovrJzscp15MgrQEgAA2L0Nn1GBYtYzfQGakUSuDhj4igMRyKC/d1MtBl3NWCm/ETZjXheb0erjoN3F26ykwBBxEop8QHNgo=
-#  bucket: otone-app-builds
-#  skip_cleanup: true
-#  local-dir: releases
-#  upload-dir: mac
-#  acl: public_read
-#  on:
-#    repo: OpenTrons/otone_frontend
-#    all_branches: true
