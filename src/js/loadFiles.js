@@ -457,7 +457,6 @@ function createAndSend () {
 
         if(shouldRun) {
           if(shouldInfinity) {
-            confirm('infinity');
             jobMsg.type = 'infinity';
           }
           sendMessage(jobMsg);
