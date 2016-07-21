@@ -50,6 +50,7 @@ install:
   - ls releases/
   - zip -r releases/OpenTrons-darwin-x64 releases/Opentrons-darwin-x64
 
+
 notifications:
   email:
     on_success: change
