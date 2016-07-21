@@ -97,7 +97,7 @@ class InstructionQueue:
         elif self.isRunning == True:
             if self.infinity_data is not None:
                 logger.debug('ins_step self.infinity_data: ********************************\n\n')
-                logger.debug(self.infinity_data,'\n')
+                logger.debug(str(self.infinity_data) + '\n')
                 self.start_job(json.loads(self.infinity_data, object_pairs_hook=collections.OrderedDict),False)
             else:
                 self.erase_job()
