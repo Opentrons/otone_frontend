@@ -1081,7 +1081,7 @@ function set_is_otPro(_is_otPro){
     var temp_id = 'btn-deck-slot-'+temp_slot_letters[n]+'3';
     if(is_otPro){
       document.getElementById(temp_id).style.display = "none";
-      document.getElementById('current_deckSize').innerHTML = 'Deck Size: OT.Pro';
+      document.getElementById('current_deckSize').innerHTML = 'Deck Size: OT.Hood';
     }
     else {
       document.getElementById(temp_id).style.display = "inline-block";
