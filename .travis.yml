@@ -62,7 +62,8 @@ deploy:
   local-dir: releases
   upload-dir: mac
   acl: public_read
-
+  on:
+    branch: 32-build-test
 
 
 notifications:
