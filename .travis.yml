@@ -40,15 +40,15 @@ install:
   - ls -la dist/
 
   # Copy backend exe
-#  - cp dist/otone_client ../backend-dist/mac/
+  - cp dist/otone_client ../backend-dist/mac/
 
   # Return to proj root
-#  - cd ..
-#  - npm install
-#  - npm install -g electron-packager
-#  - electron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
-#  - ls releases/
-#  - zip -r releases/OpenTrons-darwin-x64 releases/otone-app
+  - cd ..
+  - npm install
+  - npm install -g electron-packager
+  - electron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
+  - ls releases/
+  - zip -r releases/OpenTrons-darwin-x64 releases/otone-app
 
 notifications:
   email:
