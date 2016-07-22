@@ -1,8 +1,14 @@
 environment:
+  nodejs_version: "0.12.7"
   matrix:
+    # First group is 32 bit python 2.7
     - PYTHON: "C:\\Python34"
       PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "32"
+  # Add custom environmental variables for pip
+  PIP: C:\\Python34\Scripts\pip
+  # Add custom environmental variables to ensure 32 bit electron
+  npm_config_arch: ia32
 
 platform: x86
 
@@ -12,38 +18,35 @@ init:
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
   - cmd: wmic OS get OSArchitecture
 
-  # As AppVeyor has multiple python install, verify which one uses by default
+  # As AppVeyor has multiple python install, verify which ones will be used
   - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
-  - cmd: python --version
-  - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
+  - cmd: "%PYTHON%\\python --version"
+  - cmd: "%PYTHON%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
 
-  # Set the relevant python and pip location to the path
-  - cmd: set PATH=%PYTHON%;%PYTHON%\scripts;%PATH%
+  # Prepare pip and pip3, PATH iterated left to right first hit wins
+  - cmd: set PATH=%PYTHON%\scripts;%PATH
   - cmd: ECHO Path - %PATH%
 
-  # Verify the new default python
-  - cmd: python --version
-  - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
-  - cmd: pip --version
-
-  # Check out installed python packages
-  - cmd: pip freeze
+  # Ensure node x86 (appveyor powershell script to switch installed versions)
+  - ps: Install-Product node 5.1.0 x86
+  - cmd: node --version
+  - cmd: npm --version
 
 install:
-  # Temporary fix for PyQt not being installed in correct directory: https://github.com/appveyor/ci/issues/363
-  - REG ADD HKCU\Software\Python\PythonCore\3.4\InstallPath /f /ve /t REG_SZ /d C:\Python34
+  # Git clone happens between init and install
+  - cmd: git submodule update --init --recursive
 
-  # Download PyQt5 with 10min timeout, rename to pyqt5_installer.exe, and install
-  - ps: Start-FileDownload 'http://downloads.sourceforge.net/project/pyqt/PyQt5/PyQt-5.4.2/PyQt5-5.4.2-gpl-Py3.4-Qt5.4.2-x32.exe' -FileName pyqt5_installer.exe -Timeout 600000
-  - cmd: pyqt5_installer.exe /S
-  - cmd: python -c "import PyQt5"
+  # Install Python packages
+  - cmd: "%PIP% install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/py2exe-0.9.2.2-cp34-none-win32.whl"
+  - cmd: "%PIP% install mkdocs"
+  - cmd: "%PIP% freeze"
 
-  # Install python dependencies
-  - cmd: pip install pyinstaller
-  - cmd: pip install -r requirements.txt
+  # Build and pack Otone App - based off of Ardublockly
+  - cmd: "%PYTHON%\\python package\\build_py2exe.py"
+#  - cmd: cd package\electron && npm install && cd ..\..\
+#  - cmd: cd package\electron && npm run release && cd ..\..\
+#  - cmd: "%PYTHON3%\\python package\\pack_ardublockly.py"
+#  - cmd: dir
 
-  # Check installed packages again
-  - cmd: pip freeze
-  - cmd: cd backend
-  - cmd: pyinstaller otone_client.py
-#  - cmd: pyinstaller backend/otone_client_onefile.spec
+# Not a project with an msbuild file, build done at install.
+build: off
