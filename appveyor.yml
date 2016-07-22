@@ -28,9 +28,9 @@ init:
   - cmd: ECHO Path - %PATH%
 
   # Ensure node x86 (appveyor powershell script to switch installed versions)
-  - ps: Install-Product node 5.1.0 x86
-  - cmd: node --version
-  - cmd: npm --version
+#  - ps: Install-Product node 5.1.0 x86
+#  - cmd: node --version
+#  - cmd: npm --version
 
 install:
   # Git clone happens between init and install
