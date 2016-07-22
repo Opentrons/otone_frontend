@@ -16,7 +16,7 @@ configuration: Release
 
 init:
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
-  - cmd: wmic OS get OSArchitecture
+#  - cmd: wmic OS get OSArchitecture
 
   # As AppVeyor has multiple python install, verify which ones will be used
   - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
