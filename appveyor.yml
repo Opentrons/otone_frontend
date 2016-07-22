@@ -72,7 +72,7 @@ install:
     - "dir"
     - "%CMD_IN_ENV% python -m pip install -U pip-accel>=0.33"
     - "%CMD_IN_ENV% pip-accel install -U -i https://pypi.anaconda.org/giumas/simple lxml"
-    - "%CMD_IN_ENV% pip install -e ."
+    - "%CMD_IN_ENV% pip install -e ./appveyor/pyinstaller/"
 #    - cmd: "%PYTHON3%\\python --version"
 #    - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P')*8)\""
 #    - cmd: "%PYTHON3%\\python -m pip install --upgrade pip setuptools"
