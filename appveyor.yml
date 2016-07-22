@@ -63,6 +63,7 @@ install:
     - "SET PATH=C:\\tools\\mingw32\\bin;%PATH%"
     - "cd appveyor"
     - "cd pyinstaller"
+    - "dir"
     - "cd bootloader"
     - "python waf --msvc_version=\"msvc 12.0\" distclean all %WAF_ARGS%"
     - "cd .."
