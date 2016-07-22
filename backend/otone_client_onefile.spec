@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['backend/otone_client.py'],
-             pathex=['/Users/andy/Documents/github/otone_backend'],
+             pathex=['/projects/otone-frontend/backend'],
              binaries=None,
              datas=[('backend/data/*', 'data')],
              hiddenimports=[],
