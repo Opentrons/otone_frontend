@@ -1,15 +1,20 @@
 environment:
+    global:
+        CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\run_with_env.cmd"
+        PIP_ACCEL_LOG_FORMAT: "%(name)-18s %(levelname)s %(message)s"
+
     nodejs_version: "0.12.7"
+
     matrix:
-        - PYTHON: "C:\\Python27"
-          PYTHON_VERSION: "2.7.9"
-          PYTHON_ARCH: "32"
-          PYTHON3: "C:\\Python34"
-          PYTHON3_VERSION: "3.4.3"
+#        - PYTHON: "C:\\Python27"
+#          PYTHON_VERSION: "2.7.9"
+#          PYTHON_ARCH: "32"
+        - PYTHON3: "C:\\Python34"
+          PYTHON3_VERSION: "3.4.4"
           PYTHON3_ARCH: "32"
 
-    PIP: C:\\Python27\Scripts\pip
-    PIP3: C:\\Python34\Scripts\pip
+#    PIP: C:\\Python27\Scripts\pip
+#    PIP3: C:\\Python34\Scripts\pip
 
     npm_config_arch: ia32
 
@@ -22,25 +27,59 @@ init:
     - cmd: wmic OS get OSArchitecture
 
     - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
-    - cmd: "%PYTHON%\\python --version"
-    - cmd: "%PYTHON%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
-    - cmd: ECHO %PYTHON3% %PYTHON3_VERSION% %PYTHON3_ARCH%
-    - cmd: "%PYTHON3%\\python --version"
-    - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
+#    - cmd: "%PYTHON%\\python --version"
+#    - cmd: "%PYTHON%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
+#    - cmd: ECHO %PYTHON3% %PYTHON3_VERSION% %PYTHON3_ARCH%
+#    - cmd: "%PYTHON3%\\python --version"
+#    - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
 
-    - cmd: set PATH=%PYTHON%\scripts;%PYTHON3%\scripts;%PATH%
+#    - cmd: set PATH=%PYTHON%\scripts;%PYTHON3%\scripts;%PATH%
     - cmd: ECHO Path - %PATH%
 
     - ps: Install-Product node 5.1.0 x86
     - cmd: node --version
     - cmd: npm --version
+    - cmd: ECHO \"%APPVEYOR_SCHEDULED_BUILD%\"
+
+cache:
+    - "C:\\Users\\appveyor\\AppData\\Local\\pip"
+    - "C:\\Users\\appveyor\\AppData\\Roaming\\.pip-accel"
 
 install:
-    - cmd: cd
+    - "ECHO Filesystem root:"
+    - ps: "ls \"C:/\""
+
+    - "ECHO Chocolatey tools:"
+    - ps: "ls \"C:/Tools\""
+
+    - "ECHO Installed SDKs:"
+    - ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
+
+    - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+
+    - cmd: python --version
+    - cmd: python -c import struct; print(struct.calcsize('P')*8)
+
+    - cmd: SET PATH=C:\\tools\\mingw32\\bin;%PATH%
+    - cmd: cd appveyor
+    - cmd: cd pyinstaller
+    - cmd: cd bootloader
+    - cmd: python waf --msvc_version="msvc 12.0" distclean all %WAF_ARGS%
+    - cmd: cd ..
+
+
+    - "%CMD_IN_ENV% python -m pip install -U pip-accel>=0.33"
+    - "%CMD_IN_ENV% pip-accel install -U -i https://pypi.anaconda.org/giumas/simple lxml"
+    - "%CMD_IN_ENV% pip install -e ."
+#    - cmd: "%PYTHON3%\\python --version"
+#    - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P')*8)\""
+#    - cmd: "%PYTHON3%\\python -m pip install --upgrade pip setuptools"
+
+    - cmd: cd ..
+    - cmd: cd ..
     - cmd: cd backend
-    - cmd: "%PYTHON3%\\python -m pip install --upgrade pip setuptools"
-    - cmd: "%PIP3% install -r requirements.txt"
-    - cmd: pyinstaller --onefile --clean --windowed otone_client_onefile.spec
+    - "%CMD_IN_ENV% pip install -r requirements.txt"
+    - "%CMD_IN_ENV% pyinstaller --onefile --clean --windowed otone_client_onefile.spec"
 
 build: off
 
