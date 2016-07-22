@@ -69,7 +69,7 @@ install:
     - "cd .."
     - "cd .."
     - "cd .."
-
+    - "dir"
     - "%CMD_IN_ENV% python -m pip install -U pip-accel>=0.33"
     - "%CMD_IN_ENV% pip-accel install -U -i https://pypi.anaconda.org/giumas/simple lxml"
     - "%CMD_IN_ENV% pip install -e ."
