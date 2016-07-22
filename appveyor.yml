@@ -45,4 +45,4 @@ install:
   # Check installed packages again
   - cmd: pip freeze
 
-  - cmd: pyinstaller otone_client_onefile.spec
+  - cmd: pyinstaller backend/otone_client_onefile.spec
