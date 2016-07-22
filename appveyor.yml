@@ -16,7 +16,7 @@ configuration: Release
 
 init:
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
-#  - cmd: wmic OS get OSArchitecture
+  - cmd: wmic OS get OSArchitecture
 
   # As AppVeyor has multiple python install, verify which ones will be used
   - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
@@ -24,7 +24,7 @@ init:
   - cmd: "%PYTHON%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
 
   # Prepare pip and pip3, PATH iterated left to right first hit wins
-  - cmd: set PATH=%PYTHON%\scripts;%PATH
+  - cmd: set PATH=%PYTHON%;%PYTHON%\scripts;%PATH
   - cmd: ECHO Path - %PATH%
 
   # Ensure node x86 (appveyor powershell script to switch installed versions)
