@@ -3,7 +3,7 @@ environment:
   matrix:
     # First group is 32 bit python 2.7
     - PYTHON: "C:\\Python34"
-      PYTHON_VERSION: "3.4.4"
+      PYTHON_VERSION: "3.4.3"
       PYTHON_ARCH: "32"
   # Add custom environmental variables for pip
   PIP: C:\\Python34\Scripts\pip
