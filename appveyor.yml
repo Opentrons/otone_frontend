@@ -9,7 +9,7 @@ environment:
   PIP: C:\\Python34\Scripts\pip
   # Add custom environmental variables to ensure 32 bit electron
 #  npm_config_arch: ia32
-
+#
 platform: x86
 
 configuration: Release
