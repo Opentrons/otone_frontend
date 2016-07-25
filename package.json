@@ -4,17 +4,9 @@
   "description": "This is the frontend component the OpenTrons OT.One. It's a browser user interface served from the OT.One and it uses Autobahn|JS for connection to the backend running Crossbar.io.",
   "main": "main.js",
   "scripts": {
-    "clean": "rm -rf ./dist",
-    "clean:osx": "rm -rf ./dist/osx",
-    "clean:win": "rm -rf ./dist/win",
-    "package:osx": "electron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --icon=build-assets/icon.icns --overwrite --prune --ignore=backend",
-    "package:win": "electron-packager ./ OpenTrons --platform=win32 --arch=ia32 --out releases --icon=build-assets/icon.ico --overwrite --prune --ignore=backend",
-
-    "release:osx": "npm run package:osx && zip -r -X releases/ot-app releases/*",
-    "release:win": "npm run package:win",
-
+    "clean": "rm -rf ./out && rm -rf ./releases/*",
+    "release": "python3.4 scripts/build_pyinstaller.py && python3.4 scripts/build_electron_app.py",
     "start": "electron ."
-
   },
   "dependencies": {
     "autobahn": "^0.10.1",

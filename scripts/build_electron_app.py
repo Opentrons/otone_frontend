@@ -25,6 +25,11 @@ def get_ignore_regex():
         ".python-version",
         ".git",
         ".idea",
+        ".*.md$",
+        "releases",
+        "test",
+        "requirements.txt",
+        "LICENSE",
     ]
     return '(' +  '|'.join(ignore_list) + ')'
 
