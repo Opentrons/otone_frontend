@@ -1,9 +1,10 @@
 environment:
+  nodejs_version: "0.12.7"
   matrix:
     - PYTHON: "C:\\Python34"
       PYTHON_VERSION: "3.4.3"
       PYTHON_ARCH: "32"
-
+  npm_config_arch: ia32
 platform: x86
 
 configuration: Release
