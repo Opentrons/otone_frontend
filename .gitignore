@@ -116,3 +116,4 @@ target/
 
 # Electron build`
 releases/*
+out/
