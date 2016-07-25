@@ -36,7 +36,7 @@ before_install:
 # Build and pack Ardublockly
 install:
   - cd backend
-  - pyinstaller otone_client_onefile.spec
+  - pyinstaller pyinstaller.spec
   - ls -la dist/
 
   # Copy backend exe
