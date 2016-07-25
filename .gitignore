@@ -1,5 +1,7 @@
 ~/
 
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -111,3 +113,6 @@ docs/_build/
 target/
 .idea/
 .setup_litter
+
+# Electron build`
+releases/*
