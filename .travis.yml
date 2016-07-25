@@ -24,7 +24,6 @@ before_install:
   - pip3.4 install -r requirements.txt
 
   # Install node.js
-  - node --version
   - brew unlink node
   - brew install node
   - node --version
@@ -32,20 +31,12 @@ before_install:
 
 # Build and pack Ardublockly
 install:
-  - cd backend
-  - pyinstaller pyinstaller.spec
-  - ls -la dist/
+  - python3.4 scripts/build_pyinstaller.py
 
-  # Copy backend exe
-  - cp dist/otone_client ../backend-dist/mac/
-
-  # Return to proj root
-  - cd ..
-  - npm install
   - npm install -g electron-packager
+  - npm install
   - electron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
   - ls releases/
-  - zip -r releases/OpenTrons-darwin-x64 releases/Opentrons-darwin-x64
 
 
 # Deploy the build version in an S3 bucket
