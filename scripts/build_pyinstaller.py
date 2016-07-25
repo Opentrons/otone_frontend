@@ -33,7 +33,7 @@ def get_os():
     Gets the OS to based on the command line argument of the platform info.
     Only possibilities are: "windows", "mac", "linux"
     """
-    valid_os = ["windows", "mac", "linux"]
+    valid_os = ["windows", "linux", "mac"]
 
     print(script_tab + "Checking for command line argument indicated OS:")
     if len(sys.argv) > 1:
@@ -119,7 +119,6 @@ def build_ot_python_backend_executable():
     print(script_tag + "Project directory is:     %s" % project_root_dir)
     print(script_tag + "Script working directory: %s" % os.getcwd())
 
-    import pdb; pdb.set_trace()
 
     print(script_tag + "Removing PyInstaller old temp directories.")
     remove_pyinstaller_temps()
@@ -132,9 +131,11 @@ def build_ot_python_backend_executable():
         raise SystemExit(script_tab + "Exiting as there was an error in the "
                                       "PyInstaller execution.")
 
+    import pdb; pdb.set_trace()
     print(script_tag + "Removing old OT-App Backend executable directory.")
     backend_exec_path = os.path.join(exec_folder_name, get_os(), spec_coll_name)
-    remove_directory(backend_exec_path)
+    if os.path.isfile(backend_exec_path):
+        os.remove(backend_exec_path)
 
     print(script_tag + "Moving executable folder to backend-dist.")
     success = move_executable_folder(backend_exec_path)
