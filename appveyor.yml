@@ -12,7 +12,7 @@ configuration: Release
 init:
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
   - cmd: wmic OS get OSArchitecture
-
+  - cmd: npm config set msvs_version 2015 --global
   # As AppVeyor has multiple python install, verify which one uses by default
   - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
   - cmd: python --version
