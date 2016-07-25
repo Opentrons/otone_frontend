@@ -5,9 +5,8 @@ import platform
 import subprocess
 
 
-spec_coll_name = "server"
+spec_coll_name = "otone_client"
 exec_folder_name = "backend-dist"
-backend_dist_folder = os.path.join(exec_folder_name, spec_coll_name)
 script_tag = "[OT-App Backend build] "
 script_tab = "                    "
 
@@ -94,13 +93,12 @@ def pyinstaller_build():
     return True
 
 
-def move_executable_folder():
+def move_executable_folder(final_exec_dir):
     """
     Moves the PyInstaller executable folder from dist to project root.
     :return: Boolean indicating the success state of the operation.
     """
     original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
-    final_exec_dir = os.path.join(project_root_dir, backend_dist_folder)
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)
@@ -111,56 +109,11 @@ def move_executable_folder():
         return False
     return True
 
-def create_shell_file(os_type):
-    """
-    Creates a shell script fil into the project root to be able to easily launch
-    the Ardublockly application.
-    The Mac OS X build runs directly from clicking the .app folder, so it no
-    longer needs a shell script.
-    """
-    shell_text = ""
-    shell_location = ""
 
-    # The script depends on platform
-    if os_type == "mac":
-        # There is no need for a shell file in Mac OS X
-        print(script_tab + "There is no need to create shell file in Mac OS X.")
-        return
-    elif os_type == "linux":
-        shell_text = '#!/bin/bash\n' \
-                     'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
-                     'echo "[Shell Launch Script] Executing from: $DIR"\n' \
-                     './%s' % os.path.join(exec_folder_name, "OT-App Backend")
-        shell_location = os.path.join(project_root_dir, "OT-App Backend_run.sh")
-    else:
-        # No other OS expected, so just return. This should never happen
-        return
-
-    try:
-        print(script_tab + "Creating shell file into %s" % shell_location)
-        bash_file = open(shell_location, "w")
-        bash_file.write(shell_text)
-        bash_file.close()
-    except Exception as e:
-        print(script_tab + "%s" % e)
-        print(script_tab + "ERROR: Shell file to launch the Ardublockly "
-                           "application could not be created.")
-
-    # Make shell script executable by launching a subprocess
-    process_args = ["chmod", "+x", "%s" % shell_location]
-    print(script_tab + "Command to make executable: %s" % process_args)
-    try:
-        pyinstaller_process = subprocess.Popen(process_args)
-        std_op, std_err_op = pyinstaller_process.communicate()
-    except Exception as e:
-        print(script_tab + "%s" % e)
-        print(script_tab + "ERROR: Could not make Shell file executable.")
-
-
-def build_otapp_client():
+def build_ot_python_backend_executable():
     print(script_tag + "Build procedure started.")
     print(script_tag + "Checking for OS.")
-    os_type = "mac"   # get_os()
+    os_type = get_os()
     print(script_tag + "Building OT-App Backend for %s." % os_type)
 
     print(script_tag + "Project directory is:     %s" % project_root_dir)
@@ -180,12 +133,11 @@ def build_otapp_client():
                                       "PyInstaller execution.")
 
     print(script_tag + "Removing old OT-App Backend executable directory.")
-    remove_directory(
-        os.path.join(project_root_dir, backend_dist_folder, os_type)
-    )
+    backend_exec_path = os.path.join(exec_folder_name, get_os(), spec_coll_name)
+    remove_directory(backend_exec_path)
 
-    print(script_tag + "Moving executable folder to project root.")
-    success = move_executable_folder()
+    print(script_tag + "Moving executable folder to backend-dist.")
+    success = move_executable_folder(backend_exec_path)
     if not success:
         print(script_tab + "Removing PyInstaller recent temp directories.")
         remove_pyinstaller_temps()
@@ -195,9 +147,5 @@ def build_otapp_client():
     print(script_tag + "Removing PyInstaller recent temp directories.")
     remove_pyinstaller_temps()
 
-    print(script_tag + "Creating shell file to easily execute Ardublockly.")
-    create_shell_file(os_type)
-
-
 if __name__ == "__main__":
-    build_otapp_client()
+    build_ot_python_backend_executable()
