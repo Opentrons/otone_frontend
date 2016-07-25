@@ -39,3 +39,11 @@ install:
   - cmd: dir backend
   - cmd: dir backend\otexec
   - cmd: dir backend\otexec\server
+  - cmd: cp backend\otexec\server\otone_client.exe backend-dist\win\
+  - cmd: npm install
+  - cmd: npm install -g electron-packager
+  - cmd: electron-packager .\ OpenTrons --platform=win32 --arch=all --out releases --ignore="(node_modules\\electron-*|backend)"
+  - cmd: dir releases
+  - ps: cd releases
+  - ps: Add-Type -A System.IO.Compression.FileSystem
+#  - ps: [IO.Compression.ZipFile]::CreateFromDirectory('', '.zip')
