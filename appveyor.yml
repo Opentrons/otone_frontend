@@ -36,4 +36,6 @@ install:
   - cmd: pip freeze
   - cmd: python backend\package\build_py2exe.py
   - cmd: dir
-  - cmd: dir backend-dist
+  - cmd: dir backend
+  - cmd: dir backend\otexec
+  - cmd: dir backend\otexec\server
