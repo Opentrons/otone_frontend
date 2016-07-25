@@ -36,4 +36,4 @@ install:
   - cmd: pip freeze
   - cmd: python backend\package\build_py2exe.py
   - cmd: dir
-  - cmd: dir build
+  - cmd: dir backend-dist
