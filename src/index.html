@@ -42,7 +42,7 @@
 				<img src="images/logo.png" > </a>
 				<ul class="nav navbar-nav navbar-left">
 					<li>
-					<a href="https://github.com/opentrons" target="_blank">v1.1.0</a>
+					<a href="https://github.com/opentrons" target="_blank">v1.1.2</a>
 					</li>
 				</ul>
 			</div>
@@ -79,12 +79,12 @@
 				<div class="UI-block center-block" id="dragDiv">
 					<div class="row">
 					<div class="col-xs-4 col-sm-4  col-md-4  col-lg-4">
-					<button disabled="true" type="button" class="btn" id="runButton">Run Job</button>
+					<button disabled="true" id="runButton" class="btn" type="button" data-toggle="dropdown" onclick="createAndSend()">Run Job</button>
 					<span id="fileName">
 					[empty] </span><br>
 					<button type="button" class="btn tron-white" onclick="pause()">Pause</button>
 					<button type="button" class="btn tron-white" onclick="resume()">Resume</button>
-					<button type="button" class="btn tron-white" onclick="erase()">Erase</button>
+					<button type="button" class="btn tron-white" onclick="erase()">Cancel</button>
 					</div>
 					<div class="col-xs-8 col-sm-8  col-md-8  col-lg-8">
 						<p><span id="infoName"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="infoDate"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="infoVersion"></span></p>
@@ -461,17 +461,14 @@
 							<br/>
 							<fieldset>
 							<legend>Select Increment (mm)</legend>
-							<div id="stepSize_xyz" class="btn-group" role="group" aria-label="..."  >
+							<div id="stepSize_xyz" class="btn-group" role="group" aria-label="..." style="margin-left:5%;">
 								<button id="btn-deck-incr-100" type="button" value="100" class="btn btn-default" onclick="changeStepSize(this,'xyz',100);">100</button>
-								<button id="btn-deck-incr-50" type="button" value="50" class="btn btn-default" onclick="changeStepSize(this,'xyz',50);">50</button>
 								<button id="defaultXYZStepSizeBtn" type="button" value="20" class="btn btn-default" onclick="changeStepSize(this,'xyz',20);">20</button>
 								<button id="btn-deck-incr-10" type="button" value="10" class="btn btn-default" onclick="changeStepSize(this,'xyz',10);">10</button>
 								<button id="btn-deck-incr-5" type="button" value="5" class="btn btn-default" onclick="changeStepSize(this,'xyz',5);">5</button>
-								<button id="btn-deck-incr-2" type="button" value="2" class="btn btn-default" onclick="changeStepSize(this,'xyz',2);">2</button>
 								<button id="btn-deck-incr-1" type="button" value="1" class="btn btn-default" onclick="changeStepSize(this,'xyz',1);">1</button>
 								<button id="btn-deck-incr-05" type="button" value="0.5" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.5);">0.5</button>
-								<button id="btn-deck-incr-91" type="button" value="91" class="btn btn-default" onclick="changeStepSize(this,'xyz',91);">91</button>
-								<button id="btn-deck-incr-135" type="button" value="135" class="btn btn-default" onclick="changeStepSize(this,'xyz',135);">135</button>
+								<button id="btn-deck-incr-01" type="button" value="0.1" class="btn btn-default" onclick="changeStepSize(this,'xyz',0.1);">0.1</button>
 							</div>
 							</fieldset>
 						</div>
@@ -481,6 +478,14 @@
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<fieldset>
 						<legend>Move to Slot</legend>
+						<span>
+							<button class="btn dropdown-toggle tron-blue" type="button" data-toggle="dropdown"><span id="current_deckSize">Deck Size: OT.One</span>
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" id="portsList">
+								<li><a href="#" onclick="set_is_otPro(false)">OT.One</a></li>
+								<li><a href="#" onclick="set_is_otPro(true)">OT.Hood</a></li>
+							</ul>
+						</span>
 						</fieldset>
 						</div>
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

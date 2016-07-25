@@ -634,6 +634,7 @@ class Head:
         """Tell theQueue to clear
         """
         logger.debug('head.erase_job called')
+        self.smoothieAPI.delay_cancel()
         self.theQueue.clear()
 
 

@@ -63,28 +63,6 @@ class InstructionQueue:
                 self.head.home({'x':True,'y':True,'z':True,'a':True,'b':True})
                 self.isRunning = True
 
-                def set_xyz_speed_to_3000():
-                    logger.debug('set_xyz_speed_to_3000 called')
-                    self.head.set_speed('xyz',3000)
-
-                def set_a_speed_to_300():
-                    logger.debug('set_a_speed_to_300 called')
-                    self.head.set_speed('a',300)
-
-                def set_b_speed_to_300():
-                    logger.debug('set_b_speed_to_300 called')
-                    self.head.set_speed('b',300)
-
-                def set_c_speed_to_300():
-                    logger.debug('set_c_speed_to_300 called')
-                    self.head.set_speed('c',300)
-
-                loopy = asyncio.get_event_loop()
-                loopy.call_later(2, set_xyz_speed_to_3000)
-                loopy.call_later(2, set_a_speed_to_300)
-                loopy.call_later(2, set_b_speed_to_300)
-                loopy.call_later(2, set_c_speed_to_300)
-
             else:
                 self.ins_step()  #changed name to distinguish from theQueue step function
     
@@ -119,7 +97,7 @@ class InstructionQueue:
         elif self.isRunning == True:
             if self.infinity_data is not None:
                 logger.debug('ins_step self.infinity_data: ********************************\n\n')
-                logger.debug(self.infinity_data,'\n')
+                logger.debug(str(self.infinity_data) + '\n')
                 self.start_job(json.loads(self.infinity_data, object_pairs_hook=collections.OrderedDict),False)
             else:
                 self.erase_job()

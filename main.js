@@ -52,12 +52,16 @@ function startWampRouter() {
 function startBackend() {
   if (process.platform == "darwin") {
     child_process.exec('pkill -9 \"otone_client\"', function(error, stdout, stderr){
-      backendProcess = child_process.exec(app.getAppPath() + "/backend-dist/mac/otone_client " + app.getAppPath());
+      var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
+      var backend_arg = app.getAppPath();
+      backendProcess = child_process.spawn(backend_path, [backend_arg], {stdio: 'ignore' });
     });
   }
   else if (process.platform == "win32") {
     child_process.exec('taskkill /T /F /IM otone_client.exe',function(error, stdout, stderr){
-      backendProcess = child_process.spawn(app.getAppPath() + "\\backend-dist\\win\\otone_client.exe", [app.getAppPath()]);
+      var backend_path = app.getAppPath() + "\\backend-dist\\win\\otone_client.exe";
+      var backend_arg = app.getAppPath();
+      backendProcess = child_process.spawn(backend_path, [backend_arg], {stdio: 'ignore' });
     });
   }
   else{

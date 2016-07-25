@@ -35,9 +35,7 @@ install:
 
   - npm install -g electron-packager
   - npm install
-  - ./scripts/build_electron_app.sh
-  - electron-packager ./ OpenTrons --platform=darwin --arch=x64 --out releases --ignore="(node_modules/electron-*|backend)"
-  - ls releases/
+  - npm run release
 
 
 # Deploy the build version in an S3 bucket
@@ -50,9 +48,6 @@ deploy:
   local-dir: releases
   upload-dir: mac
   acl: public_read
-#  on:
-#    branch: 32-build-test
-
 
 notifications:
   email:

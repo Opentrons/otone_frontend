@@ -98,7 +98,7 @@ class Smoothie(object):
         def read_loop():
             while True:
                 time.sleep(0.01)
-                if self.serial_port and self.serial_port.is_open:
+                if self.connected and self.serial_port and self.serial_port.is_open:
                     try:
                         data = self.serial_port.readline().decode('UTF-8')
                         if data:
@@ -115,7 +115,6 @@ class Smoothie(object):
                                     'Failed parsing data from smoothie board'
                                 )
                     except OSError:
-                        logger.info('Device disconnected/port closed')
                         self.callbacker.connection_lost()
                 else:
                     self.callbacker.connection_lost()
@@ -132,7 +131,6 @@ class Smoothie(object):
         def connection_made(self):
             """Callback when a connection is made
             """
-            self.outer.connected = True
             logger.info("smoothie_pyserial:\n\tCB_Factory.connection_made called")
 
             self.smoothieQueue = list()
@@ -244,8 +242,8 @@ class Smoothie(object):
         and call :meth:`on_connect` callback
         """
         logger.debug('smoothie_pyserial.on_success_connecting called')
-        thestring = self._dict['setupFeedback']
-        self.try_add(thestring)#self  self._dict['setupFeedback'])
+        self.connected = True
+        self.send(self._dict['setupFeedback'])
         self.try_add('G91 G0Z-2 G0Z2 G0Z-2 G0Z2 G0Z-2 G0Z2')
         self.on_connect(self.theState)
 
@@ -342,7 +340,7 @@ class Smoothie(object):
                 pos['c']=self.theState['c']
                 self.on_position_data(pos)
 
-            if didStateChange == True or self.theState['stat']==self.state_ready and self.already_trying == False:
+            if didStateChange == True and self.theState['stat']==self.state_ready and self.already_trying == False:
                 if len(self.smoothieQueue)>0:
                     self.try_step()
                 else:
@@ -622,7 +620,7 @@ class Smoothie(object):
         """Send a raw command to the Smoothieboard
         """
         #self.try_add(string)
-        self.try_add(string)
+        self.send(string)
 
     def list_serial_ports(self):
         """ Lists serial port names
@@ -645,9 +643,10 @@ class Smoothie(object):
         result = []
         for port in ports:
             try:
-                s = serial.Serial(port)
-                s.close()
-                result.append(port)
+                if 'tty.usbmodem' in port or 'COM' in port:
+                    s = serial.Serial(port)
+                    s.close()
+                    result.append(port)
             except (OSError, serial.SerialException):
                 pass
         return result

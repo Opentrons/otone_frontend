@@ -97,15 +97,20 @@ logger.setLevel(logging.DEBUG)
 logger.addHandler(file_handler)
 
 
+if os.environ.get('DEVELOPMENT'):
 # Set up console logging
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)
-console_handler.setFormatter(logging.Formatter(LOG_FORMAT))
-logger.addHandler(console_handler)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.DEBUG)
+    console_handler.setFormatter(logging.Formatter(LOG_FORMAT))
+    logger.addHandler(console_handler)
 
 
 logger.info('OT.One Started')
 
+
+f = open(os.devnull, 'w')
+sys.stdout = f
+sys.stderr = f
 
 from head import Head
 from deck import Deck
