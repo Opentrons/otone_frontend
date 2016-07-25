@@ -36,6 +36,7 @@ install:
   - npm install -g electron-packager
   - npm install
   - npm run release
+  - ls out
 
 
 # Deploy the build version in an S3 bucket
