@@ -6,8 +6,8 @@ import subprocess
 
 
 spec_coll_name = "server"
-exec_folder_name = "arduexec"
-py_exec_folder = os.path.join(exec_folder_name, spec_coll_name)
+exec_folder_name = "backend-dist"
+backend_dist_folder = os.path.join(exec_folder_name, spec_coll_name)
 script_tag = "[OT-App Backend build] "
 script_tab = "                    "
 
@@ -100,7 +100,7 @@ def move_executable_folder():
     :return: Boolean indicating the success state of the operation.
     """
     original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
-    final_exec_dir = os.path.join(project_root_dir, py_exec_folder)
+    final_exec_dir = os.path.join(project_root_dir, backend_dist_folder)
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)
@@ -110,12 +110,6 @@ def move_executable_folder():
               original_exec_dir + "not found!")
         return False
     return True
-
-
-def copy_data_files(os_type):
-    """ At the moment there are no additional data files required to copy """
-    pass
-
 
 def create_shell_file(os_type):
     """
@@ -186,7 +180,9 @@ def build_otapp_client():
                                       "PyInstaller execution.")
 
     print(script_tag + "Removing old OT-App Backend executable directory.")
-    remove_directory(os.path.join(project_root_dir, py_exec_folder))
+    remove_directory(
+        os.path.join(project_root_dir, backend_dist_folder, os_type)
+    )
 
     print(script_tag + "Moving executable folder to project root.")
     success = move_executable_folder()
@@ -195,9 +191,6 @@ def build_otapp_client():
         remove_pyinstaller_temps()
         raise SystemExit(script_tab + "Exiting now as there was an error in "
                                       "the PyInstaller execution.")
-
-    print(script_tag + "Coping data files into executable directory.")
-    copy_data_files(os_type)
 
     print(script_tag + "Removing PyInstaller recent temp directories.")
     remove_pyinstaller_temps()
