@@ -69,9 +69,9 @@ def get_py2exe_extra_data_files():
 
 def get_py2exe_options():
     """ Prepares and returns the py2exe options dictionary. """
-    # Ensure this packages are included, usually added here out of necessity
+    # Ensure these packages are included, usually added here out of necessity
     includes = []
-    packages = ["ardublocklyserver"]
+    packages = []#["ardublocklyserver"]
     if sys.version_info.major == 3:
         packages.extend(["tkinter", "urllib", "collections", "http"])
 
