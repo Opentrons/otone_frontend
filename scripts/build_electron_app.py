@@ -13,12 +13,11 @@ project_root_dir = \
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 
 
-def build_electron_app():
-    print(script_tag + "Running electron-packager process.")
-
+def get_ignore_regex():
     ignore_list = [
-        "node_modules/electron-*",
-        "backend",
+        "node_modules/electron-prebuilt",
+        "node_modules/electron-builder",
+        "backend$",
         "scripts",
         "tests",
         "docs",
@@ -27,8 +26,11 @@ def build_electron_app():
         ".git",
         ".idea",
     ]
+    return '(' +  '|'.join(ignore_list) + ')'
 
-    ignore_regex = '(' +  '|'.join(ignore_list) + ')'
+
+def build_electron_app():
+    print(script_tag + "Running electron-packager process.")
 
     process_args = [
         "electron-packager",
@@ -37,15 +39,17 @@ def build_electron_app():
         "--platform", "darwin",
         "--arch", "x64",
         "--out", "out",
-        "--ignore", ignore_regex,
+        "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
+        "--ignore", get_ignore_regex(),
         "--overwrite",
         "--prune",
     ]
 
     electron_packager_process = subprocess.Popen(process_args)
+    electron_packager_process.communicate()
 
     if electron_packager_process.returncode != 0:
-        raise SystemExit('Failed to properly build electron app')
+        raise SystemExit(script_tag + 'Failed to properly build electron app')
 
 
 if __name__ == '__main__':
