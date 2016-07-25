@@ -1,3 +1,0 @@
-[submodule "appveyor/pyinstaller"]
-	path = appveyor/pyinstaller
-	url = https://github.com/pyinstaller/pyinstaller.git
