@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/backend
-pyisntaller otone_client_onefile.spec
+pyinstaller otone_client_onefile.spec
 ls -la dist/
 cp dist/otone_client ../backend-dist/Mac
 cd $DIR
