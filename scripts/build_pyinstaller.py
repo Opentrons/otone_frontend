@@ -131,7 +131,6 @@ def build_ot_python_backend_executable():
         raise SystemExit(script_tab + "Exiting as there was an error in the "
                                       "PyInstaller execution.")
 
-    import pdb; pdb.set_trace()
     print(script_tag + "Removing old OT-App Backend executable directory.")
     backend_exec_path = os.path.join(exec_folder_name, get_os(), spec_coll_name)
     if os.path.isfile(backend_exec_path):
