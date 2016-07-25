@@ -12,14 +12,10 @@ before_install:
   - brew tap drolando/homebrew-deadsnakes
   - brew install python34
   - PATH=/usr/local/bin:$PATH
-  - echo $PATHi
+  - echo $PATH
   - brew link --overwrite python34
-  - python --version
-  - python -c "import struct; print(struct.calcsize('P') * 8)"
   - python3.4 --version
   - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
-
-  - brew install libcouchbase
 
   # Install Python packages (built with Python 3, tests for 2 and 3)
   - pip3.4 install pyinstaller
@@ -28,6 +24,7 @@ before_install:
   - pip3.4 install -r requirements.txt
 
   # Install node.js
+  - node --version
   - brew unlink node
   - brew install node
   - node --version
