@@ -50,6 +50,7 @@ install:
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
   - cmd: python scripts\build_electron_app_win.py
+  - cmd: echo $DUMMY
 
 build: off
 
@@ -62,3 +63,5 @@ deploy:
     set_public: true
     folder: win
     artifact: out
+    on:
+      branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
