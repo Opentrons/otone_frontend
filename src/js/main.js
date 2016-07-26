@@ -861,6 +861,8 @@ var robotState = {
 
 function home (axis) {
 
+  erase();
+
   if(!axis) axis = {
     'x' : true,
     'y' : true,
@@ -943,8 +945,10 @@ function resume () {
 
 function erase () {
 
-  document.getElementById('runButton').disabled = false;
-  document.getElementById('runButton').classList.add('tron-red');
+  if(CURRENT_PROTOCOL){
+    document.getElementById('runButton').disabled = false;
+    document.getElementById('runButton').classList.add('tron-red');
+  }
 
   var msg = {
     'type' : 'eraseJob'
