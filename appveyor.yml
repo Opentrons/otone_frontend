@@ -32,7 +32,7 @@ init:
 
 install:
   - cmd: git submodule update --init --recursive
-  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/py2exe-0.9.2.2-cp34-none-win32.whl
+  - cmd: pip install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl
 #  - cmd: pip install mkdocs
   - cmd: pip freeze
   - cmd: python scripts\build_py2exe.py
@@ -40,8 +40,9 @@ install:
   - cmd: dir
   - cmd: dir backend
   - cmd: dir backend\backend
-  - cmd: dir backend\backend\otexec
-  - cmd: dir backend\backend\otexec\backexec
+  - cmd: dir backend-dist
+  - cmd: dir otexec
+  - cmd: dir otexec\backexec
   # END DEVELOPMENT TEST
 
   - cmd: cp backend\backend\otexec\backexec\otone_client.exe backend-dist\win\
