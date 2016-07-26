@@ -53,7 +53,7 @@ def build_electron_app():
     ]
 
     electron_packager_process = subprocess.Popen(process_args, shell = True)
-    electron_packager_process.communicate()
+    print(electron_packager_process.communicate())
 
     if electron_packager_process.returncode != 0:
         raise SystemExit(script_tag + 'Failed to properly build electron app')
