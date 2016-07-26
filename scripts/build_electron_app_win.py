@@ -44,7 +44,7 @@ def build_electron_app():
         project_root_dir,
         "OpenTrons",
         "--platform", "win32",
-        "--arch", "all",
+        "--arch", "ia32",
         "--out", "out",
         "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
         "--ignore", get_ignore_regex(),
@@ -52,9 +52,13 @@ def build_electron_app():
         "--prune"
     ]
 
-    electron_packager_process = subprocess.Popen(process_args, shell = True)
-    print(electron_packager_process.communicate())
-
+    electron_packager_process = subprocess.Popen(process_args, 
+                                                shell=True, stdout=w, stderr=subprocess.STDOUT, bufsize=0)
+    #print(electron_packager_process.communicate())
+    with open(w.name, 'r') as r:
+        for line in r:
+            print(line)
+    w.close()
     if electron_packager_process.returncode != 0:
         raise SystemExit(script_tag + 'Failed to properly build electron app')
 
