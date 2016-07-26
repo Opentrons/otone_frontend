@@ -44,11 +44,11 @@ install:
 #  - cmd: npm config set msvs_version 2013 -g
 #  - cmd: npm config list
   - cmd: npm install electron-packager --save-dev
-#  - cmd: npm install electron-packager -g
+  - cmd: npm install electron-packager -g
   - cmd: npm install electron-prebuilt --save-dev
-#  - cmd: npm install electron-prebuilt -g
+  - cmd: npm install electron-prebuilt -g
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
-#  - cmd: cd C:\projects\otone-frontend
+  - cmd: cd C:\projects\otone-frontend
   - cmd: python scripts\build_electron_app_win.py
 
 deploy:
