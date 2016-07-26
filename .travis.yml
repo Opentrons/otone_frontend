@@ -35,6 +35,8 @@ install:
 
   - npm install -g electron-packager
   - npm install
+  - mkdir releases
+  - ls releases
   - npm run release
   - ls out
   - ls releases
