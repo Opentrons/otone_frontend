@@ -6,7 +6,7 @@ import struct
 import time
 
 
-script_tag = "[OT-App pack]      "
+script_tag = "[OT-App zipping]   "
 script_tab = "                   "
 
 
@@ -76,17 +76,33 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
 def zip_ot_app(build_tag):
     print(script_tab + "Zipping OT App. Using tag: {}".format(build_tag))
 
+
     current_app_name = os.listdir(electron_app_dir)[0]
     current_app_path = os.path.join(electron_app_dir, current_app_name)
+
+
+    # We need to CD into the directory where the Mac app executable is located
+    # in order to zip the files within that directory and avoid zipping that
+    # directory itself
+    old_cwd = os.getcwd()
+    os.chdir(current_app_path)
+
     print(script_tab + "Zipping {} located in {}".format(
-        current_app_name, current_app_path)
+        current_app_name, os.getcwd())
     )
 
-    zip_app_dir = os.path.join(project_root_dir, 'releases')
-    zip_app_path = os.path.join(zip_app_dir, "opentrons_{}".format(build_tag))
+
+    zip_app_path = os.path.join(
+        project_root_dir,
+        "releases",
+        "opentrons_{}.zip".format(build_tag)
+    )
+    print(script_tab + "Zipped application will be located in: {}".format(
+        zip_app_path
+    ))
 
     zip_process = subprocess.Popen(
-        ['zip', '-r', zip_app_path, current_app_path],
+        ['zip', '-r', '-X', '--symlinks', zip_app_path, '.'],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -94,6 +110,9 @@ def zip_ot_app(build_tag):
     _, std_err = zip_process.communicate()
     if std_err:
         print(script_tab + "Error using zip command: {}".format(std_err))
+
+    # Return process back to original cwd
+    os.chdir(old_cwd)
 
 
 def main():
