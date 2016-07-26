@@ -33,7 +33,7 @@ def get_ignore_regex():
         "requirements.txt",
         "LICENSE",
     ]
-    return '(' +  '|'.join(ignore_list) + ')'
+    return '--ignore '.join(ignore_list)
 
 
 def build_electron_app():
@@ -47,11 +47,11 @@ def build_electron_app():
         "--arch", "ia32",
         "--out", "out",
         "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
-        "--ignore", get_ignore_regex(),
+        get_ignore_regex(),
         "--overwrite",
         "--prune"
     ]
-    print(''.join(process_args))
+    print(' '.join(process_args))
 
     electron_packager_process = subprocess.Popen(process_args, 
                                                 shell=True)
