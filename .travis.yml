@@ -49,6 +49,9 @@ deploy:
   local-dir: releases
   upload-dir: mac
   acl: public_read
+  on:
+    repo: OpenTrons/otone_frontend
+    all_branches: true
 
 notifications:
   email:
