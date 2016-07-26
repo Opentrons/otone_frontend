@@ -45,7 +45,7 @@ install:
   - cmd: dir otexec\backexec
   # END DEVELOPMENT TEST
 
-  - cmd: cp backend\backend\otexec\backexec\otone_client.exe backend-dist\win\
+  - cmd: cp otexec\backexec\otone_client.exe backend-dist\win\
   - cmd: npm install
   - cmd: npm install -g electron-packager
   - cmd: electron-packager .\ OpenTrons --platform=win32 --arch=all --out releases --ignore="(node_modules\\electron-*|backend)"
