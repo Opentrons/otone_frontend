@@ -43,10 +43,10 @@ def build_electron_app():
         "electron-packager",
         project_root_dir,
         "\"OpenTrons\"",
-        "--platform", "win32",
+        "--platform=win32",
         #"--arch", "ia32",
         #"--out", "out",
-        "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
+        "--icon="+os.path.join(project_root_dir, "build-assets", "icon.ico"),
         get_ignore_regex(),
         #"--overwrite",
         #"--prune"
