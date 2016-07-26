@@ -48,8 +48,4 @@ install:
   - cmd: cp otexec\backexec\otone_client.exe backend-dist\win\
   - cmd: npm install
   - cmd: npm install -g electron-packager
-  - cmd: electron-packager .\ OpenTrons --platform=win32 --arch=all --out releases --ignore="(node_modules\\electron-*|backend)"
-  - cmd: dir releases
-  - ps: cd releases
-  - ps: Add-Type -A System.IO.Compression.FileSystem
-#  - ps: [IO.Compression.ZipFile]::CreateFromDirectory('', '.zip')
+  - cmd: python scripts\build_electron_app_win.py
