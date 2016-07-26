@@ -20,6 +20,11 @@ electron_app_dir = os.path.join(project_root_dir, "out")
 
 
 def get_build_tag():
+    """
+    Gets the OS, CPU architecture (32 vs 64 bit), and current time stamp and
+    appends CI branch, commit, or pull request info
+    :return: string of os, arch, and time stamp and if CI info if available
+    """
     arch_time_stamp = "{}{}_{}".format(
         platform.system(),
         struct.calcsize('P') * 8,
@@ -76,10 +81,9 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
 def zip_ot_app(build_tag):
     print(script_tab + "Zipping OT App. Using tag: {}".format(build_tag))
 
-
+    # Assuming there is only one app in the electron build dir, zip that app
     current_app_name = os.listdir(electron_app_dir)[0]
     current_app_path = os.path.join(electron_app_dir, current_app_name)
-
 
     # We need to CD into the directory where the Mac app executable is located
     # in order to zip the files within that directory and avoid zipping that
@@ -92,6 +96,8 @@ def zip_ot_app(build_tag):
     )
 
 
+    # Place app in the releases dir
+    # e.g. <project root>/releases/opentrons_<build tag>.zip
     zip_app_path = os.path.join(
         project_root_dir,
         "releases",
