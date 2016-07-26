@@ -38,5 +38,7 @@ install:
   - cmd: python scripts\build_py2exe.py
 
   - cmd: cp otexec\backexec\otone_client.exe backend-dist\win\
-  - cmd: npm install electron-packager
+  - cmd: node version
+  - cmd: npm version
+  - cmd: npm install electron-packager -g
   - cmd: python scripts\build_electron_app_win.py
