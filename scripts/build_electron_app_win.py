@@ -17,8 +17,8 @@ project_root_dir = \
 
 def get_ignore_regex():
     ignore_list = [
-        "node_modules/electron-prebuilt",
-        "node_modules/electron-builder",
+        "node_modules\\electron-prebuilt",
+        "node_modules\\electron-builder",
         "backend$",
         "scripts",
         "tests",
@@ -47,7 +47,7 @@ def build_electron_app():
         "--arch", "all",
         "--out", "out",
         "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
-        #"--ignore", get_ignore_regex(),
+        "--ignore", get_ignore_regex(),
         "--overwrite",
         "--prune"
     ]
