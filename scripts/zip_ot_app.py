@@ -95,12 +95,14 @@ def zip_ot_app(build_tag):
         current_app_name, os.getcwd())
     )
 
+    releases_dir = os.path.join(project_root_dir, 'releases')
+    if not os.path.isdir(releases_dir):
+        os.mkdir(releases_dir)
 
     # Place app in the releases dir
     # e.g. <project root>/releases/opentrons_<build tag>.zip
     zip_app_path = os.path.join(
-        project_root_dir,
-        "releases",
+        releases_dir,
         "opentrons_{}.zip".format(build_tag)
     )
     print(script_tab + "Zipped application will be located in: {}".format(
