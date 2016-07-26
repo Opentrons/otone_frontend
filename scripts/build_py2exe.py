@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import platform
 from distutils.core import setup
 from glob import glob
 try:
