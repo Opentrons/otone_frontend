@@ -51,6 +51,8 @@ install:
   - cmd: cd C:\projects\otone-frontend
   - cmd: python scripts\build_electron_app_win.py
 
+build: off
+
 deploy:
   provider: S3
   access_key_id: AWS_ACCESS_KEY
