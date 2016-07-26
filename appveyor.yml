@@ -45,7 +45,7 @@ install:
   - cmd: npm install electron-packager -g
   - cmd: dir
   - cmd: dir node_modules
-  - cmd: dir node_modules/.bin
+  - cmd: dir node_modules\.bin
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\.bin
 #  - cmd: cd C:\projects\otone-frontend
   - cmd: python scripts\build_electron_app_win.py
