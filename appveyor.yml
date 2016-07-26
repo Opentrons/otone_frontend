@@ -53,3 +53,13 @@ install:
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
 #  - cmd: cd C:\projects\otone-frontend
   - cmd: python scripts\build_electron_app_win.py
+
+deploy:
+  provider: S3
+  access_key_id: AWS_ACCESS_KEY
+  secret_access_key: AWS_SECRET_KEY
+  bucket: ot-app-builds
+  region: us-east-1
+  set_public: true
+  folder: win
+  artifact: out/
