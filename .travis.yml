@@ -6,31 +6,22 @@ before_install:
   - uname -a
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
-  - pip freeze
 
   # Install Python 2 and 3 with pip and check versions
   - brew update
-  - brew install python3
-  - brew link --overwrite python3
-  - brew install python
-  - brew link --overwrite python
+  - brew tap drolando/homebrew-deadsnakes
+  - brew install python34
   - PATH=/usr/local/bin:$PATH
   - echo $PATH
-  - python --version
-  - python -c "import struct; print(struct.calcsize('P') * 8)"
-  - python3 --version
-  - python3 -c "import struct; print(struct.calcsize('P') * 8)"
-
-  - brew install libcouchbase
+  - brew link --overwrite python34
+  - python3.4 --version
+  - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
 
   # Install Python packages (built with Python 3, tests for 2 and 3)
-  - pip3 install pyinstaller
+  - pip3.4 install pyinstaller
   - pyinstaller --version
-  - pip freeze
-  - pip3 freeze
 
-  - pip3 install -r requirements.txt
-  - pip3 freeze
+  - pip3.4 install -r requirements.txt
 
   # Install node.js
   - brew unlink node
@@ -40,34 +31,29 @@ before_install:
 
 # Build and pack Ardublockly
 install:
-  - cd backend
-  - pyinstaller otone_client_onefile.spec
-  - ls -la dist/
+  - python3.4 scripts/build_pyinstaller.py
 
-  # Copy backend exe
-  - cp dist/otone_client ../backend-dist/mac/
-
-  # Return to proj root
-  - cd ..
-  - npm install && electron-packager ./ OpenTrons --ia32 --out releases
-  - ls dist/
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+  - npm install -g electron-packager
+  - npm install
+  - npm run release
+  - ls out
+  - ls releases
 
 # Deploy the build version in an S3 bucket
 deploy:
   provider: s3
-  access_key_id: foo
-  secret_access_key:
-    secret: bar
-  bucket: otone-app-builds
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: ot-app-builds
   skip_cleanup: true
   local-dir: releases
   upload-dir: mac
   acl: public_read
   on:
-    repo: OpenTrons/otone_backend
+    repo: OpenTrons/otone_frontend
     all_branches: true
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
