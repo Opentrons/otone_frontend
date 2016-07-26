@@ -182,15 +182,6 @@ class Head:
                 if 'volume' in hd:
                     setattr(self.PIPETTES[hd['axis']],'volume',hd['volume'])
 
-            elif tool_type[0] == 'grabber':
-                pass
-            else:
-                #ToDo - add error handling here
-                pass
-        
-
-
-
         self.save_pipette_values()
         self.publish_calibrations()
 
