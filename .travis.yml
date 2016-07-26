@@ -1,0 +1,59 @@
+# We are using the iOS build system to create Mac OS X python builds
+language: objective-c
+
+before_install:
+  # OS extra info
+  - uname -a
+  - python --version
+  - python -c "import struct; print(struct.calcsize('P') * 8)"
+
+  # Install Python 2 and 3 with pip and check versions
+  - brew update
+  - brew tap drolando/homebrew-deadsnakes
+  - brew install python34
+  - PATH=/usr/local/bin:$PATH
+  - echo $PATH
+  - brew link --overwrite python34
+  - python3.4 --version
+  - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
+
+  # Install Python packages (built with Python 3, tests for 2 and 3)
+  - pip3.4 install pyinstaller
+  - pyinstaller --version
+
+  - pip3.4 install -r requirements.txt
+
+  # Install node.js
+  - brew unlink node
+  - brew install node
+  - node --version
+  - npm --version
+
+# Build and pack Ardublockly
+install:
+  - python3.4 scripts/build_pyinstaller.py
+
+  - npm install -g electron-packager
+  - npm install
+  - npm run release
+  - ls out
+  - ls releases
+
+# Deploy the build version in an S3 bucket
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: ot-app-builds
+  skip_cleanup: true
+  local-dir: releases
+  upload-dir: mac
+  acl: public_read
+  on:
+    repo: OpenTrons/otone_frontend
+    all_branches: true
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
