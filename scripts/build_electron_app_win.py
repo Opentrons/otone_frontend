@@ -51,6 +51,7 @@ def build_electron_app():
         "--overwrite",
         "--prune"
     ]
+    print(''.join(process_args))
 
     electron_packager_process = subprocess.Popen(process_args, 
                                                 shell=True)
