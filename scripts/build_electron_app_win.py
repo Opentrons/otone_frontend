@@ -42,7 +42,7 @@ def build_electron_app():
     process_args = [
         "electron-packager",
         project_root_dir,
-        "\"OpenTrons\"",
+        "OpenTrons",
         "--platform=win32",
         "--arch=ia32",
         #"--out", "out",
