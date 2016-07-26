@@ -412,6 +412,11 @@ function selectContainer(currentDiv) {
 
 function saveContainer (axis) {
 
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var contName = currentSelectedContainer.value;
 
   firstTD = currentSelectedContainer.nextElementSibling;
@@ -452,6 +457,11 @@ function saveContainer (axis) {
 
 function movetoContainer (axis) {
 
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var contName = currentSelectedContainer.value;
   
   var thisLoc = theContainerLocations[axis][contName];
@@ -483,6 +493,8 @@ function movetoContainer (axis) {
 /////////////////////////////////
 /////////////////////////////////
 /////////////////////////////////
+
+var robot_connected = false;
 
 var lineCount = 0;
 var lineLimit = 500; // If this number is too big bad things happen
@@ -592,6 +604,7 @@ var socketHandler = {
   },
   'status' : function (isConnected) {
     if (isConnected===true) {
+      robot_connected = true;
       document.getElementById('port_list').innerHTML = '';
       document.getElementById('status').innerHTML = 'Connected';
       document.getElementById('status').style.color = 'rgb(27,225,100)';
@@ -600,6 +613,7 @@ var socketHandler = {
       }
     }
     else if (isConnected===false) {
+      robot_connected = false;
       document.getElementById('port_list').innerHTML = '';
       document.getElementById('status').innerHTML = 'Disconnected';
       document.getElementById('status').style.color = 'red';
@@ -861,6 +875,11 @@ var robotState = {
 
 function home (axis) {
 
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   erase();
 
   if(!axis) axis = {
@@ -919,6 +938,11 @@ function listPorts () {
 
 function pause () {
 
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var msg = {
     'type' : 'pauseJob'
   };
@@ -932,6 +956,11 @@ function pause () {
 
 function resume () {
 
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var msg = {
     'type' : 'resumeJob'
   };
@@ -944,6 +973,11 @@ function resume () {
 /////////////////////////////////
 
 function erase () {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
 
   if(CURRENT_PROTOCOL){
     document.getElementById('runButton').disabled = false;
@@ -962,6 +996,11 @@ function erase () {
 /////////////////////////////////
 
 function setSpeed (axis,value) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
 
   var div = document.getElementById('speed_'+axis);
   if(div){
@@ -987,6 +1026,11 @@ function setSpeed (axis,value) {
 ////////////
 
 function calibrate (axis, property, current) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
 
   var showMe = current.parentNode.children[1];
   showMe.style.visibility = 'visible';
@@ -1016,6 +1060,11 @@ function calibrate (axis, property, current) {
 
 function movePipette(axis,property) {
 
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   setSpeed(axis);
 
   var msg = {
@@ -1030,6 +1079,12 @@ function movePipette(axis,property) {
 }
 
 function shakePipette(axis) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   sendMessage({
     'type' : 'movePlunger',
     'data' : {
@@ -1095,6 +1150,12 @@ function set_is_otPro(_is_otPro){
 }
 
 function moveSlot(slotName) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var letter = slotName.charAt(0);
   var number = Number(slotName.charAt(1));
 
@@ -1131,6 +1192,12 @@ function moveSlot(slotName) {
 /////////////////////////////////
 
 function moveVolume (axis) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var volumeMenu = document.getElementById('volume_testing');
   var volume = volumeMenu ? volumeMenu.value : undefined;
 
@@ -1196,6 +1263,11 @@ function moveVolume (axis) {
 
 function saveVolume (axis) {
 
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var volumeMenu = document.getElementById('volume_testing');
   var volume = volumeMenu ? volumeMenu.value : undefined;
 
@@ -1236,6 +1308,12 @@ function saveVolume (axis) {
 /////////////////////////////////
 
 function pickupTip(axis) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   if(CURRENT_PROTOCOL && CURRENT_PROTOCOL.head) {
     for(var pipetteName in CURRENT_PROTOCOL.head) {
       if(CURRENT_PROTOCOL.head[pipetteName].axis===axis) {
@@ -1267,6 +1345,12 @@ function pickupTip(axis) {
 /////////////////////////////////
 
 function calibrateContainer (axis, containerName) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   if ('ab'.indexOf(axis)>=0) {
     var msg = {
       'type' : 'calibrateContainer',
@@ -1286,6 +1370,12 @@ function calibrateContainer (axis, containerName) {
 /////////////////////////////////
 
 function step (axis, multiplyer) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var msg = {
     'type' : 'step',
     'data' : {}
@@ -1319,6 +1409,12 @@ function step (axis, multiplyer) {
 /////////////////////////////////
 
 function sendDebugCommand () {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   var text = document.getElementById('debugCommandInput').value;
 
   var msg = {
@@ -1336,6 +1432,12 @@ function sendDebugCommand () {
 /////////////////////////////////
 
 function relativeCoords(){
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+  
   var msg = {
     'type' : 'relativeCoords'
   };

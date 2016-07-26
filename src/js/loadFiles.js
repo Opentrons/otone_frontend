@@ -381,6 +381,12 @@ window.addEventListener("keyup", handleKeyboardEvent, false);
 /////////////////////////////////
 
 function createAndSend () {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   if(CURRENT_PROTOCOL) {
 
     var robotProtocol;
