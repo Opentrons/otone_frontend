@@ -41,5 +41,6 @@ install:
   - cmd: node --version
   - cmd: npm --version
   - cmd: npm install electron-packager --save-dev
-  - cmd: npm install
+#  - cmd: npm install
+  - cmd: echo %path%
   - cmd: python scripts\build_electron_app_win.py
