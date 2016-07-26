@@ -33,7 +33,7 @@ def get_ignore_regex():
         "requirements.txt",
         "LICENSE",
     ]
-    return ' --ignore '.join(ignore_list)
+    return ' --ignore='.join(ignore_list)
 
 
 def build_electron_app():
