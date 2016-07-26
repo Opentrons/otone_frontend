@@ -37,7 +37,7 @@ install:
   - npm install
   - npm run release
   - ls out
-
+  - ls releases
 
 # Deploy the build version in an S3 bucket
 deploy:
