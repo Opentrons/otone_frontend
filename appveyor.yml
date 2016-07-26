@@ -36,15 +36,7 @@ install:
 #  - cmd: pip install mkdocs
   - cmd: pip freeze
   - cmd: python scripts\build_py2exe.py
-  # START DEVELOPMENT TEST: CHECKING DIRECTORIES FOR CONTENT - THIS IS TO BE REMOVED 
-  - cmd: dir
-  - cmd: dir backend
-  - cmd: dir backend\backend
-  - cmd: dir backend-dist
-  - cmd: dir otexec
-  - cmd: dir otexec\backexec
-  # END DEVELOPMENT TEST
 
   - cmd: cp otexec\backexec\otone_client.exe backend-dist\win\
-  - cmd: npm install -g electron-packager
+  - cmd: npm install electron-packager
   - cmd: python scripts\build_electron_app_win.py
