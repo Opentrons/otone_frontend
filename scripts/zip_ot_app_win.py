@@ -31,7 +31,7 @@ def get_build_tag():
         ci_name='Appveyor',
         pull_request_var=os.getenv('APPVEYOR_PULL_NUMBER'),
         branch_var=os.getenv('APPVEYOR_REPO_BRANCH'),
-        commit_var=os.getenv('APPVEYOR_REPO_COMMIT)')
+        commit_var=os.getenv('APPVEYOR_REPO_COMMIT')
     )
 
     if appveyor_tag:
@@ -87,7 +87,7 @@ def zip_ot_app(build_tag):
 
     zip_process = subprocess.Popen(
     #    ['zip', '-r', zip_app_path, current_app_path],
-        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::ExtractToDirectory(\'otapp.zip\', \'OpenTrons-win32-ia32\'); }"',
+        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \''+"opentrons_{}".format(build_tag)+'\'; [IO.Compression.ZipFile]::ExtractToDirectory(\'otapp.zip\', \'OpenTrons-win32-ia32\'); }"',
 
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
