@@ -76,7 +76,7 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
 
 
 def zip_ot_app(build_tag):
-    print(script_tab + "Zipping OT App. Using tag: otapp_win"#{}".format(build_tag))
+    print(script_tab + "Zipping OT App. Using tag: otapp_win")#{}".format(build_tag))
 
     current_app_name = os.listdir(electron_app_dir)[0]
     current_app_path = os.path.join(electron_app_dir, current_app_name)
