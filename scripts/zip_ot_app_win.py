@@ -76,12 +76,12 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
 
 
 def zip_ot_app(build_tag):
-    print(script_tab + "Zipping OT App. Using tag: {}".format(build_tag))
+    print(script_tab + "Zipping OT App. Using tag: otapp_win"#{}".format(build_tag))
 
     current_app_name = os.listdir(electron_app_dir)[0]
     current_app_path = os.path.join(electron_app_dir, current_app_name)
-    print(script_tab + "Zipping {} located in {}".format(
-        current_app_name, current_app_path)
+    print(script_tab + "Zipping {} located at\n{}{}".format(
+        current_app_name, script_tab, current_app_path)
     )
 
     zip_app_dir = os.path.join(project_root_dir, 'releases')
@@ -91,7 +91,11 @@ def zip_ot_app(build_tag):
     #    ['zip', '-r', zip_app_path, current_app_path],
     #    powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('foo.zip', 'bar'); }"
 
-        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::CreateFromDirectory(\'.\',\''+"opentrons_{}".format(build_tag)+'.zip\'); }"',
+        'powershell.exe -nologo -noprofile -command' + 
+        '"& { Add-Type -A \'System.IO.Compression.FileSystem\'; ' +
+        '[IO.Compression.ZipFile]::CreateFromDirectory(\'current_app_name\',\''+
+        #"opentrons_{}".format(build_tag)
+        'otapp.zip\'); }"',
 
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
@@ -99,7 +103,7 @@ def zip_ot_app(build_tag):
 
     _, std_err = zip_process.communicate()
     if std_err:
-        print(script_tab + "Error using zip command: {}".format(std_err))
+        print(script_tab + "Error using zip command:\n\n"+format(std_err))
 
 
 def main():
