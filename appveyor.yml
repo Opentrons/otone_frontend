@@ -57,7 +57,7 @@ install:
 
 build: off
 
-artifact:
+artifacts:
   - path: out\*.zip
     name: OTAppWin
 
