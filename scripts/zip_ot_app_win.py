@@ -91,7 +91,7 @@ def zip_ot_app(build_tag):
     #    ['zip', '-r', zip_app_path, current_app_path],
     #    powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('foo.zip', 'bar'); }"
 
-        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::ExtractToDirectory(\''+"opentrons_{}".format(build_tag)+'.zip\', \'OpenTrons-win32-ia32\'); }"',
+        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::CreateFromDirectory(\'.\',\''+"opentrons_{}".format(build_tag)+'.zip\'); }"',
 
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
