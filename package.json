@@ -7,7 +7,7 @@
     "clean": "rm -rf ./out && rm -rf ./releases/*",
     "release": "npm run release:osx && npm run release:win",
     "release:osx": "python3.4 scripts/build_pyinstaller.py && python3.4 scripts/build_electron_app.py",
-    "release:win": "python3.4 scripts/build_py2exe.py && python3.4 scripts/build_electron_app_win.py",
+    "release:win": "python3.4 scripts/build_py2exe.py && python3.4 scripts/build_electron_app_win.py && python3.4 scripts/zip_ot_app_win.py",
     "start": "electron ."
   },
   "dependencies": {

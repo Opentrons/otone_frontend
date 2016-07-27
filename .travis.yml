@@ -35,7 +35,7 @@ install:
 
   - npm install -g electron-packager
   - npm install
-  - npm run release
+  - npm run release:osx
   - ls out
 
 
