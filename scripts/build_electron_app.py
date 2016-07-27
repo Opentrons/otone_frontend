@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 
 
@@ -38,7 +39,7 @@ def build_electron_app():
     print(script_tag + "Running electron-packager process.")
 
     process_args = [
-        "electron-packager",
+        shutil.which("electron-packager"),
         project_root_dir,
         "OpenTrons",
         "--platform", "darwin",
