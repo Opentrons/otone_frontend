@@ -88,7 +88,7 @@ def zip_ot_app(build_tag):
     zip_app_path = os.path.join(zip_app_dir, "opentrons_{}".format(build_tag))
     zip_command = 'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::CreateFromDirectory(\''+current_app_path+'\',\'out\otapp.zip\'); }"'
     
-    npm_install_process = subprocess.Popen('npm install')
+    npm_install_process = subprocess.Popen('npm install', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     _, std_err = npm_install_process.communicate()
     if ste_err:
         print(script_tab + "Error using npm install:\n\n"+format(std_err))

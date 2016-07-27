@@ -47,7 +47,7 @@ install:
   - cmd: npm install electron-packager -g
   - cmd: npm install electron-prebuilt --save-dev
   - cmd: npm install electron-prebuilt -g
-  - cmd: npm install node-gyp -g
+  - cmd: npm install node-gyp
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
   - cmd: python scripts\build_electron_app_win.py
