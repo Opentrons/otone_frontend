@@ -87,7 +87,7 @@ def zip_ot_app(build_tag):
 
     zip_process = subprocess.Popen(
     #    ['zip', '-r', zip_app_path, current_app_path],
-        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::ExtractToDirectory(\'otapp.zip\', \'OpenTrons-win32-ia32\'); }"'
+        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::ExtractToDirectory(\'otapp.zip\', \'OpenTrons-win32-ia32\'); }"',
 
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
