@@ -46,6 +46,7 @@ def build_electron_app():
         "--out", "out",
         "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
         "--ignore", get_ignore_regex(),
+        "--asar", "true",
         "--overwrite",
         "--prune",
     ]
