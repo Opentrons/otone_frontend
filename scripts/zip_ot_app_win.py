@@ -31,10 +31,10 @@ def get_build_tag():
         ci_name='Appveyor',
         pull_request_var=os.getenv('APPVEYOR_PULL_NUMBER'),
         branch_var=os.getenv('APPVEYOR_REPO_BRANCH'),
-        commit_var=os.getenv('APPVEYOR_REPO_COMMIT)'
+        commit_var=os.getenv('APPVEYOR_REPO_COMMIT)')
     )
 
-    if appveyor_tag is not None:
+    if appveyor_tag:
         return "{}_{}".format(arch_time_stamp, appveyor_tag)
 
     return arch_time_stamp
