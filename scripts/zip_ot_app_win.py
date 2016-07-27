@@ -28,7 +28,7 @@ def get_build_tag():
 
     print(script_tag + "Checking Appveyor environment variables for tag:")
     appveyor_tag = tag_from_ci_env_vars(
-        ci_name='Appveyor',
+        ci_name='Appveyor'#,
         pull_request_var='APPVEYOR_PULL_NUMBER',
         branch_var='APPVEYOR_REPO_BRANCH',
         commit_var='APPVEYOR_REPO_COMMIT'
@@ -62,7 +62,9 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
                            "{} {}".format(
             ci_name, branch, commit
         ))
-        return "{}_{}".format(branch, commit[:10])
+        print(script_tab + "{}_{}".format(branch, commit[:10]))
+        #return "{}_{}".format(branch, commit[:10])
+        return "otapp"
 
     print(script_tab + "The environmental variables for {} were deemed "
                        "invalid".format(ci_name))
@@ -87,7 +89,9 @@ def zip_ot_app(build_tag):
 
     zip_process = subprocess.Popen(
     #    ['zip', '-r', zip_app_path, current_app_path],
-        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \''+"opentrons_{}".format(build_tag)+'\'; [IO.Compression.ZipFile]::ExtractToDirectory(\'otapp.zip\', \'OpenTrons-win32-ia32\'); }"',
+    #    powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('foo.zip', 'bar'); }"
+
+        'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::ExtractToDirectory(\''+"opentrons_{}".format(build_tag)+'.zip\', \'OpenTrons-win32-ia32\'); }"',
 
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
