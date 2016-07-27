@@ -11,7 +11,6 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
 let backendProcess = undefined
-const userDataPath = app.getAppPath('userData')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -51,10 +50,10 @@ function startWampRouter() {
 }
 
 function startBackend() {
-  if (process.platform == "darwin") {
-    child_process.exec('pkill -9 \"otone_client\"', function(error, stdout, stderr){
+  const userDataPath = app.getAppPath('userData')
 
-      console.log('*&&*&&&&&&&&&&&&&&&&&&&&&&&', app.getAppPath(), app.getPath('userData'))
+  if (process.platform == "darwin") {
+    child_process.exec('pkill -9 \"otone_client\"', function(){
       var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
         backendProcess = child_process.execFile(backend_path, [userDataPath], {stdio: 'ignore' }, function(error, stdout, stderr){
             console.log(stdout);
@@ -66,11 +65,17 @@ function startBackend() {
     });
   }
   else if (process.platform == "win32") {
-    child_process.exec('taskkill /T /F /IM otone_client.exe',function(error, stdout, stderr){
+    child_process.exec('taskkill /T /F /IM otone_client.exe', function(){
       var backend_path = app.getAppPath() + "\\backend-dist\\win\\otone_client.exe";
-      backendProcess = child_process.spawn(backend_path, [userDataPath], {stdio: 'ignore' });
-    });
-  }
+        backendProcess = child_process.execFile(backend_path, [userDataPath], {stdio: 'ignore' }, function(error, stdout, stderr){
+            console.log(stdout);
+            console.log(stderr);
+            if (error) {
+                throw error;
+            }
+        });
+  });
+}
   else{
     console.log('\n\n\n\nunknown OS: '+process.platform+'\n\n\n\n')
   }
