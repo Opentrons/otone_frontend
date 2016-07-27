@@ -50,12 +50,19 @@ install:
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
   - cmd: python scripts\build_electron_app_win.py
-  - cmd: echo $DUMMY
-  - cmd: echo %DUMMY%
+  - cmd: dir out
+  - cmd: dir out/OpenTrons-win32-ia32
+
 
 build: off
 
+
+
+
 deploy:
+  - provider: Environment
+    name: staging
+
   - provider: S3
     access_key_id: $(AWS_ACCESS_KEY)
     secret_access_key: $(AWS_SECRET_KEY)
