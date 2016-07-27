@@ -28,7 +28,7 @@ def get_build_tag():
 
     print(script_tag + "Checking Appveyor environment variables for tag:")
     appveyor_tag = tag_from_ci_env_vars(
-        ci_name='Appveyor'#,
+        ci_name='Appveyor',
         pull_request_var='APPVEYOR_PULL_NUMBER',
         branch_var='APPVEYOR_REPO_BRANCH',
         commit_var='APPVEYOR_REPO_COMMIT'
