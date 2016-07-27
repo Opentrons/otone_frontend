@@ -259,6 +259,8 @@ class Smoothie(object):
                 string = (string+'\r\n').encode('UTF-8')
                 try:
                     self.serial_port.write(string)
+                    self.theState['stat'] = 1
+                    self.already_trying = False #spaghetti
                 except serial.SerialException:
                     self.callbacker.connection_lost()
             else:
