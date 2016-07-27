@@ -568,7 +568,7 @@ function convert_csv_to_json(filetext) {
     }
   };
   var current_head = {
-    "p20-single" : {
+    "p10-single" : {
       "tool" : "pipette",
       "tip-racks" : [
       ],
@@ -577,11 +577,11 @@ function convert_csv_to_json(filetext) {
       },
       "multi-channel" : false,
       "axis" : "a",
-      "volume" : 20,
+      "volume" : 10,
       "down-plunger-speed" : 300,
       "up-plunger-speed" : 500,
       "tip-plunge" : 8,
-      "extra-pull-volume" : 20,
+      "extra-pull-volume" : 0.5,
       "extra-pull-delay" : 1,
       "distribute-percentage" : 0.1,
       "points" : [
@@ -589,7 +589,7 @@ function convert_csv_to_json(filetext) {
     }
   };
   var current_instructions = [{
-    'tool': 'p20-single',
+    'tool': 'p10-single',
     'groups': []
   }];
 
@@ -653,9 +653,9 @@ function convert_csv_to_json(filetext) {
     for(var p=0; p<total_plates; p++) {
       var tiprack_name = 'tiprack_' + (p+1);
       current_deck[tiprack_name] = {
-        'labware' : 'tiprack-20ul'
+        'labware' : 'tiprack-10ul'
       }
-      current_head['p20-single']['tip-racks'].push({
+      current_head['p10-single']['tip-racks'].push({
         'container' : tiprack_name
       });
     }
