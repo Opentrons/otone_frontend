@@ -92,7 +92,7 @@ def zip_ot_app(build_tag):
     #    powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('foo.zip', 'bar'); }"
 
         'powershell.exe -nologo -noprofile -command' + 
-        '"& { Add-Type -A \'System.IO.Compression.FileSystem\'; ' +
+        '" & { Add-Type -A \'System.IO.Compression.FileSystem\'; ' +
         '[IO.Compression.ZipFile]::CreateFromDirectory(\'current_app_name\',\''+
         #"opentrons_{}".format(build_tag)
         'otapp.zip\'); }"',
