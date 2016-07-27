@@ -49,8 +49,8 @@ def get_os():
 
     os_found = platform.system()
     if os_found == "Windows":
-        raise SystemExit(script_tab + "OS found is: %s\n" % valid_os[0] +
-                         "Exit: This script is not design to run on Windows.")
+        print(script_tab + "OS found is: %s" % valid_os[0])
+        return valid_os[0]
     elif os_found == "Linux":
         print(script_tab + "OS found is: %s" % valid_os[1])
         return valid_os[1]
