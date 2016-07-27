@@ -26,16 +26,16 @@ def get_build_tag():
         time.strftime("%Y-%m-%d_%H.%M")
     )
 
-    print(script_tag + "Checking Travis-CI environment variables for tag:")
-    travis_tag = tag_from_ci_env_vars(
+    print(script_tag + "Checking Appveyor environment variables for tag:")
+    appveyor_tag = tag_from_ci_env_vars(
         ci_name='Appveyor',
         pull_request_var=os.getenv('APPVEYOR_PULL_NUMBER'),
         branch_var=os.getenv('APPVEYOR_REPO_BRANCH'),
         commit_var=os.getenv('APPVEYOR_REPO_COMMIT)'
     )
 
-    if travis_tag:
-        return "{}_{}".format(arch_time_stamp, travis_tag)
+    if appveyor_tag is not None:
+        return "{}_{}".format(arch_time_stamp, appveyor_tag)
 
     return arch_time_stamp
 
