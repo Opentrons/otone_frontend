@@ -86,7 +86,7 @@ def zip_ot_app(build_tag):
 
     zip_app_dir = os.path.join(project_root_dir, 'releases')
     zip_app_path = os.path.join(zip_app_dir, "opentrons_{}".format(build_tag))
-    zip_command = 'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::CreateFromDirectory(\''+current_app_path+'\',\'otapp.zip\'); }"'
+    zip_command = 'powershell.exe -nologo -noprofile -command "& { Add-Type -A \'System.IO.Compression.FileSystem\'; [IO.Compression.ZipFile]::CreateFromDirectory(\''+current_app_path+'\',\'out\otapp.zip\'); }"'
     zip_process = subprocess.Popen(
     #    ['zip', '-r', zip_app_path, current_app_path],
     #    powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('foo.zip', 'bar'); }"
