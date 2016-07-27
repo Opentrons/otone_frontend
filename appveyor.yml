@@ -40,7 +40,7 @@ install:
   - cmd: cp otexec\backexec\otone_client.exe backend-dist\win\
 #  - cmd: node --version
 #  - cmd: npm --version
-#  - cmd: npm config list
+  - cmd: npm config list
 #  - cmd: npm config set msvs_version 2013 -g
 #  - cmd: npm config list
   - cmd: npm install electron-packager --save-dev
@@ -48,7 +48,6 @@ install:
   - cmd: npm install electron-prebuilt --save-dev
   - cmd: npm install electron-prebuilt -g
   - cmd: npm install node-gyp -g
-  - cmd: npm install
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
   - cmd: python scripts\build_electron_app_win.py
