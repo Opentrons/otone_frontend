@@ -57,13 +57,12 @@ install:
 
 build: off
 
-
+artifact:
+  - path: out\*.zip
+    name: OTAppWin
 
 
 deploy:
-  - provider: Environment
-    name: staging
-
   - provider: S3
     access_key_id: $(AWS_ACCESS_KEY)
     secret_access_key: $(AWS_SECRET_KEY)
@@ -71,6 +70,6 @@ deploy:
     region: us-east-1
     set_public: true
     folder: win
-    artifact: out
+    artifact: OTAppWin
     on:
       branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
