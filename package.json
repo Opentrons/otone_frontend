@@ -6,9 +6,17 @@
   "scripts": {
     "clean": "rm -rf ./out && rm -rf ./releases/*",
     "build:backend:osx": "python3.4 scripts/build_pyinstaller.py",
+    "build:backend:win": "python scripts/build_pyinstaller.py",
+
     "build:frontend:osx": "python3.4 scripts/build_electron_app.py",
+    "build:frontend:win": "python scripts/build_electron_app.py",
+
     "package:osx": "python3.4 scripts/zip_ot_app.py",
-    "release": "npm run build:backend:osx && npm run build:frontend:osx && npm run package:osx",
+    "package:win": "python scripts/zip_ot_app.py",
+
+    "release:osx": "npm run build:backend:osx && npm run build:frontend:osx && npm run package:osx",
+    "release:win": "npm run build:backend:win && npm run build:frontend:win && npm run package:win",
+
     "start": "electron ."
   },
   "dependencies": {
