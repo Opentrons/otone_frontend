@@ -42,7 +42,7 @@ app.on('before-quit', function(){
 function startWampRouter() {
     var router = nightlife.createRouter({
         httpServer: http.createServer(),
-        port: 8080,
+        port: 31947,
         path: '/ws',
         autoCreateRealms: true,
         logger: new CLogger({name: 'nightlife-router'})
