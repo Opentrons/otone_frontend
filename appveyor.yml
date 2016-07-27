@@ -49,6 +49,8 @@ install:
   - cmd: npm install electron-prebuilt -g
   - cmd: npm install node-gyp
   - cmd: npm prune
+  - cmd: npm remove node-gyp
+  - cmd: npm install node-gyp
   - cmd: npm install
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
