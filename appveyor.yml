@@ -48,7 +48,7 @@ install:
 #  - cmd: pip install mkdocs
   - cmd: pip freeze
 
-  - cmd: %PIP3% install -r requirements.txt
+  - cmd: "%PIP3% install -r requirements.txt"
 
   - cmd: python scripts\build_py2exe.py
   - cmd: dir otexec\backexec
