@@ -67,7 +67,7 @@ init:
   - cmd: "%PIP3% install pyasn1-modules"
   - cmd: "%PIP3% install pycparser"
   - cmd: "%PIP3% install Pygments"
-  - cmd: "%PIP3% install PyInstaller"
+#  - cmd: "%PIP3% install PyInstaller"
   - cmd: "%PIP3% install PyNaCl"
   - cmd: "%PIP3% install pyOpenSSL"
   - cmd: "%PIP3% install pyserial"
