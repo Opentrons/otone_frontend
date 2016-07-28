@@ -36,17 +36,16 @@ def get_icon_path():
 
 def get_ignore_regex():
     ignore_list = [
-        "node_modules/electron-prebuilt",
-        "node_modules/electron-builder",
+        os.path.join("node_modules", "electron-builder"),
+        os.path.join("node_modules", "electron-prebuilt"),
         "backend$",
         "scripts",
         "tests",
         "docs",
         ".node-version",
         ".python-version",
-        ".git",
         ".idea",
-        ".*.md$",
+        "\.md$",
         "releases",
         "test",
         "requirements.txt",
