@@ -14,7 +14,7 @@ environment:
 
   npm_config_arch: ia32
 
-platform: x64
+platform: x86
 
 configuration: Release
 
@@ -45,7 +45,8 @@ init:
 
 install:
   - cmd: git submodule update --init --recursive
-  - cmd: "%PIP2% install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl"
+#  - cmd: "%PIP2% install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl"
+  - cmd: "%PIP2% install py2exe
 #  - cmd: pip install mkdocs
 #  - cmd: pip freeze
   - cmd: "%PIP3% install -r requirements.txt"
