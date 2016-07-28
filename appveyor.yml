@@ -1,10 +1,18 @@
 environment:
   nodejs_version: "4.4.7"
   matrix:
-    - PYTHON: "C:\\Python34"
-      PYTHON_VERSION: "3.4.3"
-      PYTHON_ARCH: "32"
+    - PYTHON3: "C:\\Python34"
+      PYTHON3_VERSION: "3.4.3"
+      PYTHON3_ARCH: "32"
+      PYTHON2: "C:\\Python27"
+      PYTHON2_VERSION: "2.7.9"
+      PYTHON2_ARCH: "32"
+
+  PIP3: C:\\Python34\Scripts\pip
+  PIP2: C:\\Python27\Scripts\pip
+
   npm_config_arch: ia32
+
 platform: x86
 
 configuration: Release
@@ -14,21 +22,23 @@ init:
   - cmd: wmic OS get OSArchitecture
   - cmd: npm config set msvs_version 2015 --global
   # As AppVeyor has multiple python install, verify which one uses by default
-  - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
-  - cmd: python --version
-  - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
+  - cmd: ECHO %PYTHON3% %PYTHON3_VERSION% %PYTHON3_ARCH%
+  - cmd: "%PYTHON3%\\python --version"
+  - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
+
+  - cmd: ECHO %PYTHON2% %PYTHON2_VERSION% %PYTHON2_ARCH%
+  - cmd: "%PYTHON2%\\python --version"
+  - cmd: "%PYTHON2%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
+
 
   # Set the relevant python and pip location to the path
-  - cmd: set PATH=%PYTHON%;%PYTHON%\scripts;%PATH%
+  - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
   - cmd: ECHO Path - %PATH%
 
-  # Verify the new default python
-  - cmd: python --version
-  - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
-  - cmd: pip --version
+  - ps: Install-Product node 5.1.0 x86
+  - cmd: node --version
+  - cmd: npm --version
 
-  # Check out installed python packages
-  - cmd: pip freeze
 
 install:
   - cmd: git submodule update --init --recursive
@@ -43,15 +53,20 @@ install:
   - cmd: npm config list
 #  - cmd: npm config set msvs_version 2013 -g
 #  - cmd: npm config list
+
+  - cmd: node-gyp --python %PYTHON2%
+
   - cmd: npm install electron-packager --save-dev
   - cmd: npm install electron-packager -g
   - cmd: npm install electron-prebuilt --save-dev
   - cmd: npm install electron-prebuilt -g
-  - cmd: npm install node-gyp
-  - cmd: npm prune
-  - cmd: npm uninstall node-gyp
-  - cmd: npm uninstall node-gyp -g
-  - cmd: npm install node-gyp -g
+#  - cmd: npm install node-gyp
+#  - cmd: npm prune
+#  - cmd: npm uninstall node-gyp
+#  - cmd: npm uninstall node-gyp -g
+#  - cmd: npm install node-gyp -g
+
+
   - cmd: npm install
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
