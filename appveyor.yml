@@ -4,6 +4,7 @@ environment:
     - PYTHON3: "C:\\Python34"
       PYTHON3_VERSION: "3.4.3"
       PYTHON3_ARCH: "32"
+      # PYTHON2.7 REQUIRED FOR NODE-GYP
       PYTHON2: "C:\\Python27"
       PYTHON2_VERSION: "2.7.9"
       PYTHON2_ARCH: "32"
@@ -38,7 +39,8 @@ init:
   - ps: Install-Product node 6.3.0 x86
   - cmd: node --version
   - cmd: npm --version
-  - cmd: npm -g install npm@latest
+  # CRITICAL FOR NODE-GYP TO WORK
+- cmd: npm -g install npm@latest
 
 install:
   - cmd: git submodule update --init --recursive
@@ -46,8 +48,8 @@ install:
 #  - cmd: pip install mkdocs
   - cmd: pip freeze
   - cmd: python scripts\build_py2exe.py
-
-  - cmd: cp otexec\backexec\otone_client.exe backend-dist\win\
+  - cmd: dir otexec\backexec
+  - cmd: cp otexec\backexec\ backend-dist\win\
 #  - cmd: node --version
 #  - cmd: npm --version
   - cmd: npm config list
