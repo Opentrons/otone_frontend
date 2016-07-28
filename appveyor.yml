@@ -26,11 +26,12 @@ init:
   - cmd: ECHO %PYTHON3% %PYTHON3_VERSION% %PYTHON3_ARCH%
   - cmd: "%PYTHON3%\\python --version"
   - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
-
+  - cmd: "%PYTHON3%\\python -m pip install --upgrade pip"
+  
   - cmd: ECHO %PYTHON2% %PYTHON2_VERSION% %PYTHON2_ARCH%
   - cmd: "%PYTHON2%\\python --version"
   - cmd: "%PYTHON2%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
-
+  - cmd: "%PYTHON2%\\python -m pip install --upgrade pip"
 
   # Set the relevant python and pip location to the path
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
