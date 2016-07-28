@@ -52,7 +52,7 @@ install:
   - cmd: "%PIP3% install -r requirements.txt"
 
   - cmd: "%PYTHON3%\\python scripts\\zope_fix.py"
-  - cmd: "%PYTHON3%\\python scripts\\build_py2exe.py"
+  - cmd: "%PYTHON2%\\python scripts\\build_py2exe.py"
   - cmd: dir otexec\backexec
   - cmd: xcopy /e otexec\backexec backend-dist\win
 #  - cmd: node --version
