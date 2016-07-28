@@ -46,7 +46,7 @@ init:
   - cmd: npm -g install npm@latest
 
   - cmd: "%PIP3% install autobahn"
-
+  - cmd: "%PIP3% install zope"
 
 install:
   - cmd: git submodule update --init --recursive
