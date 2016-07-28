@@ -244,7 +244,7 @@ class Smoothie(object):
         logger.debug('smoothie_pyserial.on_success_connecting called')
         self.connected = True
         self.send(self._dict['setupFeedback'])
-        self.home('G91 G0Z-1 G0Z1 G0Z-1 G0Z1 G0Z-1 G0Z1')
+        self.try_add('G91 G0Z-1 G0Z1 G0Z-1 G0Z1 G0Z-1 G0Z1')
         self.on_connect(self.theState)
 
 
