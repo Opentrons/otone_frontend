@@ -54,6 +54,9 @@ install:
 #  - cmd: npm config set msvs_version 2013 -g
 #  - cmd: npm config list
   - cmd: npm config set python %PYTHON2%\python.exe --global
+  - cmd: npm uninstall node-gyp -g
+  - cmd: npm uninstall node-gyp
+  - cmd: npm install node-gyp
   - cmd: npm install node-gyp -g
   - cmd: node-gyp --python %PYTHON2%
   - cmd: npm install bufferutil -g
