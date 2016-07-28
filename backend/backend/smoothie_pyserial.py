@@ -256,11 +256,11 @@ class Smoothie(object):
             self.on_raw_data('--> '+string)  #self
             if self.serial_port and self.serial_port.is_open:
                 logger.debug('\n\tstring: {}'.format(string))
-                string = (string+'\r\n').encode('UTF-8')
                 try:
-                    self.serial_port.write(string)
-                    self.theState['stat'] = 1
-                    self.already_trying = False #spaghetti
+                    self.serial_port.write((string+'\r\n').encode('UTF-8'))
+                    if 'G0' in string or 'G9' in string:
+                        self.theState['stat'] = 1
+                        self.already_trying = False #spaghetti
                 except serial.SerialException:
                     self.callbacker.connection_lost()
             else:
