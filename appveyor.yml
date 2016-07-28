@@ -48,7 +48,7 @@ init:
   - cmd: "%PIP3% install autobahn"
   - cmd: "%PIP3% install zope.interface"
   - cmd: "%PIP3% install pyserial"
-#  - cmd: "%PIP3% install argh"
+  - cmd: "%PIP3% install argh"
 #  - cmd: "%PIP3% install attrs"
 #  - cmd: "%PIP3% install cbor"
 #  - cmd: "%PIP3% install cffi"
