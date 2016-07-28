@@ -40,7 +40,7 @@ init:
   - cmd: node --version
   - cmd: npm --version
   # CRITICAL FOR NODE-GYP TO WORK
-- cmd: npm -g install npm@latest
+  - cmd: npm -g install npm@latest
 
 install:
   - cmd: git submodule update --init --recursive
