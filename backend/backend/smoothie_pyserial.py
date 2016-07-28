@@ -244,7 +244,7 @@ class Smoothie(object):
         logger.debug('smoothie_pyserial.on_success_connecting called')
         self.connected = True
         self.send(self._dict['setupFeedback'])
-        self.try_add('G91 G0Z-2 G0Z2 G0Z-2 G0Z2 G0Z-2 G0Z2')
+        self.home('G91 G0Z-1 G0Z1 G0Z-1 G0Z1 G0Z-1 G0Z1')
         self.on_connect(self.theState)
 
 
@@ -258,7 +258,7 @@ class Smoothie(object):
                 logger.debug('\n\tstring: {}'.format(string))
                 try:
                     self.serial_port.write((string+'\r\n').encode('UTF-8'))
-                    if 'G0' in string or 'G9' in string:
+                    if 'G0' in string or 'G9' in string or 'G4' in string:
                         self.theState['stat'] = 1
                         self.already_trying = False #spaghetti
                 except serial.SerialException:
