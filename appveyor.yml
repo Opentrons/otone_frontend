@@ -35,7 +35,7 @@ init:
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
   - cmd: ECHO Path - %PATH%
 
-  - ps: Install-Product node 6.2.2 x86
+  - ps: Install-Product node 6.3.0 x86
   - cmd: node --version
   - cmd: npm --version
 
