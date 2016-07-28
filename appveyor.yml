@@ -49,8 +49,12 @@ install:
 #  - cmd: "%PIP2% install py2exe"
 #  - cmd: pip install mkdocs
   - cmd: "%PIP3% freeze > requirements.txt"
-
+  - cmd: type requirements.txt
+  
   - cmd: "%PIP3% install -r requirements.txt"
+
+  - cmd: "%PIP3% install zope"
+
   - cmd: "%PIP2% freeze"
 
   - cmd: "%PYTHON3%\\python scripts\\zope_fix.py"
