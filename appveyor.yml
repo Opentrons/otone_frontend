@@ -35,7 +35,7 @@ init:
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
   - cmd: ECHO Path - %PATH%
 
-  - ps: Install-Product node 5.1.0 x86
+  - ps: Install-Product node 5.12.0 x86
   - cmd: node --version
   - cmd: npm --version
 
@@ -53,7 +53,7 @@ install:
   - cmd: npm config list
 #  - cmd: npm config set msvs_version 2013 -g
 #  - cmd: npm config list
-
+  - cmd: npm config set python %PYTHON2%\python.exe --global
   - cmd: npm install node-gyp -g
   - cmd: node-gyp --python %PYTHON2%
 
@@ -67,7 +67,7 @@ install:
 #  - cmd: npm uninstall node-gyp -g
 #  - cmd: npm install node-gyp -g
 
-
+  - cmd: npm prune
   - cmd: npm install
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
