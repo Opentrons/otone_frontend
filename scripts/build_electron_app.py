@@ -1,5 +1,7 @@
 import os
+import platform
 import shutil
+import struct
 import subprocess
 
 
@@ -13,6 +15,24 @@ project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 
+
+def get_arch():
+    cpu_word_size = struct.calcsize('P') * 8
+    if cpu_word_size == 64:
+        return 'x64'
+    if cpu_word_size == 32:
+        return 'ia32'
+
+def get_icon_path():
+    platform_type = get_platform()
+    if platform_type == 'win32':
+        icon_file = 'icon.ico'
+    elif platform_type == 'darwin':
+        icon_file = 'icon.icns'
+    else:
+        raise SystemExit(script_tab + 'Cannot find app icon for OS: {}'.format(platform_type))
+
+    return os.path.join(project_root_dir, "build-assets", icon_file)
 
 def get_ignore_regex():
     ignore_list = [
@@ -32,8 +52,21 @@ def get_ignore_regex():
         "requirements.txt",
         "LICENSE",
     ]
-    return '(' +  '|'.join(ignore_list) + ')'
 
+    ignore_flags = []
+    for regex in ignore_list:
+        ignore_flags.extend(["--ignore", regex])
+
+    return ignore_flags
+
+def get_platform():
+    os_type = platform.system()
+    if os_type  == 'Windows':
+        return 'win32'
+    elif os_type == 'Darwin':
+        return 'darwin'
+    else:
+        raise SystemExit(script_tab + 'Unsupported OS {}'.format(os_type))
 
 def build_electron_app():
     print(script_tag + "Running electron-packager process.")
@@ -42,15 +75,15 @@ def build_electron_app():
         shutil.which("electron-packager"),
         project_root_dir,
         "OpenTrons",
-        "--platform", "darwin",
-        "--arch", "x64",
-        "--out", "out",
-        "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
-        "--ignore", get_ignore_regex(),
+        "--platform", get_platform(),
+        "--arch", get_arch(),
+        "--out", output_dir,
+        "--icon", get_icon_path(),
         "--asar", "true",
-        "--overwrite",
-        "--prune",
-    ]
+        "--overwrite", "true",
+        "--prune", "true",
+    ] + get_ignore_regex()
+
 
     electron_packager_process = subprocess.Popen(process_args)
     electron_packager_process.communicate()
