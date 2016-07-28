@@ -80,8 +80,8 @@ def build_electron_app():
         "--out", output_dir,
         "--icon", get_icon_path(),
         "--asar", "true",
-        "--overwrite", "true",
-        "--prune", "true",
+        "--overwrite",
+        "--prune",
     ] + get_ignore_regex()
 
 
