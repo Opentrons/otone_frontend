@@ -44,9 +44,9 @@ init:
 
 install:
   - cmd: git submodule update --init --recursive
-  - cmd: pip install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl
+  - cmd: "%PIP2% install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl"
 #  - cmd: pip install mkdocs
-  - cmd: pip freeze
+#  - cmd: pip freeze
   - cmd: "%PIP3% install -r requirements.txt"
 
   - cmd: "%PYTHON3%\\python scripts\\zope_fix.py"
