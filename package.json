@@ -5,10 +5,11 @@
   "main": "main.js",
   "scripts": {
     "clean": "rm -rf ./out && rm -rf ./releases/*",
-    "build:backend:osx": "python3.4 scripts/build_pyinstaller.py",
-    "build:frontend:osx": "python3.4 scripts/build_electron_app.py",
-    "package:osx": "python3.4 scripts/zip_ot_app.py",
-    "release": "npm run build:backend:osx && npm run build:frontend:osx && npm run package:osx",
+    "build:backend": "python3.4 scripts/build_pyinstaller.py",
+    "build:frontend": "python3.4 scripts/build_electron_app.py",
+    "package": "python3.4 scripts/zip_ot_app.py",
+    "release": "npm run build:backend && npm run build:frontend && npm run package",
+
     "start": "electron ."
   },
   "dependencies": {
