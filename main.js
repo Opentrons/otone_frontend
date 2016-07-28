@@ -1,14 +1,20 @@
 if (require('electron-squirrel-startup')) return;
-const $ = jQuery = require('jquery')
-const http       = require('http')
-, CLogger  = require('node-clogger')
-const path = require('path')
-const nightlife  = require('nightlife-rabbit')
-    , autobahn = require('autobahn')
+
+// Rutime imports
 const child_process = require("child_process")
+const path = require('path')
+const http       = require('http')
+
+// Framework imports
 const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
+
+// Thirdparty imports
+const $ = jQuery = require('jquery')
+const autobahn = require('autobahn')
+const CLogger  = require('node-clogger')
+const nightlife  = require('nightlife-rabbit')
 
 let backendProcess = undefined
 
