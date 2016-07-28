@@ -47,6 +47,7 @@ init:
 
   - cmd: "%PIP3% install autobahn"
   - cmd: "%PIP3% install zope.interface"
+  - cmd: "%PIP3% install pyserial"
 
 install:
   - cmd: git submodule update --init --recursive
