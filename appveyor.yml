@@ -49,10 +49,12 @@ install:
 #  - cmd: "%PIP2% install py2exe"
 #  - cmd: pip install mkdocs
 #  - cmd: pip freeze
-  - cmd: "%PIP3% install -r requirements.txt"
 
   - cmd: "%PYTHON3%\\python scripts\\zope_fix.py"
   - cmd: "%PYTHON3%\\python scripts\\build_py2exe.py"
+
+  - cmd: "%PIP3% install -r requirements.txt"
+
   - cmd: dir otexec\backexec
   - cmd: xcopy /e otexec\backexec backend-dist\win
 #  - cmd: node --version
