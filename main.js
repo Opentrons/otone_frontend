@@ -49,36 +49,43 @@ function startWampRouter() {
     });
 }
 
-function startBackend() {
-  const userDataPath = app.getAppPath('userData')
-
-  if (process.platform == "darwin") {
-    child_process.exec('pkill -9 \"otone_client\"', function(){
-      var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
-        backendProcess = child_process.execFile(backend_path, [userDataPath], {stdio: 'ignore' }, function(error, stdout, stderr){
-            console.log(stdout);
-            console.log(stderr);
-            if (error) {
-                throw error;
-            }
-        });
+/**
+ * Starts an executable in a separate process
+ * @param {param} filePath - path to an executable
+ * @param {Array} extraArgs - Array of arguments to pass during invocation of file
+ */
+function execFile(filePath, extraArgs) {
+    backendProcess = child_process.execFile(filePath, extraArgs, {stdio: 'ignore' }, function(error, stdout, stderr){
+        console.log(stdout);
+        console.log(stderr);
+        if (error) {
+            throw error;
+        }
     });
-  }
-  else if (process.platform == "win32") {
-    child_process.exec('taskkill /T /F /IM otone_client.exe', function(){
-      var backend_path = app.getAppPath() + "\\backend-dist\\win\\otone_client.exe";
-        backendProcess = child_process.execFile(backend_path, [userDataPath], {stdio: 'ignore' }, function(error, stdout, stderr){
-            console.log(stdout);
-            console.log(stderr);
-            if (error) {
-                throw error;
-            }
-        });
-  });
 }
-  else{
-    console.log('\n\n\n\nunknown OS: '+process.platform+'\n\n\n\n')
-  }
+
+/**
+ * Starts otone_client backend executable; kills existing process if any
+ */
+function startBackend() {
+    const userDataPath = app.getPath('userData');
+
+    if (process.platform == "darwin") {
+        child_process.exec('pkill -9 \"otone_client\"', function(){
+            var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
+            execFile(backend_path, [userDataPath]);
+        });
+    }
+
+    else if (process.platform == "win32") {
+        child_process.exec('taskkill /T /F /IM otone_client.exe', function(){
+            var backend_path = app.getAppPath() + "\\backend-dist\\win\\otone_client.exe";
+            execFile(backend_path, [userDataPath]);
+        });
+    }
+    else{
+        console.log('\n\n\n\nunknown OS: '+process.platform+'\n\n\n\n');
+    }
 }
 
 app.on('ready', createWindow)
