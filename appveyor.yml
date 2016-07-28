@@ -48,7 +48,8 @@ install:
   - cmd: "%PIP3% install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl"
 #  - cmd: "%PIP2% install py2exe"
 #  - cmd: pip install mkdocs
-#  - cmd: pip freeze
+  - cmd: "%PIP3% freeze"
+  - cmd: "%PIP2% freeze"
 
   - cmd: "%PYTHON3%\\python scripts\\zope_fix.py"
   - cmd: "%PYTHON3%\\python scripts\\build_py2exe.py"
