@@ -184,6 +184,7 @@ def get_os():
     print(script_tab + "Valid command line arg not found, checking system.")
 
     os_found = platform.system()
+    print(script_tag + 'os_found: {}'.format(os_found))
     if os_found == "Windows":
         return valid_os[0]
     elif os_found == "Linux":
@@ -216,7 +217,7 @@ def main():
     if not os.path.exists(backend_exec_dir):
         os.makedirs(backend_exec_dir)
 
-    print(script_tag + "Building OTOne App using py2exe.")
+    print(script_tag + "Building OT-App using py2exe.")
     if len(sys.argv) <= 1:
         build_exe(["py2exe"])
     else:
