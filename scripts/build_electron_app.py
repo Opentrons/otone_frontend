@@ -39,6 +39,7 @@ def get_ignore_regex():
         os.path.join("node_modules", "electron-builder"),
         os.path.join("node_modules", "electron-prebuilt"),
         "backend$",
+        "backend-env",
         "scripts",
         "tests",
         "docs",
