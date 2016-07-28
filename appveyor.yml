@@ -54,6 +54,7 @@ install:
 #  - cmd: npm config set msvs_version 2013 -g
 #  - cmd: npm config list
 
+  - cmd: npm install node-gyp -g
   - cmd: node-gyp --python %PYTHON2%
 
   - cmd: npm install electron-packager --save-dev
