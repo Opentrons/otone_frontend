@@ -168,7 +168,7 @@ def get_os():
     Gets the OS to based on the command line argument of the platform info.
     Only possibilities are: "windows", "mac", "linux"
     """
-    valid_os = ["windows", "linux", "mac"]
+    valid_os = ["Windows", "linux", "mac"]
 
     print(script_tab + "Checking for command line argument indicated OS:")
     if len(sys.argv) > 1:
