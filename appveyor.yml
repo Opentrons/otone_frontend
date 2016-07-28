@@ -49,7 +49,7 @@ install:
   - cmd: pip freeze
   - cmd: python scripts\build_py2exe.py
   - cmd: dir otexec\backexec
-  - cmd: cp otexec\backexec\ backend-dist\win\
+  - cmd: xcopy otexec\backexec\ backend-dist\win\ /e
 #  - cmd: node --version
 #  - cmd: npm --version
   - cmd: npm config list
