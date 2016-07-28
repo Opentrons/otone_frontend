@@ -14,7 +14,7 @@ environment:
 
   npm_config_arch: ia32
 
-platform: x86
+platform: x64
 
 configuration: Release
 
