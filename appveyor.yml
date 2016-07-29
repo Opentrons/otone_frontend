@@ -91,7 +91,7 @@ install:
   - cmd: "%PIP3% install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl"
 #  - cmd: "%PIP2% install py2exe"
 #  - cmd: pip install mkdocs
-  - cmd: "%PIP3% install -r requirements"
+  - cmd: "%PIP3% install -r requirements.txt"
 #  - cmd: cd backend\backend
 #  - cmd: "%PIP3% freeze > requirements.txt"
 #  - cmd: type requirements.txt
