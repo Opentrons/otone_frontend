@@ -88,7 +88,7 @@ def pyinstaller_build():
     ]
     print(script_tab + "Command: %s" % process_args)
 
-    pyinstaller_process = subprocess.Popen(process_args)
+    pyinstaller_process = subprocess.Popen(process_args, shell=True)
     std_op, std_err_op = pyinstaller_process.communicate()
 
     if pyinstaller_process.returncode != 0:
