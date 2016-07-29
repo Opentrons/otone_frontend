@@ -33,7 +33,7 @@ def get_os():
     Gets the OS to based on the command line argument of the platform info.
     Only possibilities are: "windows", "mac", "linux"
     """
-    valid_os = ["Windows", "linux", "mac"]
+    valid_os = ["windows", "linux", "mac"]
 
     print(script_tab + "Checking for command line argument indicated OS:")
     if len(sys.argv) > 1:
@@ -51,14 +51,19 @@ def get_os():
     os_found = platform.system()
     print(script_tag + 'os_found: {}'.format(os_found))
     if os_found == "Windows":
+        return valid_os[0]
+#        raise SystemExit(script_tab + "OS found is: %s\n" % valid_os[0] +
+#                         "Exit: This script is not design to run on Windows.")
+    elif os_found == "Linux":
         raise SystemExit(script_tab + "OS found is: %s\n" % valid_os[0] +
                          "Exit: This script is not design to run on Windows.")
-    elif os_found == "Linux":
-        print(script_tab + "OS found is: %s" % valid_os[1])
-        return valid_os[1]
+#        print(script_tab + "OS found is: %s" % valid_os[1])
+#        return valid_os[1]
     elif os_found == "Darwin":
-        print(script_tab + "OS found is: %s" % valid_os[2])
-        return valid_os[2]
+        raise SystemExit(script_tab + "OS found is: %s\n" % valid_os[0] +
+                         "Exit: This script is not design to run on Windows.")
+#        print(script_tab + "OS found is: %s" % valid_os[2])
+#        return valid_os[2]
     else:
         raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
 
