@@ -88,7 +88,7 @@ def pyinstaller_build():
     ]
     print(script_tab + "Command: %s" % process_args)
 
-    pyinstaller_process = subprocess.Popen(process_args, shell=True, stdout=subprocess.PIPE, stdout=subprocess.STDOUT)
+    pyinstaller_process = subprocess.Popen(process_args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
     while True:
         nextline = process.stdout.readline()
