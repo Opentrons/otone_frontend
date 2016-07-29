@@ -91,14 +91,14 @@ def pyinstaller_build():
     pyinstaller_process = subprocess.Popen(process_args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
     while True:
-        nextline = process.stdout.readline()
-        if nextline == '' and process.poll() is not None:
+        nextline = pyinstaller_process.stdout.readline()
+        if nextline == '' and pyinstaller_process.poll() is not None:
             break
         sys.stdout.write(nextline)
         sys.stdout.flush()
 
-    output = process.communicate()[0]
-    exitCode = process.returncode
+    output = pyinstaller_process.communicate()[0]
+    exitCode = pyinstaller_process.returncode
 
     if (exitCode == 0):
         return output
