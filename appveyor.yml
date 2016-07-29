@@ -67,7 +67,7 @@ init:
 #  - cmd: "%PIP3% install pyasn1-modules"
 #  - cmd: "%PIP3% install pycparser"
 #  - cmd: "%PIP3% install Pygments"
-  - cmd: "%PIP3% install PyInstaller"
+  - cmd: "%PIP3% install pyinstaller"
 #  - cmd: "%PIP3% install PyNaCl"
 #  - cmd: "%PIP3% install pyOpenSSL"
 #  - cmd: "%PIP3% install pyserial"
@@ -106,7 +106,7 @@ install:
   - cmd: "%PIP3% freeze"
 #  - cmd: "%PYTHON3%\\python scripts\\build_py2exe.py"
 #  - cmd: "%PYTHON3%\\python scripts\\build_pyinstaller_win.py"
-  - cmd: "%PYTHON2%\\python -m pyinstaller scripts\\pyinstaller.spec"
+  - cmd: pyinstaller scripts\pyinstaller.spec
 
   - cmd: dir otexec\backexec
   - cmd: xcopy /e otexec\backexec backend-dist\win
