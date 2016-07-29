@@ -88,23 +88,10 @@ def pyinstaller_build():
     ]
     print(script_tab + "Command: %s" % process_args)
 
-    pyinstaller_process = subprocess.Popen(process_args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    
-    while True:
-        nextline = pyinstaller_process.stdout.readline()
-        if nextline == '' and pyinstaller_process.poll() is not None:
-            break
-        sys.stdout.write(str(nextline))
-        sys.stdout.flush()
-
-    output = pyinstaller_process.communicate()[0]
-    exitCode = pyinstaller_process.returncode
-
-    if (exitCode == 0):
-        return output
-    else:
-        raise ProcessException(command, exitCode, output)
+    pyinstaller_process = subprocess.check_output(process_args, shell=True, stderr=subprocess.STDOUT, universal_newlines=True)
     #std_op, std_err_op = pyinstaller_process.communicate()
+    print(pyinstaller_process)
+    return False
 
     if pyinstaller_process.returncode != 0:
         print(script_tab + "ERROR: PyInstaller returned with exit code: %s" %
