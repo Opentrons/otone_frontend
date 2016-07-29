@@ -101,10 +101,11 @@ install:
 
   - cmd: "%PIP2% freeze"
 
-  - cmd: "%PYTHON3%\\python scripts\\zope_fix.py"
+#  - cmd: "%PYTHON3%\\python scripts\\zope_fix.py"
 
   - cmd: "%PIP3% freeze"
-  - cmd: "%PYTHON3%\\python scripts\\build_py2exe.py"
+#  - cmd: "%PYTHON3%\\python scripts\\build_py2exe.py"
+  - cmd: "%PYTHON3%\\python scripts\\build_pyinstaller_win.py"
 
   - cmd: dir otexec\backexec
   - cmd: xcopy /e otexec\backexec backend-dist\win
@@ -136,28 +137,29 @@ install:
   - cmd: npm install
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
-  - cmd: python scripts\build_electron_app_win.py
-  - cmd: python scripts\zip_ot_app_win.py
-  - cmd: dir out
-  - cmd: dir out\OpenTrons-win32-ia32
+  - cmd: 
+  - cmd: "%PYTHON27%\\python scripts\\build_electron_app_win.py"
+#  - cmd: python scripts\zip_ot_app_win.py
+#  - cmd: dir out
+#  - cmd: dir out\OpenTrons-win32-ia32
   - cmd: dir
 
 
 build: off
 
-artifacts:
-  - path: out\*.zip
-    name: OTAppWin
+#artifacts:
+#  - path: out\*.zip
+#    name: OTAppWin
 
 
-deploy:
-  - provider: S3
-    access_key_id: $(AWS_ACCESS_KEY)
-    secret_access_key: $(AWS_SECRET_KEY)
-    bucket: ot-app-builds
-    region: us-east-1
-    set_public: true
-    folder: win
-    artifact: OTAppWin
-    on:
-      branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
+#deploy:
+#  - provider: S3
+#    access_key_id: $(AWS_ACCESS_KEY)
+#    secret_access_key: $(AWS_SECRET_KEY)
+#    bucket: ot-app-builds
+#    region: us-east-1
+#    set_public: true
+#    folder: win
+#    artifact: OTAppWin
+#    on:
+#      branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
