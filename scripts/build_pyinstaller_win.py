@@ -94,7 +94,7 @@ def pyinstaller_build():
         nextline = pyinstaller_process.stdout.readline()
         if nextline == '' and pyinstaller_process.poll() is not None:
             break
-        sys.stdout.write(nextline)
+        sys.stdout.write(str(nextline))
         sys.stdout.flush()
 
     output = pyinstaller_process.communicate()[0]
