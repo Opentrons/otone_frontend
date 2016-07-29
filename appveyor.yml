@@ -45,10 +45,10 @@ init:
   # CRITICAL FOR NODE-GYP TO WORK
   - cmd: npm -g install npm@latest
 
-  - cmd: "%PIP3% install autobahn"
-  - cmd: "%PIP3% install zope.interface"
-  - cmd: "%PIP3% install pyserial"
-  - cmd: "%PIP3% install argh"
+#  - cmd: "%PIP3% install autobahn"
+#  - cmd: "%PIP3% install zope.interface"
+#  - cmd: "%PIP3% install pyserial"
+#  - cmd: "%PIP3% install argh"
 #  - cmd: "%PIP3% install attrs"
 #  - cmd: "%PIP3% install cbor"
 #  - cmd: "%PIP3% install cffi"
@@ -72,18 +72,18 @@ init:
 #  - cmd: "%PIP3% install pyOpenSSL"
 #  - cmd: "%PIP3% install pyserial"
 #  - cmd: "%PIP3% install PyTrie"
-  - cmd: "%PIP3% install PyYAML"
+#  - cmd: "%PIP3% install PyYAML"
  # - cmd: "%PIP3% install requests"
 #  - cmd: "%PIP3% install sdnotify"
 #  - cmd: "%PIP3% install sdnotify"
 #  - cmd: "%PIP3% install service-identity"
 #  - cmd: "%PIP3% install setproctitle"
 #  - cmd: "%PIP3% install shutilwhich"
-  - cmd: "%PIP3% install six"
-  - cmd: "%PIP3% install treq"
+#  - cmd: "%PIP3% install six"
+#  - cmd: "%PIP3% install treq"
 #  - cmd: "%PIP3% install Twisted"
-  - cmd: "%PIP3% install txaio"
-  - cmd: "%PIP3% install u-msgpack-python"
+#  - cmd: "%PIP3% install txaio"
+#  - cmd: "%PIP3% install u-msgpack-python"
 #  - cmd: "%PIP3% install watchdog"
 
 install:
@@ -91,6 +91,7 @@ install:
   - cmd: "%PIP3% install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl"
 #  - cmd: "%PIP2% install py2exe"
 #  - cmd: pip install mkdocs
+  - cmd: "%PIP3% install -r requirements"
 #  - cmd: cd backend\backend
 #  - cmd: "%PIP3% freeze > requirements.txt"
 #  - cmd: type requirements.txt
