@@ -38,7 +38,7 @@ init:
   - cmd: dir %PYTHON3%
   - cmd: dir %PYTHON3%\libs
   - cmd: dir %PYTHON3%\Lib
-
+  - cmd: dir %PYTHON3%\Lib\site-packages
   # Set the relevant python and pip location to the path
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
   - cmd: ECHO Path - %PATH%
@@ -94,7 +94,7 @@ init:
 #  - cmd: "%PIP3 install posix"
   - cmd: "%PIP3 install datetime"
 #  - cmd: "%PIP3 install multiprocessing"
-  - cmd: "%PIP3 install io"
+#  - cmd: "%PIP3 install io"
   - cmd: "%PIP3 install pickle"
   - cmd: "%PIP3 install operator"
   - cmd: "%PIP3 install functools"
