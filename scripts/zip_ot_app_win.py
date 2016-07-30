@@ -16,7 +16,7 @@ project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 
-electron_app_dir = os.path.join(project_root_dir, "out")
+electron_app_dir = os.path.join(project_root_dir, "dist")
 
 
 def get_build_tag():

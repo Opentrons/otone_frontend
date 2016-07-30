@@ -182,11 +182,12 @@ install:
 #  - cmd: dir out\OpenTrons-win32-ia32
   - cmd: dir
   - cmd: dir dist
+  - cmd: cd dist
 
 build: off
 
 artifacts:
-  - path: out\*.zip
+  - path: *.zip
     name: OTAppWin
 
 
