@@ -35,6 +35,8 @@ init:
   - cmd: "%PYTHON2%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
   - cmd: "%PYTHON2%\\python -m pip install --upgrade pip"
 
+  - cmd: dir %PYTHON3%
+
   # Set the relevant python and pip location to the path
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
   - cmd: ECHO Path - %PATH%
@@ -89,7 +91,7 @@ init:
   - cmd: "%PIP3 install resource"
 #  - cmd: "%PIP3 install posix"
   - cmd: "%PIP3 install datetime"
-  - cmd: "%PIP3 install multiprocessing"
+#  - cmd: "%PIP3 install multiprocessing"
   - cmd: "%PIP3 install io"
   - cmd: "%PIP3 install pickle"
   - cmd: "%PIP3 install operator"
