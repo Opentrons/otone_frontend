@@ -36,6 +36,8 @@ init:
   - cmd: "%PYTHON2%\\python -m pip install --upgrade pip"
 
   - cmd: dir %PYTHON3%
+  - cmd: dir %PYTHON3%\libs
+  - cmd: dir %PYTHON3%\Lib
 
   # Set the relevant python and pip location to the path
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
