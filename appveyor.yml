@@ -87,7 +87,7 @@ init:
   
 
   - cmd: "%PIP3 install resource"
-  - cmd: "%PIP3 install posix"
+#  - cmd: "%PIP3 install posix"
   - cmd: "%PIP3 install datetime"
   - cmd: "%PIP3 install multiprocessing"
   - cmd: "%PIP3 install io"
