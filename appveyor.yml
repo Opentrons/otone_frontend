@@ -181,23 +181,23 @@ install:
 #  - cmd: dir out
 #  - cmd: dir out\OpenTrons-win32-ia32
   - cmd: dir
-
+  - cmd: dir dist
 
 build: off
 
-#artifacts:
-#  - path: out\*.zip
-#    name: OTAppWin
+artifacts:
+  - path: out\*.zip
+    name: OTAppWin
 
 
-#deploy:
-#  - provider: S3
-#    access_key_id: $(AWS_ACCESS_KEY)
-#    secret_access_key: $(AWS_SECRET_KEY)
-#    bucket: ot-app-builds
-#    region: us-east-1
-#    set_public: true
-#    folder: win
-#    artifact: OTAppWin
-#    on:
-#      branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
+deploy:
+  - provider: S3
+    access_key_id: $(AWS_ACCESS_KEY)
+    secret_access_key: $(AWS_SECRET_KEY)
+    bucket: ot-app-builds
+    region: us-east-1
+    set_public: true
+    folder: win
+    artifact: OTAppWin
+    on:
+      branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
