@@ -95,7 +95,7 @@ init:
   - cmd: "%PIP3 install datetime"
 #  - cmd: "%PIP3 install multiprocessing"
 #  - cmd: "%PIP3 install io"
-  - cmd: "%PIP3 install pickle"
+#  - cmd: "%PIP3 install pickle"
   - cmd: "%PIP3 install operator"
   - cmd: "%PIP3 install functools"
   - cmd: "%PIP3 install opcode"
@@ -132,6 +132,7 @@ install:
 #  - cmd: cp requirements.txt ..\..
 #  - cmd: cd ..\..
 
+  - cmd: dir %PYTHON3%\Lib\site-packages
 #  - cmd: "%PIP3% install zope"
 
   - cmd: "%PIP2% freeze"
