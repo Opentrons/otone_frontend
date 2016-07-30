@@ -107,9 +107,10 @@ install:
 #  - cmd: "%PYTHON3%\\python scripts\\build_py2exe.py"
 #  - cmd: "%PYTHON3%\\python scripts\\build_pyinstaller_win.py"
   - cmd: pyinstaller scripts\pyinstaller.spec
-
-  - cmd: dir otexec\backexec
-  - cmd: xcopy /e otexec\backexec backend-dist\win
+  - cmd: dir dist
+  - cmd: type build\pyinstaller\warnpyinstaller.txt
+#  - cmd: dir otexec\backexec
+  - cmd: xcopy /e dist backend-dist\win
 #  - cmd: node --version
 #  - cmd: npm --version
   - cmd: npm config list
