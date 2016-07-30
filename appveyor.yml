@@ -176,7 +176,7 @@ install:
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
   - cmd: 
-  - cmd: "%PYTHON27%\\python scripts\\build_electron_app_win.py"
+  - cmd: "%PYTHON2%\\python scripts\\build_electron_app_win.py"
 #  - cmd: python scripts\zip_ot_app_win.py
 #  - cmd: dir out
 #  - cmd: dir out\OpenTrons-win32-ia32
