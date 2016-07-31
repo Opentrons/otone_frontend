@@ -177,9 +177,9 @@ install:
   - cmd: cd C:\projects\otone-frontend
   - cmd: 
   - cmd: "%PYTHON2%\\python scripts\\build_electron_app_win.py"
-#  - cmd: python scripts\zip_ot_app_win.py
-#  - cmd: dir out
-#  - cmd: dir out\OpenTrons-win32-ia32
+  - cmd: python scripts\zip_ot_app_win.py
+  - cmd: dir out
+  - cmd: dir out\OpenTrons-win32-ia32
   - cmd: dir
   - cmd: dir dist
 #  - cmd: cd dist
