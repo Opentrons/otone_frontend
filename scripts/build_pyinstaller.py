@@ -5,7 +5,7 @@ import platform
 import subprocess
 
 
-exec_folder_name = "backend-dist"
+exec_folder_name = os.path.join("app", "backend-dist")
 script_tag = "[OT-App Backend build] "
 script_tab = "                    "
 
