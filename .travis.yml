@@ -17,7 +17,9 @@ before_install:
   - nodenv versions
   - nodenv local 6.0.0
   - nodenv version
+  - nodenv rehash
   - npm --version
+  - nodenv which npm
 
   # Install Python 2 and 3 with pip and check versions
   - brew tap drolando/homebrew-deadsnakes
