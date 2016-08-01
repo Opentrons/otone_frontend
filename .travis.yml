@@ -7,6 +7,9 @@ before_install:
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
 
+  # Update brew
+  - brew update
+
   # Install node.js
   - brew install nodenv
   - brew unlink node
@@ -17,7 +20,6 @@ before_install:
   - npm --version
 
   # Install Python 2 and 3 with pip and check versions
-  - brew update
   - brew tap drolando/homebrew-deadsnakes
   - brew install python34
   - PATH=/usr/local/bin:$PATH
