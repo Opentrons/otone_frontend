@@ -1,5 +1,6 @@
 # We are using the iOS build system to create Mac OS X python builds
-language: objective-c
+osx_image: beta-xcode6.1
+language: node_js
 node_js:
   - "6.0.0"
 
