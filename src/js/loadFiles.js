@@ -254,7 +254,6 @@ function loadFile(e) {
     var reader = new FileReader();
 
     reader.onload = function(e){
-      const app = require('electron').remote.app
       const fs = require("fs")
       const path = require("path")
       const protocol_path = path.join(__dirname, "../otone_data/protocol.json")
