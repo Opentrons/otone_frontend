@@ -16,8 +16,10 @@
     "spectron": "^3.2.6"
   },
   "build": {
+    "asar": true,
     "appId": "ot.one.opentrons",
     "app-category-type": "public.app-category.productivity",
+    "productName": "OT One App",
     "dmg": {
         "contents": [
             {
