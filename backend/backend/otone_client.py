@@ -108,6 +108,10 @@ if os.environ.get('DEVELOPMENT'):
 logger.info('OT.One Started')
 
 
+f = open(os.devnull, 'w')
+sys.stdout = f
+sys.stderr = f
+
 from head import Head
 from deck import Deck
 

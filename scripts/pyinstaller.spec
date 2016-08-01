@@ -3,10 +3,10 @@
 block_cipher = None
 
 
-a = Analysis(['backend/otone_client.py'],
-             pathex=['/Users/andy/Documents/github/otone_backend'],
+a = Analysis(['../backend/backend/otone_client.py'],
+             pathex=[],
              binaries=None,
-             datas=[('backend/data/*', 'data')],
+             datas=[('../backend/backend/data/*', 'data')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
