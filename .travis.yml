@@ -24,8 +24,9 @@ before_install:
   - pip3.4 install -r requirements.txt
 
   # Install node.js
+  - brew install nodenv
   - brew unlink node
-  - brew install node
+  - nodenv install 6.0.0
   - node --version
   - npm --version
 
