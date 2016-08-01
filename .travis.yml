@@ -27,6 +27,7 @@ before_install:
   - brew install nodenv
   - brew unlink node
   - nodenv install 6.0.0
+  - nodenv local 6.0.0
   - node --version
   - npm --version
 
