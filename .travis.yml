@@ -7,6 +7,15 @@ before_install:
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
 
+  # Install node.js
+  - brew install nodenv
+  - brew unlink node
+  - nodenv install 6.0.0
+  - nodenv versions
+  - nodenv local v6.0.0
+  - nodenv version
+  - npm --version
+
   # Install Python 2 and 3 with pip and check versions
   - brew update
   - brew tap drolando/homebrew-deadsnakes
@@ -23,15 +32,6 @@ before_install:
 
   - pip3.4 install -r requirements.txt
 
-  # Install node.js
-  - brew install nodenv
-  - brew unlink node
-  - nodenv install 6.0.0
-  - nodenv local 6.0.0
-  - node --version
-  - npm --version
-
-# Build and pack Ardublockly
 install:
   - python3.4 scripts/build_pyinstaller.py
 
