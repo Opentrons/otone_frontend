@@ -1,0 +1,92 @@
+{
+    "a": {
+        "blowout": 21,
+        "bottom": 19,
+        "droptip": 24,
+        "resting": 0,
+        "theContainers": {
+            "MODIFIED_RACK_NAME": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "canvas": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "paint": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "trash": {
+                "x": 120,
+                "y": 190,
+                "z": 100
+            }
+        },
+        "tip_rack_origin": "MODIFIED_RACK_NAME",
+        "tip_racks": [
+            {
+                "container": "MODIFIED_RACK_NAME"
+            }
+        ],
+        "top": 2.5,
+        "trash_container": {
+            "container": "trash"
+        },
+        "volume": 200
+    },
+    "b": {
+        "blowout": 20.2,
+        "bottom": 18.2,
+        "droptip": 22.6,
+        "resting": 0,
+        "theContainers": {
+            "MODIFIED_RACK_NAME": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "canvas": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "paint": {
+                "rel_x": null,
+                "rel_y": null,
+                "rel_z": null,
+                "x": null,
+                "y": null,
+                "z": null
+            },
+            "trash": {
+                "x": 145.997,
+                "y": 324,
+                "z": 54
+            }
+        },
+        "tip_rack_origin": "",
+        "tip_racks": [],
+        "top": 1.8,
+        "trash_container": [],
+        "volume": 200
+    }
+}

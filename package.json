@@ -25,9 +25,11 @@
     "autobahn": "^0.10.1",
     "electron-prebuilt": "^1.2.4",
     "electron-squirrel-startup": "^1.0.0",
+    "fs": "0.0.2",
     "jquery": "^1.11.1",
     "nightlife-rabbit": "git+https://github.com/christian-raedel/nightlife-rabbit",
-    "node-clogger": "git+https://github.com/christian-raedel/node-clogger.git#v0.3.3"
+    "node-clogger": "git+https://github.com/christian-raedel/node-clogger.git#v0.3.3",
+    "zip-folder": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

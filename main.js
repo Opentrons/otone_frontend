@@ -7,6 +7,7 @@ const nightlife  = require('nightlife-rabbit')
     , autobahn = require('autobahn')
 const child_process = require("child_process")
 const electron = require('electron')
+const dialog = electron.dialog
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
@@ -83,3 +84,9 @@ app.on('activate', function () {
     createWindow()
   }
 })
+
+exports.selectDirectory = function(callback) {
+  dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory']
+  }, callback)
+}

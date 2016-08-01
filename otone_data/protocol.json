@@ -1,0 +1,92 @@
+{
+    "info": {
+        "name": "Dinosaur",
+        "description": "protocol description",
+        "create-date": "Jan 21, 2016",
+        "version": "1.0",
+        "run-notes": "none"
+    },
+    "deck": {
+        "MODIFIED_RACK_NAME": {
+            "labware": "tiprack-200ul",
+            "slot" : "B1"
+        },
+        "trash": {
+            "labware": "point",
+            "slot" : "B2"
+        },
+        "canvas": {
+            "labware": "96-PCR-flat",
+            "slot" : "C2"
+        },
+        "paint": {
+            "labware": "tube-rack-2ml",
+            "slot" : "D1"
+        }
+    },
+    "head": {
+        "p200": {
+            "tool": "pipette",
+            "tip-racks": [
+                {
+                    "container": "MODIFIED_RACK_NAME"
+                }
+            ],
+            "trash-container": {
+                "container": "trash"
+            },
+            "multi-channel": false,
+            "axis": "a",
+            "volume": 200,
+            "down-plunger-speed": 300,
+            "up-plunger-speed": 500,
+            "tip-plunge": 6,
+            "extra-pull-volume": 0,
+            "extra-pull-delay": 200,
+            "distribute-percentage": 0.1,
+            "points": [
+                {
+                    "f1": 1,
+                    "f2": 1
+                },
+                {
+                    "f1": 5,
+                    "f2": 5
+                },
+                {
+                    "f1": 7,
+                    "f2": 7
+                },
+                {
+                    "f1": 10,
+                    "f2": 10
+                }
+            ]
+        }
+    },
+    "ingredients": {},
+    "instructions": [
+        {
+            "tool": "p200",
+            "groups": [
+                {
+                    "transfer": [
+                        {
+                            "from": {
+                                "container": "paint",
+                                "location": "A1",
+                                "touch-tip": false
+                            },
+                            "to": {
+                                "container": "canvas",
+                                "location": "D1",
+                                "touch-tip": false
+                            },
+                            "volume": 100
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
