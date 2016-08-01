@@ -8,7 +8,7 @@ import subprocess
 spec_coll_name = "otone_client"
 exec_folder_name = "backend-dist"
 script_tag = "[OT-App Backend build] "
-script_tab = "                    "
+script_tab = "                       "
 
 # The project_root_dir depends on the location of this file, so it cannot be
 # moved without updating this line
