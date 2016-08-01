@@ -131,7 +131,7 @@ class Smoothie(object):
         def connection_made(self):
             """Callback when a connection is made
             """
-            logger.info("smoothie_pyserial:\n\tCB_Factory.connection_made called")
+            logger.info("Serial port CONNECTED")
 
             self.smoothieQueue = list()
 
