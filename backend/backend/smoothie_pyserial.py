@@ -259,6 +259,8 @@ class Smoothie(object):
                 string = (string+'\r\n').encode('UTF-8')
                 try:
                     self.serial_port.write(string)
+                    self.theState['stat'] = 1
+                    self.already_trying = False #spaghetti
                 except serial.SerialException:
                     self.callbacker.connection_lost()
             else:
@@ -643,7 +645,7 @@ class Smoothie(object):
         result = []
         for port in ports:
             try:
-                if 'tty.usbmodem' in port or 'COM' in port:
+                if 'usbmodem' in port or 'COM' in port:
                     s = serial.Serial(port)
                     s.close()
                     result.append(port)
