@@ -6,7 +6,7 @@ const zipFolder = require('zip-folder');
 
 const template = [
   {
-    label: 'File',
+    label: 'Opentrons',
     submenu: [
       {
         label: 'Download Logs',
