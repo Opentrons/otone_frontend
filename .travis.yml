@@ -1,5 +1,7 @@
 # We are using the iOS build system to create Mac OS X python builds
 language: objective-c
+node_js:
+  - "6.0.0"
 
 before_install:
   # OS extra info
@@ -11,15 +13,16 @@ before_install:
   - brew update
 
   # Install node.js
-  - brew install nodenv
-  - brew unlink node
-  - nodenv install 6.0.0
-  - nodenv versions
-  - nodenv local 6.0.0
-  - nodenv version
-  - nodenv rehash
+  # - brew install nodenv
+  # - brew unlink node
+  # - nodenv install 6.0.0
+  # - nodenv versions
+  # - nodenv local 6.0.0
+  # - nodenv version
+  # - nodenv rehash
+  - node --version
   - npm --version
-  - nodenv which npm
+  - npm install
 
   # Install Python 2 and 3 with pip and check versions
   - brew tap drolando/homebrew-deadsnakes
@@ -30,7 +33,7 @@ before_install:
   - python3.4 --version
   - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
 
-  # Install Python packages (built with Python 3, tests for 2 and 3)
+  # Install Python packages (built with Python 3)
   - pip3.4 install pyinstaller
   - pyinstaller --version
   - pip3.4 install -r requirements.txt
