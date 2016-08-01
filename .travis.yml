@@ -1,8 +1,5 @@
 # We are using the iOS build system to create Mac OS X python builds
-osx_image: beta-xcode6.1
-language: node_js
-node_js:
-  - "6.0.0"
+language: objective-c
 
 before_install:
   # OS extra info
@@ -21,6 +18,7 @@ before_install:
   # - nodenv local 6.0.0
   # - nodenv version
   # - nodenv rehash
+  - nvm install 6.0.0
   - node --version
   - npm --version
   - npm install
