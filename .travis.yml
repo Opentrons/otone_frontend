@@ -19,7 +19,7 @@ before_install:
   # - nodenv version
   # - nodenv rehash
   - brew install nvm
-  - mkdir ~/.nvm && export NVM_DIR=~/.nvm && source $(brew --prefix nvm)/nvm.sh
+  - mkdir ~/.nvm && export NVM_DIR=~/.nvm && source $(brew --prefix nvm)/nvm.sh && nvm alias default 6.0.0
   - nvm install 6.0.0
   - node --version
   - npm --version
