@@ -98,6 +98,7 @@ init:
 #  - cmd: "%PIP3% install Twisted"
 #  - cmd: "%PIP3% install txaio"
 #  - cmd: "%PIP3% install u-msgpack-python"
+  - cmd: "%PIP3 install msgpack-python"
 #  - cmd: "%PIP3% install watchdog"
   - cmd: "%PIP3% install pyinstaller==3.1.1"
   
