@@ -24,9 +24,14 @@ platform: x86
 configuration: Release
 
 init:
-
+  
   - "ECHO Installed SDKs:"
   - ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
+  - ps: $x64items = @(Get-ChildItem "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")
+  - ps: $x64items + @(Get-ChildItem "HKLM:SOFTWARE\wow6432node\Microsoft\Windows\CurrentVersion\Uninstall") `
+     | ForEach-object { Get-ItemProperty Microsoft.PowerShell.Core\Registry::$_ } `
+        | Sort-Object -Property DisplayName `
+           | Select-Object -Property DisplayName,DisplayVersion
 
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
   - cmd: wmic OS get OSArchitecture
@@ -94,7 +99,7 @@ init:
 #  - cmd: "%PIP3% install txaio"
 #  - cmd: "%PIP3% install u-msgpack-python"
 #  - cmd: "%PIP3% install watchdog"
-  - cmd: "%PIP3% install pyinstaller"
+  - cmd: "%PIP3% install pyinstaller==3.1.1"
   
 
   - cmd: "%PIP3 install resource"
