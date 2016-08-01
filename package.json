@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "postinstall": "install-app-deps",
     "clean": "rm -rf ./out && rm -rf ./releases/*",
     "build:backend": "python3.4 scripts/build_pyinstaller.py",
     "build:frontend": "python3.4 scripts/build_electron_app.py",
