@@ -4,14 +4,20 @@ const mainProcess = remote.require('./main');
 const path = require('path');
 const zipFolder = require('zip-folder');
 
+const template = [
+  {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Download Logs',
+        click() { downloadLogs() }
+      }
+    ]
+  }
+]
 
-const menu = new Menu()
-menu.append(new MenuItem({label: 'Download Logs', click() { downloadLogs() }}))
-
-window.addEventListener('contextmenu', (e) => {
-  e.preventDefault()
-  menu.popup(remote.getCurrentWindow())
-}, false)
+const menu = Menu.buildFromTemplate(template)
+Menu.setApplicationMenu(menu)
 
 function downloadLogs() {
   mainProcess.selectDirectory((folder) => {
