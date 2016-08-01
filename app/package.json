@@ -1,0 +1,45 @@
+{
+  "name": "ot-one-desktop-app",
+  "version": "1.1.0",
+  "description": "This is the frontend component the OpenTrons OT.One. It's a browser user interface served from the OT.One and it uses Autobahn|JS for connection to the backend running Crossbar.io.",
+  "main": "../main.js",
+  "scripts": {
+    "clean": "rm -rf ./out && rm -rf ./releases/*",
+    "build:backend": "python3.4 scripts/build_pyinstaller.py",
+    "build:frontend": "python3.4 scripts/build_electron_app.py",
+    "package": "python3.4 scripts/zip_ot_app.py",
+    "release": "npm run build:backend && npm run build:frontend && npm run package",
+
+    "start": "electron ."
+  },
+  "dependencies": {
+    "autobahn": "^0.10.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "jquery": "^1.11.1",
+    "nightlife-rabbit": "git+https://github.com/christian-raedel/nightlife-rabbit",
+    "node-clogger": "git+https://github.com/christian-raedel/node-clogger.git#v0.3.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "live-reload": "^1.1.0",
+    "spectron": "^3.2.6"
+  },
+  "build": {
+    "appId": "ot.one.opentrons",
+    "app-category-type": "public.app-category.productivity"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenTrons/otone_frontend.git"
+  },
+  "author": {
+    "name": "engineering@opentrons.com",
+    "email": "engineering@opentrons.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OpenTrons/otone_frontend/issues"
+  },
+  "homepage": "https://github.com/OpenTrons/otone_frontend"
+}
