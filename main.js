@@ -49,19 +49,37 @@ function startWampRouter() {
     });
 }
 
+/**
+ * Starts an executable in a separatae process
+ * @param {param} filePath - path to an executable
+ * @param {Array} extraArgs - Array of arguments to pass during invocation of file
+ */
+
+function execFile(filePath, extraArgs) {
+  backendProcess = child_process.execFile(filePath, extraArgs, {stdio: 'ignore' }, function(error, stdout, stderr){
+    console.log(stdout);
+    console.log(stderr);
+    if (error) {
+      throw error;
+    }
+  });
+}
+/**
+ * Starts otone_client backend executable; kills existing process if any 
+ */
 function startBackend() {
+  const userDataPath = app.getPath('userData');
+
   if (process.platform == "darwin") {
-    child_process.exec('pkill -9 \"otone_client\"', function(error, stdout, stderr){
+    child_process.exec('pkill -9 \"otone_client\"', function(){
       var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
-      var backend_arg = app.getAppPath();
-      backendProcess = child_process.spawn(backend_path, [backend_arg], {stdio: 'ignore' });
+      execFile(backend_path, [userDataPath]);
     });
   }
   else if (process.platform == "win32") {
-    child_process.exec('taskkill /T /F /IM otone_client.exe',function(error, stdout, stderr){
+    child_process.exec('taskkill /T /F /IM otone_client.exe',function(){
       var backend_path = app.getAppPath() + "\\backend-dist\\win\\otone_client.exe";
-      var backend_arg = app.getAppPath();
-      backendProcess = child_process.spawn(backend_path, [backend_arg], {stdio: 'ignore' });
+      execFile(backend_path, [userDataPath]);
     });
   }
   else{
@@ -86,10 +104,3 @@ app.on('activate', function () {
 })
 
 
- document.addEventListener("keydown", function (e) {
-  if (e.which === 123) {
-    require('remote').getCurrentWindow().toggleDevTools();
-  } else if (e.which === 116) {
-    location.reload();
-  }
-});
