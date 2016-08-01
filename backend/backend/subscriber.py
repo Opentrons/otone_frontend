@@ -66,6 +66,7 @@ class Subscriber(object):
     def home(self, data):
         """Intermediate step to start a homing sequence
         """
+        logger.debug('home called')
         self.runner.insQueue.infinity_data = None
         self.runner.insQueue.erase_job()
         self.head.home(data)
@@ -73,11 +74,13 @@ class Subscriber(object):
 
     def list_ports(self):
         if self.head:
+            logger.debug('listports called')
             temp_ports = self.head.smoothieAPI.list_serial_ports()
             self.head.pubber.send_message('portsList',temp_ports)
 
     def connect_port(self, portname):
         if self.head:
+            logger.debug('connect_port called')
             self.head.smoothieAPI.connect(portname)
 
 
@@ -137,6 +140,8 @@ class Subscriber(object):
     def calibrate_container(self, data):
         """Tell the :class:`head` to calibrate a container
         """
+        logger.debug('calibrate container called')
+        logger.debug(data)
         if 'axis' in data and 'name' in data:
             axis = data['axis']
             container_ = data['name']
@@ -202,12 +207,14 @@ class Subscriber(object):
     def instructions(self, data):
         """Intermediate step to have :class:`prtocol_runner` and :class:`the_queue` start running a protocol
         """
+        logger.debug('new instructions received')
         if data and len(data):
             self.runner.insQueue.start_job (data, True)
 
     def infinity(self, data):
         """Intermediate step to have :class:`protocol_runner` and :class:`the_queue` run a protocol to infinity and beyond
         """
+        logger.debug('infinity job received')
         if data and len(data):
             self.runner.insQueue.start_infinity_job (data)
 
