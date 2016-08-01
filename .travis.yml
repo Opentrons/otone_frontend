@@ -31,7 +31,6 @@ before_install:
   # Install Python packages (built with Python 3, tests for 2 and 3)
   - pip3.4 install pyinstaller
   - pyinstaller --version
-
   - pip3.4 install -r requirements.txt
 
 install:
