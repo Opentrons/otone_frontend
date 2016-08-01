@@ -20,6 +20,7 @@
     "appId": "ot.one.opentrons",
     "app-category-type": "public.app-category.productivity",
     "productName": "OT One App",
+    "files": [".\/..\/backend-dist\/**", "**\/*"],
     "dmg": {
         "contents": [
             {
