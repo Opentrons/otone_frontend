@@ -17,7 +17,6 @@ class Ingredients:
         """Initialize Ingredients object
         """
 
-        logger.debug('ingredients.__init__ called')
         self.ingredientDict = ingredients
         
         
@@ -38,7 +37,6 @@ class Ingredients:
          "wine": [{"container": "source-bucket","location": "A2","volume": 25000}]
         }
         """
-        logger.debug('ingredients.configure_ingredients called')
         #delete any previous ingredients
         if self.ingredientDict:
             del self.ingredientDict
