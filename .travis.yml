@@ -28,22 +28,20 @@ before_install:
   - npm install
 
   # Install Python 2 and 3 with pip and check versions
-#  - brew tap drolando/homebrew-deadsnakes
-#  - brew install python34
-#  - PATH=/usr/local/bin:$PATH
-#  - echo $PATH
-#  - brew link --overwrite python34
-#  - python3.4 --version
-#  - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
+  - brew tap drolando/homebrew-deadsnakes
+  - brew install python34
+  - PATH=/usr/local/bin:$PATH
+  - echo $PATH
+  - brew link --overwrite python34
+  - python3.4 --version
+  - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
 
   # Install Python packages (built with Python 3)
-#  - pip3.4 install pyinstaller
-#  - pyinstaller --version
-#  - pip3.4 install -r requirements.txt
+  - pip3.4 install pyinstaller
+  - pyinstaller --version
+  - pip3.4 install -r requirements.txt
 
 install:
-  # - python3.4 scripts/build_pyinstaller.py
-
   - npm --version
   - which npm
   - npm install electron-packager
