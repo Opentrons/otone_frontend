@@ -23,7 +23,7 @@
     "app-category-type": "public.app-category.productivity",
     "productName": "OpenTrons",
     "dmg": {
-        "background": "build/background.png",
+        "background-color": "white",
         "contents": [
             {
                 "x": 410,
