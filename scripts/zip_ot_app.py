@@ -27,7 +27,7 @@ def get_build_tag(os_type):
         time.strftime("%Y-%m-%d_%H.%M")
     )
 
-    if os_type == "linux" or os_type == "darwin":
+    if os_type == "mac":
         print(script_tag + "Checking Travis-CI environment variables for tag:")
         travis_tag = tag_from_ci_env_vars(
             ci_name='Travis-CI',
@@ -38,7 +38,7 @@ def get_build_tag(os_type):
 
         if travis_tag:
             return "{}_{}".format(arch_time_stamp, travis_tag)
-    if os_type == "windows":
+    if os_type == "win":
         print(script_tag + "Checking Appveyor-CI enironment variables for tag:")
         appveyor_tag = tag_from_ci_env_vars(
             ci_name='Appveyor-CI',
@@ -95,13 +95,13 @@ def zip_ot_app(build_tag, os_type):
     zip_app_dir = os.path.join(project_root_dir, 'releases')
     zip_app_path = os.path.join(zip_app_dir, "opentrons_{}".format(build_tag))
 
-    if os_type == "linux" or os_type == "darwin":
+    if os_type == "mac"
         zip_process = subprocess.Popen(
             ['zip', '-r', zip_app_path, current_app_path],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
-    elif os_type == "windows":
+    elif os_type == "win":
         zip_command = 'powershell.exe -nologo -noprofile -command \
         "& { Add-Type -A \'System.IO.Compression.FileSystem\'; \
         [IO.Compression.ZipFile]::CreateFromDirectory(\''+current_app_path+\
@@ -129,7 +129,10 @@ def get_os():
             # Take the first argument and use it as the os
             print(script_tab + "Valid command line argument found: %s" %
                   sys.argv[1])
-            return "%s" % sys.argv[1]
+            if sys.argv[1] == "windows":
+                return "win"
+            else:
+                return "mac"
         else:
             print(script_tab + "Invalid command line argument found: %s\n" %
                   sys.argv[1] + script_tab + "Options available: %s" % valid_os)
@@ -138,14 +141,13 @@ def get_os():
 
     os_found = platform.system().lower()
     if os_found == "windows":
-        print(script_tab + "OS found is: %s" % valid_os[0])
-        return valid_os[0]
-    elif os_found == "linux":
-        print(script_tab + "OS found is: %s" % valid_os[1])
-        return valid_os[1]
-    elif os_found == "darwin":
-        print(script_tab + "OS found is: %s" % valid_os[2])
-        return valid_os[2]
+        os_found = "win"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
+    elif os_found == "linux" or os_found == "darwin":
+        os_found = "mac"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
     else:
         raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
 

@@ -41,7 +41,10 @@ def get_os():
             # Take the first argument and use it as the os
             print(script_tab + "Valid command line argument found: %s" %
                   sys.argv[1])
-            return "%s" % sys.argv[1]
+            if sys.argv[1] == "windows":
+                return "win"
+            else:
+                return "mac"
         else:
             print(script_tab + "Invalid command line argument found: %s\n" %
                   sys.argv[1] + script_tab + "Options available: %s" % valid_os)
@@ -50,14 +53,13 @@ def get_os():
 
     os_found = platform.system().lower()
     if os_found == "windows":
-        print(script_tab + "OS found is: %s" % valid_os[0])
-        return valid_os[0]
-    elif os_found == "linux":
-        print(script_tab + "OS found is: %s" % valid_os[1])
-        return valid_os[1]
-    elif os_found == "darwin":
-        print(script_tab + "OS found is: %s" % valid_os[2])
-        return valid_os[2]
+        os_found = "win"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
+    elif os_found == "linux" or os_found == "darwin":
+        os_found = "mac"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
     else:
         raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
 
@@ -67,7 +69,8 @@ def remove_pyinstaller_temps():
     Removes the temporary folders created by PyInstaller (dist and build).
     """
     remove_directory(os.path.join(os.getcwd(), "dist"))
-    remove_directory(os.path.join(os.getcwd(), "build"))
+    # keep build so we can look at warnings
+    #remove_directory(os.path.join(os.getcwd(), "build"))
 
 
 def pyinstaller_build():
@@ -101,9 +104,9 @@ def move_executable_folder(final_exec_dir, os_type):
     * NOTE: On Windows, pyinstaller puts the executable in dist, whereas on Linux and
     Darwin the executable gets put into dist/[spec_coll_name]. The reason is as yet unknown.
     """
-    if os_type == "windows":
+    if os_type == "win":
         original_exec_dir = os.path.join(project_root_dir, "dist")
-    elif os_type == "Linux" or os_type == "Darwin":
+    elif os_type == "mac":
         original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
     else:
         raise SystemExit("Exit: OS data type is invalid '%s'" % os_type)
@@ -138,7 +141,7 @@ def build_ot_python_backend_executable():
     print(script_tag + "\"dist\" directory contains the following:\n\n%s\n\n\n" % os.listdir(os.path.join(project_root_dir, "dist")))
 
     if not success:
-        print(script_tab + "Removing PyInstaller recent temp directories.")
+        print(script_tab + "Removing PyInstaller recent temp directories.1")
         remove_pyinstaller_temps()
         raise SystemExit(script_tab + "Exiting as there was an error in the "
                                       "PyInstaller execution.")
@@ -151,12 +154,12 @@ def build_ot_python_backend_executable():
     print(script_tag + "Moving executable folder to backend-dist.")
     success = move_executable_folder(backend_exec_path, os_type)
     if not success:
-        print(script_tab + "Removing PyInstaller recent temp directories.")
+        print(script_tab + "Removing PyInstaller recent temp directories.2")
         remove_pyinstaller_temps()
         raise SystemExit(script_tab + "Exiting now as there was an error in "
                                       "the PyInstaller execution.")
 
-    print(script_tag + "Removing PyInstaller recent temp directories.")
+    print(script_tag + "Removing PyInstaller recent temp directories.3")
     remove_pyinstaller_temps()
 
 if __name__ == "__main__":

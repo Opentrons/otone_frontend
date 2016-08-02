@@ -16,7 +16,7 @@ project_root_dir = \
 
 
 def get_ignore_regex(os_type):
-    if os_type == "windows":
+    if os_type == "win":
         ignore_list = [
             "node_modules\\electron-prebuilt",
             "node_modules\\electron-builder",
@@ -35,7 +35,7 @@ def get_ignore_regex(os_type):
             "LICENSE",
         ]
         return '(' +  '|'.join(ignore_list) + ')'
-    elif os_type == "linux" or os_type == "darwin":
+    elif os_type == "mac":
         ignore_list = [
             "node_modules/electron-prebuilt",
             "node_modules/electron-builder",
@@ -70,7 +70,10 @@ def get_os():
             # Take the first argument and use it as the os
             print(script_tab + "Valid command line argument found: %s" %
                   sys.argv[1])
-            return "%s" % sys.argv[1]
+            if sys.argv[1] == "windows":
+                return "win"
+            else:
+                return "mac"
         else:
             print(script_tab + "Invalid command line argument found: %s\n" %
                   sys.argv[1] + script_tab + "Options available: %s" % valid_os)
@@ -79,14 +82,13 @@ def get_os():
 
     os_found = platform.system().lower()
     if os_found == "windows":
-        print(script_tab + "OS found is: %s" % valid_os[0])
-        return valid_os[0]
-    elif os_found == "linux":
-        print(script_tab + "OS found is: %s" % valid_os[1])
-        return valid_os[1]
-    elif os_found == "darwin":
-        print(script_tab + "OS found is: %s" % valid_os[2])
-        return valid_os[2]
+        os_found = "win"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
+    elif os_found == "linux" or os_found == "darwin":
+        os_found = "mac"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
     else:
         raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
 
