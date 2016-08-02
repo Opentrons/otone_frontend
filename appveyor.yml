@@ -7,7 +7,7 @@ environment:
       PYTHON3: "C:\\Python34"
       PYTHON3_VERSION: "3.4.3"
       PYTHON3_ARCH: "32"
-      # PYTHON2.7 REQUIRED FOR NODE-GYP
+      # PYTHON2.7 REQUIRED FOR NODE-GYP & ELECTRON
       PYTHON2: "C:\\Python27"
       PYTHON2_VERSION: "2.7.9"
       PYTHON2_ARCH: "32"
@@ -16,7 +16,7 @@ environment:
   PIP2: C:\\Python27\Scripts\pip
 
   npm_config_arch: ia32
-  
+
 
 
 platform: x86
@@ -24,36 +24,26 @@ platform: x86
 configuration: Release
 
 init:
-  
+# NOTE: OTONE-FRONTEND NOT CLONED YET
+
+# 1. ENSURE CORRECT VERSION OF DEV TOOLS
+
   - "ECHO Installed SDKs:"
   - ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
-  - ps: $x64items = @(Get-ChildItem "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")
-  - ps: $x64items + @(Get-ChildItem "HKLM:SOFTWARE\wow6432node\Microsoft\Windows\CurrentVersion\Uninstall") `
-     | ForEach-object { Get-ItemProperty Microsoft.PowerShell.Core\Registry::$_ } `
-        | Sort-Object -Property DisplayName `
-           | Select-Object -Property DisplayName,DisplayVersion
 
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
   - cmd: wmic OS get OSArchitecture
   - cmd: npm config set msvs_version 2015 --global
-  # As AppVeyor has multiple python install, verify which one uses by default
+
   - cmd: ECHO %PYTHON3% %PYTHON3_VERSION% %PYTHON3_ARCH%
   - cmd: "%PYTHON3%\\python --version"
   - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
   - cmd: "%PYTHON3%\\python -m pip install --upgrade pip"
-  
+
   - cmd: ECHO %PYTHON2% %PYTHON2_VERSION% %PYTHON2_ARCH%
   - cmd: "%PYTHON2%\\python --version"
   - cmd: "%PYTHON2%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
   - cmd: "%PYTHON2%\\python -m pip install --upgrade pip"
-
-  - cmd: dir %PYTHON3%
-  - cmd: dir %PYTHON3%\libs
-  - cmd: dir %PYTHON3%\Lib
-  - cmd: dir %PYTHON3%\Lib\site-packages
-  # Set the relevant python and pip location to the path
-  - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
-  - cmd: ECHO Path - %PATH%
 
   - ps: Install-Product node 6.3.0 x86
   - cmd: node --version
@@ -61,52 +51,44 @@ init:
   # CRITICAL FOR NODE-GYP TO WORK
   - cmd: npm -g install npm@latest
 
-#  - cmd: "%PIP3% install autobahn"
-#  - cmd: "%PIP3% install pyserial"
-#  - cmd: "%PIP3% install PyYAML"
-#  - cmd: "%PIP3% install u-msgpack-python"
-#  - cmd: "%PIP3 install msgpack-python"
-#  - cmd: "%PIP3% install pyinstaller==3.1.1"
-#  - cmd: "%PIP3 install resource"
-#  - cmd: "%PIP3 install datetime"
+# You can use the following PowerShell code to get the full list of software installed on build worker
+# from(https://www.appveyor.com/docs/installed-software):
+#  - ps: $x64items = @(Get-ChildItem "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")
+#  - ps: $x64items + @(Get-ChildItem "HKLM:SOFTWARE\wow6432node\Microsoft\Windows\CurrentVersion\Uninstall") `
+#     | ForEach-object { Get-ItemProperty Microsoft.PowerShell.Core\Registry::$_ } `
+#     | Sort-Object -Property DisplayName `
+#     | Select-Object -Property DisplayName,DisplayVersion
 
 
+# 2. SET THE RELEVANT PYTHON AND PIP LOCATIONS IN THE PATH
+  - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
+  - cmd: ECHO Path - %PATH%
 
 
 install:
+# NOTE: OTONE-FRONTEND NOW CLONED INTO C:\\PROJECTS\OTOONE-FRONTEND
 
+# 1. INSTALL PYTHON DEPENDENCIES
   - cmd: "%PIP3% install -r requirements.txt"
+  # Ensure any submodules are updated, initialized if necessary, and do it recursively
   - cmd: git submodule update --init --recursive
-#  - cmd: "%PIP3% install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl"
-#  - cmd: "%PIP2% install py2exe"
-#  - cmd: pip install mkdocs
-#  - cmd: "%PIP3% install -r requirements.txt"
-#  - cmd: cd backend\backend
-#  - cmd: "%PIP3% freeze > requirements.txt"
-#  - cmd: type requirements.txt
-#  - cmd: cp requirements.txt ..\..
-#  - cmd: cd ..\..
 
-  - cmd: dir %PYTHON3%\Lib\site-packages
-#  - cmd: "%PIP3% install zope"
-
+  # Show installed python2 packages in requirements format
   - cmd: "%PIP2% freeze"
-
-#  - cmd: "%PYTHON3%\\python scripts\\zope_fix.py"
-
+  # Show installed python3 packages in requirements format
   - cmd: "%PIP3% freeze"
-#  - cmd: "%PYTHON3%\\python scripts\\build_py2exe.py"
-#  - cmd: "%PYTHON3%\\python scripts\\build_pyinstaller_win.py"
-  - cmd: pyinstaller scripts\pyinstaller.spec
+
+# 2. BUILD BACKEND EXECUTABLE
+  - cmd: "%PYTHON3%\\python scripts\\build_pyinstaller.py"
+
+  # CHECK CONTENTS OF DIST DIRECTORY, WHERE BACKEND EXECUTABLE IS CREATED
   - cmd: dir dist
+
+  # SHOW WARNINGS FROM PYINSTALLER
   - cmd: type build\pyinstaller\warnpyinstaller.txt
-#  - cmd: dir otexec\backexec
-  - cmd: xcopy /e dist backend-dist\win
-#  - cmd: node --version
-#  - cmd: npm --version
+
+# 3. PREPARE NPM FOR ELECTRON APP BUILD
   - cmd: npm config list
-#  - cmd: npm config set msvs_version 2013 -g
-#  - cmd: npm config list
   - cmd: npm config set python %PYTHON2%\python.exe --global
   - cmd: npm uninstall node-gyp -g
   - cmd: npm uninstall node-gyp
@@ -118,26 +100,19 @@ install:
   - cmd: npm install electron-packager -g
   - cmd: npm install electron-prebuilt --save-dev
   - cmd: npm install electron-prebuilt -g
-#  - cmd: npm install node-gyp
-#  - cmd: npm prune
-#  - cmd: npm uninstall node-gyp
-#  - cmd: npm uninstall node-gyp -g
-#  - cmd: npm install node-gyp -g
-
   - cmd: npm prune
-  - cmd: dir
 
+# 4. INSTALL NODE DEPENDENCIES
   - cmd: npm install
   - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
-  - cmd: 
+
+# 5. BUILD ELECTRON APP
   - cmd: "%PYTHON2%\\python scripts\\build_electron_app_win.py"
+
+# 6. PACKAGE ELECTRON APP
   - cmd: python scripts\zip_ot_app_win.py
-  - cmd: dir out
-  - cmd: dir out\OpenTrons-win32-ia32
-  - cmd: dir
-  - cmd: dir dist
-#  - cmd: cd dist
+
 
 build: off
 
@@ -156,4 +131,4 @@ deploy:
     folder: win
     artifact: OTAppWin
     on:
-      branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
+      branch: $(APPVEYOR_REPO_BRANCH)
