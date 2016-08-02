@@ -5,7 +5,6 @@ import platform
 import subprocess
 
 
-spec_coll_name = "otone_client"
 exec_folder_name = "backend-dist"
 script_tag = "[OT-App Backend build] "
 script_tab = "                       "
@@ -33,7 +32,7 @@ def get_os():
     Gets the OS to based on the command line argument of the platform info.
     Only possibilities are: "windows", "mac", "linux"
     """
-    valid_os = ["windows", "linux", "mac"]
+    valid_os = ["win", "linux", "mac"]
 
     print(script_tab + "Checking for command line argument indicated OS:")
     if len(sys.argv) > 1:
@@ -50,8 +49,8 @@ def get_os():
 
     os_found = platform.system()
     if os_found == "Windows":
-        raise SystemExit(script_tab + "OS found is: %s\n" % valid_os[0] +
-                         "Exit: This script is not design to run on Windows.")
+        print(script_tab + "OS found is: %s" % valid_os[0])
+        return valid_os[0]
     elif os_found == "Linux":
         print(script_tab + "OS found is: %s" % valid_os[1])
         return valid_os[1]
@@ -61,6 +60,17 @@ def get_os():
     else:
         raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
 
+def get_spec_coll_name():
+    os_type = get_os()
+    if os_type == 'win':
+        return "otone_client.exe"
+    elif os_type == 'mac':
+        return "otone_client"
+    raise SystemExit(
+        'Unable to determine pyinstaller.spec COLL name for OS: {}'.format(
+            os_type
+        )
+    )
 
 def remove_pyinstaller_temps():
     """
@@ -98,7 +108,7 @@ def move_executable_folder(final_exec_dir):
     Moves the PyInstaller executable folder from dist to project root.
     :return: Boolean indicating the success state of the operation.
     """
-    original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
+    original_exec_dir = os.path.join(project_root_dir, "dist", get_spec_coll_name())
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)
@@ -132,7 +142,9 @@ def build_ot_python_backend_executable():
                                       "PyInstaller execution.")
 
     print(script_tag + "Removing old OT-App Backend executable directory.")
-    backend_exec_path = os.path.join(exec_folder_name, get_os(), spec_coll_name)
+    backend_exec_path = os.path.join(
+        exec_folder_name, get_os(), get_spec_coll_name()
+    )
     if os.path.isfile(backend_exec_path):
         os.remove(backend_exec_path)
 
