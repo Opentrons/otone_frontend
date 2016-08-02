@@ -5,7 +5,6 @@ import platform
 import subprocess
 
 
-exec_folder_name = os.path.join("app", "backend-dist")
 script_tag = "[OT-App Backend build] "
 script_tab = "                       "
 
@@ -14,6 +13,8 @@ script_tab = "                       "
 project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
+
+exec_folder_name = os.path.join(project_root_dir, "app", "backend-dist")
 
 PYINSTALLER_DISTPATH = os.path.join(project_root_dir, "pyinstaller-dist")
 PYINSTALLER_WORKPATH = os.path.join(project_root_dir, "pyinstaller-build")
@@ -113,7 +114,9 @@ def move_executable_folder(final_exec_dir):
     Moves the PyInstaller executable folder from dist to project root.
     :return: Boolean indicating the success state of the operation.
     """
-    original_exec_dir = os.path.join(project_root_dir, "dist", get_spec_coll_name())
+
+    original_exec_dir = os.path.join(PYINSTALLER_DISTPATH, get_spec_coll_name())
+
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)
