@@ -126,7 +126,7 @@ def build_ot_python_backend_executable():
     print(script_tag + "Running PyInstaller process.")
     success = pyinstaller_build()
 
-    print(script_tag + "/dist contains the following:\n\n%s\n\n\n" % os.listdir('.'))
+    print(script_tag + "\"dist\" directory contains the following:\n\n%s\n\n\n" % os.listdir(os.path.join(project_root_dir, "dist")))
 
     if not success:
         print(script_tab + "Removing PyInstaller recent temp directories.")
