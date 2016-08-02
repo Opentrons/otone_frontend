@@ -51,7 +51,7 @@ def build_electron_app():
         "--prune",
     ]
 
-    electron_packager_process = subprocess.Popen(process_args, env=os.environ.copy())
+    electron_packager_process = subprocess.Popen(process_args)
     electron_packager_process.communicate()
 
     if electron_packager_process.returncode != 0:
