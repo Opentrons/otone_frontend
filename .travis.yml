@@ -43,7 +43,7 @@ before_install:
 install:
   - python3.4 scripts/build_pyinstaller.py
 
-  - npm install -g electron-packager
+  - npm install electron-packager
   - npm install
   - npm run release
   - ls out
