@@ -21,9 +21,9 @@
     "asar": true,
     "appId": "ot.one.opentrons",
     "app-category-type": "public.app-category.productivity",
-    "productName": "OT One App",
-    "files": [".\/..\/backend-dist\/**", "**\/*"],
+    "productName": "OpenTrons",
     "dmg": {
+        "background": "build/background.png",
         "contents": [
             {
                 "x": 410,
@@ -37,9 +37,6 @@
                 "type": "file"
             }
         ]
-    },
-    "win": {
-      "remoteReleases": "https://github.com/develar/onshape-desktop-shell"
     }
   }
 }
