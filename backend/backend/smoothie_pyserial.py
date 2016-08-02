@@ -237,7 +237,7 @@ class Smoothie(object):
         """
         self.connected = True
         self.send(self._dict['setupFeedback'])
-        self.try_add('G91 G0Z-1 G0Z1 G0Z-1 G0Z1 G0Z-1 G0Z1')
+        self.try_add('G91 G0Z-2 G0Z2 G0Z-2 G0Z2 G0Z-2 G0Z2')
         self.on_connect(self.theState)
 
 
