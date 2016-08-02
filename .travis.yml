@@ -36,7 +36,6 @@ before_install:
 install:
   - node --version
   - npm --version
-  - npm install electron-packager
   - npm install
   - npm run release
   - ls out
