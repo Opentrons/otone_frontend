@@ -48,14 +48,14 @@ def get_os():
 
     print(script_tab + "Valid command line arg not found, checking system.")
 
-    os_found = platform.system()
-    if os_found == "Windows":
+    os_found = platform.system().lower()
+    if os_found == "windows":
         print(script_tab + "OS found is: %s" % valid_os[0])
         return valid_os[0]
-    elif os_found == "Linux":
+    elif os_found == "linux":
         print(script_tab + "OS found is: %s" % valid_os[1])
         return valid_os[1]
-    elif os_found == "Darwin":
+    elif os_found == "darwin":
         print(script_tab + "OS found is: %s" % valid_os[2])
         return valid_os[2]
     else:
@@ -101,13 +101,13 @@ def move_executable_folder(final_exec_dir, os_type):
     * NOTE: On Windows, pyinstaller puts the executable in dist, whereas on Linux and
     Darwin the executable gets put into dist/[spec_coll_name]. The reason is as yet unknown.
     """
-    if os_type == "Windows":
+    if os_type == "windows":
         original_exec_dir = os.path.join(project_root_dir, "dist")
     elif os_type == "Linux" or os_type == "Darwin":
         original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
     else:
         raise SystemExit("Exit: OS data type is invalid '%s'" % os_type)
-        
+
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)

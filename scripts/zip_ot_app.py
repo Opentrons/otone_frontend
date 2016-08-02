@@ -27,7 +27,7 @@ def get_build_tag(os_type):
         time.strftime("%Y-%m-%d_%H.%M")
     )
 
-    if os_type == "Linux" or os_type == "Darwin":
+    if os_type == "linux" or os_type == "darwin":
         print(script_tag + "Checking Travis-CI environment variables for tag:")
         travis_tag = tag_from_ci_env_vars(
             ci_name='Travis-CI',
@@ -38,7 +38,7 @@ def get_build_tag(os_type):
 
         if travis_tag:
             return "{}_{}".format(arch_time_stamp, travis_tag)
-    if os_type == "Windows":
+    if os_type == "windows":
         print(script_tag + "Checking Appveyor-CI enironment variables for tag:")
         appveyor_tag = tag_from_ci_env_vars(
             ci_name='Appveyor-CI',
@@ -95,13 +95,13 @@ def zip_ot_app(build_tag, os_type):
     zip_app_dir = os.path.join(project_root_dir, 'releases')
     zip_app_path = os.path.join(zip_app_dir, "opentrons_{}".format(build_tag))
 
-    if os_type == "Linux" or os_type == "Darwin":
+    if os_type == "linux" or os_type == "darwin":
         zip_process = subprocess.Popen(
             ['zip', '-r', zip_app_path, current_app_path],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
-    elif os_type == "Windows":
+    elif os_type == "windows":
         zip_command = 'powershell.exe -nologo -noprofile -command \
         "& { Add-Type -A \'System.IO.Compression.FileSystem\'; \
         [IO.Compression.ZipFile]::CreateFromDirectory(\''+current_app_path+\
@@ -136,14 +136,14 @@ def get_os():
 
     print(script_tab + "Valid command line arg not found, checking system.")
 
-    os_found = platform.system()
-    if os_found == "Windows":
+    os_found = platform.system().lower()
+    if os_found == "windows":
         print(script_tab + "OS found is: %s" % valid_os[0])
         return valid_os[0]
-    elif os_found == "Linux":
+    elif os_found == "linux":
         print(script_tab + "OS found is: %s" % valid_os[1])
         return valid_os[1]
-    elif os_found == "Darwin":
+    elif os_found == "darwin":
         print(script_tab + "OS found is: %s" % valid_os[2])
         return valid_os[2]
     else:

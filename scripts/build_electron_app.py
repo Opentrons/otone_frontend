@@ -16,7 +16,7 @@ project_root_dir = \
 
 
 def get_ignore_regex(os_type):
-    if os_type == "Windows":
+    if os_type == "windows":
         ignore_list = [
             "node_modules\\electron-prebuilt",
             "node_modules\\electron-builder",
@@ -35,7 +35,7 @@ def get_ignore_regex(os_type):
             "LICENSE",
         ]
         return '(' +  '|'.join(ignore_list) + ')'
-    elif os_type == "Linux" or os_type == "Darwin":
+    elif os_type == "linux" or os_type == "darwin":
         ignore_list = [
             "node_modules/electron-prebuilt",
             "node_modules/electron-builder",
@@ -77,14 +77,14 @@ def get_os():
 
     print(script_tab + "Valid command line arg not found, checking system.")
 
-    os_found = platform.system()
-    if os_found == "Windows":
+    os_found = platform.system().lower()
+    if os_found == "windows":
         print(script_tab + "OS found is: %s" % valid_os[0])
         return valid_os[0]
-    elif os_found == "Linux":
+    elif os_found == "linux":
         print(script_tab + "OS found is: %s" % valid_os[1])
         return valid_os[1]
-    elif os_found == "Darwin":
+    elif os_found == "darwin":
         print(script_tab + "OS found is: %s" % valid_os[2])
         return valid_os[2]
     else:
@@ -99,7 +99,7 @@ def build_electron_app():
         "electron-packager",
         project_root_dir,
         "OpenTrons",
-        "--platform", "darwin",
+        "--platform", os_type,
         "--arch", "x64",
         "--out", "out",
         "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
