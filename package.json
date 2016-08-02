@@ -13,6 +13,8 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "live-reload": "^1.1.0",
+    "electron-builder": "5.22.1",
+    "electron-packager": "7.3.0",
     "spectron": "^3.2.6"
   },
   "build": {
