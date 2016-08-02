@@ -108,10 +108,10 @@ install:
   - cmd: cd C:\projects\otone-frontend
 
 # 5. BUILD ELECTRON APP
-  - cmd: "%PYTHON2%\\python scripts\\build_electron_app_win.py"
+  - cmd: "%PYTHON2%\\python scripts\\build_electron_app.py"
 
 # 6. PACKAGE ELECTRON APP
-  - cmd: python scripts\zip_ot_app_win.py
+  - cmd: python scripts\zip_ot_app.py
 
 
 build: off
