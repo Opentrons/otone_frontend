@@ -67,7 +67,6 @@ init:
 #  - cmd: "%PIP3% install u-msgpack-python"
 #  - cmd: "%PIP3 install msgpack-python"
 #  - cmd: "%PIP3% install pyinstaller==3.1.1"
-  - cmd: "%PIP3% install -r requirements.txt"
 #  - cmd: "%PIP3 install resource"
 #  - cmd: "%PIP3 install datetime"
 
@@ -75,6 +74,8 @@ init:
 
 
 install:
+
+  - cmd: "%PIP3% install -r requirements.txt"
   - cmd: git submodule update --init --recursive
 #  - cmd: "%PIP3% install https://dl.dropboxusercontent.com/s/ks2ye06y1azkit8/py2exe-0.9.2.2-cp34-none-win32.whl"
 #  - cmd: "%PIP2% install py2exe"
