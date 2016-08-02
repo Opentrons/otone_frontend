@@ -1,6 +1,6 @@
 {
   "name": "ot-one-desktop-app",
-  "version": "1.1.0",
+  "version": "1.1.4",
   "description": "This is the frontend component the OpenTrons OT.One. It's a browser user interface served from the OT.One and it uses Autobahn|JS for connection to the backend running Crossbar.io.",
   "main": "main.js",
   "scripts": {
@@ -16,9 +16,11 @@
     "autobahn": "^0.10.1",
     "electron-prebuilt": "^1.2.4",
     "electron-squirrel-startup": "^1.0.0",
+    "fs": "0.0.2",
     "jquery": "^1.11.1",
     "nightlife-rabbit": "git+https://github.com/christian-raedel/nightlife-rabbit",
-    "node-clogger": "git+https://github.com/christian-raedel/node-clogger.git#v0.3.3"
+    "node-clogger": "git+https://github.com/christian-raedel/node-clogger.git#v0.3.3",
+    "zip-folder": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

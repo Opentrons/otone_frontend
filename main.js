@@ -5,10 +5,11 @@ const http       = require('http')
 const path = require('path')
 const nightlife  = require('nightlife-rabbit')
     , autobahn = require('autobahn')
-const child_process = require("child_process")
+const child_process = require('child_process')
 const electron = require('electron')
-const app = electron.app
+const {app} = electron
 const BrowserWindow = electron.BrowserWindow
+const addMenu = require('./menu').addMenu;
 
 let backendProcess = undefined
 
@@ -91,15 +92,10 @@ function startBackend() {
 app.on('ready', createWindow)
 app.on('ready', startWampRouter)
 app.on('ready', startBackend)
+app.on('ready', addMenu)
 
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit()
-  }
-})
-
-app.on('activate', function () {
-  if (mainWindow === null) {
-    createWindow()
   }
 })
