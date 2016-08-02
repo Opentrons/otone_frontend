@@ -30,11 +30,10 @@ before_install:
   # Install Python 2 and 3 with pip and check versions
   - brew tap drolando/homebrew-deadsnakes
   - brew install python34
-  - PATH=$PATH:/usr/local/bin
-  - echo $PATH
   - brew link --overwrite python34
   - python3.4 --version
   - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
+  - echo $PATH
 
   # Install Python packages (built with Python 3)
   - pip3.4 install pyinstaller
@@ -42,8 +41,8 @@ before_install:
   - pip3.4 install -r requirements.txt
 
 install:
+  - node --version
   - npm --version
-  - which npm
   - npm install electron-packager
   - npm install
   - npm run release
