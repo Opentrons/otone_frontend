@@ -22,6 +22,7 @@ before_install:
   - mkdir ~/.nvm && export NVM_DIR=~/.nvm && source $(brew --prefix nvm)/nvm.sh && nvm alias default 6.0.0
   - echo "$(brew --prefix nvm)/nvm.sh" >> ~/.bashrc
   - nvm install 6.0.0
+  - nvm use 6.0.0
   - node --version
   - npm --version
   - npm install
