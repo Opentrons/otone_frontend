@@ -11,13 +11,6 @@ before_install:
   - brew update
 
   # Install node.js
-  # - brew install nodenv
-  # - brew unlink node
-  # - nodenv install 6.0.0
-  # - nodenv versions
-  # - nodenv local 6.0.0
-  # - nodenv version
-  # - nodenv rehash
   - brew install nvm
   - mkdir ~/.nvm && export NVM_DIR=~/.nvm && source $(brew --prefix nvm)/nvm.sh && nvm alias default 6.0.0
   - echo "$(brew --prefix nvm)/nvm.sh" >> ~/.bashrc
