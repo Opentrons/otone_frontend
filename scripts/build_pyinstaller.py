@@ -15,6 +15,9 @@ project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 
+PYINSTALLER_DISTPATH = os.path.join(project_root_dir, "pyinstaller-dist")
+PYINSTALLER_WORKPATH = os.path.join(project_root_dir, "pyinstaller-build")
+
 # verbose_print = print if verbose else lambda *a, **k: None
 
 
@@ -76,8 +79,8 @@ def remove_pyinstaller_temps():
     """
     Removes the temporary folders created by PyInstaller (dist and build).
     """
-    remove_directory(os.path.join(os.getcwd(), "dist"))
-    remove_directory(os.path.join(os.getcwd(), "build"))
+    remove_directory(PYINSTALLER_WORKPATH)
+    remove_directory(PYINSTALLER_DISTPATH)
 
 
 def pyinstaller_build():
@@ -88,7 +91,9 @@ def pyinstaller_build():
     """
     process_args = [
         "pyinstaller",
-        "{}".format(os.path.join("scripts", "pyinstaller.spec"))
+        "{}".format(os.path.join("scripts", "pyinstaller.spec")),
+        "--workpath", PYINSTALLER_WORKPATH,
+        "--distpath", PYINSTALLER_DISTPATH
     ]
     print(script_tab + "Command: %s" % process_args)
 
