@@ -93,12 +93,21 @@ def pyinstaller_build():
     return True
 
 
-def move_executable_folder(final_exec_dir):
+def move_executable_folder(final_exec_dir, os_type):
     """
     Moves the PyInstaller executable folder from dist to project root.
     :return: Boolean indicating the success state of the operation.
+
+    * NOTE: On Windows, pyinstaller puts the executable in dist, whereas on Linux and
+    Darwin the executable gets put into dist/[spec_coll_name]. The reason is as yet unknown.
     """
-    original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
+    if os_type == "Windows":
+        original_exec_dir = os.path.join(project_root_dir, "dist")
+    elif os_type == "Linux" or os_type == "Darwin":
+        original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
+    else:
+        raise SystemExit("Exit: OS data type is invalid '%s'" % os_type)
+        
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)
@@ -140,7 +149,7 @@ def build_ot_python_backend_executable():
         os.remove(backend_exec_path)
 
     print(script_tag + "Moving executable folder to backend-dist.")
-    success = move_executable_folder(backend_exec_path)
+    success = move_executable_folder(backend_exec_path, os_type)
     if not success:
         print(script_tab + "Removing PyInstaller recent temp directories.")
         remove_pyinstaller_temps()
