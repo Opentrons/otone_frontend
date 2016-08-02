@@ -7,7 +7,7 @@ import subprocess
 
 output_dir = "out"
 script_tag = "[OT-App frontend build] "
-script_tab = "                    "
+script_tab = "                        "
 
 # The project_root_dir depends on the location of this file, so it cannot be
 # moved without updating this line
@@ -24,11 +24,13 @@ def get_arch():
         return 'ia32'
 
 def get_icon_path():
+    icon_dir = os.path.join(project_root_dir, "build")
+
     platform_type = get_platform()
     if platform_type == 'win32':
-        icon_file = 'icon.ico'
+        icon_file = os.path.join(icon_dir, 'icon.ico')
     elif platform_type == 'darwin':
-        icon_file = 'icon.icns'
+        icon_file = os.path.join(icon_dir, 'icon.icns')
     else:
         raise SystemExit(script_tab + 'Cannot find app icon for OS: {}'.format(platform_type))
 
@@ -73,7 +75,7 @@ def build_electron_app():
 
     process_args = [
         shutil.which("electron-packager"),
-        project_root_dir,
+        os.path.join(project_root_dir, "app"),
         "OpenTrons",
         "--platform", get_platform(),
         "--arch", get_arch(),
