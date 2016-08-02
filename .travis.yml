@@ -30,7 +30,7 @@ before_install:
   # Install Python 2 and 3 with pip and check versions
   - brew tap drolando/homebrew-deadsnakes
   - brew install python34
-  # - PATH=/usr/local/bin:$PATH
+  - PATH=$PATH:/usr/local/bin
   - echo $PATH
   - brew link --overwrite python34
   - python3.4 --version
