@@ -244,19 +244,38 @@ function loadFile(e) {
 
   if(files[0]){
     var _F = files[0];
-    TIPRACKS = {'a':[],'b':[]}; // clear tipracks
+
     _FILENAME = _F.name;
+
+    console.log(_FILENAME);
 
     document.getElementById('fileName').innerHTML = _FILENAME.split('.')[0];
 
     var reader = new FileReader();
 
     reader.onload = function(e){
+      const fs = require("fs")
+      const path = require("path")
+      const protocol_path = path.join(__dirname, "../otone_data/protocol.json")
+
+      fs.writeFile(protocol_path, reader.result, function (err) {
+        if(err){
+          alert("An error ocurred saving the protocol:\n\n "+ err.message)
+        }
+      });
 
       var tempProtocol = undefined;
 
       try{
-        var tempProtocol = JSON.parse(reader.result);
+        var extensionsArray = _FILENAME.split('.');
+        var extension = extensionsArray[extensionsArray.length-1];
+
+        if(extension=='json'){
+          tempProtocol = JSON.parse(reader.result);
+        }
+        else if(extension=='csv'){
+          tempProtocol = convert_csv_to_json(reader.result);
+        }
       }
       catch(err){
         tempProtocol = undefined;
@@ -265,6 +284,8 @@ function loadFile(e) {
       }
 
       if(tempProtocol) {
+
+        TIPRACKS = {'a':[],'b':[]}; // clear tipracks
 
         setPipetteNames(tempProtocol); // set the names of the pipettes in the container table
         //if we find the info generate html elements
@@ -369,6 +390,12 @@ window.addEventListener("keyup", handleKeyboardEvent, false);
 /////////////////////////////////
 
 function createAndSend () {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   if(CURRENT_PROTOCOL) {
 
     var robotProtocol;
@@ -533,6 +560,126 @@ function getAJAX(filepath,callback) {
   oReq.onload = callback;
   oReq.open("get", filepath, true);
   oReq.send();
+}
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
+function convert_csv_to_json(filetext) {
+
+  var line_array = filetext.split('\n');
+
+  var current_ingredients = {};
+  var current_deck = {
+    'trash' : {
+      'labware' : 'point'
+    }
+  };
+  var current_head = {
+    "p10-single" : {
+      "tool" : "pipette",
+      "tip-racks" : [
+      ],
+      "trash-container" : {
+        "container" : "trash"
+      },
+      "multi-channel" : false,
+      "axis" : "a",
+      "volume" : 10,
+      "down-plunger-speed" : 300,
+      "up-plunger-speed" : 500,
+      "tip-plunge" : 8,
+      "extra-pull-volume" : 0.5,
+      "extra-pull-delay" : 1,
+      "distribute-percentage" : 0.1,
+      "points" : [
+      ]
+    }
+  };
+  var current_instructions = [{
+    'tool': 'p10-single',
+    'groups': []
+  }];
+
+  var total_transfers = 0;
+
+  for(var i=0; i<line_array.length; i++) {
+    var cells = line_array[i].split(',');
+    if(cells.length>4) {
+      if(cells[0].trim().indexOf('#')==0) {
+        // it's a commented line
+      }
+      else {
+
+        var volume = Number(cells[4]);
+
+        if(volume>0) {
+          total_transfers++;
+
+          var s_plate = cells[0];
+          var d_plate = cells[2];
+
+          // create a new 96 plate on the deck if it doesn't already exist
+          if(!current_deck[s_plate]){
+            current_deck[s_plate] = {
+              'labware' : '96-PCR-flat'
+            }
+          }
+          if(!current_deck[d_plate]){
+            current_deck[d_plate] = {
+              'labware' : '96-PCR-flat'
+            }
+          }
+
+          var s_well = cells[1];
+          var d_well = cells[3];
+
+          current_instructions[0]['groups'].push({
+            "transfer": [
+              {
+                "from": {
+                  "container": s_plate,
+                  "location": s_well,
+                  "tip-offset": -1
+                },
+                "to": {
+                  "container": d_plate,
+                  "location": d_well
+                },
+                "volume": volume,
+                "blowout" : true
+              }
+            ]
+          });
+        }
+      }
+    }
+  }
+
+  if(total_transfers > 0) {
+    var total_plates = Math.floor(total_transfers/96) + 1
+    for(var p=0; p<total_plates; p++) {
+      var tiprack_name = 'tiprack_' + (p+1);
+      current_deck[tiprack_name] = {
+        'labware' : 'tiprack-10ul'
+      }
+      current_head['p10-single']['tip-racks'].push({
+        'container' : tiprack_name
+      });
+    }
+
+    var new_protocol = {
+      'deck' : current_deck,
+      'head' : current_head,
+      'ingredients' : current_ingredients,
+      'instructions' : current_instructions
+    }
+
+    //console.log(JSON.stringify(new_protocol,undefined,2));
+
+    return new_protocol;
+  }
 }
 
 /////////////////////////////////

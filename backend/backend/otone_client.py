@@ -168,12 +168,10 @@ class WampComponent(wamp.ApplicationSession):
 
 
         def set_client_status(status):
-            logger.debug('WampComponent.set_client_status called')
             global client_status
             client_status = status
             self.publish('com.opentrons.robot_ready',True)
 
-        logger.debug('about to publish com.opentrons.robot_ready TRUE')
         self.publish('com.opentrons.robot_ready',True)
         yield from self.subscribe(set_client_status, 'com.opentrons.browser_ready')
         yield from self.subscribe(subscriber.dispatch_message, 'com.opentrons.browser_to_robot')
@@ -218,7 +216,6 @@ def instantiate_objects():
     global perm_dir_path
     global dir_path
 
-    logger.debug('instantiate_objects called')
     #get default json file
     def_start_protocol = FileIO.get_dict_from_json(os.path.join(dir_path,'data/default_startup_protocol.json'))
     #FileIO.get_dict_from_json('/home/pi/PythonProject/default_startup_protocol.json')
@@ -226,15 +223,9 @@ def instantiate_objects():
 
     #instantiate the head
     head = Head(def_start_protocol['head'], publisher, perm_dir_path)
-    logger.debug('head string: ')
-    logger.debug(str(head))
-    logger.debug('head representation: ')
-    logger.debug(repr(head))
     #use the head data to configure the head
     head_data = {}
     head_data = prot_dict['head']   #extract the head section from prot_dict
-
-    logger.debug("Head configured!")
 
 
     #instantiate the script keeper (sk)
@@ -242,10 +233,6 @@ def instantiate_objects():
 
     #instantiate the deck
     deck = Deck(def_start_protocol['deck'], publisher, perm_dir_path)
-    logger.debug('deck string: ')
-    logger.debug(str(deck))
-    logger.debug('deck representation: ')
-    logger.debug(repr(deck))
 
 
     runner = ProtocolRunner(head, publisher)
@@ -256,7 +243,6 @@ def instantiate_objects():
     deck_data = prot_dict['deck']   #extract the deck section from prot_dict
     #    deck = RobotLib.Deck({})        #instantiate an empty deck
     deck.configure_deck(deck_data)  #configure the deck from prot_dict data
-    logger.debug("Deck configured!")
 
 
     #do something with the Ingredient data
@@ -265,7 +251,6 @@ def instantiate_objects():
     ingr = Ingredients({})
 
     ingr.configure_ingredients(ingr_data) #configure the ingredienets from prot_dict data
-    logger.debug('Ingredients imported!')
 
 
     publisher.set_head(head)
