@@ -95,7 +95,7 @@ def zip_ot_app(build_tag, os_type):
     zip_app_dir = os.path.join(project_root_dir, 'releases')
     zip_app_path = os.path.join(zip_app_dir, "opentrons_{}".format(build_tag))
 
-    if os_type == "mac"
+    if os_type == "mac":
         zip_process = subprocess.Popen(
             ['zip', '-r', zip_app_path, current_app_path],
             stdout=subprocess.PIPE,
