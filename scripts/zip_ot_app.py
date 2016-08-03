@@ -108,11 +108,11 @@ def zip_ot_app(build_tag, os_type):
         print(script_tab + zip_command)
         zip_command += current_app_path
         print(script_tab + zip_command)
-        zip_command += ','
+        zip_command += "','"
         print(script_tab + zip_command)
         zip_command += zip_app_path
         print(script_tab + zip_command)
-        zip_command += '); }\"".format(current_app_path, zip_app_path)
+        zip_command += "'); }\""
         print(script_tab + zip_command)
         zip_process = subprocess.Popen(
             zip_command,
