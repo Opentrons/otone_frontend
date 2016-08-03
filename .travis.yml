@@ -24,17 +24,27 @@ before_install:
   - pip3.4 install -r requirements.txt
 
   # Install node.js
-  - brew unlink node
-  - brew install node
+#  - brew unlink node
+#  - brew install node
   - node --version
   - npm --version
 
+env:
+  - TRAVIS_NODE_VERSION="6.3.0"
+
+
 # Build and pack Ardublockly
 install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - npm install
+  - node --version
+  - npm --version
+
   - python3.4 scripts/build_pyinstaller.py
 
   - npm install -g electron-packager
   - npm install
+  - npm list graceful-fs
   - npm run release:osx
   - ls out
 
