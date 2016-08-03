@@ -100,7 +100,7 @@ def build_electron_app():
         ] + get_ignore_regex()
 
 
-    electron_packager_process = subprocess.Popen(process_args)
+    electron_packager_process = subprocess.Popen(process_args, shell=True)
     electron_packager_process.communicate()
 
     if electron_packager_process.returncode != 0:
