@@ -97,18 +97,32 @@ def build_electron_app():
 
     os_type = get_os()
 
-    process_args = [
-        "electron-packager",
-        project_root_dir,
-        "OpenTrons",
-        "--platform", os_type,
-        "--arch", "x64",
-        "--out", "out",
-        "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
-        "--ignore", get_ignore_regex(os_type),
-        "--overwrite",
-        "--prune",
-    ]
+    if os_type = "win":
+        process_args = [
+            "electron-packager",
+            project_root_dir,
+            "OpenTrons",
+            "--platform", "win32",
+            "--arch", "x64",
+            "--out", "out",
+            "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
+            "--ignore", get_ignore_regex(os_type),
+            "--overwrite",
+            "--prune",
+        ]
+    elif os_type = "mac":
+        rocess_args = [
+            "electron-packager",
+            project_root_dir,
+            "OpenTrons",
+            "--platform", "darwin",
+            "--arch", "x64",
+            "--out", "out",
+            "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
+            "--ignore", get_ignore_regex(os_type),
+            "--overwrite",
+            "--prune",
+        ]
 
     electron_packager_process = subprocess.Popen(process_args, shell=True)
     electron_packager_process.communicate()
