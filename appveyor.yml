@@ -111,6 +111,8 @@ install:
   - cmd: "%PYTHON2%\\python scripts\\build_electron_app.py"
 
 # 6. PACKAGE ELECTRON APP
+  - cmd: dir
+  - cmd: mkdir releases
   - cmd: python scripts\zip_ot_app.py
 
 
