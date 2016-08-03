@@ -97,7 +97,7 @@ def build_electron_app():
 
     os_type = get_os()
 
-    if os_type = "win":
+    if os_type == "win":
         process_args = [
             "electron-packager",
             project_root_dir,
@@ -110,7 +110,7 @@ def build_electron_app():
             "--overwrite",
             "--prune",
         ]
-    elif os_type = "mac":
+    elif os_type == "mac":
         rocess_args = [
             "electron-packager",
             project_root_dir,
