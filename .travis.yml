@@ -14,8 +14,8 @@ before_install:
   - brew install nvm
   - mkdir ~/.nvm && export NVM_DIR=~/.nvm && source $(brew --prefix nvm)/nvm.sh && nvm alias default 6.0.0
   - echo "$(brew --prefix nvm)/nvm.sh" >> ~/.bashrc
-  - nvm install 6.0.0
-  - nvm use 6.0.0
+  - nvm install 6.3.0
+  - nvm use 6.3.0
   - node --version
   - npm --version
   - npm install
@@ -38,7 +38,7 @@ install:
   - npm --version
   - npm install electron-packager
   - npm install
-  - npm run release
+  - npm run release:osx
   - ls out
   - ls releases
 
