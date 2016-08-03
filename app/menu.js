@@ -47,18 +47,15 @@ function downloadLogs() {
 
 function zip(source, destination) {
   zipFolder(source, destination, function(err) {
-    const iconPath = `${app.getAppPath()}/build-assets/icon.png`;
     if(err) {
       dialog.showMessageBox({
         message: `Log exporting failed with error: \n\n ${err}`,
-        buttons: ["OK"],
-        icon: iconPath
+        buttons: ["OK"]
       });
     } else {
       dialog.showMessageBox({
         message: `Logs successfully exported to ${destination}`,
-        buttons: ["OK"],
-        icon: iconPath
+        buttons: ["OK"]
       });
     }
   });
