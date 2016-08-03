@@ -46,6 +46,7 @@ backend_env
 
 # Ignore any Opentrons auto-generated files
 backend/otone_data
+backend/backend/otone_data/*
 backend/logfile.txt
 logfile.txt
 

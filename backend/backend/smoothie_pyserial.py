@@ -248,9 +248,11 @@ class Smoothie(object):
             logger.debug('--> '+string)
             self.on_raw_data('--> '+string)  #self
             if self.serial_port and self.serial_port.is_open:
-                string = (string+'\r\n').encode('UTF-8')
                 try:
-                    self.serial_port.write(string)
+                    self.serial_port.write((string+'\r\n').encode('UTF-8'))
+                    if 'G0' in string or 'G9' in string or 'G4' in string:
+                        self.theState['stat'] = 1
+                        self.already_trying = False #spaghetti
                 except serial.SerialException:
                     self.callbacker.connection_lost()
             else:
@@ -286,9 +288,6 @@ class Smoothie(object):
                 if key == "!!":
                     self.already_trying = False
                     didStateChange = True
-                if ok_print:
-                    if key in self.theState:
-                        logger.debug('smoothie_pyserial:\n\ttheState[{0}] = {1}'.format(key,self.theState[key]))
                 if key == 'stat' and self.theState[key] != value:
                     didStateChange = True
                     self.already_trying = False
@@ -609,7 +608,7 @@ class Smoothie(object):
         result = []
         for port in ports:
             try:
-                if 'tty.usbmodem' in port or 'COM' in port:
+                if 'usbmodem' in port or 'COM' in port:
                     s = serial.Serial(port)
                     s.close()
                     result.append(port)
