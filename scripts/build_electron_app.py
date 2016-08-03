@@ -32,9 +32,9 @@ def get_ignore_regex(os_type):
             "releases",
             "test",
             "requirements.txt",
-            "LICENSE",
+            "LICENSE"
         ]
-        return '(' +  '|'.join(ignore_list) + ')'
+        return ' --ignore='.join(ignore_list)
     elif os_type == "mac":
         ignore_list = [
             "node_modules/electron-prebuilt",
@@ -51,7 +51,7 @@ def get_ignore_regex(os_type):
             "releases",
             "test",
             "requirements.txt",
-            "LICENSE",
+            "LICENSE"
         ]
         return '(' +  '|'.join(ignore_list) + ')'
     else:
@@ -102,13 +102,13 @@ def build_electron_app():
             "electron-packager",
             project_root_dir,
             "OpenTrons",
-            "--platform", "win32",
-            "--arch", "x64",
-            "--out", "out",
-            "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
-            "--ignore", get_ignore_regex(os_type),
+            "--platform=win32",
+            "--arch=x64",
+            "--out=out",
+            "--icon="+os.path.join(project_root_dir, "build-assets", "icon.ico"),
+            get_ignore_regex(os_type),
             "--overwrite",
-            "--prune",
+            "--prune"
         ]
     elif os_type == "mac":
         rocess_args = [
@@ -121,7 +121,7 @@ def build_electron_app():
             "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
             "--ignore", get_ignore_regex(os_type),
             "--overwrite",
-            "--prune",
+            "--prune"
         ]
 
     electron_packager_process = subprocess.Popen(process_args, shell=True)
