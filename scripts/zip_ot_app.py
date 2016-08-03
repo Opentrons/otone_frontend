@@ -109,7 +109,8 @@ def zip_ot_app(build_tag, os_type):
         zip_process = subprocess.Popen(
             zip_command,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
+            shell=True
         )
 
     _, std_err = zip_process.communicate()
