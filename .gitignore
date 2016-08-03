@@ -36,10 +36,10 @@ node_modules
 dist
 
 .node-version
-backend-dist/mac/*
-!backend-dist/mac/.gitkeep
-backend-dist/win/*
-!backend-dist/win/.gitkeep
+app/backend-dist/mac/*
+!app/backend-dist/mac/.gitkeep
+app/backend-dist/win/*
+!app/backend-dist/win/.gitkeep
 
 ## backend gitignore
 backend_env
