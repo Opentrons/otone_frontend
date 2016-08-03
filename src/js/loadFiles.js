@@ -241,6 +241,10 @@ var TIPRACKS = {'a':[],'b':[]}; // tip rack origin is just first tiprack in list
 
 const remote = require("electron").remote
 
+window.addEventListener('load',function(){
+  document.getElementById('ot_app_version').innerHTML = remote.app.getVersion()
+});
+
 function loadFile(e) {
   var files = e.dataTransfer.files; // FileList object.
 
