@@ -158,7 +158,7 @@ def main():
     os_type = get_os()
     print(script_tag + "Zipping OT App for %s." % os_type)
     build_tag = get_build_tag(os_type)
-    zip_ot_app(build_tag)
+    zip_ot_app(build_tag, os_type)
 
 if __name__ == '__main__':
     main()
