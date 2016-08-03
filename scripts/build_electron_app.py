@@ -24,7 +24,7 @@ def get_arch():
         return 'ia32'
 
 def get_icon_path():
-    platform_type = get_platform()
+    platform_type = get_platform().lower()
     if platform_type == 'win32':
         icon_file = 'icon.ico'
     elif platform_type == 'darwin':
@@ -71,20 +71,22 @@ def get_platform():
 def build_electron_app():
     print(script_tag + "Running electron-packager process.")
     ot_type = get_platform()
-
+    print(script_tag + "os_type: {}".format(os_type))
     if ot_type == "darwin":
         process_args = [
-            "electron-packager",
-            project_root_dir,
+            shutil.which("electron-packager"),
+            os.path.join(project_root_dir, "app"),
             "OpenTrons",
-            "--platform="+get_platform(),
-            "--arch="+get_arch(),
-            "--out="+output_dir,
-            "--icon="+get_icon_path(),
+            "--platform", get_platform(),
+            "--arch", get_arch(),
+            "--out", output_dir,
+            "--icon", get_icon_path(),
             "--asar=true",
             "--overwrite",
             "--prune",
         ] + get_ignore_regex()
+        electron_packager_process = subprocess.Popen(process_args)
+        electron_packager_process.communicate()
     elif ot_type == "win32":
         process_args = [
             "electron-packager",
@@ -98,10 +100,10 @@ def build_electron_app():
             "--overwrite",
             "--prune",
         ] + get_ignore_regex()
+        electron_packager_process = subprocess.Popen(process_args, shell=True)
+        electron_packager_process.communicate()
 
 
-    electron_packager_process = subprocess.Popen(process_args, shell=True)
-    electron_packager_process.communicate()
 
     if electron_packager_process.returncode != 0:
         raise SystemExit(script_tag + 'Failed to properly build electron app')
