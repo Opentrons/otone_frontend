@@ -7,7 +7,6 @@
   "dependencies": {
     "autobahn": "^0.10.1",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-prebuilt": "^1.2.4",
     "fs": "0.0.2",
     "jquery": "^1.11.1",
     "nightlife-rabbit": "git+https://github.com/christian-raedel/nightlife-rabbit",

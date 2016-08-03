@@ -95,6 +95,7 @@ app.on('ready', startBackend)
 app.on('ready', addMenu)
 
 app.on('window-all-closed', function () {
+  backendProcess.kill('SIGTERM')
   if (process.platform !== 'darwin') {
     app.quit()
   }
