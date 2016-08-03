@@ -70,19 +70,34 @@ def get_platform():
 
 def build_electron_app():
     print(script_tag + "Running electron-packager process.")
+    ot_type = get_platform()
 
-    process_args = [
-        shutil.which("electron-packager"),
-        project_root_dir,
-        "OpenTrons",
-        "--platform="+get_platform(),
-        "--arch="+get_arch(),
-        "--out="+output_dir,
-        "--icon="+get_icon_path(),
-        "--asar=true",
-        "--overwrite",
-        "--prune",
-    ] + get_ignore_regex()
+    if ot_type == "darwin":
+        process_args = [
+            shutil.which("electron-packager"),
+            project_root_dir,
+            "OpenTrons",
+            "--platform="+get_platform(),
+            "--arch="+get_arch(),
+            "--out="+output_dir,
+            "--icon="+get_icon_path(),
+            "--asar=true",
+            "--overwrite",
+            "--prune",
+        ] + get_ignore_regex()
+    elif ot_type == "win32":
+        process_args = [
+            "electron-packager",
+            project_root_dir,
+            "OpenTrons",
+            "--platform="+get_platform(),
+            "--arch="+get_arch(),
+            "--out="+output_dir,
+            "--icon="+get_icon_path(),
+            "--asar=true",
+            "--overwrite",
+            "--prune",
+        ] + get_ignore_regex()
 
 
     electron_packager_process = subprocess.Popen(process_args)
