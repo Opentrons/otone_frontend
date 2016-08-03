@@ -111,7 +111,7 @@ def build_electron_app():
             "--prune"
         ]
     elif os_type == "mac":
-        rocess_args = [
+        process_args = [
             "electron-packager",
             project_root_dir,
             "OpenTrons",
