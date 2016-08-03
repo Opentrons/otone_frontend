@@ -133,5 +133,5 @@ deploy:
     set_public: true
     folder: win
     artifact: OTAppWin
-#    on:
-#      branch: $(APPVEYOR_REPO_BRANCH)
+    on:
+      branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
