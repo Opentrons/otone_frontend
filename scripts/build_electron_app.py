@@ -1,6 +1,7 @@
-import sys
-import platform
 import os
+import platform
+import shutil
+import struct
 import subprocess
 
 
@@ -15,116 +16,76 @@ project_root_dir = \
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 
 
-def get_ignore_regex(os_type):
-    if os_type == "win":
-        ignore_list = [
-            "node_modules\\electron-prebuilt",
-            "node_modules\\electron-builder",
-            "backend$",
-            "scripts",
-            "tests",
-            "docs",
-            ".node-version",
-            ".python-version",
-            ".git",
-            ".idea",
-            ".*.md$",
-            "releases",
-            "test",
-            "requirements.txt",
-            "LICENSE"
-        ]
-        return ' --ignore='.join(ignore_list)
-    elif os_type == "mac":
-        ignore_list = [
-            "node_modules/electron-prebuilt",
-            "node_modules/electron-builder",
-            "backend$",
-            "scripts",
-            "tests",
-            "docs",
-            ".node-version",
-            ".python-version",
-            ".git",
-            ".idea",
-            ".*.md$",
-            "releases",
-            "test",
-            "requirements.txt",
-            "LICENSE"
-        ]
-        return '(' +  '|'.join(ignore_list) + ')'
+def get_arch():
+    cpu_word_size = struct.calcsize('P') * 8
+    if cpu_word_size == 64:
+        return 'x64'
+    if cpu_word_size == 32:
+        return 'ia32'
+
+def get_icon_path():
+    platform_type = get_platform()
+    if platform_type == 'win32':
+        icon_file = 'icon.ico'
+    elif platform_type == 'darwin':
+        icon_file = 'icon.icns'
     else:
-        return []
+        raise SystemExit(script_tab + 'Cannot find app icon for OS: {}'.format(platform_type))
 
-def get_os():
-    """
-    Gets the OS to based on the command line argument of the platform info.
-    Only possibilities are: "windows", "mac", "linux"
-    """
-    valid_os = ["windows", "linux", "mac"]
+    return os.path.join(project_root_dir, "build-assets", icon_file)
 
-    print(script_tab + "Checking for command line argument indicated OS:")
-    if len(sys.argv) > 1:
-        if sys.argv[1] in valid_os:
-            # Take the first argument and use it as the os
-            print(script_tab + "Valid command line argument found: %s" %
-                  sys.argv[1])
-            if sys.argv[1] == "windows":
-                return "win"
-            else:
-                return "mac"
-        else:
-            print(script_tab + "Invalid command line argument found: %s\n" %
-                  sys.argv[1] + script_tab + "Options available: %s" % valid_os)
+def get_ignore_regex():
+    ignore_list = [
+        os.path.join("node_modules", "electron-builder"),
+        os.path.join("node_modules", "electron-prebuilt"),
+        "backend$",
+        "backend-env",
+        "scripts",
+        "tests",
+        "docs",
+        ".node-version",
+        ".python-version",
+        ".idea",
+        "\.md$",
+        "releases",
+        "test",
+        "requirements.txt",
+        "LICENSE",
+    ]
 
-    print(script_tab + "Valid command line arg not found, checking system.")
+    ignore_flags = []
+    for regex in ignore_list:
+        ignore_flags.extend(["--ignore="+regex])
 
-    os_found = platform.system().lower()
-    if os_found == "windows":
-        os_found = "win"
-        print(script_tab + "OS found is: %s" % os_found)
-        return os_found
-    elif os_found == "linux" or os_found == "darwin":
-        os_found = "mac"
-        print(script_tab + "OS found is: %s" % os_found)
-        return os_found
+    return ignore_flags
+
+def get_platform():
+    os_type = platform.system().lower()
+    if os_type  == 'windows':
+        return 'win32'
+    elif os_type == 'darwin':
+        return 'darwin'
     else:
-        raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
+        raise SystemExit(script_tab + 'Unsupported OS {}'.format(os_type))
 
 def build_electron_app():
     print(script_tag + "Running electron-packager process.")
 
-    os_type = get_os()
+    process_args = [
+        shutil.which("electron-packager"),
+        project_root_dir,
+        "OpenTrons",
+        "--platform="+get_platform(),
+        "--arch="+get_arch(),
+        "--out="+output_dir,
+        "--icon="+get_icon_path(),
+        "--asar=true",
+        "--overwrite",
+        "--prune",
+    ] + get_ignore_regex()
 
-    if os_type == "win":
-        process_args = [
-            "electron-packager",
-            project_root_dir,
-            "OpenTrons",
-            "--platform=win32",
-            "--arch=x64",
-            "--out=out",
-            "--icon="+os.path.join(project_root_dir, "build-assets", "icon.ico"),
-            get_ignore_regex(os_type),
-            "--overwrite",
-            "--prune"
-        ]
-    elif os_type == "mac":
-        process_args = [
-            "electron-packager",
-            project_root_dir,
-            "OpenTrons",
-            "--platform", "darwin",
-            "--arch", "x64",
-            "--out", "out",
-            "--icon", os.path.join(project_root_dir, "build-assets", "icon.ico"),
-            "--ignore", get_ignore_regex(os_type),
-            "--overwrite",
-            "--prune"
-        ]
 
-    electron_packager_process = subprocess.Popen(process_args, shell=True)
+    electron_packager_process = subprocess.Popen(process_args)
     electron_packager_process.communicate()
 
     if electron_packager_process.returncode != 0:
