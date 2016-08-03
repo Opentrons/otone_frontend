@@ -107,7 +107,7 @@ def zip_ot_app(build_tag, os_type):
         zip_command += current_app_path
         zip_command += "','"
         zip_command += zip_app_path
-        zip_command += "'); }\""
+        zip_command += ".zip'); }\""
         zip_process = subprocess.Popen(
             zip_command,
             stdout=subprocess.PIPE,
