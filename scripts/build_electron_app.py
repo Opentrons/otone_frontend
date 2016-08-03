@@ -79,7 +79,7 @@ def build_electron_app():
         "OpenTrons",
         "--platform", get_platform(),
         "--arch", get_arch(),
-        "--version", "1.3.0",
+        "--version", "1.3.1",
         "--out", output_dir,
         "--icon", get_icon_path(),
         "--asar", "true",
