@@ -67,6 +67,8 @@ function execFile(filePath, extraArgs) {
 function startBackend() {
     const userDataPath = app.getPath('userData');
 
+    global.userDataPath = userDataPath;
+
     if (process.platform == "darwin") {
         child_process.exec('pkill -9 \"otone_client\"', function(){
             var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";

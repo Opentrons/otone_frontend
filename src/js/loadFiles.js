@@ -256,7 +256,8 @@ function loadFile(e) {
     reader.onload = function(e){
       const fs = require("fs")
       const path = require("path")
-      const protocol_path = path.join(__dirname, "../otone_data/protocol.json")
+      const remote = require("electron").remote
+      const protocol_path = remote.getGlobal('userDataPath') + "/otone_data/protocol.json";
 
       fs.writeFile(protocol_path, reader.result, function (err) {
         if(err){
