@@ -30,16 +30,6 @@ function createWindow () {
   })
 }
 
-app.on('before-quit', function(){
-
-  if (process.platform == "darwin") {
-    child_process.exec('pkill -9 \"otone_client\"');
-  }
-  else if (process.platform == "win32") {
-    child_process.exec('taskkill /T /F /IM otone_client.exe');
-  }
-});
-
 function startWampRouter() {
     var router = nightlife.createRouter({
         httpServer: http.createServer(),
@@ -63,6 +53,22 @@ function execFile(filePath, extraArgs) {
             throw error;
         }
     });
+
+    var backendProcessName = path.basename(backendProcess.spawnfile)
+    console.log(
+        'Backend process successfully started with PID', backendProcess.pid,
+        'and using spawnfile', backendProcessName
+    )
+
+    backendProcess.shutdown = function (){
+        if (process.platform == "darwin") {
+            child_process.spawnSync('pkill', ['-9', backendProcessName]);
+        }
+        else if (process.platform == "win32") {
+            child_process.spawnSync('taskkill', ['/T', '/F',  '/IM', backendProcessName]);
+        }
+        console.log('Backend process successfully shutdown')
+    }
 }
 
 /**
@@ -72,20 +78,16 @@ function startBackend() {
     const userDataPath = app.getPath('userData');
 
     if (process.platform == "darwin") {
-        child_process.exec('pkill -9 \"otone_client\"', function(){
-            var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
-            execFile(backend_path, [userDataPath]);
-        });
+      var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
+      execFile(backend_path, [userDataPath]);
     }
 
     else if (process.platform == "win32") {
-        child_process.exec('taskkill /T /F /IM otone_client.exe', function(){
-            var backend_path = app.getAppPath() + "\\backend-dist\\win\\otone_client.exe";
-            execFile(backend_path, [userDataPath]);
-        });
+      var backend_path = app.getAppPath() + "\\backend-dist\\win\\otone_client.exe";
+      execFile(backend_path, [userDataPath]);
     }
     else{
-        console.log('\n\n\n\nunknown OS: '+process.platform+'\n\n\n\n');
+      console.log('\n\n\n\nunknown OS: '+process.platform+'\n\n\n\n');
     }
 }
 
@@ -95,7 +97,15 @@ app.on('ready', startBackend)
 app.on('ready', addMenu)
 
 app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
+    process.once("uncaughtException", function (error) {
+      // Ugly but convenient. If we have more than one uncaught exception
+      // then re-raise. Otherwise Do nothing as that exception is caused by
+      // an attempt to shutdown the backend process
+      if (process.listeners("uncaughtException").length > 1) {
+          throw error;
+      }
+    });
+
+    backendProcess.shutdown()
     app.quit()
-  }
 })
