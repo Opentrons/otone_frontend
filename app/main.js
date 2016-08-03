@@ -97,8 +97,18 @@ app.on('ready', startBackend)
 app.on('ready', addMenu)
 
 app.on('window-all-closed', function () {
-  backendProcess.shutdown()
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+    process.once("uncaughtException", function (error) {
+      // Ugly but convenient. If we have more than one uncaught exception
+      // then re-raise. Otherwise Do nothing as that exception is caused by
+      // an attempt to shutdown the backend process
+      if (process.listeners("uncaughtException").length > 1) {
+          throw error;
+      }
+    });
+
+    backendProcess.shutdown()
+
+    if (process.platform !== 'darwin') {
+      app.quit()
+    }
 })
