@@ -70,9 +70,9 @@ def get_platform():
 
 def build_electron_app():
     print(script_tag + "Running electron-packager process.")
-    ot_type = get_platform()
+    os_type = get_platform()
     print(script_tag + "os_type: {}".format(os_type))
-    if ot_type == "darwin":
+    if os_type == "darwin":
         process_args = [
             shutil.which("electron-packager"),
             os.path.join(project_root_dir, "app"),
@@ -87,7 +87,7 @@ def build_electron_app():
         ] + get_ignore_regex()
         electron_packager_process = subprocess.Popen(process_args)
         electron_packager_process.communicate()
-    elif ot_type == "win32":
+    elif os_type == "win32":
         process_args = [
             "electron-packager",
             project_root_dir,
