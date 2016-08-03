@@ -74,7 +74,7 @@ def build_electron_app():
 
     if ot_type == "darwin":
         process_args = [
-            shutil.which("electron-packager"),
+            "electron-packager",
             project_root_dir,
             "OpenTrons",
             "--platform="+get_platform(),
