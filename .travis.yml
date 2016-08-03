@@ -7,47 +7,40 @@ before_install:
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
 
-  # Install Python 2 and 3 with pip and check versions
+  # Update brew
   - brew update
+
+  # Install node.js
+  - brew install nvm
+  - mkdir ~/.nvm && export NVM_DIR=~/.nvm && source $(brew --prefix nvm)/nvm.sh && nvm alias default 6.0.0
+  - echo "$(brew --prefix nvm)/nvm.sh" >> ~/.bashrc
+  - nvm install 6.0.0
+  - nvm use 6.0.0
+  - node --version
+  - npm --version
+  - npm install
+
+  # Install Python 2 and 3 with pip and check versions
   - brew tap drolando/homebrew-deadsnakes
   - brew install python34
-  - PATH=/usr/local/bin:$PATH
-  - echo $PATH
   - brew link --overwrite python34
   - python3.4 --version
   - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
+  - echo $PATH
 
-  # Install Python packages (built with Python 3, tests for 2 and 3)
+  # Install Python packages (built with Python 3)
   - pip3.4 install pyinstaller
   - pyinstaller --version
-
   - pip3.4 install -r requirements.txt
 
-  # Install node.js
-#  - brew unlink node
-#  - brew install node
-  - node --version
-  - npm --version
-
-env:
-  - TRAVIS_NODE_VERSION="6.3.0"
-
-
-# Build and pack Ardublockly
 install:
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-  - npm install
   - node --version
   - npm --version
-
-  - python3.4 scripts/build_pyinstaller.py
-
-  - npm install -g electron-packager
+  - npm install electron-packager
   - npm install
-  - npm list graceful-fs
-  - npm run release:osx
+  - npm run release
   - ls out
-
+  - ls releases
 
 # Deploy the build version in an S3 bucket
 deploy:
@@ -59,6 +52,9 @@ deploy:
   local-dir: releases
   upload-dir: mac
   acl: public_read
+  on:
+    repo: OpenTrons/otone_frontend
+    all_branches: true
 
 notifications:
   email:
