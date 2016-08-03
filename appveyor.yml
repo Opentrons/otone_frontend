@@ -115,6 +115,8 @@ install:
   # RELEASES DIRECTORY REQUIRED FOR scripts\zip_ot_app.py
   - cmd: mkdir releases
   - cmd: python scripts\zip_ot_app.py
+  - cmd: dir releases
+  - cmd: dir out
 
 
 build: off
