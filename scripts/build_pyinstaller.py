@@ -79,10 +79,8 @@ def pyinstaller_build():
     package folder. Captures the output streams and checks for errors.
     :return: Boolean indicating the success state of the operation.
     """
-    process_args = [
-        "pyinstaller",
-        "{}".format(os.path.join("scripts", "pyinstaller.spec"))
-    ]
+    process_args = "pyinstaller {}".format(os.path.join("scripts", "pyinstaller.spec"))
+    
     print(script_tab + "Command: %s" % process_args)
 
     pyinstaller_process = subprocess.Popen(process_args, shell=True)
