@@ -239,6 +239,8 @@ var CURRENT_PROTOCOL = undefined;
 var _FILENAME = undefined;
 var TIPRACKS = {'a':[],'b':[]}; // tip rack origin is just first tiprack in list
 
+const remote = require("electron").remote
+
 function loadFile(e) {
   var files = e.dataTransfer.files; // FileList object.
 
@@ -256,8 +258,7 @@ function loadFile(e) {
     reader.onload = function(e){
       const fs = require("fs")
       const path = require("path")
-      const remote = require("electron").remote
-      const protocol_path = remote.getGlobal('userDataPath') + "/otone_data/protocol.json";
+      const protocol_path = remote.app.getPath('userData') + "/otone_data/protocol.json";
 
       fs.writeFile(protocol_path, reader.result, function (err) {
         if(err){
