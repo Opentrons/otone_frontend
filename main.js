@@ -46,15 +46,10 @@ function startWampRouter() {
         port: 31947,
         path: '/ws',
         autoCreateRealms: true,
-        logger: new CLogger('server', {
+        logger: new CLogger('nightlife-rabbit', {
             transports: [
                 new CLogger.transports.LogFile({
-                    'filename': app.getPath('userData') + '/otone_data/router_logfile.txt',
-                    filters: {
-                        filename: function() {
-                            return new Date().toDateString;
-                        }
-                    }
+                    'filename': app.getPath('userData') + '/otone_data/router_logfile.txt'
                 })
             ]
         })
