@@ -36,7 +36,7 @@ before_install:
 install:
   - node --version
   - npm --version
-  - npm install
+  - npm install && cd app && npm install && cd ..  # Hack until instapp-app-deps works on travis
   - npm run release
   - ls out
   - ls releases
