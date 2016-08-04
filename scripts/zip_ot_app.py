@@ -132,12 +132,10 @@ def zip_ot_app(build_tag, os_type):
         if std_err:
             print(script_tab + "Error using zip command: {}".format(std_err))
     if os_type == "win":
-        zip_command = (
-            "powershell.exe -nologo -noprofile -command \"& "
-            "{ Add-Type -A 'System.IO.Compression.FileSystem'; "
-            "[IO.Compression.ZipFile]::CreateFromDirectory("
-            "'{}','{}.zip'); }\"".format(current_app_path, zip_app_path)
-        )
+        zip_command = "powershell.exe -nologo -noprofile -command \"& "
+        zip_command += "{ Add-Type -A 'System.IO.Compression.FileSystem'; "
+        zip_command += "[IO.Compression.ZipFile]::CreateFromDirectory("
+        zip_command += "'{}','{}.zip'); }\"".format(current_app_path, zip_app_path)
         zip_process = subprocess.Popen(
             zip_command,
             stdout=subprocess.PIPE,
