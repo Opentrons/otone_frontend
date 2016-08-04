@@ -7,11 +7,11 @@ const nightlife  = require('nightlife-rabbit')
     , autobahn = require('autobahn')
 const child_process = require('child_process')
 const electron = require('electron')
-const {app} = electron
-const BrowserWindow = electron.BrowserWindow
+const {app, powerSaveBlocker, BrowserWindow} = electron
 const addMenu = require('./menu').addMenu;
 
 let backendProcess = undefined
+let powerSaver = undefined
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -88,10 +88,15 @@ function startBackend() {
     }
 }
 
+function blockPowerSaver() {
+  powerSaver = powerSaveBlocker.start('prevent-display-sleep')
+}
+
 app.on('ready', createWindow)
 app.on('ready', startWampRouter)
 app.on('ready', startBackend)
 app.on('ready', addMenu)
+app.on('ready', blockPowerSaver)
 
 app.on('window-all-closed', function () {
     process.once("uncaughtException", function (error) {
@@ -103,6 +108,7 @@ app.on('window-all-closed', function () {
       }
     });
 
+    powerSaverBlocker.stop(powerSaver.id)
     backendProcess.shutdown()
     app.quit()
 })
