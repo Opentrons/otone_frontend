@@ -28,7 +28,7 @@ def get_build_tag(os_type):
     :return: string of os, arch, and time stamp and if CI info if available
     """
     arch_time_stamp = "{}{}_{}".format(
-        platform.system(),
+        platform.system()[:3],
         struct.calcsize('P') * 8,
         time.strftime("%Y-%m-%d_%H.%M")
     )
@@ -116,7 +116,7 @@ def zip_ot_app(build_tag, os_type):
     # e.g. <project root>/releases/opentrons_<build tag>.zip
     zip_app_path = os.path.join(
         releases_dir,
-        "opentrons_{}.zip".format(build_tag)
+        "ot_{}.zip".format(build_tag)
     )
     print(script_tab + "Zipped application will be located in: {}".format(
         zip_app_path
@@ -135,7 +135,7 @@ def zip_ot_app(build_tag, os_type):
         zip_command = "powershell.exe -nologo -noprofile -command \"& "
         zip_command += "{ Add-Type -A 'System.IO.Compression.FileSystem'; "
         zip_command += "[IO.Compression.ZipFile]::CreateFromDirectory("
-        zip_command += "'{"+current_app_path+"}','"+zip_app_path+"'.zip'); }\""
+        zip_command += "'{"+current_app_path+"}','"+zip_app_path+"'); }\""
         print(script_tab + zip_command)
         zip_process = subprocess.Popen(
             zip_command,
