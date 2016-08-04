@@ -39,7 +39,11 @@ function startWampRouter() {
                 filename: app.getPath('userData') + '/otone_data/router_logfile.txt',
                 json: false,
                 maxsize: 10*1024*1024,
-                maxFiles: 5
+                maxFiles: 5,
+                timestamp: function(){
+                  const d = new Date();
+                  return d.toISOString();
+                }
             })
         ]
     });
