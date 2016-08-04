@@ -122,14 +122,14 @@ def move_executable_folder(final_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)
         print(script_tab + "BEFORE:\n" + str(os.listdir(PYINSTALLER_DISTPATH)))
-        print(script_tab + "BEFORE:\n" + str(os.listdir(PYINSTALLER_WORKPATH)))
+        print(script_tab + "BEFORE:\n" + str(os.path.join(project_root_dir, "app")))
         print(script_tab + "BEFORE:\n" +str(
                 os.listdir(os.path.join(exec_folder_name, get_os()))
                 )
             )
         shutil.move(original_exec_dir, final_exec_dir)
         print(script_tab + "AFTER:\n" + str(os.listdir(PYINSTALLER_DISTPATH)))
-        print(script_tab + "AFTER:\n" + str(os.listdir(PYINSTALLER_WORKPATH)))
+        print(script_tab + "AFTER:\n" + str(os.path.join(project_root_dir, "app")))
         print(script_tab + "AFTER:\n" +str(
                 os.listdir(os.path.join(exec_folder_name, get_os()))
                 )

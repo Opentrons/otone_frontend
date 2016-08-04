@@ -85,7 +85,7 @@ install:
   - cmd: dir app\backend-dist\win
 
   # SHOW WARNINGS FROM PYINSTALLER
-  - cmd: type build\pyinstaller\warnpyinstaller.txt
+  - cmd: type app\warnpyinstaller.txt
 
 # 3. PREPARE NPM FOR ELECTRON APP BUILD
   - cmd: npm config list
