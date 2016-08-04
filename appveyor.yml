@@ -82,7 +82,7 @@ install:
   - cmd: "%PYTHON3%\\python scripts\\build_pyinstaller.py"
 
   # CHECK CONTENTS OF DIST DIRECTORY, WHERE BACKEND EXECUTABLE IS CREATED
-  - cmd: dir backend-dist\win
+  - cmd: dir app\backend-dist\win
 
   # SHOW WARNINGS FROM PYINSTALLER
   - cmd: type build\pyinstaller\warnpyinstaller.txt
