@@ -239,6 +239,12 @@ var CURRENT_PROTOCOL = undefined;
 var _FILENAME = undefined;
 var TIPRACKS = {'a':[],'b':[]}; // tip rack origin is just first tiprack in list
 
+const remote = require("electron").remote
+
+window.addEventListener('load',function(){
+  document.getElementById('ot_app_version').innerHTML = remote.app.getVersion()
+});
+
 function loadFile(e) {
   var files = e.dataTransfer.files; // FileList object.
 
@@ -254,6 +260,15 @@ function loadFile(e) {
     var reader = new FileReader();
 
     reader.onload = function(e){
+      const fs = require("fs")
+      const path = require("path")
+      const protocol_path = remote.app.getPath('userData') + "/otone_data/protocol.json";
+
+      fs.writeFile(protocol_path, reader.result, function (err) {
+        if(err){
+          alert("An error ocurred saving the protocol:\n\n "+ err.message)
+        }
+      });
 
       var tempProtocol = undefined;
 

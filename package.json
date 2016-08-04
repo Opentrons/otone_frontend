@@ -1,10 +1,6 @@
 {
-  "name": "ot-one-desktop-app",
-  "productName": "OT One App",
-  "version": "1.1.0",
-  "description": "This is the frontend component the OpenTrons OT.One. It's a browser user interface served from the OT.One and it uses Autobahn|JS for connection to the backend running Crossbar.io.",
-  "main": "main.js",
   "scripts": {
+    "postinstall": "install-app-deps",
     "clean": "rm -rf ./out && rm -rf ./releases/*",
     "build:backend": "python3.4 scripts/build_pyinstaller.py",
     "build:frontend": "python3.4 scripts/build_electron_app.py",
@@ -13,35 +9,37 @@
 
     "start": "electron ."
   },
-  "dependencies": {
-    "autobahn": "^0.10.1",
-    "electron-prebuilt": "^1.2.4",
-    "electron-squirrel-startup": "^1.0.0",
-    "jquery": "^1.11.1",
-    "nightlife-rabbit": "git+https://github.com/christian-raedel/nightlife-rabbit",
-    "node-clogger": "git+https://github.com/christian-raedel/node-clogger.git#v0.3.3"
-  },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "live-reload": "^1.1.0",
+    "electron-builder": "5.22.1",
+    "electron-packager": "7.3.0",
     "spectron": "^3.2.6"
   },
   "build": {
+    "asar": true,
     "appId": "ot.one.opentrons",
-    "app-category-type": "public.app-category.productivity"
+    "app-category-type": "public.app-category.productivity",
+    "productName": "OpenTrons",
+    "dmg": {
+        "background-color": "white",
+        "contents": [
+            {
+                "x": 410,
+                "y": 150,
+               "type": "link",
+                "path": "/Applications"
+            },
+            {
+                "x": 130,
+                "y": 150,
+                "type": "file"
+            }
+        ]
+    }
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/OpenTrons/otone_frontend.git"
-  },
-  "author": {
-    "name": "engineering@opentrons.com",
-    "email": "engineering@opentrons.com"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OpenTrons/otone_frontend/issues"
-  },
-  "homepage": "https://github.com/OpenTrons/otone_frontend"
+  "win": {
+    "iconUrl": "https://s3.amazonaws.com/ot-app-builds/win/icon.ico"
+  }
 }

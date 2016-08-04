@@ -39,7 +39,6 @@ class Pipette(Tool):
         offset = the offset in space from the A tool which is defined to
             have offset = (0,0,0)
         """
-        logger.info('pipette.__init__ called')
         toolname = axis + '_pipette'
         super().__init__(toolname, 'pipette', axis)
 
@@ -73,7 +72,6 @@ class Pipette(Tool):
     def init_sequence(self):
         """Returns the initial pipetting sequence when running pipette command - returns plunger to resting position
         """
-        logger.debug('pipette.init_sequence called')
         oneCommand = {}
         oneCommand[self.axis] = self.resting #self.bottom
 
@@ -83,7 +81,6 @@ class Pipette(Tool):
     def end_sequence(self):
         """Returns the end pipetting sequence when running pipette command - currently an empty dictionary
         """
-        logger.debug('pipette.end_sequence called')
         oneCommand = {}
 
         return [oneCommand]
@@ -106,10 +103,11 @@ class Pipette(Tool):
         }
         """
 
-        logger.debug('pipette.pmap called')
 
         temploc = collections.OrderedDict()
         should_home_axis = False
+
+        logger.debug('pipette.pmap() called for dict: {}'.format(temploc))
 
         for n in loc:
             if n=='plunger':
@@ -141,6 +139,7 @@ class Pipette(Tool):
                     }
                 else:
                     logger.error('Cannot find container: {}'.format(containerName))
+                    return
             elif n == 'speed':
                 temploc['axis'] = self.axis
                 temploc[n] = loc[n]
@@ -153,7 +152,6 @@ class Pipette(Tool):
         #this flips the coord system
         if 'container' in loc:
             if loc['container'] is not None:
-                logger.debug('temploc: {}'.format(temploc))
                 if 'x' in temploc and 'x' in temploc['container']:
                     if not math.isnan(temploc['x']) and not math.isnan(temploc['container']['x']):
                         # moving right from container.x
@@ -184,7 +182,6 @@ class Pipette(Tool):
             return_value.append({'home': home_command}) #if tip has been dropped
    
 #        return temploc
-        logger.debug('return_value: {}'.format(return_value))
         return return_value
 
 
@@ -192,8 +189,6 @@ class Pipette(Tool):
     def calibrate(self, property_, value):
         """Set a given pipette property to a value
         """
-        logger.debug('pipette.calibrate called')
-        logger.debug('\tproperty_: {0} , value: {1}'.format(property_,value))
        #ToDo: probably need to utilize None instead of math.nan here
         if (value != None and (property_=='top' or property_=='bottom' or property_=='blowout' or property_=='droptip')):
             # if it's a top or blowout value, save it
@@ -230,10 +225,6 @@ class Pipette(Tool):
         # The following statement needs to be verified:
         #All containers created while the robot is on, regardless of how many jobs it runs,
         #will be saved for each pipette, so that its XYZ origin is remembered until poweroff
-        logger.debug('pipette.create_deck called')
-        logger.debug('containerNameArray: {}'.format(containerNameArray))
-        logger.debug('BEFORE self.theContainers: {}'.format(self.theContainers))
-
 
         if containerNameArray and len(containerNameArray)>0:
             #self.theOldContainers = [self.theConold_name for old_name in self.theContainers if old_name in containerNameArray]
@@ -246,17 +237,13 @@ class Pipette(Tool):
                 if containerNameArray[i] not in list(self.theContainers.keys()):
                     self.theContainers[containerNameArray[i]] = {'x' : None,'y' : None,'z' : None, 'rel_x' : None,'rel_y' : None,'rel_z' : None}
                     
-        logger.debug('AFTER self.theContainers: {}'.format(self.theContainers))
         return self.theContainers
 
     #from pipette.js
     def calibrate_container(self, containerName, coords):
         """Set the absolute location coordinates of a given container for this pipette
         """
-        logger.info('pipette.calibrate_container called')
-        logger.debug('\ncontainerName: {0}, coords: {1}'.format(containerName, coords))
         if containerName and self.theContainers[containerName] and coords:
-            logger.debug('type(coords) = {}'.format(type(coords)))
             if coords['x'] is not None:
                 self.theContainers[containerName]['x'] = coords['x']
             if coords['y'] is not None:
@@ -272,15 +259,12 @@ class Pipette(Tool):
 
                 #js console.log('axis '+self.axis+ 'calibrated container '+containerName)
                 #js console.log(self.theContainers[containerName])
-            logger.debug('axis: {0}, calibrated container: {1}'.format(self.axis,containerName))
 
 
     #from pipette.js
     def rel_to_abs(self, rel_val):
         """Convert a relative value between top and bottom to an absolute position for a pipette plunger operation
         """
-        logger.debug('pipette.rel_to_abs called')
-        logger.debug('\n\nrel_val: {}'.format(rel_val))
 
         if rel_val is not None:
 

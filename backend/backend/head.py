@@ -29,7 +29,6 @@ class Head:
         tools = dictionary of the tools on the head
         
         """
-        logger.info('head.__init__ called')
         self.smoothieAPI = openSmoothie.Smoothie(self)
         self.PIPETTES = {'a':Pipette('a'),'b':Pipette('b')}    #need to create this dict in head setup
         self.tools = tools
@@ -73,7 +72,6 @@ class Head:
         :todo:
         :obj:`theState` should be updated BEFORE the actions taken from given state
         """
-        logger.debug('head.on_state_change called')
         
         if state['stat'] == 1 or state['delaying'] == 1:
             self.theQueue.is_busy = True
@@ -85,7 +83,6 @@ class Head:
                 self.theQueue.step(False)
     
         self.theState = state
-        logger.debug('Head state: {}'.format(self.theState))
 
 
 #local functions---------------
@@ -95,7 +92,6 @@ class Head:
         :returns: (tool_type, axis)
         :rtype: tuple
         """
-        logger.debug('head.get_tool_info called')
         tool_type = head_tool['tool']
         axis = head_tool['axis']
         
@@ -142,8 +138,6 @@ class Head:
                 "volume" : 800
             }
         """
-        logger.debug('head.configure_head called')
-        logger.debug('\targs: {}'.format(head_data))
         #delete any previous tools in head
         del self.tools
         self.tools = []
@@ -204,7 +198,6 @@ class Head:
         :todo:
         Is :meth:`create_pipettes` even needed?
         """
-        logger.debug('head.create_pipettes called')
         thePipettes = {}
         if len(axis):
             for a in axis:
@@ -222,7 +215,6 @@ class Head:
         """Home robot according to axis_dict
         """
         #maps to smoothieAPI.home()
-        logger.debug('head.home called, args: {}'.format(axis_dict))
         
         self.smoothieAPI.home(axis_dict)
         
@@ -231,7 +223,6 @@ class Head:
     def raw(self, string):
         """Send a raw command to the Smoothieboard
         """
-        logger.debug('head.raw called')
         #maps to smoothieAPI.raw()
         #function raw(string)
         self.smoothieAPI.raw(string)
@@ -241,7 +232,6 @@ class Head:
     def kill(self):
         """Halt the Smoothieboard (M112) and clear the the object (:class:`the_queue`)
         """
-        logger.debug('head.kill called')
         #maps to smoothieAPI.halt() with extra code
         self.smoothieAPI.halt()
         self.theQueue.clear();
@@ -250,7 +240,6 @@ class Head:
     def reset(self):
         """Reset the Smoothieboard and clear theQueue object (:class:`the_queue`)
         """
-        logger.debug('head.reset called')
         #maps to smoothieAPI.reset() with extra code
         self.smoothieAPI.reset()
         self.theQueue.clear();
@@ -260,7 +249,6 @@ class Head:
     def get_state(self):
         """Get state information from Smoothieboard
         """
-        logger.debug('head.get_state called')
         #maps to smoothieAPI.get_state()
         #function get_state ()
         return self.smoothieAPI.get_state()
@@ -270,7 +258,6 @@ class Head:
     def set_speed(self, axis, value):
         """Set the speed for given axis to given value
         """
-        logger.debug('head.set_speed called')
         
         #maps to smoothieAPI.set_speed()
         #function setSpeed(axis, value, callback)
@@ -297,9 +284,7 @@ class Head:
         }
 
         """
-        logger.debug('head.move called')
         if locations:
-            logger.debug('locations: {}'.format(locations))
             self.theQueue.add(locations)
         
     #from planner.js
@@ -319,11 +304,6 @@ class Head:
         'b' : 32
         }
         """
-        logger.debug('head.step called')
-        logger.debug('locations: {}'.format(locations))
-        # only step with the UI if the queue is currently empty
-        logger.debug('head:\n\tlen(self.theQueue.qlist): {}'.format(len(self.theQueue.qlist)))
-        logger.debug('head:\n\tself.theQueue.is_busy?: {}'.format(self.theQueue.is_busy))
         if len(self.theQueue.qlist)==0: # and self.theQueue.is_busy==False:
 
             if locations is not None:
@@ -363,7 +343,6 @@ class Head:
         (180 degree rotation around X axis, ie Z and Y +/- flipped)
         
         """
-        logger.debug('head.pipette called')
         if group and 'axis' in group and group['axis'] in self.PIPETTES and 'locations' in group and len(group['locations'])>0:
     
             this_axis = group['axis']  
@@ -372,8 +351,6 @@ class Head:
             # the array of move commands we are about to build from each location
             # starting with this pipette's initializing move commands
             move_commands = current_pipette.init_sequence()
-            logger.debug('head.pipette, current_pipette.init_sequence(): {}'.format(current_pipette.init_sequence()))
-            logger.debug('head.pipette, move_commands: {}'.format(move_commands))
     
             # loop through each location
             # using each pipette's calibrations to test and convert to absolute coordinates
@@ -382,7 +359,6 @@ class Head:
                 thisLocation = group['locations'][i]  
     
                 # convert to absolute coordinates for the specifed pipette axis
-                logger.debug('head.pipette:\n\tlocation: {}'.format(thisLocation))
                 absCoords = current_pipette.pmap(thisLocation)  
     
                 # add the absolute coordinates we just made to our final array
@@ -398,7 +374,6 @@ class Head:
         """Sets the value of a property for given pipette by fetching state information 
         from smoothieboard(:meth:`smoothie_pyserial.get_state`)
         """
-        logger.debug('head.calibrate_pipette called')
         #maps to smoothieAPI.get_state() with extra code
         if pipette and self.PIPETTES[pipette]: 
             state = self.smoothieAPI.get_state()
@@ -411,7 +386,6 @@ class Head:
     def calibrate_container(self, pipette, container):   
         """Set the location of a container
         """
-        logger.debug('head.calibrate_container called')
         if pipette and self.PIPETTES[pipette]:     
             state = self.smoothieAPI.get_state()
             self.PIPETTES[pipette].calibrate_container(container,state)
@@ -420,7 +394,6 @@ class Head:
     def save_volume(self, data):
         """Save pipette volume to otone_data/pipette_values.json
         """
-        logger.debug('head.save_volume called')
         if(self.PIPETTES[data.axis] and data.volume is not None and data.volume > 0):
             self.PIPETTES[data.axis].volume = data.volume
             
@@ -431,7 +404,6 @@ class Head:
     def save_pipette_values(self):
         """Save pipette values to otone_data/pipette_values.json
         """
-        logger.debug('head.save_pipette_values called')
         pipette_values = {}
 
         params_to_save = [
@@ -476,9 +448,8 @@ class Head:
     def load_pipette_values(self):
         """Load pipette values from data/pipette_calibrations.json
         """
-        logger.debug('head.load_pipette_values called')
+        logger.debug('loading pipette calibrations:')
         old_values = FileIO.get_dict_from_json(os.path.join(self.dir_path,'otone_data/pipette_calibrations.json'))
-        logger.debug('old_values:\n')
         logger.debug(old_values)
         
         if self.PIPETTES is not None and len(self.PIPETTES) > 0:
@@ -496,8 +467,6 @@ class Head:
                     #  'volume'
                     #  'theContainers'
             
-            logger.debug('self.PIPETTES[{}]:\n\n'.format(axis))
-            logger.debug(self.PIPETTES[axis])
         else:
             logger.debug('head.load_pipette_values: No pipettes defined in PIPETTES')
             
@@ -513,8 +482,6 @@ class Head:
         :rtype: dictionary
         
         """
-        logger.debug('head.create_deck called')
-        logger.debug('newDeck: {}'.format(new_deck))
         
         #doesn't map to smoothieAPI
         nameArray = []  
@@ -540,18 +507,14 @@ class Head:
         :rtype: dictionary
         
         """
-        logger.debug('head.get_deck called')
         response = {}
         for axis in self.PIPETTES:
             response[axis] = {}
-            logger.debug('self.PIPETTES[{0}].theContainers: {1}'.format(axis, self.PIPETTES[axis].theContainers))
             for name in self.PIPETTES[axis].theContainers:
-                logger.debug('self.PIPETTES[{0}].theContainers[{1}]'.format(axis, self.PIPETTES[axis].theContainers[name]))
                 response[axis][name] = self.PIPETTES[axis].theContainers[name]
   
         self.save_pipette_values()
 
-        logger.debug('head.get_deck response: {}'.format(response))
         return response
 
 
@@ -562,7 +525,6 @@ class Head:
         :rtype: dictionary
         
         """
-        logger.debug('head.get_pipettes called')
         response = {}
 
         for axis in self.PIPETTES:
@@ -577,7 +539,6 @@ class Head:
             #  'droptip'
             #  'volume'
         
-        logger.debug('head.get_pipettes response: {}'.format(response))
         return response
 
     #from planner.js
@@ -588,14 +549,9 @@ class Head:
         """
         #doesn't map to smoothieAPI
         #function movePipette (axis, property)
-        logger.debug('head.move_pipette called')
-        logger.debug('axis: {0}, property_: {1}'.format(axis,property_))
-        logger.debug('head:\n\tself.PIPETTES[axis].__dict__[{0}] = {1}'.format(property_,self.PIPETTES[axis].__dict__[property_]))
         if self.PIPETTES[axis] and property_ in self.PIPETTES[axis].__dict__:
             moveCommand = {}
             moveCommand[axis] = self.PIPETTES[axis].__dict__[property_]
-            logger.debug('moveCommand = {}'.format(moveCommand))
-            logger.debug(moveCommand)
             self.move(moveCommand)
             
     
@@ -611,9 +567,6 @@ class Head:
 
         """
 
-        logger.debug('head.move_plunger called')
-        logger.debug('locations: {}'.format(locations))
-
         if(self.PIPETTES[axis]):
             for i in range(len(locations)):
                 moveCommand = self.PIPETTES[axis].pmap(locations[i])
@@ -623,7 +576,6 @@ class Head:
     def erase_job(self):
         """Tell theQueue to clear
         """
-        logger.debug('head.erase_job called')
         self.smoothieAPI.delay_cancel()
         self.theQueue.clear()
 
@@ -631,7 +583,6 @@ class Head:
     def publish_calibrations(self):
         """Publish calibrations data
         """
-        logger.debug('head.publish_calibrations called')
         self.pubber.send_message('containerLocations',self.get_deck())
         self.pubber.send_message('pipetteValues',self.get_pipettes())
         

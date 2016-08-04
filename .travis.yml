@@ -7,34 +7,36 @@ before_install:
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
 
-  # Install Python 2 and 3 with pip and check versions
+  # Update brew
   - brew update
+
+  # Install node.js
+  - brew install nvm
+  - mkdir ~/.nvm && export NVM_DIR=~/.nvm && source $(brew --prefix nvm)/nvm.sh && nvm alias default 6.0.0
+  - echo "$(brew --prefix nvm)/nvm.sh" >> ~/.bashrc
+  - nvm install 6.0.0
+  - nvm use 6.0.0
+  - node --version
+  - npm --version
+  - npm install
+
+  # Install Python 2 and 3 with pip and check versions
   - brew tap drolando/homebrew-deadsnakes
   - brew install python34
-  - PATH=/usr/local/bin:$PATH
-  - echo $PATH
   - brew link --overwrite python34
   - python3.4 --version
   - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
+  - echo $PATH
 
-  # Install Python packages (built with Python 3, tests for 2 and 3)
+  # Install Python packages (built with Python 3)
   - pip3.4 install pyinstaller
   - pyinstaller --version
-
   - pip3.4 install -r requirements.txt
 
-  # Install node.js
-  - brew unlink node
-  - brew install node
+install:
   - node --version
   - npm --version
-
-# Build and pack Ardublockly
-install:
-  - python3.4 scripts/build_pyinstaller.py
-
-  - npm install -g electron-packager
-  - npm install
+  - npm install && cd app && npm install && cd ..  # Hack until instapp-app-deps works on travis
   - npm run release
   - ls out
   - ls releases
