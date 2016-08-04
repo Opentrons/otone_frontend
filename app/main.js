@@ -9,7 +9,11 @@ const child_process = require('child_process')
 const electron = require('electron')
 const {app} = electron
 const BrowserWindow = electron.BrowserWindow
+
+
 const addMenu = require('./menu').addMenu;
+const initAutoUpdater = require('./update_helpers').initAutoUpdater;
+
 
 let backendProcess = undefined
 
@@ -94,6 +98,8 @@ app.on('ready', createWindow)
 app.on('ready', startWampRouter)
 app.on('ready', startBackend)
 app.on('ready', addMenu)
+app.on('ready', initAutoUpdater)
+
 
 app.on('window-all-closed', function () {
     process.once("uncaughtException", function (error) {
