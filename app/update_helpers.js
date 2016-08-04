@@ -6,9 +6,9 @@ function updateButtonHandler(buttonIndex) {
     console.log('Updating app...')
 }
 
-let updateButtons = {
-    'Ok': okButtonHandler,
-    'Update': updateButtonHandler
-}
+let updateButtons = [
+    ['Ok', okButtonHandler],
+    ['Update', updateButtonHandler]
+]
 
 module.exports = updateButtons;

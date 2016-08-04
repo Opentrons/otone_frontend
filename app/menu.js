@@ -1,7 +1,9 @@
 module.exports.addMenu = addMenu;
 const electron = require("electron");
-const {dialog, Menu, MenuItem, app} = electron;
+const {dialog, Menu, MenuItem, app, autoUpdater} = electron;
 const zipFolder = require('zip-folder');
+
+// const autoUpdater = require('auto-updater');
 const updateButtons = require('./update_helpers');
 
 
@@ -12,12 +14,16 @@ function addMenu() {
       { label: "About", selector: "orderFrontStandardAboutPanel:" },
       { label: 'Update',
         click: () => {
+
+          var updateFeed = 'http://localhost:3000';
+          autoUpdater.setFeedURL(updateFeed + '?v=' + app.getVersion());
+
           dialog.showMessageBox({
             message: 'Check for updates',
-            buttons: Object.keys(updateButtons)
+            buttons: updateButtons.map((item) => item[0])
           },
-          function (buttonIndex){
-          })
+          (buttonIndex) => updateButtons[buttonIndex][1]()
+          )
         }
       },
         { type: "separator" },
