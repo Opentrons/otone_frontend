@@ -630,8 +630,6 @@ var socketHandler = {
       robotState.pipettes[axis].blowout = data[axis].blowout || robotState.pipettes[axis].blowout;
       robotState.pipettes[axis].droptip = data[axis].droptip || robotState.pipettes[axis].droptip;
       robotState.pipettes[axis].volume = data[axis].volume || robotState.pipettes[axis].volume;
-      
-      document.getElementById('pipetteVolume_'+axis).innerHTML = robotState.pipettes[axis].volume.toFixed(2);
 
       try{
         document.getElementById('pipetteVolume_'+axis).innerHTML = robotState.pipettes[axis].volume.toFixed(2);
@@ -1200,61 +1198,45 @@ function moveVolume (axis) {
     return;
   }
 
-  var volumeMenu = document.getElementById('volume_testing');
-  var volume = volumeMenu ? volumeMenu.value : undefined;
+  if(axis) {
 
-  if(debug===true) console.log('volume '+volume);
-
-  if(volume) {
-
-    volume *= -1; // negative because we're just sucking up right now
-
-    // deduce the percentage the plunger should move to
-    var totalPipetteVolume = robotState.pipettes[axis].volume;
-    if(!totalPipetteVolume) totalPipetteVolume = 200;
-    if(!isNaN(totalPipetteVolume)) {
-      var plungerPercentage = volume / totalPipetteVolume;
-
-      if(debug===true) console.log('moving to '+plungerPercentage);
-
-      sendMessage({
-        'type' : 'movePlunger',
-        'data' : {
-          'axis' : axis,
-          'locations' : [
-            {
-              'z' : -20,
-              'relative' : true
-            },
-            {
-              'speed' : 300
-            },
-            {
-              'plunger' : 'blowout'
-            },
-            {
-              'plunger' : 1
-            },
-            {
-              'z' : 20,
-              'relative' : true
-            },
-            {
-              'plunger' : 1
-            },
-            {
-              'speed' : 300
-            },
-            {
-              'plunger' : 1 + plungerPercentage // say 1+ because we're backing off from 1 right now
-            }
-          ]
-        }
-      });
-    }
-    else {
-      alert('Please calibrate pipette volume first');
-    }
+    sendMessage({
+      'type' : 'movePlunger',
+      'data' : {
+        'axis' : axis,
+        'locations' : [
+          {
+            'z' : -20,
+            'relative' : true
+          },
+          {
+            'speed' : 300
+          },
+          {
+            'plunger' : 'blowout'
+          },
+          {
+            'plunger' : 1
+          },
+          {
+            'z' : 20,
+            'relative' : true
+          },
+          {
+            'plunger' : 1
+          },
+          {
+            'speed' : 300
+          },
+          {
+            'plunger' : 0
+          }
+        ]
+      }
+    });
+  }
+  else {
+    alert('Please calibrate pipette volume first');
   }
 }
 
@@ -1263,26 +1245,37 @@ function moveVolume (axis) {
 /////////////////////////////////
 /////////////////////////////////
 
-function saveVolume (axis, volume) {
+function saveVolume (axis) {
 
-  if(!robot_connected){
-    alert('Please first connect to your machine');
-    return;
-  }
+  // if(!robot_connected){
+  //   alert('Please first connect to your machine');
+  //   return;
+  // }
 
-  if(volume && !isNaN(volume)) {
+  // var volumeInput = document.getElementById('volume_input_'+axis);
+  // var volume = volumeMenu ? volumeMenu.value : undefined;
 
-    sendMessage({
-      'type':'saveVolume',
-      'data': {
-        'volume':volume,
-        'axis':axis
-      }
-    });
-    else  {
-      alert('error saving new volume, check the pipette\'s coordinates');
-    }
-  }
+  // volume = Number(volume);
+
+  // if(!isNaN(volume) && volume>0) {
+
+  //   if(debug===true) console.log('pipetteVolume_'+axis);
+  //   document.getElementById('pipetteVolume_'+axis).innerHTML = volume.toFixed(2);
+  //   robotState.pipettes[axis].volume = volume;
+
+  //   sendMessage({
+  //     'type':'saveVolume',
+  //     'data': {
+  //       'volume':volume,
+  //       'axis':axis
+  //     }
+  //   });
+
+  //   volumeInput.value = '';
+  // }
+  // else  {
+  //   alert('error saving new volume');
+  // }
 }
 
 /////////////////////////////////

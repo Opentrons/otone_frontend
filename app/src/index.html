@@ -356,37 +356,23 @@
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
               <div class="UI-block center-block large-panel pipette-panel">
-                <legend class="UI-Title">Calibrate Volume</legend>
+                <legend class="UI-Title">Save Pipette Volume</legend>
                 <div style="margin-left:20px;">
-                  <h4 style="padding-top:10px;">
-                    <span>Testing uL: </span>
-                    <select type="text" id="volume_testing">
-                      <option value="1000">1000</option>
-                      <option value="500">500</option>
-                      <option value="200">200</option>
-                      <option value="100">100</option>
-                      <option value="50">50</option>
-                      <option value="25">25</option>
-                      <option value="10">10</option>
-                      <option value="5">5</option>
-                    </select>
-                  </h4>
-                  <br/>
                   <div style="display:inline-block; ">
                     <div>
                       <span class="shortform pipette-Left">Left</span> (uL): <code id="pipetteVolume_b">null</code>
                     </div>
-                    <br/>
-                    <button type="button" class="btn btn-sm tron-black b" onclick="saveVolume('b')">Save
-                    </button>
+                    <div>
+                      <span class="shortform pipette-Left">Save (uL):</span>
+                      <input type="text" id="volume_input_b" style="width:60px">
+                      </input>
+                      <button type="button" class="btn btn-sm tron-black b" onclick="saveVolume('b')">Save
+                      </button>
+                    </div>
                     <button type="button" class="btn btn-sm tron-black b" onclick="moveVolume('b')">Test</button>
-
-
-
-                    <button type="button" class="btn btn-sm tron-black b" onclick="shakePipette('b')">Shake</button>
-
                     <button type="button" class="btn btn-sm tron-black b" onclick="pickupTip('b')">Pickup-Tip</button>
                   </div>
+                  <br />
                   <div style="display:inline-block; margin-top:20px;">
 
                     <div>
@@ -397,13 +383,6 @@
                       Save
                     </button>
                     <button type="button" class="btn btn-sm tron-blue a" onclick="moveVolume('a')">Test</button>
-
-
-
-
-
-                    <button type="button" class="btn btn-sm tron-blue a" onclick="shakePipette('a')">Shake</button>
-
                     <button type="button" class="btn btn-sm tron-blue a" onclick="pickupTip('a')">Pickup-Tip</button>
                   </div>
 
