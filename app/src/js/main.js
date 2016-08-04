@@ -630,6 +630,8 @@ var socketHandler = {
       robotState.pipettes[axis].blowout = data[axis].blowout || robotState.pipettes[axis].blowout;
       robotState.pipettes[axis].droptip = data[axis].droptip || robotState.pipettes[axis].droptip;
       robotState.pipettes[axis].volume = data[axis].volume || robotState.pipettes[axis].volume;
+      
+      document.getElementById('pipetteVolume_'+axis).innerHTML = robotState.pipettes[axis].volume.toFixed(2);
 
       try{
         document.getElementById('pipetteVolume_'+axis).innerHTML = robotState.pipettes[axis].volume.toFixed(2);
@@ -1261,42 +1263,22 @@ function moveVolume (axis) {
 /////////////////////////////////
 /////////////////////////////////
 
-function saveVolume (axis) {
+function saveVolume (axis, volume) {
 
   if(!robot_connected){
     alert('Please first connect to your machine');
     return;
   }
 
-  var volumeMenu = document.getElementById('volume_testing');
-  var volume = volumeMenu ? volumeMenu.value : undefined;
+  if(volume && !isNaN(volume)) {
 
-  if(volume) {
-
-    // find the percentage we've moved between "bottom" and "top"
-    var totalDistance = robotState.pipettes[axis].bottom - robotState.pipettes[axis].top;
-    var distanceFromBottom = robotState.pipettes[axis].bottom - robotState[axis];
-    var percentageFromBottom = distanceFromBottom / totalDistance;
-
-    if(debug===true) console.log('saved at '+percentageFromBottom);
-
-    // determine the number of uL this pipette can do based of percentage
-    var totalVolume = volume / percentageFromBottom;
-
-    if(!isNaN(totalVolume) && totalVolume>0) {
-
-      if(debug===true) console.log('pipetteVolume_'+axis);
-      document.getElementById('pipetteVolume_'+axis).innerHTML = totalVolume.toFixed(2);
-      robotState.pipettes[axis].volume = totalVolume;
-
-      sendMessage({
-        'type':'saveVolume',
-        'data': {
-          'volume':totalVolume,
-          'axis':axis
-        }
-      });
-    }
+    sendMessage({
+      'type':'saveVolume',
+      'data': {
+        'volume':volume,
+        'axis':axis
+      }
+    });
     else  {
       alert('error saving new volume, check the pipette\'s coordinates');
     }
