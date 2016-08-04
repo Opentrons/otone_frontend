@@ -99,7 +99,10 @@ def pyinstaller_build():
     ]
     print(script_tab + "Command: %s" % process_args)
 
-    pyinstaller_process = subprocess.Popen(process_args, shell=True)
+    if platform.system().lower() == "windows":
+        pyinstaller_process = subprocess.Popen(process_args, shell=True)
+    else:
+        pyinstaller_process = subprocess.Popen(process_args)
     std_op, std_err_op = pyinstaller_process.communicate()
 
     if pyinstaller_process.returncode != 0:
