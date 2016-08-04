@@ -1,6 +1,5 @@
 {
   "scripts": {
-<<<<<<< HEAD
     "postinstall": "install-app-deps",
     "clean": "rm -rf ./out && rm -rf ./releases/*",
     "build:backend:osx": "python3.4 scripts/build_pyinstaller.py",
