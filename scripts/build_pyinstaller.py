@@ -121,11 +121,17 @@ def move_executable_folder(final_exec_dir):
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)
-        print(script_tab + "BEFORE:\n" + os.listdir(original_exec_dir))
-        print(script_tab + "BEFORE:\n" +os.listdir(final_exec_dir))
+        print(script_tab + "BEFORE:\n" + os.listdir(PYINSTALLER_DISTPATH))
+        print(script_tab + "BEFORE:\n" +os.listdir(
+                                                    os.path.join(exec_folder_name, get_os())
+                                                )
+            )
         shutil.move(original_exec_dir, final_exec_dir)
-        print(script_tab + "AFTER:\n" + os.listdir(original_exec_dir))
-        print(script_tab + "AFTER:\n" +os.listdir(final_exec_dir))
+        print(script_tab + "AFTER:\n" + os.listdir(PYINSTALLER_DISTPATH))
+        print(script_tab + "AFTER:\n" +os.listdir(
+                                                    os.path.join(exec_folder_name, get_os())
+                                                )
+            )
     else:
         print(script_tab + "ERROR: PyInstaller executable output folder '%s' " %
               original_exec_dir + "not found!")
