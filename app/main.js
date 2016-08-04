@@ -10,6 +10,8 @@ const electron = require('electron')
 const {app, powerSaveBlocker, BrowserWindow} = electron
 const addMenu = require('./menu').addMenu;
 
+const winston = require('winston')
+
 let backendProcess = undefined
 let powerSaver = undefined
 
@@ -28,12 +30,30 @@ function createWindow () {
 }
 
 function startWampRouter() {
+
+    var wamp_logger = new (winston.Logger)({
+        transports: [
+            new (winston.transports.File)({
+                level: 'verbose',
+                name: 'wamp-router',
+                filename: app.getPath('userData') + '/otone_data/router_logfile.txt',
+                json: false,
+                maxsize: 10*1024*1024,
+                maxFiles: 5,
+                timestamp: function(){
+                  const d = new Date();
+                  return d.toISOString();
+                }
+            })
+        ]
+    });
+
     var router = nightlife.createRouter({
         httpServer: http.createServer(),
         port: 31947,
         path: '/ws',
         autoCreateRealms: true,
-        logger: new CLogger({name: 'nightlife-router'})
+        logger: wamp_logger
     });
 }
 
