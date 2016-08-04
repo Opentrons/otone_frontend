@@ -11,6 +11,8 @@ const {app} = electron
 const BrowserWindow = electron.BrowserWindow
 const addMenu = require('./menu').addMenu;
 
+const winston = require('winston')
+
 let backendProcess = undefined
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -41,21 +43,27 @@ app.on('before-quit', function(){
 });
 
 function startWampRouter() {
+
+    var wamp_logger = new (winston.Logger)({
+        transports: [
+            new (winston.transports.File)({
+                level: 'verbose',
+                name: 'wamp-router',
+                filename: app.getPath('userData') + '/otone_data/router_logfile.txt',
+                json: false,
+                maxsize: 10*1024*1024,
+                maxFiles: 5
+            })
+        ]
+    });
+
     var router = nightlife.createRouter({
         httpServer: http.createServer(),
         port: 31947,
         path: '/ws',
         autoCreateRealms: true,
-        logger: new CLogger('nightlife-rabbit', {
-            transports: [
-                new CLogger.transports.LogFile({
-                    'filename': app.getPath('userData') + '/otone_data/router_logfile.txt'
-                })
-            ]
-        })
+        logger: wamp_logger
     });
-
-    console.log('saving router logs to "' + app.getPath('userData') + '/otone_data/router_logfile.txt"');
 }
 
 /**
