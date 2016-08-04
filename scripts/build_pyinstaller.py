@@ -93,9 +93,9 @@ def pyinstaller_build():
 
     process_args = [
         "pyinstaller",
-        "{}".format(os.path.join("scripts", "pyinstaller.spec")),
         "--workpath", PYINSTALLER_WORKPATH,
-        "--distpath", PYINSTALLER_DISTPATH
+        "--distpath", PYINSTALLER_DISTPATH,
+        "{}".format(os.path.join("scripts", "pyinstaller.spec"))
     ]
     print(script_tab + "Command: %s" % process_args)
 
