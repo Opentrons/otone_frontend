@@ -5,15 +5,8 @@ import platform
 import subprocess
 
 
-<<<<<<< HEAD
-spec_coll_name = "otone_client"
-exec_folder_name = "backend-dist"
-script_tag = "[OT-App Backend build] "
-script_tab = "                    "
-=======
 script_tag = "[OT-App Backend build] "
 script_tab = "                       "
->>>>>>> origin/20-create-windows-installer-for-app
 
 # The project_root_dir depends on the location of this file, so it cannot be
 # moved without updating this line
@@ -21,15 +14,10 @@ project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 
-<<<<<<< HEAD
-=======
 exec_folder_name = os.path.join(project_root_dir, "app", "backend-dist")
 
 PYINSTALLER_DISTPATH = os.path.join(project_root_dir, "pyinstaller-dist")
 PYINSTALLER_WORKPATH = os.path.join(project_root_dir, "pyinstaller-build")
-
->>>>>>> origin/20-create-windows-installer-for-app
-# verbose_print = print if verbose else lambda *a, **k: None
 
 
 def remove_directory(dir_to_remove):
