@@ -6,8 +6,7 @@
     "build:frontend": "python3.4 scripts/build_electron_app.py",
     "package": "python3.4 scripts/zip_ot_app.py",
     "release": "npm run build:backend && npm run build:frontend && npm run package",
-
-    "start": "electron ."
+    "start": "NODE_ENV=development electron app/"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -23,23 +22,26 @@
     "app-category-type": "public.app-category.productivity",
     "productName": "OpenTrons",
     "dmg": {
-        "background-color": "white",
-        "contents": [
-            {
-                "x": 410,
-                "y": 150,
-               "type": "link",
-                "path": "/Applications"
-            },
-            {
-                "x": 130,
-                "y": 150,
-                "type": "file"
-            }
-        ]
+      "background-color": "white",
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
     }
   },
   "win": {
     "iconUrl": "https://s3.amazonaws.com/ot-app-builds/win/icon.ico"
+  },
+  "dependencies": {
+    "electron-debug": "^1.0.1"
   }
 }

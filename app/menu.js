@@ -2,16 +2,28 @@ module.exports.addMenu = addMenu;
 const electron = require("electron");
 const {dialog, Menu, MenuItem, app} = electron;
 const zipFolder = require('zip-folder');
+const updateButtons = require('./update_helpers');
+
 
 function addMenu() {
   const template =  [{
     label: "OpenTrons",
     submenu: [
-        { label: "About", selector: "orderFrontStandardAboutPanel:" },
+      { label: "About", selector: "orderFrontStandardAboutPanel:" },
+      { label: 'Update',
+        click: () => {
+          dialog.showMessageBox({
+            message: 'Check for updates',
+            buttons: Object.keys(updateButtons)
+          },
+          function (buttonIndex){
+          })
+        }
+      },
         { type: "separator" },
         { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
     ]}, {
-    label: "Edit",
+      label: "Edit",
     submenu: [
         { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
         { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
