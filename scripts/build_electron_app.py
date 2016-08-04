@@ -7,7 +7,7 @@ import subprocess
 
 output_dir = "out"
 script_tag = "[OT-App frontend build] "
-script_tab = "                    "
+script_tab = "                        "
 
 # The project_root_dir depends on the location of this file, so it cannot be
 # moved without updating this line
@@ -24,11 +24,13 @@ def get_arch():
         return 'ia32'
 
 def get_icon_path():
-    platform_type = get_platform().lower()
+    icon_dir = os.path.join(project_root_dir, "build")
+
+    platform_type = get_platform()
     if platform_type == 'win32':
-        icon_file = 'icon.ico'
+        icon_file = os.path.join(icon_dir, 'icon.ico')
     elif platform_type == 'darwin':
-        icon_file = 'icon.icns'
+        icon_file = os.path.join(icon_dir, 'icon.icns')
     else:
         raise SystemExit(script_tab + 'Cannot find app icon for OS: {}'.format(platform_type))
 
@@ -70,6 +72,7 @@ def get_platform():
 
 def build_electron_app():
     print(script_tag + "Running electron-packager process.")
+
     os_type = get_platform()
     print(script_tag + "os_type: {}".format(os_type))
     if os_type == "darwin":
@@ -79,6 +82,7 @@ def build_electron_app():
             "OpenTrons",
             "--platform", get_platform(),
             "--arch", get_arch(),
+            "--version=1.3.1"
             "--out", output_dir,
             "--icon", get_icon_path(),
             "--asar=true",
@@ -94,6 +98,7 @@ def build_electron_app():
             "OpenTrons",
             "--platform="+get_platform(),
             "--arch="+get_arch(),
+            "--version=1.3.1",
             "--out="+output_dir,
             "--icon="+get_icon_path(),
             "--asar=true",
@@ -102,8 +107,6 @@ def build_electron_app():
         ] + get_ignore_regex()
         electron_packager_process = subprocess.Popen(process_args, shell=True)
         electron_packager_process.communicate()
-
-
 
     if electron_packager_process.returncode != 0:
         raise SystemExit(script_tag + 'Failed to properly build electron app')

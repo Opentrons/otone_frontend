@@ -35,7 +35,6 @@ class InstructionQueue:
         """Initialize Instruction Queue object
         
         """
-        logger.info('instruction_queue.__init__ called')
         self.head = head
         self.isRunning = False
         self.infinity_data = None
@@ -52,12 +51,10 @@ class InstructionQueue:
     def start_job(self, instructions, should_home):
         """Start the ProtocolRunner job with a givein list of instructions
         """
-        logger.info('instruction_queue.start_job called')
         logger.debug('instructions: {}'.format(instructions))
         if instructions and len(instructions):
             self.head.erase_job()
             self.instructionArray = instructions
-            logger.debug('instruction_queue: new instructions: {}'.format(self.instructionArray))
 
             if self.infinity_data is None or should_home == True:
                 self.head.home({'x':True,'y':True,'z':True,'a':True,'b':True})
@@ -77,7 +74,7 @@ class InstructionQueue:
     def erase_job(self):
         """Erase the ProtocolRunner job
         """
-        logger.info('instruction_queue.erase_job called')
+        logger.info('Infinity job started')
         self.head.erase_job()
         self.isRunning = False;
         self.instructionArray = []
@@ -86,8 +83,7 @@ class InstructionQueue:
     def ins_step(self):
         """Increment to the next instruction in the :obj:`instructionArray`
         """
-        logger.debug('instruction_queue.ins_step called, len(self.instructionArray): {}'.format(len(self.instructionArray)))
-        logger.debug('instruction_queue self.instructionArray: {}'.format(self.instructionArray))
+        logger.debug('Instruction queue (length {})'.format(len(self.instructionArray)))
         if len(self.instructionArray)>0:
             #pop the first item in the instructionArray list
             #this_instruction = self.instructionArray.splice(0,1)[0]
@@ -96,8 +92,6 @@ class InstructionQueue:
                 self.send_instruction(this_instruction)
         elif self.isRunning == True:
             if self.infinity_data is not None:
-                logger.debug('ins_step self.infinity_data: ********************************\n\n')
-                logger.debug(str(self.infinity_data) + '\n')
                 self.start_job(json.loads(self.infinity_data, object_pairs_hook=collections.OrderedDict),False)
             else:
                 self.erase_job()
@@ -108,8 +102,6 @@ class InstructionQueue:
     def send_instruction(self,instruction):
         """Execute groups (:meth:`head.pipette`) from the given instruction list one by one
         """
-        logger.debug('instruction_queue.send_instruction called')
-        logger.debug('instruction: {0}'.format(json.dumps(instruction,sort_keys=True,indent=4,separators=(',',': '))))
         if 'groups' in instruction and len(instruction['groups']):
             for m in instruction['groups']:
                 this_group = m

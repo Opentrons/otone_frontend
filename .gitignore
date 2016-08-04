@@ -36,16 +36,17 @@ node_modules
 dist
 
 .node-version
-backend-dist/mac/*
-!backend-dist/mac/.gitkeep
-backend-dist/win/*
-!backend-dist/win/.gitkeep
+app/backend-dist/mac/*
+!app/backend-dist/mac/.gitkeep
+app/backend-dist/win/*
+!app/backend-dist/win/.gitkeep
 
 ## backend gitignore
 backend_env
 
 # Ignore any Opentrons auto-generated files
 backend/otone_data
+backend/backend/otone_data/*
 backend/logfile.txt
 logfile.txt
 
@@ -60,7 +61,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
 dist/
 downloads/

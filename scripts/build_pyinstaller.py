@@ -5,10 +5,15 @@ import platform
 import subprocess
 
 
+<<<<<<< HEAD
 spec_coll_name = "otone_client"
 exec_folder_name = "backend-dist"
 script_tag = "[OT-App Backend build] "
 script_tab = "                    "
+=======
+script_tag = "[OT-App Backend build] "
+script_tab = "                       "
+>>>>>>> origin/20-create-windows-installer-for-app
 
 # The project_root_dir depends on the location of this file, so it cannot be
 # moved without updating this line
@@ -16,6 +21,14 @@ project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 
+<<<<<<< HEAD
+=======
+exec_folder_name = os.path.join(project_root_dir, "app", "backend-dist")
+
+PYINSTALLER_DISTPATH = os.path.join(project_root_dir, "pyinstaller-dist")
+PYINSTALLER_WORKPATH = os.path.join(project_root_dir, "pyinstaller-build")
+
+>>>>>>> origin/20-create-windows-installer-for-app
 # verbose_print = print if verbose else lambda *a, **k: None
 
 
@@ -33,7 +46,8 @@ def get_os():
     Gets the OS to based on the command line argument of the platform info.
     Only possibilities are: "windows", "mac", "linux"
     """
-    valid_os = ["windows", "linux", "mac"]
+
+    valid_os = ["win", "linux", "mac"]
 
     print(script_tab + "Checking for command line argument indicated OS:")
     if len(sys.argv) > 1:
@@ -41,10 +55,7 @@ def get_os():
             # Take the first argument and use it as the os
             print(script_tab + "Valid command line argument found: %s" %
                   sys.argv[1])
-            if sys.argv[1] == "windows":
-                return "win"
-            else:
-                return "mac"
+            return "%s" % sys.argv[1]
         else:
             print(script_tab + "Invalid command line argument found: %s\n" %
                   sys.argv[1] + script_tab + "Options available: %s" % valid_os)
@@ -64,13 +75,25 @@ def get_os():
         raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
 
 
+def get_spec_coll_name():
+    os_type = get_os()
+    if os_type == 'win':
+        return "otone_client.exe"
+    elif os_type == 'mac':
+        return "otone_client"
+    raise SystemExit(
+        'Unable to determine pyinstaller.spec COLL name for OS: {}'.format(
+            os_type
+        )
+    )
+
+
 def remove_pyinstaller_temps():
     """
     Removes the temporary folders created by PyInstaller (dist and build).
     """
-    remove_directory(os.path.join(os.getcwd(), "dist"))
-    # keep build so we can look at warnings
-    #remove_directory(os.path.join(os.getcwd(), "build"))
+    remove_directory(PYINSTALLER_WORKPATH)
+    remove_directory(PYINSTALLER_DISTPATH)
 
 
 def pyinstaller_build():
@@ -79,8 +102,13 @@ def pyinstaller_build():
     package folder. Captures the output streams and checks for errors.
     :return: Boolean indicating the success state of the operation.
     """
-    process_args = "pyinstaller {}".format(os.path.join("scripts", "pyinstaller.spec"))
-    
+
+    process_args = [
+        "pyinstaller",
+        "{}".format(os.path.join("scripts", "pyinstaller.spec")),
+        "--workpath", PYINSTALLER_WORKPATH,
+        "--distpath", PYINSTALLER_DISTPATH
+    ]
     print(script_tab + "Command: %s" % process_args)
 
     pyinstaller_process = subprocess.Popen(process_args, shell=True)
@@ -94,20 +122,13 @@ def pyinstaller_build():
     return True
 
 
-def move_executable_folder(final_exec_dir, os_type):
+def move_executable_folder(final_exec_dir):
     """
     Moves the PyInstaller executable folder from dist to project root.
     :return: Boolean indicating the success state of the operation.
-
-    * NOTE: On Windows, pyinstaller puts the executable in dist, whereas on Linux and
-    Darwin the executable gets put into dist/[spec_coll_name]. The reason is as yet unknown.
     """
-    if os_type == "win":
-        original_exec_dir = os.path.join(project_root_dir, "dist")
-    elif os_type == "mac":
-        original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
-    else:
-        raise SystemExit("Exit: OS data type is invalid '%s'" % os_type)
+
+    original_exec_dir = os.path.join(PYINSTALLER_DISTPATH, get_spec_coll_name())
 
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
@@ -136,28 +157,28 @@ def build_ot_python_backend_executable():
     print(script_tag + "Running PyInstaller process.")
     success = pyinstaller_build()
 
-    print(script_tag + "\"dist\" directory contains the following:\n\n%s\n\n\n" % os.listdir(os.path.join(project_root_dir, "dist")))
-
     if not success:
-        print(script_tab + "Removing PyInstaller recent temp directories.1")
+        print(script_tab + "Removing PyInstaller recent temp directories.")
         remove_pyinstaller_temps()
         raise SystemExit(script_tab + "Exiting as there was an error in the "
                                       "PyInstaller execution.")
 
     print(script_tag + "Removing old OT-App Backend executable directory.")
-    backend_exec_path = os.path.join(exec_folder_name, get_os(), spec_coll_name)
+    backend_exec_path = os.path.join(
+        exec_folder_name, get_os(), get_spec_coll_name()
+    )
     if os.path.isfile(backend_exec_path):
         os.remove(backend_exec_path)
 
     print(script_tag + "Moving executable folder to backend-dist.")
-    success = move_executable_folder(backend_exec_path, os_type)
+    success = move_executable_folder(backend_exec_path)
     if not success:
-        print(script_tab + "Removing PyInstaller recent temp directories.2")
+        print(script_tab + "Removing PyInstaller recent temp directories.")
         remove_pyinstaller_temps()
         raise SystemExit(script_tab + "Exiting now as there was an error in "
                                       "the PyInstaller execution.")
 
-    print(script_tag + "Removing PyInstaller recent temp directories.3")
+    print(script_tag + "Removing PyInstaller recent temp directories.")
     remove_pyinstaller_temps()
 
 if __name__ == "__main__":
