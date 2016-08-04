@@ -1,9 +1,8 @@
 module.exports.addMenu = addMenu;
 const electron = require("electron");
-const {dialog, Menu, MenuItem, app, autoUpdater} = electron;
+const {app, autoUpdater, dialog, Menu, MenuItem} = electron;
 const zipFolder = require('zip-folder');
 
-// const autoUpdater = require('auto-updater');
 const updateButtons = require('./update_helpers');
 
 
