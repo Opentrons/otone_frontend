@@ -1,7 +1,7 @@
 const electron = require("electron");
-const {autoUpdater} = electron;
+const {app, autoUpdater} = electron;
 
-var AUTO_UPDATE_URL =  'https://ot-app-releases.herokuapp.com';
+var UPDATE_SERVER_URL =  'http://localhost:3000';
 
 
 function initAutoUpdater () {
@@ -30,6 +30,8 @@ function initAutoUpdater () {
     (e, notes, name, date, url) => console.log(`Update downloaded: ${name}: ${url}`)
   )
 
+  var AUTO_UPDATE_URL = UPDATE_SERVER_URL + '?version=' + app.getVersion()
+  console.log('Setting AUTO UPDATE URL to ' + AUTO_UPDATE_URL)
   autoUpdater.setFeedURL(AUTO_UPDATE_URL)
   autoUpdater.checkForUpdates()
 }
