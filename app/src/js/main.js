@@ -1247,35 +1247,31 @@ function moveVolume (axis) {
 
 function saveVolume (axis) {
 
-  // if(!robot_connected){
-  //   alert('Please first connect to your machine');
-  //   return;
-  // }
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
 
-  // var volumeInput = document.getElementById('volume_input_'+axis);
-  // var volume = volumeMenu ? volumeMenu.value : undefined;
+  var volumeInput = document.getElementById('volume_input_'+axis);
+  var volume = volumeInput ? volumeInput.value : undefined;
 
-  // volume = Number(volume);
+  volume = Number(volume);
 
-  // if(!isNaN(volume) && volume>0) {
+  if(!isNaN(volume) && volume>0) {
 
-  //   if(debug===true) console.log('pipetteVolume_'+axis);
-  //   document.getElementById('pipetteVolume_'+axis).innerHTML = volume.toFixed(2);
-  //   robotState.pipettes[axis].volume = volume;
+    sendMessage({
+      'type':'saveVolume',
+      'data': {
+        'volume':volume,
+        'axis':axis
+      }
+    });
 
-  //   sendMessage({
-  //     'type':'saveVolume',
-  //     'data': {
-  //       'volume':volume,
-  //       'axis':axis
-  //     }
-  //   });
-
-  //   volumeInput.value = '';
-  // }
-  // else  {
-  //   alert('error saving new volume');
-  // }
+    volumeInput.value = '';
+  }
+  else  {
+    alert('error saving new volume');
+  }
 }
 
 /////////////////////////////////
