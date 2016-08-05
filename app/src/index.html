@@ -366,9 +366,8 @@
                       <span class="shortform pipette-Left">Save (uL):</span>
                       <input type="text" id="volume_input_b" style="width:60px">
                       </input>
-                      <button type="button" class="btn btn-sm tron-black b" onclick="saveVolume('b')">Save
-                      </button>
                     </div>
+                    <button type="button" class="btn btn-sm tron-black b" onclick="saveVolume('b')">Save</button>
                     <button type="button" class="btn btn-sm tron-black b" onclick="moveVolume('b')">Test</button>
                     <button type="button" class="btn btn-sm tron-black b" onclick="pickupTip('b')">Pickup-Tip</button>
                   </div>
@@ -376,12 +375,14 @@
                   <div style="display:inline-block; margin-top:20px;">
 
                     <div>
-                      <span class="shortform pipette-Center">Center</span> (uL): <code id="pipetteVolume_a">null</code>
+                      <span class="shortform pipette-Left">Right</span> (uL): <code id="pipetteVolume_a">null</code>
                     </div>
-                    <br/>
-                    <button type="button" class="btn btn-sm tron-blue a" onclick="saveVolume('a')">
-                      Save
-                    </button>
+                    <div>
+                      <span class="shortform pipette-Left">Save (uL):</span>
+                      <input type="text" id="volume_input_a" style="width:60px">
+                      </input>
+                    </div>
+                    <button type="button" class="btn btn-sm tron-blue a" onclick="saveVolume('a')">Save</button>
                     <button type="button" class="btn btn-sm tron-blue a" onclick="moveVolume('a')">Test</button>
                     <button type="button" class="btn btn-sm tron-blue a" onclick="pickupTip('a')">Pickup-Tip</button>
                   </div>
