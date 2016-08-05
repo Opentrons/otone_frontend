@@ -128,7 +128,10 @@ app.on('window-all-closed', function () {
       }
     });
 
-    powerSaverBlocker.stop(powerSaver.id)
-    backendProcess.shutdown()
     app.quit()
 })
+
+app.on('quit', function(){
+    powerSaveBlocker.stop(powerSaver.id);
+    backendProcess.shutdown();
+});
