@@ -13,7 +13,7 @@ const addMenu = require('./menu').addMenu;
 const winston = require('winston')
 
 let backendProcess = undefined
-let powerSaver_ID = undefined
+let powerSaverID = undefined
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -109,7 +109,7 @@ function startBackend() {
 }
 
 function blockPowerSaver() {
-  powerSaver_ID = powerSaveBlocker.start('prevent-display-sleep')
+  powerSaverID = powerSaveBlocker.start('prevent-display-sleep')
 }
 
 app.on('ready', createWindow)
@@ -132,7 +132,7 @@ app.on('quit', function(){
       }
     });
     backendProcess.shutdown();
-    if (powerSaveBlocker.isStarted(powerSaver_ID)) {
-      powerSaveBlocker.stop(powerSaver_ID);
+    if (powerSaveBlocker.isStarted(powerSaverID)) {
+      powerSaveBlocker.stop(powerSaverID);
     }
 });
