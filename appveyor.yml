@@ -48,7 +48,6 @@ init:
   - ps: Install-Product node 6.0.0 x86
   - cmd: node --version
   - cmd: npm --version
-  - cmd: npm -g install npm@3.8.6
 
   # SET THE RELEVANT PYTHON AND PIP LOCATIONS IN THE PATH
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
@@ -81,7 +80,7 @@ install:
 
   # INSTALL NODE DEPENDENCIES
   # - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
-  - cmd: cd C:\projects\otone-frontend
+  # - cmd: cd C:\projects\otone-frontend
   - cmd: npm install
   - npm run release:win
 
