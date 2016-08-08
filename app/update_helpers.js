@@ -30,10 +30,6 @@ function initAutoUpdater () {
    function(e, releaseNotes, releaseName, date, url) {
        console.log(`Update downloaded: ${releaseName}: ${url}`)
        console.log(`Update Info: ${releaseNotes}`)
-       if (e) {
-           console.log(e)
-           return;
-       }
 
        var index = dialog.showMessageBox({
            type: 'info',
@@ -47,7 +43,7 @@ function initAutoUpdater () {
            return;
        }
 
-       autoUpdater.quitAndUpdate();
+       autoUpdater.quitAndInstall();
    }
   )
 
