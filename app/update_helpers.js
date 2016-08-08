@@ -1,5 +1,5 @@
 const electron = require("electron");
-const {app, autoUpdater} = electron;
+const {app, dialog, autoUpdater} = electron;
 
 var UPDATE_SERVER_URL =  'http://ot-app-releases.herokuapp.com';
 
@@ -35,7 +35,7 @@ function initAutoUpdater () {
            return;
        }
 
-       var index = dialog.showMessageBox(mainWindow, {
+       var index = dialog.showMessageBox({
            type: 'info',
            buttons: ['Restart','Later'],
            title: "OT App", // TODO: Make this a config

@@ -39,6 +39,9 @@
           "type": "file"
         }
       ]
+    },
+    "mac": {
+      "target": ["dmg", "zip"]
     }
   },
   "win": {
