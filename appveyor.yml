@@ -1,12 +1,13 @@
 os: Visual Studio 2015
 
 environment:
-  nodejs_version: "4.4.7"
+  nodejs_version: "6.0.0"
   matrix:
     - language: cpp
       PYTHON3: "C:\\Python34"
       PYTHON3_VERSION: "3.4.3"
       PYTHON3_ARCH: "32"
+
       # PYTHON2.7 REQUIRED FOR NODE-GYP & ELECTRON
       PYTHON2: "C:\\Python27"
       PYTHON2_VERSION: "2.7.9"
@@ -24,9 +25,8 @@ platform: x86
 configuration: Release
 
 init:
-# NOTE: OTONE-FRONTEND NOT CLONED YET
-
-# 1. ENSURE CORRECT VERSION OF DEV TOOLS
+  - cmd: node --version
+  - cmd: npm --version
 
   - "ECHO Installed SDKs:"
   - ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
