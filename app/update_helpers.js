@@ -1,7 +1,7 @@
 const electron = require("electron");
 const {app, autoUpdater} = electron;
 
-var UPDATE_SERVER_URL =  'http://localhost:3000';
+var UPDATE_SERVER_URL =  'http://ot-app-releases.herokuapp.com';
 
 
 function initAutoUpdater () {
@@ -36,23 +36,7 @@ function initAutoUpdater () {
   autoUpdater.checkForUpdates()
 }
 
-
-function okButtonHandler(buttonIndex) {
-    console.log('ok button app...')
-}
-
-function updateButtonHandler(buttonIndex) {
-    console.log('Updating app...')
-}
-
-let updateButtons = [
-    ['Ok', okButtonHandler],
-    ['Update', updateButtonHandler]
-];
-
-
 module.exports = {
-    updateButtons,
     initAutoUpdater
 };
 
