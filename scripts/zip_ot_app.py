@@ -28,7 +28,7 @@ def get_build_tag(os_type):
     :return: string of os, arch, and time stamp and if CI info if available
     """
     arch_time_stamp = "{}{}_{}".format(
-        platform.system()[:3],
+        platform.system(),
         struct.calcsize('P') * 8,
         time.strftime("%Y-%m-%d_%H.%M")
     )
@@ -116,7 +116,7 @@ def zip_ot_app(build_tag, os_type):
     # e.g. <project root>/releases/opentrons_<build tag>.zip
     zip_app_path = os.path.join(
         releases_dir,
-        "ot_{}.zip".format(build_tag)
+        "opentrons_{}.zip".format(build_tag)
     )
     print(script_tab + "Zipped application will be located in: {}".format(
         zip_app_path
