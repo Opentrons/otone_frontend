@@ -132,17 +132,24 @@ def zip_ot_app(build_tag, os_type):
         if std_err:
             print(script_tab + "Error using zip command: {}".format(std_err))
     if os_type == "win":
-        zip_command = "powershell.exe -nologo -noprofile -command \"& "
-        zip_command += "{ Add-Type -A 'System.IO.Compression.FileSystem'; "
-        zip_command += "[IO.Compression.ZipFile]::CreateFromDirectory("
-        zip_command += "'{" + current_app_path + "}','"+zip_app_path+"'); }\""
-        print(script_tab + zip_command)
-        zip_process = subprocess.Popen(
-            zip_command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
+        zip_output = zipfile.ZipFile(zip_app_path, 'w', zipfile.ZIP_DEFLATED)
+        for dirname, subdirs, subfiles in os.walk(current_app_path):
+            zip_output.write(dirname)
+            for filename in subfiles:
+                zip_output.write(os.path.join(dirname, filename))
+        zip_output.close()
+
+        # zip_command = "powershell.exe -nologo -noprofile -command \"& "
+        # zip_command += "{ Add-Type -A 'System.IO.Compression.FileSystem'; "
+        # zip_command += "[IO.Compression.ZipFile]::CreateFromDirectory("
+        # zip_command += "'{" + current_app_path + "}','"+zip_app_path+"'); }\""
+        # print(script_tab + zip_command)
+        # zip_process = subprocess.Popen(
+        #     zip_command,
+        #     stdout=subprocess.PIPE,
+        #     stderr=subprocess.PIPE,
+        #     shell=True
+        # )
     os.chdir(old_cwd)
 
 
