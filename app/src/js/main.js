@@ -995,6 +995,22 @@ function erase () {
 /////////////////////////////////
 /////////////////////////////////
 
+var fanState = false;
+
+function toggleFan() {
+  
+  fanState = !fanState;
+
+  sendMessage({
+    'type' : 'fan',
+    'fan' : fanState
+  });
+}
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function setSpeed (axis,value) {
 
   if(!robot_connected){
