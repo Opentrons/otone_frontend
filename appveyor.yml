@@ -65,7 +65,7 @@ install:
 # 3. PREPARE NPM FOR ELECTRON APP BUILD
   - cmd: npm config list
   - cmd: npm config set python %PYTHON2%\python.exe --global
-#  - cmd: npm install node-gyp
+  - cmd: npm install node-gyp
   - cmd: npm install node-gyp -g
 #  - cmd: node-gyp --python %PYTHON2%
 #  - cmd: npm install bufferutil -g
@@ -78,7 +78,7 @@ install:
   # INSTALL NODE DEPENDENCIES
   # - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   # - cmd: cd C:\projects\otone-frontend
-  - cmd: npm install
+  - cmd: npm install && cd app && npm install && cd ..
   - npm run release:win
 
   # 5. BUILD ELECTRON APP
@@ -92,9 +92,7 @@ install:
   - cmd: dir backend\backend
   - cmd: dir out
   - cmd: dir build
-  - cmd: mkdir releases
 
-  - cmd: python scripts\zip_ot_app.py
   - cmd: dir releases
   - cmd: dir out\OpenTrons-win32-ia32
 
