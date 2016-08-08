@@ -107,4 +107,6 @@ class InstructionQueue:
                 this_group = m
                 if this_group['command'] == 'pipette':
                     self.head.pipette(this_group)
+        elif instruction.get('tool') == 'smoothieboard':
+            self.theQueue.add(instruction)
                     
