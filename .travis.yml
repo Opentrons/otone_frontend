@@ -26,6 +26,7 @@ before_install:
   - brew link --overwrite python34
   - python3.4 --version
   - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
+  - python --version
   - echo $PATH
 
   # Install Python packages (built with Python 3)
@@ -38,8 +39,7 @@ install:
   - npm --version
   - npm install && cd app && npm install && cd ..  # Hack until instapp-app-deps works on travis
   - npm run release
-  - ls out
-  - ls releases
+  - ls dist/mac
 
 # Deploy the build version in an S3 bucket
 deploy:
