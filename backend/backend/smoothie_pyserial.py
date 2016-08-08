@@ -621,9 +621,13 @@ class Smoothie(object):
             Uses the 2.4 mosfet on the Smoothieboard
         """
         if state == True:
-            self.try_add('M106') # connects the Smothieboard's 2.4 negative (-) pin to GND
+            self.send('M106') # connects the Smothieboard's 2.4 negative (-) pin to GND
         else:
-            self.try_add('M107') # floats the Smothieboard's 2.4 negative (-) pin
+            self.send('M107') # floats the Smothieboard's 2.4 negative (-) pin
+
+        # the Smoothieboard's "stat" response isn't affected by `M` commands
+        # so just manually trigger a state change
+        self.on_state_change(self.theState)
 
     #############################################
     #

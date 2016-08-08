@@ -134,7 +134,7 @@ class TheQueue:
                     self.head.smoothieAPI.set_speed(self.current_command['axis'],self.current_command['speed'])
 
                 elif 'fan' in self.current_command:
-                    self.head.smoothieAPI.set_gpio(self.current_command['fan'])
+                    self.head.smoothieAPI.set_fan(self.current_command['fan'])
                     
                 else:
                     self.head.smoothieAPI.move(self.current_command)	#, self.sent_successfully );      # MOVE
