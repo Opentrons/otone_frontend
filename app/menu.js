@@ -3,31 +3,17 @@ const electron = require("electron");
 const {app, autoUpdater, dialog, Menu, MenuItem} = electron;
 const zipFolder = require('zip-folder');
 
-const updateButtons = require('./update_helpers');
-
 
 function addMenu() {
   const template =  [{
     label: "OpenTrons",
     submenu: [
       { label: "About", selector: "orderFrontStandardAboutPanel:" },
-      { label: 'Update',
-        click: () => {
-
-          var updateFeed = 'http://localhost:3000';
-          autoUpdater.setFeedURL(updateFeed + '?v=' + app.getVersion());
-
-          dialog.showMessageBox({
-            message: 'Check for updates',
-            buttons: updateButtons.map((item) => item[0])
-          },
-          (buttonIndex) => updateButtons[buttonIndex][1]()
-          )
-        }
-      },
         { type: "separator" },
-        { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
-    ]}, {
+        { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }
+      }
+    ]},
+    {
       label: "Edit",
     submenu: [
         { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
