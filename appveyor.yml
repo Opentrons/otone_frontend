@@ -62,9 +62,6 @@ install:
   - cmd: "%PIP2% freeze"
   - cmd: "%PIP3% freeze"
 
-  # 2. BUILD BACKEND EXECUTABLE
-  - cmd: "%PYTHON3%\\python scripts\\build_pyinstaller.py"
-
 # 3. PREPARE NPM FOR ELECTRON APP BUILD
   - cmd: npm config list
   - cmd: npm config set python %PYTHON2%\python.exe --global
