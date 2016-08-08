@@ -57,7 +57,7 @@ def get_ignore_regex():
 
     ignore_flags = []
     for regex in ignore_list:
-        ignore_flags.extend(["--ignore="+regex])
+        ignore_flags.extend(["--ignore", regex])
 
     return ignore_flags
 
@@ -73,41 +73,31 @@ def get_platform():
 def build_electron_app():
     print(script_tag + "Running electron-packager process.")
 
-    os_type = get_platform()
-    print(script_tag + "os_type: {}".format(os_type))
-    if os_type == "darwin":
-        process_args = [
-            shutil.which("electron-packager"),
-            project_root_dir,
-            "OpenTrons",
-            "--platform", get_platform(),
-            "--arch", get_arch(),
-            "--version=1.3.1",
-            "--out", output_dir,
-            "--icon", get_icon_path(),
-            "--asar=true",
-            "--overwrite",
-            "--prune",
-        ] + get_ignore_regex()
+    platform_type = get_platform()
+    print(script_tag + "os_type: {}".format(platform_type))
+
+    process_args = [
+        shutil.which("electron-packager"),
+        os.path.join(project_root_dir, "app"),
+        "OpenTrons",
+        "--platform", platform_type,
+        "--arch", get_arch(),
+        "--version=1.3.1",
+        "--out", output_dir,
+        "--icon", get_icon_path(),
+        "--asar=false",
+        "--overwrite",
+        "--prune",
+    ] + get_ignore_regex()
+
+    electron_packager_process = None
+
+    if platform_type == 'darwin':
         electron_packager_process = subprocess.Popen(process_args)
-        electron_packager_process.communicate()
-    elif os_type == "win32":
-        process_args = [
-            "electron-packager",
-            project_root_dir,
-            "OpenTrons",
-            "--platform="+get_platform(),
-            "--arch="+get_arch(),
-            "--version=1.3.1",
-            "--out="+output_dir,
-            "--icon="+get_icon_path(),
-            "--asar=true",
-            "--overwrite",
-            "--prune",
-        ] + get_ignore_regex()
+    elif platform_type == 'win32':
         electron_packager_process = subprocess.Popen(process_args, shell=True)
-        # shell=True required for subprocess.Popen on win32
-        electron_packager_process.communicate()
+
+    electron_packager_process.communicate()
 
     if electron_packager_process.returncode != 0:
         raise SystemExit(script_tag + 'Failed to properly build electron app')
