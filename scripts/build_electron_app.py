@@ -82,8 +82,7 @@ def build_electron_app():
             "OpenTrons",
             "--platform", get_platform(),
             "--arch", get_arch(),
-            # SETTING VERSION IS CURRENTLY FAILING ON TRAVIS
-            #"--version=1.3.1"
+            "--version=1.3.1",
             "--out", output_dir,
             "--icon", get_icon_path(),
             "--asar=true",
@@ -99,8 +98,7 @@ def build_electron_app():
             "OpenTrons",
             "--platform="+get_platform(),
             "--arch="+get_arch(),
-            # SETTING VERSION IS CURRENTLY FAILING ON TRAVIS
-            #"--version=1.3.1",
+            "--version=1.3.1",
             "--out="+output_dir,
             "--icon="+get_icon_path(),
             "--asar=true",
