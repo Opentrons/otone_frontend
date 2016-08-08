@@ -132,6 +132,9 @@ class TheQueue:
 
                 elif 'speed' in self.current_command:
                     self.head.smoothieAPI.set_speed(self.current_command['axis'],self.current_command['speed'])
+
+                elif 'magbead' in self.current_command:
+                    self.head.smoothieAPI.set_magbead(self.current_command['magbead'])
                     
                 else:
                     self.head.smoothieAPI.move(self.current_command)	#, self.sent_successfully );      # MOVE
