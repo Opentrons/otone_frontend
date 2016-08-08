@@ -227,6 +227,7 @@ class Subscriber(object):
               'reset' : lambda self: self.reset(),
               'move' : lambda self, data: self.head.move(data),
               'step' : lambda self, data: self.head.step(data),
+              'fan' : lambda self, data: self.theQueue.add(data),
               'calibratePipette' : lambda self, data: self.calibrate_pipette(data),  #needs xtra code
               'calibrateContainer' : lambda self, data: self.calibrate_container(data),
               'getCalibrations' : lambda self: self.get_calibrations(),
