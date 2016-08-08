@@ -4,16 +4,30 @@ const {dialog, Menu, MenuItem, app} = electron;
 const zipFolder = require('zip-folder');
 
 function addMenu() {
-  const template =  [
-    {
-      label: 'Opentrons',
-      submenu: [
-        {
-          label: 'Download Logs',
-          click() { downloadLogs() }
-        }
-      ]
-    }
+  const template =  [{
+    label: "OpenTrons",
+    submenu: [
+        { label: "About", selector: "orderFrontStandardAboutPanel:" },
+        { type: "separator" },
+        { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
+    ]}, {
+    label: "Edit",
+    submenu: [
+        { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+        { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+        { type: "separator" },
+        { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+        { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+        { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+        { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+    ]}, {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Download Logs',
+        click() { downloadLogs() }
+      }
+    ]}
   ]
 
   const menu = Menu.buildFromTemplate(template);
@@ -33,18 +47,15 @@ function downloadLogs() {
 
 function zip(source, destination) {
   zipFolder(source, destination, function(err) {
-    const iconPath = `${app.getAppPath()}/build-assets/icon.png`;
     if(err) {
       dialog.showMessageBox({
         message: `Log exporting failed with error: \n\n ${err}`,
-        buttons: ["OK"],
-        icon: iconPath
+        buttons: ["OK"]
       });
     } else {
       dialog.showMessageBox({
         message: `Logs successfully exported to ${destination}`,
-        buttons: ["OK"],
-        icon: iconPath
+        buttons: ["OK"]
       });
     }
   });

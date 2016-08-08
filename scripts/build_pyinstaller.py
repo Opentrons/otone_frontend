@@ -19,6 +19,8 @@ exec_folder_name = os.path.join(project_root_dir, "app", "backend-dist")
 PYINSTALLER_DISTPATH = os.path.join(project_root_dir, "pyinstaller-dist")
 PYINSTALLER_WORKPATH = os.path.join(project_root_dir, "pyinstaller-build")
 
+# verbose_print = print if verbose else lambda *a, **k: None
+
 
 def remove_directory(dir_to_remove):
     """ :param dir_to_remove: Directory to remove. """
@@ -93,9 +95,10 @@ def pyinstaller_build():
 
     process_args = [
         "pyinstaller",
+
+        "{}".format(os.path.join("scripts", "pyinstaller.spec")),
         "--workpath", PYINSTALLER_WORKPATH,
-        "--distpath", PYINSTALLER_DISTPATH,
-        "{}".format(os.path.join("scripts", "pyinstaller.spec"))
+        "--distpath", PYINSTALLER_DISTPATH
     ]
     print(script_tab + "Command: %s" % process_args)
 

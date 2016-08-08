@@ -45,7 +45,7 @@ init:
   - cmd: "%PYTHON2%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
   - cmd: "%PYTHON2%\\python -m pip install --upgrade pip"
 
-  - ps: Install-Product node 6.3.0 x86
+  - ps: Install-Product node 6.0.0 x86
   - cmd: node --version
   - cmd: npm --version
   # CRITICAL FOR NODE-GYP TO WORK

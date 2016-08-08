@@ -7,11 +7,13 @@ const nightlife  = require('nightlife-rabbit')
     , autobahn = require('autobahn')
 const child_process = require('child_process')
 const electron = require('electron')
-const {app} = electron
-const BrowserWindow = electron.BrowserWindow
+const {app, powerSaveBlocker, BrowserWindow} = electron
 const addMenu = require('./menu').addMenu;
 
+const winston = require('winston')
+
 let backendProcess = undefined
+let powerSaver = undefined
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -22,21 +24,36 @@ function createWindow () {
   mainWindow.loadURL("file://" + __dirname + "/src/index.html")
 
   mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null
     app.quit();
   })
 }
 
 function startWampRouter() {
+
+    var wamp_logger = new (winston.Logger)({
+        transports: [
+            new (winston.transports.File)({
+                level: 'verbose',
+                name: 'wamp-router',
+                filename: app.getPath('userData') + '/otone_data/router_logfile.txt',
+                json: false,
+                maxsize: 10*1024*1024,
+                maxFiles: 5,
+                timestamp: function(){
+                  const d = new Date();
+                  return d.toISOString();
+                }
+            })
+        ]
+    });
+
     var router = nightlife.createRouter({
         httpServer: http.createServer(),
         port: 31947,
         path: '/ws',
         autoCreateRealms: true,
-        logger: new CLogger({name: 'nightlife-router'})
+        logger: wamp_logger
     });
 }
 
@@ -91,10 +108,15 @@ function startBackend() {
     }
 }
 
+function blockPowerSaver() {
+  powerSaver = powerSaveBlocker.start('prevent-display-sleep')
+}
+
 app.on('ready', createWindow)
 app.on('ready', startWampRouter)
 app.on('ready', startBackend)
 app.on('ready', addMenu)
+app.on('ready', blockPowerSaver)
 
 app.on('window-all-closed', function () {
     process.once("uncaughtException", function (error) {
@@ -106,9 +128,7 @@ app.on('window-all-closed', function () {
       }
     });
 
+    powerSaverBlocker.stop(powerSaver.id)
     backendProcess.shutdown()
-
-    if (process.platform !== 'darwin') {
-      app.quit()
-    }
+    app.quit()
 })
