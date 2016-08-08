@@ -48,62 +48,45 @@ init:
   - ps: Install-Product node 6.0.0 x86
   - cmd: node --version
   - cmd: npm --version
-  # CRITICAL FOR NODE-GYP TO WORK
-  - cmd: npm -g install npm@latest
+  - cmd: npm -g install npm@3.8.6
 
-# You can use the following PowerShell code to get the full list of software installed on build worker
-# from(https://www.appveyor.com/docs/installed-software):
-#  - ps: $x64items = @(Get-ChildItem "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")
-#  - ps: $x64items + @(Get-ChildItem "HKLM:SOFTWARE\wow6432node\Microsoft\Windows\CurrentVersion\Uninstall") `
-#     | ForEach-object { Get-ItemProperty Microsoft.PowerShell.Core\Registry::$_ } `
-#     | Sort-Object -Property DisplayName `
-#     | Select-Object -Property DisplayName,DisplayVersion
-
-
-# 2. SET THE RELEVANT PYTHON AND PIP LOCATIONS IN THE PATH
+  # SET THE RELEVANT PYTHON AND PIP LOCATIONS IN THE PATH
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
   - cmd: ECHO Path - %PATH%
 
-
 install:
-# NOTE: OTONE-FRONTEND NOW CLONED INTO C:\\PROJECTS\OTOONE-FRONTEND
+  # NOTE: OTONE-FRONTEND NOW CLONED INTO C:\\PROJECTS\OTOONE-FRONTEND
 
-# 1. INSTALL PYTHON DEPENDENCIES
+  # 1. INSTALL PYTHON DEPENDENCIES
   - cmd: "%PIP3% install -r requirements.txt"
-  # Ensure any submodules are updated, initialized if necessary, and do it recursively
-  - cmd: git submodule update --init --recursive
 
-  # Show installed python2 packages in requirements format
   - cmd: "%PIP2% freeze"
-  # Show installed python3 packages in requirements format
   - cmd: "%PIP3% freeze"
 
-# 2. BUILD BACKEND EXECUTABLE
+  # 2. BUILD BACKEND EXECUTABLE
   - cmd: "%PYTHON3%\\python scripts\\build_pyinstaller.py"
-
 
 # 3. PREPARE NPM FOR ELECTRON APP BUILD
   - cmd: npm config list
   - cmd: npm config set python %PYTHON2%\python.exe --global
-  - cmd: npm uninstall node-gyp -g
-  - cmd: npm uninstall node-gyp
-  - cmd: npm install node-gyp
-  - cmd: npm install node-gyp -g
-  - cmd: node-gyp --python %PYTHON2%
-  - cmd: npm install bufferutil -g
-  - cmd: npm install electron-packager --save-dev
-  - cmd: npm install electron-packager -g
-  - cmd: npm install electron-prebuilt --save-dev
-  - cmd: npm install electron-prebuilt -g
-  - cmd: npm prune
+#  - cmd: npm install node-gyp
+#  - cmd: npm install node-gyp -g
+#  - cmd: node-gyp --python %PYTHON2%
+#  - cmd: npm install bufferutil -g
+#  - cmd: npm install electron-packager --save-dev
+#  - cmd: npm install electron-packager -g
+#  - cmd: npm install electron-prebuilt --save-dev
+#  - cmd: npm install electron-prebuilt -g
+#  - cmd: npm prune
 
-# 4. INSTALL NODE DEPENDENCIES
-  - cmd: npm install
-  - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
+  # INSTALL NODE DEPENDENCIES
+  # - cmd: set PATH=%PATH%;C:\projects\appveyor\node_modules\
   - cmd: cd C:\projects\otone-frontend
+  - cmd: npm install
+  - npm run release:win
 
-# 5. BUILD ELECTRON APP
-  - cmd: "%PYTHON2%\\python scripts\\build_electron_app.py"
+  # 5. BUILD ELECTRON APP
+  # - cmd: "%PYTHON3%\\python scripts\\build_electron_app.py"
 
 # 6. PACKAGE ELECTRON APP
   - cmd: dir
