@@ -8,12 +8,19 @@ const nightlife  = require('nightlife-rabbit')
 const child_process = require('child_process')
 const electron = require('electron')
 const {app, powerSaveBlocker, BrowserWindow} = electron
+
 const addMenu = require('./menu').addMenu;
+const initAutoUpdater = require('./update_helpers').initAutoUpdater;
+
 
 const winston = require('winston')
 
 let backendProcess = undefined
 let powerSaver = undefined
+
+if (process.env.NODE_ENV == 'development'){
+    require('electron-debug')({showDevTools: true});
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -116,7 +123,12 @@ app.on('ready', createWindow)
 app.on('ready', startWampRouter)
 app.on('ready', startBackend)
 app.on('ready', addMenu)
+<<<<<<< HEAD
 app.on('ready', blockPowerSaver)
+=======
+app.on('ready', initAutoUpdater)
+
+>>>>>>> 28-add-check-for-update
 
 app.on('window-all-closed', function () {
     process.once("uncaughtException", function (error) {
