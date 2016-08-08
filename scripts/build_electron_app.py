@@ -77,7 +77,7 @@ def build_electron_app():
     print(script_tag + "os_type: {}".format(platform_type))
 
     process_args = [
-        shutil.which("electron-packager"),
+        os.path.join("node_modules", ".bin", "electron-packager"),
         os.path.join(project_root_dir, "app"),
         "OpenTrons",
         "--platform", platform_type,
