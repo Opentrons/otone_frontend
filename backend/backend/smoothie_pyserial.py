@@ -616,6 +616,14 @@ class Smoothie(object):
                 pass
         return result
 
+    def set_magbead(self, state):
+        """ Temporary solution for customer to control mag-bead module
+            Uses the 2.4 mosfet on the Smoothieboard
+        """
+        if state == True:
+            self.try_add('M106') # connects the Smothieboard's 2.4 negative (-) pin to GND
+        else:
+            self.try_add('M107') # floats the Smothieboard's 2.4 negative (-) pin
 
     #############################################
     #
