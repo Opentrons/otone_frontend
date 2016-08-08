@@ -92,9 +92,7 @@ install:
   - cmd: dir backend\backend
   - cmd: dir out
   - cmd: dir build
-  - cmd: mkdir releases
 
-  - cmd: python scripts\zip_ot_app.py
   - cmd: dir releases
   - cmd: dir out\OpenTrons-win32-ia32
 
