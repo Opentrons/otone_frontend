@@ -411,31 +411,42 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
       newInstruction.tool = currentPipette.tool;
       newInstruction.groups = [];
 
-      _instructions[i].groups.forEach( function(_group, index) { // loop through each group
+      if(_instructions[i].groups) {
 
-        var newGroup;
+        _instructions[i].groups.forEach( function(_group, index) { // loop through each group
 
-        if(_group.transfer) {
-          console.log('making a transfer');
-          newGroup = createPipetteGroup.transfer (_deck, currentPipette, _group.transfer);
-        }
-        else if(_group.distribute) {
-          console.log('making a distribute');
-          newGroup = createPipetteGroup.distribute (_deck, currentPipette, _group.distribute);
-        }
-        else if(_group.consolidate) {
-          console.log('making a consolidate');
-          newGroup = createPipetteGroup.consolidate (_deck, currentPipette, _group.consolidate);
-        }
-        else if(_group.mix) {
-          console.log('making a mix');
-          newGroup = createPipetteGroup.mix (_deck, currentPipette, _group.mix);
-        }
+          var newGroup;
 
-        if(newGroup) {
-          newInstruction.groups.push(newGroup);
-        }
-      });
+          if(_group.transfer) {
+            console.log('making a transfer');
+            newGroup = createPipetteGroup.transfer (_deck, currentPipette, _group.transfer);
+          }
+          else if(_group.distribute) {
+            console.log('making a distribute');
+            newGroup = createPipetteGroup.distribute (_deck, currentPipette, _group.distribute);
+          }
+          else if(_group.consolidate) {
+            console.log('making a consolidate');
+            newGroup = createPipetteGroup.consolidate (_deck, currentPipette, _group.consolidate);
+          }
+          else if(_group.mix) {
+            console.log('making a mix');
+            newGroup = createPipetteGroup.mix (_deck, currentPipette, _group.mix);
+          }
+
+          if(newGroup) {
+            newInstruction.groups.push(newGroup);
+          }
+        });
+      }
+
+      // hack for writing a GPIO on the smoothieboard LOW
+      else if(_instructions[i].tool === 'smoothieboard') {
+        newInstruction.groups.push({
+          'command': 'smoothieboard',
+          'fan': _instructions[i].fan
+        });
+      }
     }
 
     createdInstructions.push(newInstruction);
