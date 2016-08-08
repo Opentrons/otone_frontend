@@ -5,7 +5,7 @@
     "build:backend": "python3.4 scripts/build_pyinstaller.py",
     "build:frontend": "python scripts/build_electron_app_with_builder.py",
     "package": "python3.4 scripts/zip_ot_app.py",
-    "release": "npm run build:backend && npm run build:frontend && npm run package",
+    "release": "npm run build:backend && npm run build:frontend",
 
     "start": "electron ."
   },
