@@ -122,10 +122,8 @@ install:
 
 build: off
 
-artifacts:
-  - path: releases\*.zip
-    name: OTAppWin
-
+before-deploy:
+  - ps: Get-ChildItem .\releases\*.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName OTAppWin}
 
 deploy:
   - provider: S3
