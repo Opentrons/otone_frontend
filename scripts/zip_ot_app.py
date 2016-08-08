@@ -135,7 +135,7 @@ def zip_ot_app(build_tag, os_type):
         zip_command = "powershell.exe -nologo -noprofile -command \"& "
         zip_command += "{ Add-Type -A 'System.IO.Compression.FileSystem'; "
         zip_command += "[IO.Compression.ZipFile]::CreateFromDirectory("
-        zip_command += "'{"+current_app_name+"}','"+zip_app_path+"'); }\""
+        zip_command += "'{" + current_app_path + "}','"+zip_app_path+"'); }\""
         print(script_tab + zip_command)
         zip_process = subprocess.Popen(
             zip_command,
