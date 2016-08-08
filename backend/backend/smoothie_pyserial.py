@@ -616,8 +616,8 @@ class Smoothie(object):
                 pass
         return result
 
-    def set_magbead(self, state):
-        """ Temporary solution for customer to control mag-bead module
+    def set_fan(self, state):
+        """ Controls a 3Amp mosfet (for controlling a cooling fan)
             Uses the 2.4 mosfet on the Smoothieboard
         """
         if state == True:
