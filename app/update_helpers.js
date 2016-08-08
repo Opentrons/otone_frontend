@@ -27,7 +27,28 @@ function initAutoUpdater () {
 
   autoUpdater.on(
     'update-downloaded',
-    (e, notes, name, date, url) => console.log(`Update downloaded: ${name}: ${url}`)
+   function(e, releaseNotes, releaseName, date, url) {
+       console.log(`Update downloaded: ${releaseName}: ${url}`)
+       console.log(`Update Info: ${releaseNotes}`)
+       if (e) {
+           console.log(e)
+           return;
+       }
+
+       var index = dialog.showMessageBox(mainWindow, {
+           type: 'info',
+           buttons: ['Restart','Later'],
+           title: "OT App", // TODO: Make this a config
+           message: 'The new version has been downloaded. Please restart the application to apply the updates.',
+           detail: releaseName + "\n\n" + releaseNotes
+       });
+
+       if (index === 1) {
+           return;
+       }
+
+       autoUpdater.quitAndUpdate();
+   }
   )
 
   var AUTO_UPDATE_URL = UPDATE_SERVER_URL + '?version=' + app.getVersion()
