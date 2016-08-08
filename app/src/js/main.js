@@ -998,12 +998,19 @@ function erase () {
 var fanState = false;
 
 function toggleFan() {
-  
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
   fanState = !fanState;
 
   sendMessage({
     'type' : 'fan',
-    'fan' : fanState
+    'data' : {
+      'fan' : fanState
+    }
   });
 }
 

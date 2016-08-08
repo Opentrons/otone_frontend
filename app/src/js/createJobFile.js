@@ -439,14 +439,11 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
           }
         });
       }
+    }
 
-      // hack for writing a GPIO on the smoothieboard LOW
-      else if(_instructions[i].tool === 'smoothieboard') {
-        newInstruction.groups.push({
-          'command': 'smoothieboard',
-          'fan': _instructions[i].fan
-        });
-      }
+    // hack for writing a GPIO on the smoothieboard LOW
+    else if(_instructions[i].tool === 'smoothieboard') {
+      newInstruction = _instructions[i];
     }
 
     createdInstructions.push(newInstruction);

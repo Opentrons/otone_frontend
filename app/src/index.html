@@ -84,7 +84,6 @@
                   <button type="button" class="btn tron-white" onclick="pause()">Pause</button>
                   <button type="button" class="btn tron-white" onclick="resume()">Resume</button>
                   <button type="button" class="btn tron-white" onclick="erase()">Cancel</button>
-                  <button type="button" class="btn tron-white" onclick="toggleFan()">Fan</button>
                 </div>
                 <div class="col-xs-8 col-sm-8  col-md-8  col-lg-8">
                   <p><span id="infoName"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="infoDate"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="infoVersion"></span></p>
@@ -576,6 +575,7 @@
                 <div class="UI-block center-block">
                   <div id="debug-console">
                     <div id="debugCommandContainer">
+                      <button type="button" class="btn tron-white" onclick="toggleFan()">Fan</button>
                       <h4>Send G-code</h4>
                       <textarea id="debugCommandInput"></textarea>
                       <button class="btn tron-blue" id="debugCommandButton" onclick="sendDebugCommand()">Send</button>
