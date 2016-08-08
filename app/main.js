@@ -123,12 +123,8 @@ app.on('ready', createWindow)
 app.on('ready', startWampRouter)
 app.on('ready', startBackend)
 app.on('ready', addMenu)
-<<<<<<< HEAD
 app.on('ready', blockPowerSaver)
-=======
 app.on('ready', initAutoUpdater)
-
->>>>>>> 28-add-check-for-update
 
 app.on('window-all-closed', function () {
     process.once("uncaughtException", function (error) {
