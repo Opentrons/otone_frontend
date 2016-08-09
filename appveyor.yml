@@ -69,7 +69,7 @@ install:
   - cmd: npm install node-gyp -g
 #  - cmd: node-gyp --python %PYTHON2%
   - cmd: npm install bufferutil -g
-#  - cmd: npm install electron-packager --save-dev
+  - cmd: npm install electron-packager --save-dev
 #  - cmd: npm install electron-packager -g
 #  - cmd: npm install electron-prebuilt --save-dev
 #  - cmd: npm install electron-prebuilt -g
