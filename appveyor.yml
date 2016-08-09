@@ -54,6 +54,7 @@ init:
   # SET THE RELEVANT PYTHON AND PIP LOCATIONS IN THE PATH
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
   - cmd: ECHO Path - %PATH%
+  - ps: cp C:\Python34\python.exe C:\Python34\python3.4.exe
 
 install:
   # NOTE: OTONE-FRONTEND NOW CLONED INTO C:\\PROJECTS\OTOONE-FRONTEND
@@ -67,12 +68,9 @@ install:
   # ADDITIONAL NPM PREP FOR ELECTRON APP BUILD
   - cmd: npm config list
   - cmd: npm config set python %PYTHON2%\python.exe --global
-#  - cmd: npm install node-gyp
-#  - cmd: npm install node-gyp -g
-#  - cmd: npm install bufferutil -g
 
   - npm install
-  - npm run release:win
+  - ps: npm run release:win
 
 
 

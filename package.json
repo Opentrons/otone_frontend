@@ -2,20 +2,10 @@
   "scripts": {
     "postinstall": "install-app-deps",
     "clean": "rm -rf ./out && rm -rf ./releases/*",
-    "build:backend:osx": "python3.4 scripts/build_pyinstaller.py",
-    "build:backend:win": "C:\\Python34\\python scripts\\build_pyinstaller.py",
-
-    "build:frontend:osx": "python3.4 scripts/build_electron_app.py",
-    "build:frontend:win": "C:\\Python34\\python scripts\\build_electron_app.py",
-
-    "build:frontend": "npm run build:frontend:osx && npm run build:frontend:win",
-
-    "package:osx": "python3.4 scripts/zip_ot_app.py",
-    "package:win": "C:\\Python34\\python scripts\\zip_ot_app.py",
-
-    "release:osx": "npm run build:backend:osx && npm run build:frontend:osx && npm run package:osx",
-    "release:win": "npm run build:backend:win && npm run build:frontend:win && npm run package:win",
-
+    "build:backend": "python3.4 scripts/build_pyinstaller.py",
+    "build:frontend": "python3.4 scripts/build_electron_app.py",
+    "package": "python3.4 scripts/zip_ot_app.py",
+    "release": "npm run build:backend && npm run build:frontend && npm run package",
     "start": "electron ."
   },
   "devDependencies": {
