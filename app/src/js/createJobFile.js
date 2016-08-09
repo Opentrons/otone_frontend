@@ -441,8 +441,8 @@ function createRobotProtocol (protocol) { // 'protocol' is the human-readable js
       }
     }
 
-    // hack for writing a GPIO on the smoothieboard LOW
-    else if(_instructions[i].tool === 'smoothieboard') {
+    // hack for accessing the command types in "the_Queue.py" step() function
+    else if(_instructions[i].tool === 'robot') {
       newInstruction = _instructions[i];
     }
 
