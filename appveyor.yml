@@ -88,5 +88,3 @@ deploy:
     set_public: true
     folder: win
     artifact: OTAppWin
-    on:
-      branch: 16-add-ci-cd-pipeline-for-windows-app-frontend
