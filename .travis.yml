@@ -39,7 +39,8 @@ install:
   - node --version
   - npm --version
   - npm install && cd app && npm install && cd ..  # Hack until instapp-app-deps works on travis
-  - npm run release
+  - npm run release:mac
+  - ls out
   - ls dist/mac
   - ls releases
 
