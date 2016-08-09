@@ -37,11 +37,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://opentrons.com" target="_blank">
+          <a class="navbar-brand">
             <img src="images/logo.png" > </a>
           <ul class="nav navbar-nav navbar-left">
             <li>
-            <a href="https://github.com/opentrons" target="_blank" id="ot_app_version"></a>
+            <a id="ot_app_version"></a>
             </li>
           </ul>
         </div>
@@ -356,54 +356,34 @@
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
               <div class="UI-block center-block large-panel pipette-panel">
-                <legend class="UI-Title">Calibrate Volume</legend>
+                <legend class="UI-Title">Save Pipette Volume</legend>
                 <div style="margin-left:20px;">
-                  <h4 style="padding-top:10px;">
-                    <span>Testing uL: </span>
-                    <select type="text" id="volume_testing">
-                      <option value="1000">1000</option>
-                      <option value="500">500</option>
-                      <option value="200">200</option>
-                      <option value="100">100</option>
-                      <option value="50">50</option>
-                      <option value="25">25</option>
-                      <option value="10">10</option>
-                      <option value="5">5</option>
-                    </select>
-                  </h4>
-                  <br/>
                   <div style="display:inline-block; ">
                     <div>
                       <span class="shortform pipette-Left">Left</span> (uL): <code id="pipetteVolume_b">null</code>
                     </div>
-                    <br/>
-                    <button type="button" class="btn btn-sm tron-black b" onclick="saveVolume('b')">Save
-                    </button>
+                    <div>
+                      <span class="shortform">Save Volume (uL):</span>
+                      <input type="text" id="volume_input_b" style="width:60px">
+                      </input>
+                    </div>
+                    <button type="button" class="btn btn-sm tron-black b" onclick="saveVolume('b')">Save</button>
                     <button type="button" class="btn btn-sm tron-black b" onclick="moveVolume('b')">Test</button>
-
-
-
-                    <button type="button" class="btn btn-sm tron-black b" onclick="shakePipette('b')">Shake</button>
-
                     <button type="button" class="btn btn-sm tron-black b" onclick="pickupTip('b')">Pickup-Tip</button>
                   </div>
-                  <div style="display:inline-block; margin-top:20px;">
+                  <br />
+                  <div style="display:inline-block; margin-top:30px;">
 
                     <div>
                       <span class="shortform pipette-Center">Center</span> (uL): <code id="pipetteVolume_a">null</code>
                     </div>
-                    <br/>
-                    <button type="button" class="btn btn-sm tron-blue a" onclick="saveVolume('a')">
-                      Save
-                    </button>
+                    <div>
+                      <span class="shortform">Save Volume (uL):</span>
+                      <input type="text" id="volume_input_a" style="width:60px">
+                      </input>
+                    </div>
+                    <button type="button" class="btn btn-sm tron-blue a" onclick="saveVolume('a')">Save</button>
                     <button type="button" class="btn btn-sm tron-blue a" onclick="moveVolume('a')">Test</button>
-
-
-
-
-
-                    <button type="button" class="btn btn-sm tron-blue a" onclick="shakePipette('a')">Shake</button>
-
                     <button type="button" class="btn btn-sm tron-blue a" onclick="pickupTip('a')">Pickup-Tip</button>
                   </div>
 

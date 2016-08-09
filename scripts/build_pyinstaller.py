@@ -36,6 +36,7 @@ def get_os():
     Gets the OS to based on the command line argument of the platform info.
     Only possibilities are: "windows", "mac", "linux"
     """
+
     valid_os = ["win", "linux", "mac"]
 
     print(script_tab + "Checking for command line argument indicated OS:")
@@ -51,18 +52,18 @@ def get_os():
 
     print(script_tab + "Valid command line arg not found, checking system.")
 
-    os_found = platform.system()
-    if os_found == "Windows":
-        print(script_tab + "OS found is: %s" % valid_os[0])
-        return valid_os[0]
-    elif os_found == "Linux":
-        print(script_tab + "OS found is: %s" % valid_os[1])
-        return valid_os[1]
-    elif os_found == "Darwin":
-        print(script_tab + "OS found is: %s" % valid_os[2])
-        return valid_os[2]
+    os_found = platform.system().lower()
+    if os_found == "windows":
+        os_found = "win"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
+    elif os_found == "linux" or os_found == "darwin":
+        os_found = "mac"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
     else:
         raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
+
 
 def get_spec_coll_name():
     os_type = get_os()
@@ -75,6 +76,7 @@ def get_spec_coll_name():
             os_type
         )
     )
+
 
 def remove_pyinstaller_temps():
     """
@@ -90,15 +92,20 @@ def pyinstaller_build():
     package folder. Captures the output streams and checks for errors.
     :return: Boolean indicating the success state of the operation.
     """
+
     process_args = [
         "pyinstaller",
+
         "{}".format(os.path.join("scripts", "pyinstaller.spec")),
         "--workpath", PYINSTALLER_WORKPATH,
         "--distpath", PYINSTALLER_DISTPATH
     ]
     print(script_tab + "Command: %s" % process_args)
 
-    pyinstaller_process = subprocess.Popen(process_args)
+    if platform.system().lower() == "windows":
+        pyinstaller_process = subprocess.Popen(process_args, shell=True)
+    else:
+        pyinstaller_process = subprocess.Popen(process_args)
     std_op, std_err_op = pyinstaller_process.communicate()
 
     if pyinstaller_process.returncode != 0:
@@ -143,6 +150,7 @@ def build_ot_python_backend_executable():
 
     print(script_tag + "Running PyInstaller process.")
     success = pyinstaller_build()
+
     if not success:
         print(script_tab + "Removing PyInstaller recent temp directories.")
         remove_pyinstaller_temps()
