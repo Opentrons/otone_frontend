@@ -71,9 +71,9 @@ install:
   - cmd: npm install node-gyp
   - cmd: npm install node-gyp -g
   - cmd: npm install bufferutil -g
-  - cmd: npm install electron-packager --save-dev
+#  - cmd: npm install electron-packager --save-dev
 #  - cmd: npm install electron-packager -g
-  - cmd: npm install electron-prebuilt --save-dev
+#  - cmd: npm install electron-prebuilt --save-dev
 #  - cmd: npm install electron-prebuilt -g
 #  - cmd: npm prune
 
