@@ -69,8 +69,8 @@ install:
   - cmd: npm config list
   - cmd: npm config set python %PYTHON2%\python.exe --global
 
-  - cmd: npm install
-  - ps: npm run release:win
+  - npm install
+  - npm run release:win
 
 
 
