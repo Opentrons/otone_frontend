@@ -173,7 +173,7 @@ def clean_build_dist(build_tag):
     zip_path = zip_path[0]
 
     print(script_tab + 'Found mac *dmg* at: {}'.format(dmg_path))
-    print(script_tab + 'Found mac *zip* at: {}\n\n'.format(dmg_path))
+    print(script_tab + 'Found mac *zip* at: {}\n'.format(dmg_path))
 
     new_dmg_path = os.path.join(
         project_root_dir,
@@ -193,7 +193,7 @@ def clean_build_dist(build_tag):
     print(script_tab + 'Moving *dmg* to: {}'.format(new_dmg_path))
     shutil.move(dmg_path, new_dmg_path)
 
-    print(script_tab + 'Moving *zip* to: {}\n\n'.format(new_zip_path))
+    print(script_tab + 'Moving *zip* to: {}\n'.format(new_zip_path))
     shutil.move(zip_path, new_zip_path)
 
     print(script_tab + 'Builds successfully moved to {}'.format(releases_dir))
