@@ -1,8 +1,11 @@
 #!/bin/env python2.7
 
+import glob
 import json
 import os
 import platform
+import re
+import shutil
 import struct
 import subprocess
 import time
@@ -27,6 +30,15 @@ def get_app_version():
     app_json_path = os.path.join(project_root_dir, "app", "package.json")
     with open(app_json_path, 'r') as json_file:
         return json.load(json_file).get('version').encode('utf8')
+
+
+def remove_directory(dir_to_remove):
+    """ :param dir_to_remove: Directory to remove. """
+    if os.path.exists(dir_to_remove):
+        print(script_tab + "Removing directory %s" % dir_to_remove)
+        shutil.rmtree(dir_to_remove)
+    else:
+        print(script_tab + "Directory %s was not found." % dir_to_remove)
 
 
 def get_build_tag():
@@ -134,13 +146,61 @@ def build_electron_app():
     if electron_builder_process.returncode != 0:
         raise SystemExit(script_tag + 'Failed to properly build electron app')
 
+    print(script_tab + 'electron-builder process completed successfully')
+
 def clean_build_dist(build_tag):
-    pass
+    """
+    Simply moves application to the releases dir and properly names it.
+
+    For Mac:
+        Moves and renames zip & dmg files in <project root>/dist/mac/ to <project root>/releases
+
+    :param build_tag:
+    :return:
+    """
+
+    electron_builder_dist = os.path.join(project_root_dir, "dist", "mac")
+
+    dmg_path = glob.glob(os.path.join(electron_builder_dist, '*.dmg'))
+    zip_path = glob.glob(os.path.join(electron_builder_dist, '*.zip'))
+
+    if len(dmg_path) != 1 or len(zip_path) != 1:
+        raise SystemExit(
+            script_tab + 'Error: Too few or too many .dmg or .zip files found. Aborting...'
+        )
+
+    dmg_path = dmg_path[0]
+    zip_path = zip_path[0]
+
+    print(script_tab + 'Found mac *dmg* at: {}'.format(dmg_path))
+    print(script_tab + 'Found mac *zip* at: {}\n\n'.format(dmg_path))
+
+    new_dmg_path = os.path.join(
+        project_root_dir,
+        "releases",
+        "OpenTrons-{}.dmg".format(build_tag)
+    )
+    new_zip_path = os.path.join(
+        project_root_dir,
+        "releases",
+        "OpenTrons-{}.zip".format(build_tag)
+    )
+
+    releases_dir = os.path.join(project_root_dir, 'releases')
+    remove_directory(releases_dir)
+    os.mkdir(releases_dir)
+
+    print(script_tab + 'Moving *dmg* to: {}'.format(new_dmg_path))
+    shutil.move(dmg_path, new_dmg_path)
+
+    print(script_tab + 'Moving *zip* to: {}\n\n'.format(new_zip_path))
+    shutil.move(zip_path, new_zip_path)
+
+    print(script_tab + 'Builds successfully moved to {}'.format(releases_dir))
 
 
 if __name__ == '__main__':
-    # build_electron_app()
+    build_electron_app()
     build_tag = get_build_tag()
-    print(build_tag)
-    # clean_build_dist(build_tag)
+    clean_build_dist(build_tag)
 
