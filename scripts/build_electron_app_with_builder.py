@@ -1,10 +1,11 @@
 #!/bin/env python2.7
 
+import json
 import os
 import platform
-import shutil
 import struct
 import subprocess
+import time
 
 
 script_tag = "[OT-App frontend build] "
@@ -15,6 +16,17 @@ script_tab = "                        "
 project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
+
+
+def get_app_version():
+    """
+    Get the OT App version as specified in the electron package.json file
+    :return: string of app version
+    """
+
+    app_json_path = os.path.join(project_root_dir, "app", "package.json")
+    with open(app_json_path, 'r') as json_file:
+        return json.load(json_file).get('version').encode('utf8')
 
 
 def get_build_tag():
@@ -29,6 +41,8 @@ def get_build_tag():
         time.strftime("%Y-%m-%d_%H.%M")
     )
 
+    app_version = get_app_version()
+
     print(script_tag + "Checking Travis-CI environment variables for tag:")
     travis_tag = tag_from_ci_env_vars(
         ci_name='Travis-CI',
@@ -37,10 +51,16 @@ def get_build_tag():
         commit_var='TRAVIS_COMMIT'
     )
 
-    if travis_tag:
-        return "{}_{}".format(arch_time_stamp, travis_tag)
+    build_tag = "v{app_version}-{arch_time_stamp}".format(
+        app_version=app_version,
+        arch_time_stamp=arch_time_stamp
+    )
 
-    return arch_time_stamp
+    if travis_tag:
+        return "{}_{}".format(build_tag, travis_tag)
+
+    return build_tag
+
 
 
 def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
@@ -114,6 +134,13 @@ def build_electron_app():
     if electron_builder_process.returncode != 0:
         raise SystemExit(script_tag + 'Failed to properly build electron app')
 
+def clean_build_dist(build_tag):
+    pass
+
 
 if __name__ == '__main__':
-    build_electron_app()
+    # build_electron_app()
+    build_tag = get_build_tag()
+    print(build_tag)
+    # clean_build_dist(build_tag)
+
