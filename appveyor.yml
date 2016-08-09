@@ -48,6 +48,9 @@ init:
   - ps: Install-Product node 6.0.0 x86
   - cmd: node --version
   - cmd: npm --version
+    # CRITICAL FOR NODE-GYP TO WORK
+  - cmd: npm -g install npm@latest
+  - cmd: npm --version
 
   # SET THE RELEVANT PYTHON AND PIP LOCATIONS IN THE PATH
   - cmd: set PATH=%PYTHON3%;%PYTHON3%\scripts;%PYTHON2%;%PYTHON2%\scripts;%PATH%
@@ -67,7 +70,6 @@ install:
   - cmd: npm config set python %PYTHON2%\python.exe --global
   - cmd: npm install node-gyp
   - cmd: npm install node-gyp -g
-  - cmd: node-gyp --python %PYTHON2%
   - cmd: npm install bufferutil -g
   - cmd: npm install electron-packager --save-dev
 #  - cmd: npm install electron-packager -g
