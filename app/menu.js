@@ -1,6 +1,6 @@
 module.exports.addMenu = addMenu;
 const electron = require("electron");
-const {app, autoUpdater, dialog, Menu, MenuItem} = electron;
+const {app, dialog, Menu, MenuItem} = electron;
 const zipFolder = require('zip-folder');
 
 
@@ -9,13 +9,12 @@ function addMenu() {
     label: "OpenTrons",
     submenu: [
       { label: "About", selector: "orderFrontStandardAboutPanel:" },
-        { type: "separator" },
-        { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }
-      }
+      { type: "separator" },
+      { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
     ]},
     {
       label: "Edit",
-    submenu: [
+      submenu: [
         { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
         { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
         { type: "separator" },
