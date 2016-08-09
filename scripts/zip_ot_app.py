@@ -1,14 +1,16 @@
+import sys
 import os
 import platform
 import re
 import subprocess
 import struct
 import time
+import zipfile
+
 
 
 script_tag = "[OT-App zipping]   "
 script_tab = "                   "
-
 
 # The project_root_dir depends on this file location, assumed to be two levels
 # below project root, so it cannot be moved without updating this variable
@@ -19,7 +21,7 @@ project_root_dir = \
 electron_app_dir = os.path.join(project_root_dir, "out")
 
 
-def get_build_tag():
+def get_build_tag(os_type):
     """
     Gets the OS, CPU architecture (32 vs 64 bit), and current time stamp and
     appends CI branch, commit, or pull request info
@@ -31,17 +33,28 @@ def get_build_tag():
         time.strftime("%Y-%m-%d_%H.%M")
     )
 
-    print(script_tag + "Checking Travis-CI environment variables for tag:")
-    travis_tag = tag_from_ci_env_vars(
-        ci_name='Travis-CI',
-        pull_request_var='TRAVIS_PULL_REQUEST',
-        branch_var='TRAVIS_BRANCH',
-        commit_var='TRAVIS_COMMIT'
-    )
+    ci_tag = None
 
-    if travis_tag:
-        return "{}_{}".format(arch_time_stamp, travis_tag)
+    if os_type == "mac":
+        print(script_tag + "Checking Travis-CI environment variables for tag:")
+        ci_tag = tag_from_ci_env_vars(
+            ci_name='Travis-CI',
+            pull_request_var='TRAVIS_PULL_REQUEST',
+            branch_var='TRAVIS_BRANCH',
+            commit_var='TRAVIS_COMMIT'
+        )
 
+    if os_type == "win":
+        print(script_tag + "Checking Appveyor-CI enironment variables for tag:")
+        ci_tag = tag_from_ci_env_vars(
+            ci_name='Appveyor-CI',
+            pull_request_var='APPVEYOR_PULL_REQUEST_NUMBER',
+            branch_var='APPVEYOR_REPO_BRANCH',
+            commit_var='APPVEYOR_REPO_COMMIT'
+        )
+
+    if ci_tag:
+        return "{}_{}".format(arch_time_stamp, ci_tag)
     return arch_time_stamp
 
 
@@ -78,7 +91,7 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
     return None
 
 
-def zip_ot_app(build_tag):
+def zip_ot_app(build_tag, os_type):
     print(script_tab + "Zipping OT App. Using tag: {}".format(build_tag))
 
     # Assuming there is only one app in the electron build dir, zip that app
@@ -109,24 +122,79 @@ def zip_ot_app(build_tag):
         zip_app_path
     ))
 
-    zip_process = subprocess.Popen(
-        ['zip', '-r', '-X', '--symlinks', zip_app_path, '.'],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
-    )
+    if os_type == "mac":
+        zip_process = subprocess.Popen(
+            ['zip', '-r', '-X', '--symlinks', zip_app_path, '.'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        _, std_err = zip_process.communicate()
+        if std_err:
+            print(script_tab + "Error using zip command: {}".format(std_err))
+    if os_type == "win":
+        zip_output = zipfile.ZipFile(zip_app_path, 'w', zipfile.ZIP_DEFLATED)
+        for dirname, subdirs, subfiles in os.walk(current_app_path):
+            zip_output.write(dirname)
+            for filename in subfiles:
+                zip_output.write(os.path.join(dirname, filename))
+        zip_output.close()
 
-    _, std_err = zip_process.communicate()
-    if std_err:
-        print(script_tab + "Error using zip command: {}".format(std_err))
-
-    # Return process back to original cwd
+        # zip_command = "powershell.exe -nologo -noprofile -command \"& "
+        # zip_command += "{ Add-Type -A 'System.IO.Compression.FileSystem'; "
+        # zip_command += "[IO.Compression.ZipFile]::CreateFromDirectory("
+        # zip_command += "'{" + current_app_path + "}','"+zip_app_path+"'); }\""
+        # print(script_tab + zip_command)
+        # zip_process = subprocess.Popen(
+        #     zip_command,
+        #     stdout=subprocess.PIPE,
+        #     stderr=subprocess.PIPE,
+        #     shell=True
+        # )
     os.chdir(old_cwd)
 
 
+def get_os():
+    """
+    Gets the OS to based on the command line argument of the platform info.
+    Only possibilities are: "windows", "mac", "linux"
+    """
+    valid_os = ["windows", "linux", "mac"]
+
+    print(script_tab + "Checking for command line argument indicated OS:")
+    if len(sys.argv) > 1:
+        if sys.argv[1] in valid_os:
+            # Take the first argument and use it as the os
+            print(script_tab + "Valid command line argument found: %s" %
+                  sys.argv[1])
+            if sys.argv[1] == "windows":
+                return "win"
+            else:
+                return "mac"
+        else:
+            print(script_tab + "Invalid command line argument found: %s\n" %
+                  sys.argv[1] + script_tab + "Options available: %s" % valid_os)
+
+    print(script_tab + "Valid command line arg not found, checking system.")
+
+    os_found = platform.system().lower()
+    if os_found == "windows":
+        os_found = "win"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
+    elif os_found == "linux" or os_found == "darwin":
+        os_found = "mac"
+        print(script_tab + "OS found is: %s" % os_found)
+        return os_found
+    else:
+        raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
+
 def main():
-    print(script_tag + "Zipping OT App")
-    build_tag = get_build_tag()
-    zip_ot_app(build_tag)
+    print(script_tag + "Zipping OT App procedure started.")
+    print(script_tag + "Checking for OS.")
+    os_type = get_os()
+    print(script_tag + "Zipping OT App for %s." % os_type)
+    build_tag = get_build_tag(os_type)
+    zip_ot_app(build_tag, os_type)
 
 if __name__ == '__main__':
     main()

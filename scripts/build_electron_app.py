@@ -62,10 +62,10 @@ def get_ignore_regex():
     return ignore_flags
 
 def get_platform():
-    os_type = platform.system()
-    if os_type  == 'Windows':
+    os_type = platform.system().lower()
+    if os_type  == 'windows':
         return 'win32'
-    elif os_type == 'Darwin':
+    elif os_type == 'darwin':
         return 'darwin'
     else:
         raise SystemExit(script_tab + 'Unsupported OS {}'.format(os_type))
@@ -73,22 +73,30 @@ def get_platform():
 def build_electron_app():
     print(script_tag + "Running electron-packager process.")
 
+    platform_type = get_platform()
+    print(script_tag + "os_type: {}".format(platform_type))
+
     process_args = [
-        shutil.which("electron-packager"),
+        os.path.join("node_modules", ".bin", "electron-packager"),
         os.path.join(project_root_dir, "app"),
         "OpenTrons",
-        "--platform", get_platform(),
+        "--platform", platform_type,
         "--arch", get_arch(),
         "--version", "1.3.1",
         "--out", output_dir,
         "--icon", get_icon_path(),
-        "--asar", "true",
+        "--asar=true",
         "--overwrite",
         "--prune",
     ] + get_ignore_regex()
 
+    electron_packager_process = None
 
-    electron_packager_process = subprocess.Popen(process_args)
+    if platform_type == 'darwin':
+        electron_packager_process = subprocess.Popen(process_args)
+    elif platform_type == 'win32':
+        electron_packager_process = subprocess.Popen(process_args, shell=True)
+
     electron_packager_process.communicate()
 
     if electron_packager_process.returncode != 0:
