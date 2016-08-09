@@ -616,14 +616,19 @@ class Smoothie(object):
                 pass
         return result
 
-    def set_fan(self, state):
+    def set_gpio(self, pin, state):
         """ Controls a 3Amp mosfet (for controlling a cooling fan)
             Uses the 2.4 mosfet on the Smoothieboard
         """
-        if state == True:
-            self.send('M106') # connects the Smothieboard's 2.4 negative (-) pin to GND
-        else:
-            self.send('M107') # floats the Smothieboard's 2.4 negative (-) pin
+        
+        off_commands = ['M40','M42','M44','M46','M48','M50']
+        on_commands = ['M41','M43','M45','M47','M49','M51']
+
+        if pin < len(off_commands):
+            if state:
+                self.send(on_commands[pin])
+            else:
+                self.send(off_commands[pin])
 
         # the Smoothieboard's "stat" response isn't affected by `M` commands
         # so just manually trigger a state change

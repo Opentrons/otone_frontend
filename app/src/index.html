@@ -575,7 +575,12 @@
                 <div class="UI-block center-block">
                   <div id="debug-console">
                     <div id="debugCommandContainer">
-                      <button type="button" class="btn tron-white" onclick="toggleFan()">Fan</button>
+                      <button type="button" class="btn tron-black" onclick="toggleGPIO(0)" id="gpio-0">GPIO-0</button>
+                      <button type="button" class="btn tron-black" onclick="toggleGPIO(1)" id="gpio-1">GPIO-1</button>
+                      <button type="button" class="btn tron-black" onclick="toggleGPIO(2)" id="gpio-2">GPIO-2</button>
+                      <button type="button" class="btn tron-black" onclick="toggleGPIO(3)" id="gpio-3">GPIO-3</button>
+                      <button type="button" class="btn tron-black" onclick="toggleGPIO(4)" id="gpio-4">GPIO-4</button>
+                      <button type="button" class="btn tron-black" onclick="toggleGPIO(5)" id="gpio-5">GPIO-5</button>
                       <h4>Send G-code</h4>
                       <textarea id="debugCommandInput"></textarea>
                       <button class="btn tron-blue" id="debugCommandButton" onclick="sendDebugCommand()">Send</button>

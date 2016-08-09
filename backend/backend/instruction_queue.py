@@ -90,7 +90,7 @@ class InstructionQueue:
             this_instruction = self.instructionArray.pop(0)
             if this_instruction and this_instruction['tool'] == 'pipette':
                 self.send_instruction(this_instruction)
-            elif this_instruction and this_instruction['tool'] == 'smoothieboard':
+            elif this_instruction and this_instruction['tool'] == 'robot':
                 self.head.theQueue.add(this_instruction)
         elif self.isRunning == True:
             if self.infinity_data is not None:

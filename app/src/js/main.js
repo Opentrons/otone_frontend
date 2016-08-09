@@ -995,21 +995,31 @@ function erase () {
 /////////////////////////////////
 /////////////////////////////////
 
-var fanState = false;
+var gpioState = [false,false,false,false,false,false];
 
-function toggleFan() {
+function toggleGPIO(pin) {
 
   if(!robot_connected){
     alert('Please first connect to your machine');
     return;
   }
 
-  fanState = !fanState;
+  gpioState[pin] = !gpioState[pin];
+
+  if(gpioState[pin]) {
+    document.getElementById('gpio-'+pin).classList.remove('tron-black');
+    document.getElementById('gpio-'+pin).classList.add('tron-white');
+  }
+  else {
+    document.getElementById('gpio-'+pin).classList.remove('tron-white');
+    document.getElementById('gpio-'+pin).classList.add('tron-black');
+  }
 
   sendMessage({
-    'type' : 'fan',
+    'type' : 'gpio',
     'data' : {
-      'fan' : fanState
+      'gpio' : pin,
+      'state' : gpioState[pin]
     }
   });
 }
