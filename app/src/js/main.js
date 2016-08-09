@@ -1198,61 +1198,45 @@ function moveVolume (axis) {
     return;
   }
 
-  var volumeMenu = document.getElementById('volume_testing');
-  var volume = volumeMenu ? volumeMenu.value : undefined;
+  if(axis) {
 
-  if(debug===true) console.log('volume '+volume);
-
-  if(volume) {
-
-    volume *= -1; // negative because we're just sucking up right now
-
-    // deduce the percentage the plunger should move to
-    var totalPipetteVolume = robotState.pipettes[axis].volume;
-    if(!totalPipetteVolume) totalPipetteVolume = 200;
-    if(!isNaN(totalPipetteVolume)) {
-      var plungerPercentage = volume / totalPipetteVolume;
-
-      if(debug===true) console.log('moving to '+plungerPercentage);
-
-      sendMessage({
-        'type' : 'movePlunger',
-        'data' : {
-          'axis' : axis,
-          'locations' : [
-            {
-              'z' : -20,
-              'relative' : true
-            },
-            {
-              'speed' : 300
-            },
-            {
-              'plunger' : 'blowout'
-            },
-            {
-              'plunger' : 1
-            },
-            {
-              'z' : 20,
-              'relative' : true
-            },
-            {
-              'plunger' : 1
-            },
-            {
-              'speed' : 300
-            },
-            {
-              'plunger' : 1 + plungerPercentage // say 1+ because we're backing off from 1 right now
-            }
-          ]
-        }
-      });
-    }
-    else {
-      alert('Please calibrate pipette volume first');
-    }
+    sendMessage({
+      'type' : 'movePlunger',
+      'data' : {
+        'axis' : axis,
+        'locations' : [
+          {
+            'z' : -20,
+            'relative' : true
+          },
+          {
+            'speed' : 300
+          },
+          {
+            'plunger' : 'blowout'
+          },
+          {
+            'plunger' : 1
+          },
+          {
+            'z' : 20,
+            'relative' : true
+          },
+          {
+            'plunger' : 1
+          },
+          {
+            'speed' : 300
+          },
+          {
+            'plunger' : 0
+          }
+        ]
+      }
+    });
+  }
+  else {
+    alert('Please calibrate pipette volume first');
   }
 }
 
@@ -1268,38 +1252,25 @@ function saveVolume (axis) {
     return;
   }
 
-  var volumeMenu = document.getElementById('volume_testing');
-  var volume = volumeMenu ? volumeMenu.value : undefined;
+  var volumeInput = document.getElementById('volume_input_'+axis);
+  var volume = volumeInput ? volumeInput.value : undefined;
 
-  if(volume) {
+  volume = Number(volume);
 
-    // find the percentage we've moved between "bottom" and "top"
-    var totalDistance = robotState.pipettes[axis].bottom - robotState.pipettes[axis].top;
-    var distanceFromBottom = robotState.pipettes[axis].bottom - robotState[axis];
-    var percentageFromBottom = distanceFromBottom / totalDistance;
+  if(!isNaN(volume) && volume>0) {
 
-    if(debug===true) console.log('saved at '+percentageFromBottom);
+    sendMessage({
+      'type':'saveVolume',
+      'data': {
+        'volume':volume,
+        'axis':axis
+      }
+    });
 
-    // determine the number of uL this pipette can do based of percentage
-    var totalVolume = volume / percentageFromBottom;
-
-    if(!isNaN(totalVolume) && totalVolume>0) {
-
-      if(debug===true) console.log('pipetteVolume_'+axis);
-      document.getElementById('pipetteVolume_'+axis).innerHTML = totalVolume.toFixed(2);
-      robotState.pipettes[axis].volume = totalVolume;
-
-      sendMessage({
-        'type':'saveVolume',
-        'data': {
-          'volume':totalVolume,
-          'axis':axis
-        }
-      });
-    }
-    else  {
-      alert('error saving new volume, check the pipette\'s coordinates');
-    }
+    volumeInput.value = '';
+  }
+  else  {
+    alert('error saving new volume');
   }
 }
 

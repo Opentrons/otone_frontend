@@ -13,7 +13,7 @@ const addMenu = require('./menu').addMenu;
 const winston = require('winston')
 
 let backendProcess = undefined
-let powerSaver = undefined
+let powerSaverID = undefined
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -109,7 +109,7 @@ function startBackend() {
 }
 
 function blockPowerSaver() {
-  powerSaver = powerSaveBlocker.start('prevent-display-sleep')
+  powerSaverID = powerSaveBlocker.start('prevent-display-sleep')
 }
 
 app.on('ready', createWindow)
@@ -119,6 +119,10 @@ app.on('ready', addMenu)
 app.on('ready', blockPowerSaver)
 
 app.on('window-all-closed', function () {
+    app.quit()
+})
+
+app.on('quit', function(){
     process.once("uncaughtException", function (error) {
       // Ugly but convenient. If we have more than one uncaught exception
       // then re-raise. Otherwise Do nothing as that exception is caused by
@@ -127,8 +131,8 @@ app.on('window-all-closed', function () {
           throw error;
       }
     });
-
-    powerSaverBlocker.stop(powerSaver.id)
-    backendProcess.shutdown()
-    app.quit()
-})
+    backendProcess.shutdown();
+    if (powerSaveBlocker.isStarted(powerSaverID)) {
+      powerSaveBlocker.stop(powerSaverID);
+    }
+});
