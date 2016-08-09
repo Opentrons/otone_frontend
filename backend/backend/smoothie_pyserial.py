@@ -616,7 +616,7 @@ class Smoothie(object):
                 pass
         return result
 
-    def set_gpio(self, pin, state):
+    def set_mosfet(self, pin, state):
         """ Controls a 3Amp mosfet (for controlling a cooling fan)
             Uses the 2.4 mosfet on the Smoothieboard
         """

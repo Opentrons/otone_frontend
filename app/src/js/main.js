@@ -995,31 +995,31 @@ function erase () {
 /////////////////////////////////
 /////////////////////////////////
 
-var gpioState = [false,false,false,false,false,false];
+var mosfetState = [false,false,false,false,false,false];
 
-function toggleGPIO(pin) {
+function toggleMosfet(pin) {
 
   if(!robot_connected){
     alert('Please first connect to your machine');
     return;
   }
 
-  gpioState[pin] = !gpioState[pin];
+  mosfetState[pin] = !mosfetState[pin];
 
-  if(gpioState[pin]) {
-    document.getElementById('gpio-'+pin).classList.remove('tron-black');
-    document.getElementById('gpio-'+pin).classList.add('tron-white');
+  if(mosfetState[pin]) {
+    document.getElementById('mosfet-'+pin).classList.remove('tron-black');
+    document.getElementById('mosfet-'+pin).classList.add('tron-white');
   }
   else {
-    document.getElementById('gpio-'+pin).classList.remove('tron-white');
-    document.getElementById('gpio-'+pin).classList.add('tron-black');
+    document.getElementById('mosfet-'+pin).classList.remove('tron-white');
+    document.getElementById('mosfet-'+pin).classList.add('tron-black');
   }
 
   sendMessage({
-    'type' : 'gpio',
+    'type' : 'mosfet',
     'data' : {
-      'gpio' : pin,
-      'state' : gpioState[pin]
+      'mosfet' : pin,
+      'state' : mosfetState[pin]
     }
   });
 }
