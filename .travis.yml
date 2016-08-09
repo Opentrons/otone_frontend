@@ -51,7 +51,7 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   bucket: ot-app-builds
   skip_cleanup: true
-  local-dir: dist/mac
+  local-dir: releases
   upload-dir: mac
   acl: public_read
   on:
