@@ -1,7 +1,6 @@
 os: Visual Studio 2015
 
 environment:
-  nodejs_version: "6.0.0"
   matrix:
     - language: cpp
       PYTHON3: "C:\\Python34"
@@ -68,11 +67,11 @@ install:
   # ADDITIONAL NPM PREP FOR ELECTRON APP BUILD
   - cmd: npm config list
   - cmd: npm config set python %PYTHON2%\python.exe --global
-  - cmd: npm install node-gyp
-  - cmd: npm install node-gyp -g
-  - cmd: npm install bufferutil -g
+#  - cmd: npm install node-gyp
+#  - cmd: npm install node-gyp -g
+#  - cmd: npm install bufferutil -g
 
-  - cmd: npm install
+  - npm install
   - npm run release:win
 
 
