@@ -41,6 +41,7 @@ install:
   - npm install && cd app && npm install && cd ..  # Hack until instapp-app-deps works on travis
   - npm run release
   - ls dist/mac
+  - ls releases
 
 # Deploy the build version in an S3 bucket
 deploy:
