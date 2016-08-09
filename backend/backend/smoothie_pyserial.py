@@ -617,8 +617,8 @@ class Smoothie(object):
         return result
 
     def set_mosfet(self, pin, state):
-        """ Controls a 3Amp mosfet (for controlling a cooling fan)
-            Uses the 2.4 mosfet on the Smoothieboard
+        """ Controls the 6 mosfet's present on the Smoothieboard
+            Require an updated config file on the board being used
         """
         
         off_commands = ['M40','M42','M44','M46','M48','M50']
