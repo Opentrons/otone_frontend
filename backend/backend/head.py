@@ -394,10 +394,13 @@ class Head:
     def save_volume(self, data):
         """Save pipette volume to otone_data/pipette_values.json
         """
-        if(self.PIPETTES[data.axis] and data.volume is not None and data.volume > 0):
-            self.PIPETTES[data.axis].volume = data.volume
+        logger.debug('saved volume: {}'.format(data['volume']))
+        if(self.PIPETTES[data['axis']] and data['volume'] is not None and data['volume'] > 0):
+            self.PIPETTES[data['axis']].volume = data['volume']
             
         self.save_pipette_values()
+
+        self.publish_calibrations()
         
         
     #from planner.js
