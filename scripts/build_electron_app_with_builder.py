@@ -41,7 +41,7 @@ def remove_directory(dir_to_remove):
         print(script_tab + "Directory %s was not found." % dir_to_remove)
 
 
-def get_build_tag():
+def get_build_tag(os_type):
     """
     Gets the OS, CPU architecture (32 vs 64 bit), and current time stamp and
     appends CI branch, commit, or pull request info
@@ -53,24 +53,35 @@ def get_build_tag():
         time.strftime("%Y-%m-%d_%H.%M")
     )
 
-    app_version = get_app_version()
+    ci_tag = None
 
-    print(script_tag + "Checking Travis-CI environment variables for tag:")
-    travis_tag = tag_from_ci_env_vars(
-        ci_name='Travis-CI',
-        pull_request_var='TRAVIS_PULL_REQUEST',
-        branch_var='TRAVIS_BRANCH',
-        commit_var='TRAVIS_COMMIT'
-    )
+    if os_type == "mac":
+        print(script_tag + "Checking Travis-CI environment variables for tag:")
+        ci_tag = tag_from_ci_env_vars(
+            ci_name='Travis-CI',
+            pull_request_var='TRAVIS_PULL_REQUEST',
+            branch_var='TRAVIS_BRANCH',
+            commit_var='TRAVIS_COMMIT'
+        )
+
+    if os_type == "win":
+        print(script_tag + "Checking Appveyor-CI enironment variables for tag:")
+        ci_tag = tag_from_ci_env_vars(
+            ci_name='Appveyor-CI',
+            pull_request_var='APPVEYOR_PULL_REQUEST_NUMBER',
+            branch_var='APPVEYOR_REPO_BRANCH',
+            commit_var='APPVEYOR_REPO_COMMIT'
+        )
+
+    app_version = get_app_version()
 
     build_tag = "v{app_version}-{arch_time_stamp}".format(
         app_version=app_version,
         arch_time_stamp=arch_time_stamp
     )
 
-    if travis_tag:
-        return "{}_{}".format(build_tag, travis_tag)
-
+    if ci_tag:
+        return "{}_{}".format(build_tag, ci_tag)
     return build_tag
 
 
@@ -213,5 +224,5 @@ def clean_build_dist(build_tag):
 
 if __name__ == '__main__':
     build_electron_app()
-    build_tag = get_build_tag()
+    build_tag = get_build_tag(get_platform())
     clean_build_dist(build_tag)
