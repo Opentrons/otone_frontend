@@ -49,7 +49,7 @@ def get_build_tag(os_type):
     """
     arch_time_stamp = "{}{}_{}".format(
         platform.system(),
-        struct.calcsize('P') * 8,
+        64,  # struct.calcsize('P') * 8,
         time.strftime("%Y-%m-%d_%H.%M")
     )
 
@@ -126,7 +126,8 @@ def which(pgm):
             return p
 
 def get_arch():
-    cpu_word_size = struct.calcsize('P') * 8
+    # Note: forcing arch to be 64 bit
+    cpu_word_size = 64  # struct.calcsize('P') * 8
     if cpu_word_size == 64:
         return 'x64'
     if cpu_word_size == 32:
