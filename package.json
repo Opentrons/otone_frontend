@@ -13,10 +13,8 @@
     "build:frontend:mac": "python3.4 scripts/build_electron_app_with_builder.py",
     "build:frontend:win": "C:\\Python34\\python scripts\\build_electron_app_with_builder.py",
 
-    "package:win": "C:\\Python34\\python scripts\\zip_ot_app.py",
-
     "release:mac": "npm run build:backend:mac && npm run build:frontend:mac",
-    "release:win": "npm run build:backend:win && npm run build:frontend:win && npm run package:win",
+    "release:win": "npm run build:backend:win && npm run build:frontend:win",
 
     "start": "NODE_ENV=development electron app/"
   },
