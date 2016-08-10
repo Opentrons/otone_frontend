@@ -179,6 +179,13 @@ def clean_build_dist(build_tag):
 
     electron_builder_dist = os.path.join(project_root_dir, "dist", platform_type)
 
+    print(script_tab + 'Searching for build artifacts in electron-builder '
+                       'dist dir: {}'.format(electron_builder_dist))
+
+    print(script_tab + 'Contents electron-builder dist dir: {}'.format(
+        str(os.listdir(electron_builder_dist))
+    ))
+
     build_artifacts_globs = []
     if platform_type == "win":
         build_artifacts_globs = ["*"]
