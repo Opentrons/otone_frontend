@@ -133,14 +133,19 @@ def get_platform():
 def build_electron_app():
     print(script_tag + "Running electron-builder process.")
 
+    platform_type = get_platform()
     process_args = [
         which("build"),
         os.path.join(project_root_dir, "app"),
-        "--{}".format(get_platform()),
+        "--{}".format(platform_type),
         "--{}".format(get_arch()),
     ]
 
-    electron_builder_process = subprocess.Popen(process_args)
+    if platform_type == "mac":
+        electron_builder_process = subprocess.Popen(process_args)
+    elif platform_type == "win":
+        electron_builder_process = subprocess.Popen(process_args, shell=True)
+
     electron_builder_process.communicate()
 
     if electron_builder_process.returncode != 0:
