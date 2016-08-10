@@ -1,5 +1,6 @@
 # We are using the iOS build system to create Mac OS X python builds
 language: objective-c
+osx_image: beta-xcode6.3
 
 before_install:
   # OS extra info
@@ -26,6 +27,7 @@ before_install:
   - brew link --overwrite python34
   - python3.4 --version
   - python3.4 -c "import struct; print(struct.calcsize('P') * 8)"
+  - python --version
   - echo $PATH
 
   # Install Python packages (built with Python 3)
@@ -38,7 +40,7 @@ install:
   - npm --version
   - npm install && cd app && npm install && cd ..  # Hack until instapp-app-deps works on travis
   - npm run release:mac
-  - ls out
+  - ls dist/mac
   - ls releases
 
 # Deploy the build version in an S3 bucket
