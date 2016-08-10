@@ -180,12 +180,13 @@ def clean_build_dist(build_tag):
 
     electron_builder_dist = os.path.join(project_root_dir, "dist", platform_type)
 
+    print(script_tab + 'Contents electron-builder dist dir: {}'.format(
+        str(os.listdir(os.path.join(project_root_dir, "dist", platform_type)))
+    ))
+
     print(script_tab + 'Searching for build artifacts in electron-builder '
                        'dist dir: {}'.format(electron_builder_dist))
 
-    print(script_tab + 'Contents electron-builder dist dir: {}'.format(
-        str(os.listdir(os.path.join(project_root_dir, "dist")))
-    ))
 
     build_artifacts_globs = []
     if platform_type == "win":
@@ -201,6 +202,10 @@ def clean_build_dist(build_tag):
         for artifact_path in artifact_paths:
             _, file_extension = os.path.splitext(artifact_path)
             found_build_artifacts.append((artifact_path, file_extension))
+
+
+    if len(found_build_artifacts) == 0:
+        raise SystemExit(script_tab + 'No build artifacts found..')
 
     # Prepare releases dir where artifacts will be placed
     releases_dir = os.path.join(project_root_dir, 'releases')
