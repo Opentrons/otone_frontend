@@ -183,12 +183,12 @@ def clean_build_dist(build_tag):
                        'dist dir: {}'.format(electron_builder_dist))
 
     print(script_tab + 'Contents electron-builder dist dir: {}'.format(
-        str(os.listdir(electron_builder_dist))
+        str(os.listdir(os.path.join(project_root_dir, "dist")))
     ))
 
     build_artifacts_globs = []
     if platform_type == "win":
-        build_artifacts_globs = ["*"]
+        build_artifacts_globs = ["RELEASE", ".nupkg", ".exe"]
     elif platform_type == "mac":
         build_artifacts_globs = ["*.dmg", "*.zip"]
 
