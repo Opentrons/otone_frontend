@@ -159,42 +159,46 @@ def clean_build_dist(build_tag):
     :return:
     """
 
-    electron_builder_dist = os.path.join(project_root_dir, "dist", "mac")
+    platform_type = get_platform()
 
-    dmg_path = glob.glob(os.path.join(electron_builder_dist, '*.dmg'))
-    zip_path = glob.glob(os.path.join(electron_builder_dist, '*.zip'))
+    electron_builder_dist = os.path.join(project_root_dir, "dist", platform_type)
 
-    if len(dmg_path) != 1 or len(zip_path) != 1:
-        raise SystemExit(
-            script_tab + 'Error: Too few or too many .dmg or .zip files found. Aborting...'
-        )
+    build_artifacts_globs = []
+    if platform_type == "win":
+        build_artifacts_globs = ["*"]
+    elif platform_type == "mac":
+        build_artifacts_globs = ["*.dmg", "*.zip"]
 
-    dmg_path = dmg_path[0]
-    zip_path = zip_path[0]
+    found_build_artifacts = []  # Holds tuples of (filepath, ext)
 
-    print(script_tab + 'Found mac *dmg* at: {}'.format(dmg_path))
-    print(script_tab + 'Found mac *zip* at: {}\n'.format(dmg_path))
+    for glb in build_artifacts_globs:
+        artifact_paths = glob.glob(os.path.join(electron_builder_dist, glb))
 
-    new_dmg_path = os.path.join(
-        project_root_dir,
-        "releases",
-        "OpenTrons-{}.dmg".format(build_tag)
-    )
-    new_zip_path = os.path.join(
-        project_root_dir,
-        "releases",
-        "OpenTrons-{}.zip".format(build_tag)
-    )
+        for artifact_path in artifact_paths:
+            _, file_extension = os.path.splitext(artifact_path)
+            found_build_artifacts.append((artifact_path, file_extension))
 
+    # Prepare releases dir where artifacts will be placed
     releases_dir = os.path.join(project_root_dir, 'releases')
     remove_directory(releases_dir)
     os.mkdir(releases_dir)
 
-    print(script_tab + 'Moving *dmg* to: {}'.format(new_dmg_path))
-    shutil.move(dmg_path, new_dmg_path)
+    for artifact_path, artifact_ext in found_build_artifacts:
+        print(script_tab + 'Detected the following artifact for moving to '
+                           'releases dir: {} with extension: "{}"'.format(
+            artifact_path, artifact_ext
+        ))
 
-    print(script_tab + 'Moving *zip* to: {}\n'.format(new_zip_path))
-    shutil.move(zip_path, new_zip_path)
+    for artifact_path, artifact_ext in found_build_artifacts:
+        artifact_ext = ('.' + artifact_ext if artifact_ext else '')
+        new_artifact_path = os.path.join(
+            project_root_dir,
+            "releases",
+            "OpenTrons-{build_tag}{extension}".format(
+                build_tag=build_tag, extension=artifact_ext
+            )
+        )
+        shutil.move(artifact_path, new_artifact_path)
 
     print(script_tab + 'Builds successfully moved to {}'.format(releases_dir))
 
@@ -203,4 +207,3 @@ if __name__ == '__main__':
     build_electron_app()
     build_tag = get_build_tag()
     clean_build_dist(build_tag)
-
