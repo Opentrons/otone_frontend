@@ -29,7 +29,7 @@ def get_app_version():
 
     app_json_path = os.path.join(project_root_dir, "app", "package.json")
     with open(app_json_path, 'r') as json_file:
-        return json.load(json_file).get('version').decode('utf-8')
+        return json.load(json_file).get('version')
 
 
 def remove_directory(dir_to_remove):
