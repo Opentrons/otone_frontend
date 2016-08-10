@@ -995,6 +995,39 @@ function erase () {
 /////////////////////////////////
 /////////////////////////////////
 
+var mosfetState = [false,false,false,false,false,false];
+
+function toggleMosfet(pin) {
+
+  if(!robot_connected){
+    alert('Please first connect to your machine');
+    return;
+  }
+
+  mosfetState[pin] = !mosfetState[pin];
+
+  if(mosfetState[pin]) {
+    document.getElementById('mosfet-'+pin).classList.remove('tron-black');
+    document.getElementById('mosfet-'+pin).classList.add('tron-white');
+  }
+  else {
+    document.getElementById('mosfet-'+pin).classList.remove('tron-white');
+    document.getElementById('mosfet-'+pin).classList.add('tron-black');
+  }
+
+  sendMessage({
+    'type' : 'mosfet',
+    'data' : {
+      'mosfet' : pin,
+      'state' : mosfetState[pin]
+    }
+  });
+}
+
+/////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
+
 function setSpeed (axis,value) {
 
   if(!robot_connected){

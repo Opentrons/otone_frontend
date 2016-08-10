@@ -121,10 +121,7 @@ class TheQueue:
                 #logger.debug('the_queue.current_command: {}'.format(self.current_command))
 
                 # 'wait' for someone to click a button on interface. Not there yet.
-                if 'wait' in self.current_command:
-                    self.head.smoothieAPI.wait(self.current_command['wait'], self.sent_successfully)  # WAIT
-                
-                elif 'delay' in self.current_command:
+                if 'delay' in self.current_command:
                     self.head.smoothieAPI.delay(self.current_command['delay'])#, self.sent_successfully)
 
                 elif 'home' in self.current_command:
@@ -132,6 +129,9 @@ class TheQueue:
 
                 elif 'speed' in self.current_command:
                     self.head.smoothieAPI.set_speed(self.current_command['axis'],self.current_command['speed'])
+
+                elif 'mosfet' in self.current_command:
+                    self.head.smoothieAPI.set_mosfet(self.current_command['mosfet'],self.current_command.get('state',0))
                     
                 else:
                     self.head.smoothieAPI.move(self.current_command)	#, self.sent_successfully );      # MOVE
