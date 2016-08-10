@@ -195,7 +195,11 @@ def clean_build_dist(build_tag):
         ))
 
     for artifact_path, artifact_ext in found_build_artifacts:
-        artifact_ext = ('.' + artifact_ext if artifact_ext else '')
+        # If a file doesn't have an extension, make the extension the file name
+        if not artifact_ext:
+            file_name, _ = os.path.splitext(artifact_path)
+            artifact_ext = '-' + file_name
+
         new_artifact_path = os.path.join(
             project_root_dir,
             "releases",
