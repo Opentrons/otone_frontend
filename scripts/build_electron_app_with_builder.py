@@ -190,7 +190,7 @@ def clean_build_dist(build_tag):
 
     build_artifacts_globs = []
     if platform_type == "win":
-        build_artifacts_globs = ["RELEASE", ".nupkg", ".exe"]
+        build_artifacts_globs = ["RELEASES", ".nupkg", ".exe"]
     elif platform_type == "mac":
         build_artifacts_globs = ["*.dmg", "*.zip"]
 
@@ -198,7 +198,7 @@ def clean_build_dist(build_tag):
 
     for glb in build_artifacts_globs:
         artifact_paths = glob.glob(os.path.join(electron_builder_dist, glb))
-        print(script_tab + 'glb: ' + glb + ' -- ' + artifact_paths)
+        print(script_tab + 'glb: ' + glb + ' -- ' + str(artifact_paths))
 
         for artifact_path in artifact_paths:
             _, file_extension = os.path.splitext(artifact_path)
