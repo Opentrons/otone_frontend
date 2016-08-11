@@ -75,6 +75,8 @@ install:
 build: off
 
 before_deploy:
+  - ps: Get-ChildItem .\releases\*
+  - ps: ls .\releases\*
   - ps: Get-ChildItem .\releases\* | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName OTAppWin}
   - ps: foreach($artifactName in $artifacts.keys) { $artifacts[$artifactName] }
 
