@@ -198,6 +198,7 @@ def clean_build_dist(build_tag):
 
     for glb in build_artifacts_globs:
         artifact_paths = glob.glob(os.path.join(electron_builder_dist, glb))
+        print(script_tab + 'glb: ' + glb + ' -- ' + artifact_paths)
 
         for artifact_path in artifact_paths:
             _, file_extension = os.path.splitext(artifact_path)
