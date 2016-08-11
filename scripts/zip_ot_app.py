@@ -133,7 +133,7 @@ def zip_ot_app(build_tag, os_type):
             print(script_tab + "Error using zip command: {}".format(std_err))
     if os_type == "win":
         zip_output = zipfile.ZipFile(zip_app_path, 'w', zipfile.ZIP_DEFLATED)
-        for dirname, subdirs, subfiles in os.walk(current_app_path):
+        for dirname, subdirs, subfiles in os.walk('.'):
             zip_output.write(dirname)
             for filename in subfiles:
                 zip_output.write(os.path.join(dirname, filename))
