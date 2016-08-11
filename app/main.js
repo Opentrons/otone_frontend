@@ -14,6 +14,8 @@ const initAutoUpdater = require('./update_helpers').initAutoUpdater;
 
 
 const winston = require('winston')
+require('electron-debug')({showDevTools: true});
+
 
 let backendProcess = undefined
 let powerSaverID = undefined
@@ -21,6 +23,12 @@ let powerSaverID = undefined
 if (process.env.NODE_ENV == 'development'){
     require('electron-debug')({showDevTools: true});
 }
+
+let win;
+
+app.on('ready', () => {
+    win = new BrowserWindow();
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
