@@ -41,7 +41,7 @@ def remove_directory(dir_to_remove):
         print(script_tab + "Directory %s was not found." % dir_to_remove)
 
 
-def get_build_tag():
+def get_build_tag(os_type):
     """
     Gets the OS, CPU architecture (32 vs 64 bit), and current time stamp and
     appends CI branch, commit, or pull request info
@@ -49,28 +49,39 @@ def get_build_tag():
     """
     arch_time_stamp = "{}{}_{}".format(
         platform.system(),
-        struct.calcsize('P') * 8,
+        64,  # struct.calcsize('P') * 8,
         time.strftime("%Y-%m-%d_%H.%M")
     )
 
-    app_version = get_app_version()
+    ci_tag = None
 
-    print(script_tag + "Checking Travis-CI environment variables for tag:")
-    travis_tag = tag_from_ci_env_vars(
-        ci_name='Travis-CI',
-        pull_request_var='TRAVIS_PULL_REQUEST',
-        branch_var='TRAVIS_BRANCH',
-        commit_var='TRAVIS_COMMIT'
-    )
+    if os_type == "mac":
+        print(script_tag + "Checking Travis-CI environment variables for tag:")
+        ci_tag = tag_from_ci_env_vars(
+            ci_name='Travis-CI',
+            pull_request_var='TRAVIS_PULL_REQUEST',
+            branch_var='TRAVIS_BRANCH',
+            commit_var='TRAVIS_COMMIT'
+        )
+
+    if os_type == "win":
+        print(script_tag + "Checking Appveyor-CI enironment variables for tag:")
+        ci_tag = tag_from_ci_env_vars(
+            ci_name='Appveyor-CI',
+            pull_request_var='APPVEYOR_PULL_REQUEST_NUMBER',
+            branch_var='APPVEYOR_REPO_BRANCH',
+            commit_var='APPVEYOR_REPO_COMMIT'
+        )
+
+    app_version = get_app_version()
 
     build_tag = "v{app_version}-{arch_time_stamp}".format(
         app_version=app_version,
         arch_time_stamp=arch_time_stamp
     )
 
-    if travis_tag:
-        return "{}_{}".format(build_tag, travis_tag)
-
+    if ci_tag:
+        return "{}_{}".format(build_tag, ci_tag)
     return build_tag
 
 
@@ -115,7 +126,8 @@ def which(pgm):
             return p
 
 def get_arch():
-    cpu_word_size = struct.calcsize('P') * 8
+    # Note: forcing arch to be 64 bit
+    cpu_word_size = 64  # struct.calcsize('P') * 8
     if cpu_word_size == 64:
         return 'x64'
     if cpu_word_size == 32:
@@ -133,14 +145,19 @@ def get_platform():
 def build_electron_app():
     print(script_tag + "Running electron-builder process.")
 
+    platform_type = get_platform()
     process_args = [
         which("build"),
         os.path.join(project_root_dir, "app"),
-        "--{}".format(get_platform()),
+        "--{}".format(platform_type),
         "--{}".format(get_arch()),
     ]
 
-    electron_builder_process = subprocess.Popen(process_args)
+    if platform_type == "mac":
+        electron_builder_process = subprocess.Popen(process_args)
+    elif platform_type == "win":
+        electron_builder_process = subprocess.Popen(process_args, shell=True)
+
     electron_builder_process.communicate()
 
     if electron_builder_process.returncode != 0:
@@ -159,48 +176,66 @@ def clean_build_dist(build_tag):
     :return:
     """
 
-    electron_builder_dist = os.path.join(project_root_dir, "dist", "mac")
+    platform_type = get_platform()
 
-    dmg_path = glob.glob(os.path.join(electron_builder_dist, '*.dmg'))
-    zip_path = glob.glob(os.path.join(electron_builder_dist, '*.zip'))
+    electron_builder_dist = os.path.join(project_root_dir, "dist", platform_type)
 
-    if len(dmg_path) != 1 or len(zip_path) != 1:
-        raise SystemExit(
-            script_tab + 'Error: Too few or too many .dmg or .zip files found. Aborting...'
-        )
+    print(script_tab + 'Contents electron-builder dist dir: {}'.format(
+        str(os.listdir(os.path.join(project_root_dir, "dist", platform_type)))
+    ))
 
-    dmg_path = dmg_path[0]
-    zip_path = zip_path[0]
+    print(script_tab + 'Searching for build artifacts in electron-builder '
+                       'dist dir: {}'.format(electron_builder_dist))
 
-    print(script_tab + 'Found mac *dmg* at: {}'.format(dmg_path))
-    print(script_tab + 'Found mac *zip* at: {}\n'.format(dmg_path))
 
-    new_dmg_path = os.path.join(
-        project_root_dir,
-        "releases",
-        "OpenTrons-{}.dmg".format(build_tag)
-    )
-    new_zip_path = os.path.join(
-        project_root_dir,
-        "releases",
-        "OpenTrons-{}.zip".format(build_tag)
-    )
+    build_artifacts_globs = []
+    if platform_type == "win":
+        build_artifacts_globs = ["RELEASES", "*.nupkg", "*.exe"]
+    elif platform_type == "mac":
+        build_artifacts_globs = ["*.dmg", "*.zip"]
 
+    found_build_artifacts = []  # Holds tuples of (filepath, ext)
+
+    for glb in build_artifacts_globs:
+        artifact_paths = glob.glob(os.path.join(electron_builder_dist, glb))
+
+        for artifact_path in artifact_paths:
+            _, file_extension = os.path.splitext(artifact_path)
+            found_build_artifacts.append((artifact_path, file_extension))
+
+
+    if len(found_build_artifacts) == 0:
+        raise SystemExit(script_tab + 'No build artifacts found..')
+
+    # Prepare releases dir where artifacts will be placed
     releases_dir = os.path.join(project_root_dir, 'releases')
     remove_directory(releases_dir)
     os.mkdir(releases_dir)
 
-    print(script_tab + 'Moving *dmg* to: {}'.format(new_dmg_path))
-    shutil.move(dmg_path, new_dmg_path)
+    for artifact_path, artifact_ext in found_build_artifacts:
+        print(script_tab + 'Detected the following artifact for moving to '
+                           'releases dir: {} with extension: "{}"'.format(
+            artifact_path, artifact_ext
+        ))
 
-    print(script_tab + 'Moving *zip* to: {}\n'.format(new_zip_path))
-    shutil.move(zip_path, new_zip_path)
+    for artifact_path, artifact_ext in found_build_artifacts:
+        # If a file doesn't have an extension, make the extension the file name
+        if not artifact_ext:
+            artifact_ext = '-' + os.path.basename(artifact_path)
+
+        new_artifact_path = os.path.join(
+            project_root_dir,
+            "releases",
+            "OpenTrons-{build_tag}{extension}".format(
+                build_tag=build_tag, extension=artifact_ext
+            )
+        )
+        shutil.move(artifact_path, new_artifact_path)
 
     print(script_tab + 'Builds successfully moved to {}'.format(releases_dir))
 
 
 if __name__ == '__main__':
     build_electron_app()
-    build_tag = get_build_tag()
+    build_tag = get_build_tag(get_platform())
     clean_build_dist(build_tag)
-
