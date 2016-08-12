@@ -12,7 +12,8 @@
     "nightlife-rabbit": "git+https://github.com/opentrons/nightlife-rabbit",
     "node-clogger": "git+https://github.com/christian-raedel/node-clogger.git#v0.3.3",
     "zip-folder": "^1.0.0",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "electron-debug": "latest"
   },
   "repository": {
     "type": "git",

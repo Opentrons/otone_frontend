@@ -18,6 +18,8 @@ const winston = require('winston')
 let backendProcess = undefined
 let powerSaverID = undefined
 
+require('electron-debug')({showDevTools: true, enabled: true});
+
 if (process.env.NODE_ENV == 'development'){
     require('electron-debug')({showDevTools: true});
 }
