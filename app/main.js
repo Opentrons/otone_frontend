@@ -20,9 +20,9 @@ require('electron-debug')({showDevTools: true});
 let backendProcess = undefined
 let powerSaverID = undefined
 
-if (process.env.NODE_ENV == 'development'){
-    require('electron-debug')({showDevTools: true, enabled: true});
-}
+//if (process.env.NODE_ENV == 'development'){
+require('electron-debug')({showDevTools: true, enabled: true});
+//}
 
 let win;
 
