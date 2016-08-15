@@ -50,7 +50,7 @@ function initAutoUpdater () {
   var AUTO_UPDATE_URL = UPDATE_SERVER_URL + '?version=' + app.getVersion()
   console.log('process.platform = ' + process.platform)
   if (process.platform === 'win32') {
-    AUTO_UPDATE_URL = 'https://s3.amazonaws.com/ot-windows-test/win'
+    AUTO_UPDATE_URL = 'https://s3-us-west-2.amazonaws.com/ot-windows-test/win/'
 //     AUTO_UPDATE_URL = 'https://ot-app-releases.herokuapp.com'
   }
   console.log('Setting AUTO UPDATE URL to ' + AUTO_UPDATE_URL)
