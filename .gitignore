@@ -36,6 +36,7 @@ node_modules
 dist
 
 .node-version
+.python-version
 app/backend-dist/mac/*
 !app/backend-dist/mac/.gitkeep
 app/backend-dist/win/*
