@@ -50,7 +50,7 @@ if len(sys.argv) > 1:
 # Exit program if multiple processes are running
 if process_manager.check_is_running(perm_dir_path):
     print('Silently exiting due to previous running process')
-    exit(0)
+    sys.exit()
 
 disconnect_counter = 0
 disconnect_seconds_timeout = 30
