@@ -100,6 +100,7 @@ function execFile(filePath, extraArgs) {
  */
 function startBackend() {
     const userDataPath = app.getPath('userData');
+    console.log('User Data Path', userDataPath)
 
     if (process.platform == "darwin") {
       var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";

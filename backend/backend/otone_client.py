@@ -29,6 +29,8 @@ import time
 
 from autobahn.wamp.serializer import JsonSerializer, MsgPackSerializer
 
+import process_manager
+
 # If code is frozen (i.e. pyinstaller executable) then
 # file path is the sys._MEIPASS attribute
 if getattr(sys, 'frozen', None):
@@ -44,6 +46,11 @@ else:
 
 if len(sys.argv) > 1:
     perm_dir_path = sys.argv[1]
+
+# Exit program if multiple processes are running
+if process_manager.check_is_running(perm_dir_path):
+    print('Silently exiting due to previous running process')
+    exit(0)
 
 disconnect_counter = 0
 disconnect_seconds_timeout = 30
