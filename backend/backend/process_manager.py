@@ -27,12 +27,15 @@ def check_is_running(pid_dir):
         write_pid_file(pid_file_path)
         return False
 
-    last_pid = get_pid_from_file(pid_file_path)
+    last_pid = None
+    try:
+        last_pid = get_pid_from_file(pid_file_path)
+    except ValueError:
+        last_pid = None
+        os.remove(pid_file_path)
 
-    if last_pid == current_pid:
-        return True
 
-    if psutil.pid_exists(last_pid):
+    if last_pid and psutil.pid_exists(last_pid):
         return True
 
     write_pid_file(pid_file_path)
