@@ -427,7 +427,12 @@ class Smoothie(object):
                             elif value > 0 and self.theState['direction'][n]>0:
                                 value = value + self.theState['direction'][n]
                                 self.theState['direction'][n] = 0
-                    cmd = cmd + str(float(value))
+
+                    try:
+                        cmd = cmd + str(float(value))
+                    except TypeError as e:
+                        logger.debug('Failed casting coordinate value {}'.format(value))
+                        cmd = cmd + str(float(0.0))
 
 
             self.try_add(cmd)
@@ -612,7 +617,7 @@ class Smoothie(object):
                     s = serial.Serial(port)
                     s.close()
                     result.append(port)
-            except (OSError, serial.SerialException):
+            except (OSError, serial.SerialException, termios.error):
                 pass
         return result
 
