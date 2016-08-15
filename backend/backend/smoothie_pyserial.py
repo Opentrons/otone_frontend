@@ -617,7 +617,7 @@ class Smoothie(object):
                     s = serial.Serial(port)
                     s.close()
                     result.append(port)
-            except (OSError, serial.SerialException):
+            except (OSError, serial.SerialException, termios.error):
                 pass
         return result
 
