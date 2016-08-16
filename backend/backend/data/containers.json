@@ -6,8 +6,6 @@
          }
       },
 
-
-
       "unc_rack" :{
          "locations":{  
 
@@ -182,9 +180,8 @@
 "C4":{"x":50,"y":90,"z":0  ,"depth":55 , "diameter":14  , "total-liquid-volume":50000}
          }
       },
-
-
-            "small_vial_rack_16x45":{
+   
+    "small_vial_rack_16x45":{
          "locations":{
 "A1":{"x":0,"y":0,"z":0  , "depth":45 , "diameter":16  , "total-liquid-volume":10000},
 "B1":{"x":40,"y":0,"z":0  , "depth":45 , "diameter":16  , "total-liquid-volume":10000},
