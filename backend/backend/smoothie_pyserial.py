@@ -8,6 +8,7 @@ import logging
 import math
 import serial
 import sys
+import termios
 import time
 
 
