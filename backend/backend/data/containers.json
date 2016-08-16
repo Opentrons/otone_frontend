@@ -150,7 +150,7 @@
          }
       },
 
-        "3ml 3x2":{
+        "3ml-3x2":{
          "locations":{
 "A1":{"x":0,"y":0,"z":0  , "depth":68 , "diameter":34  , "total-liquid-volume":50000},
 "B1":{"x":40.5,"y":0,"z":0  ,"depth":68 , "diameter":34  , "total-liquid-volume":50000},
@@ -166,7 +166,7 @@
 "C4":{"x":50,"y":90,"z":0  ,"depth":68 , "diameter":34  , "total-liquid-volume":50000}
          }
       },
- "5ml 3x4":{
+ "5ml-3x4":{
          "locations":{
 "A1":{"x":0,"y":0,"z":0  , "depth":55 , "diameter":14  , "total-liquid-volume":50000},
 "B1":{"x":25,"y":0,"z":0  ,"depth":55 , "diameter":14  , "total-liquid-volume":50000},
