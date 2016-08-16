@@ -277,9 +277,9 @@ class Smoothie(object):
             try:
                 data = json.loads(msg)
             except Exception as e:
-                logging.debug('json.loads(msg) error: {}'.format(msg))
-                logging.debug('original messag ewas: {}'.format(data_))
-                logging.exception('Failed to load json in smoothie handler')
+                logger.debug('json.loads(msg) error: {}'.format(msg))
+                logger.debug('original messag ewas: {}'.format(data_))
+                logger.exception('Failed to load json in smoothie handler')
                 return
 
             didStateChange = False
@@ -418,7 +418,7 @@ class Smoothie(object):
                                 value = value - self.theState['direction'][n]
                         except Exception as e:
                             # TODO(Ahmed): wtf is going on here...
-                            logging.exception('Failed do switch direction stuff....')
+                            logger.exception('Failed do switch direction stuff....')
 
                     else:
                         if axis=='X' or axis=='Y':
@@ -618,8 +618,9 @@ class Smoothie(object):
                     s = serial.Serial(port)
                     s.close()
                     result.append(port)
-            except (OSError, serial.SerialException, termios.error):
-                pass
+            except Exception as e:
+                logger.debug('Exception in testing port {}'.format(port))
+                logger.exception(e)
         return result
 
     def set_mosfet(self, pin, state):
@@ -692,7 +693,7 @@ class Smoothie(object):
             try:
                 self.outer.on_state_change(state)
             except Exception as e:
-                logging.exception('smoothie_pyserial.on_state_change: problem calling self.outer.on_state_change')
+                logger.exception('smoothie_pyserial.on_state_change: problem calling self.outer.on_state_change')
                 raise e
 
     def on_limit_hit(self, axis):
