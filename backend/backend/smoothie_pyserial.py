@@ -411,7 +411,7 @@ class Smoothie(object):
                             if axis=='X' or axis=='Y':
                                 tvalue = float(self.theState[n])
                                 if value < tvalue and self.theState['direction'][n]==0:
-                                    self.theState['direction'][n] = 0
+                                    self.theState['direction'][n] = 0.5
                                 elif value > tvalue and self.theState['direction'][n]>0:
                                     self.theState['direction'][n] = 0
                                 value = value - self.theState['direction'][n]
@@ -422,7 +422,7 @@ class Smoothie(object):
                     else:
                         if axis=='X' or axis=='Y':
                             if value < 0 and self.theState['direction'][n]==0:
-                                self.theState['direction'][n] = 0
+                                self.theState['direction'][n] = 0.5
                                 value = value - self.theState['direction'][n]
                             elif value > 0 and self.theState['direction'][n]>0:
                                 value = value + self.theState['direction'][n]
