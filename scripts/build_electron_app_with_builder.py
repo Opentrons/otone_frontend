@@ -190,7 +190,7 @@ def clean_build_dist(build_tag):
 
     build_artifacts_globs = []
     if platform_type == "win":
-        build_artifacts_globs = ["RELEASES", "*.nupkg", "*.exe", "*"]
+        build_artifacts_globs = ["RELEASES", "*.nupkg", "*.exe"]
     elif platform_type == "mac":
         build_artifacts_globs = ["*.dmg", "*.zip"]
 
