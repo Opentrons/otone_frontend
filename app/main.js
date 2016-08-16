@@ -12,6 +12,8 @@ const {app, powerSaveBlocker, BrowserWindow} = electron
 const addMenu = require('./menu').addMenu;
 const initAutoUpdater = require('./update_helpers').initAutoUpdater;
 
+const fs = require('fs')
+
 
 const winston = require('winston')
 
@@ -37,6 +39,10 @@ function createWindow () {
 }
 
 function startWampRouter() {
+
+    // winston seems to not create the file if it doesn't exist already
+    // to avoid this, .appendFileSync() will create the file incase it's not there
+    fs.appendFileSync(app.getPath('userData') + '/otone_data/router_logfile.txt', '');
 
     var wamp_logger = new (winston.Logger)({
         transports: [
@@ -100,6 +106,7 @@ function execFile(filePath, extraArgs) {
  */
 function startBackend() {
     const userDataPath = app.getPath('userData');
+    console.log('User Data Path', userDataPath)
 
     if (process.platform == "darwin") {
       var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
