@@ -24,6 +24,10 @@ if (process.env.NODE_ENV == 'development'){
     require('electron-debug')({showDevTools: true});
 }
 
+process.on('uncaughtException', function(err) {
+  console.log(err);
+});
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -47,7 +51,7 @@ function startWampRouter() {
     var wamp_logger = new (winston.Logger)({
         transports: [
             new (winston.transports.File)({
-                level: 'verbose',
+                level: 'silly',
                 name: 'wamp-router',
                 filename: app.getPath('userData') + '/otone_data/router_logfile.txt',
                 json: false,
