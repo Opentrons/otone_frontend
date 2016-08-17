@@ -688,9 +688,14 @@ function makePipettingMotion (theDeck, theTool, thisParams, shouldDropPlunger) {
     }
     console.log('specifiedOffset = '+specifiedOffset);
     var arriveDepth = 0;
-    var bottomLimit = 0
-    if (!isNaN(locationPos.depth)){
-      bottomLimit = locationPos.depth * -1;//(locationPos.depth - 0.2) * -1; // give it 0.2 mm minimum distance from bottom of well
+    var bottomLimit = 0;
+    try {
+      if (!isNaN(locationPos.depth)){
+        bottomLimit = locationPos.depth * -1;//(locationPos.depth - 0.2) * -1; // give it 0.2 mm minimum distance from bottom of well
+      }
+    }
+    catch(e) {
+      throw 'Error: no well position name ' + thisParams.location + ' in ' + containerName;
     }
     console.log('bottomLimit = '+bottomLimit);
     if(thisParams['liquid-tracking']===true) {
