@@ -189,7 +189,15 @@ function console_log(string){ // makeshift "console" - console div is currently 
 
 function setupPlateInterface() {
   setupDragBox();
-  loadDefaultContainers();
+  loadContainers('./data/containers.json');
+
+  var userContainerFiles = remote.app.getUserJSONFiles();
+
+  for (var i = 0; i < userContainerFiles.length; i++) {
+    var filepath = userContainerFiles[i];
+    loadContainers(filepath);
+  }
+
 }
 
 window.addEventListener('load',setupPlateInterface);
@@ -509,7 +517,7 @@ function createAndSend () {
 /////////////////////////////////
 /////////////////////////////////
 
-function loadDefaultContainers() {
+function loadContainers(containersFilepath) {
 
   function onContainers () {
     try {
@@ -523,10 +531,9 @@ function loadDefaultContainers() {
     }
     catch(error) {
       console.log(error);
+      debugger;
     }
   }
-
-    var containersFilepath = './data/containers.json';
 
   getAJAX(containersFilepath,onContainers);
 }
