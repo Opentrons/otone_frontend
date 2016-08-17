@@ -41,6 +41,14 @@ function startWampRouter() {
 
     // winston seems to not create the file if it doesn't exist already
     // to avoid this, .appendFileSync() will create the file incase it's not there
+
+    try {
+      fs.mkdirSync(app.getPath('userData') + '/otone_data');
+    }
+    catch(e) {
+      //file already exists
+    }
+
     fs.appendFileSync(app.getPath('userData') + '/otone_data/router_logfile.txt', '');
 
     var wamp_logger = new (winston.Logger)({
