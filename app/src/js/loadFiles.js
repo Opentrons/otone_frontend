@@ -531,7 +531,8 @@ function loadContainers(containersFilepath) {
     }
     catch(error) {
       console.log(error);
-      debugger;
+      var filename = containersFilepath.split('/');
+      alert('Syntax error in containers file: '+filename[filename.length-1]);
     }
   }
 
