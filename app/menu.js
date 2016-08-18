@@ -3,8 +3,6 @@ module.exports.addMenu = addMenu;
 const electron = require("electron");
 const {app, dialog, Menu, MenuItem, shell} = electron;
 const zipFolder = require('zip-folder');
-const fs = require('fs')
-const path = require('path')
 const {getAutoUpdateToggle, toggleAutoUpdating} = require('./preferences')
 
 function addMenu() {

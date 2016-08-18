@@ -13,9 +13,7 @@ function getAutoUpdateToggle() {
 }
 
 function toggleAutoUpdating() {
-  console.log(`before toggle: ${getAutoUpdateToggle()}`)
   settings.setSync('autoUpdate', !getAutoUpdateToggle())
-  console.log(`after toggle: ${getAutoUpdateToggle()}`)
 }
 
 module.exports = {
