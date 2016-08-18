@@ -39,6 +39,7 @@ function addMenu() {
       {
         label: `Auto Update this App`,
         type: "checkbox",
+        checked: getAutoUpdateToggle(),
         click() { toggleAutoUpdating() }
       }
     ]}

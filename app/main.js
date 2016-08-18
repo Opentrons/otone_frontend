@@ -160,11 +160,7 @@ app.on('ready', startWampRouter)
 app.on('ready', startBackend)
 app.on('ready', addMenu)
 app.on('ready', blockPowerSaver)
-
-if (getAutoUpdateToggle() == true) {
-  app.on('ready', initAutoUpdater)
-}
-
+app.on('ready', initAutoUpdater)
 app.on('ready', createContainersFolder)
 
 app.on('window-all-closed', function () {

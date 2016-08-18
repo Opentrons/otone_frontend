@@ -1,31 +1,19 @@
-const storage = require('electron-json-storage');
+const electron = require('electron');
+const {dialog, Menu} = electron
+const settings = require('electron-settings')
 
-let autoUpdateToggle;
+settings.defaults({
+  "autoUpdate": false
+});
 
 function getAutoUpdateToggle() {
-  storage.get('preferences', function(error, data) {
-    if (data) {
-      autoUpdateToggle = !!data.autoUpdate
-    } else if (error) {
-      dialog.showMessageBox({
-        message: `Error toggling auto-update: \n\n${error}`,
-        buttons: ["OK"]
-      });
-    }
-  });
-  return autoUpdateToggle
+  return settings.getSync('autoUpdate')
 }
 
 function toggleAutoUpdating() {
-  storage.set('preferences', {autoUpdate: !!!getAutoUpdateToggle() }, function(error) {
-    if (error) {
-      dialog.showMessageBox({
-        message: `Error toggling auto-update: \n\n${error}`,
-        buttons: ["OK"]
-      });
-    }
-  });
-  console.log(getAutoUpdateToggle())
+  console.log(`before toggle: ${getAutoUpdateToggle()}`)
+  settings.setSync('autoUpdate', !getAutoUpdateToggle())
+  console.log(`after toggle: ${getAutoUpdateToggle()}`)
 }
 
 module.exports = {

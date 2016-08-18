@@ -55,7 +55,6 @@
     "iconUrl": "https://s3.amazonaws.com/ot-app-builds/win/icon.ico"
   },
   "dependencies": {
-    "electron-debug": "^1.0.1",
-    "electron-json-storage": "^2.0.0"
+    "electron-debug": "^1.0.1"
   }
 }
