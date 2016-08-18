@@ -15,7 +15,6 @@ const winston = require('winston')
 
 const addMenu = require('./menu').addMenu;
 const initAutoUpdater = require('./update_helpers').initAutoUpdater;
-const getAutoUpdateToggle = require('./preferences').getAutoUpdateToggle;
 
 let backendProcess = undefined
 let powerSaverID = undefined

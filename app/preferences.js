@@ -6,6 +6,8 @@ settings.defaults({
   "autoUpdate": false
 });
 
+settings.applyDefaultsSync()
+
 function getAutoUpdateToggle() {
   return settings.getSync('autoUpdate')
 }
