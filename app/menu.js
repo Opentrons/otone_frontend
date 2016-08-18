@@ -1,12 +1,11 @@
 module.exports.addMenu = addMenu;
 
-const fs = require('fs')
-const path = require('path')
-
 const electron = require("electron");
 const {app, dialog, Menu, MenuItem, shell} = electron;
 const zipFolder = require('zip-folder');
-
+const fs = require('fs')
+const path = require('path')
+const {getAutoUpdateToggle, toggleAutoUpdating} = require('./preferences')
 
 function addMenu() {
   const template =  [{
@@ -36,6 +35,11 @@ function addMenu() {
       {
         label: 'Open Containers Folder',
         click() { openContainersFolder() }
+      },
+      {
+        label: `Auto Update this App`,
+        type: "checkbox",
+        click() { toggleAutoUpdating() }
       }
     ]}
   ]
@@ -56,7 +60,6 @@ function downloadLogs() {
 }
 
 function openContainersFolder() {
-
   const containersFolderDir = app.getUserContainersPath();
 
   shell.showItemInFolder(containersFolderDir);

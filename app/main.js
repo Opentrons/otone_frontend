@@ -15,6 +15,7 @@ const winston = require('winston')
 
 const addMenu = require('./menu').addMenu;
 const initAutoUpdater = require('./update_helpers').initAutoUpdater;
+const getAutoUpdateToggle = require('./preferences').getAutoUpdateToggle;
 
 let backendProcess = undefined
 let powerSaverID = undefined
@@ -159,7 +160,11 @@ app.on('ready', startWampRouter)
 app.on('ready', startBackend)
 app.on('ready', addMenu)
 app.on('ready', blockPowerSaver)
-app.on('ready', initAutoUpdater)
+
+if (getAutoUpdateToggle() == true) {
+  app.on('ready', initAutoUpdater)
+}
+
 app.on('ready', createContainersFolder)
 
 app.on('window-all-closed', function () {
