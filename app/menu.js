@@ -1,6 +1,10 @@
 module.exports.addMenu = addMenu;
+
+const fs = require('fs')
+const path = require('path')
+
 const electron = require("electron");
-const {app, dialog, Menu, MenuItem} = electron;
+const {app, dialog, Menu, MenuItem, shell} = electron;
 const zipFolder = require('zip-folder');
 
 
@@ -28,6 +32,10 @@ function addMenu() {
       {
         label: 'Download Logs',
         click() { downloadLogs() }
+      },
+      {
+        label: 'Open Containers Folder',
+        click() { openContainersFolder() }
       }
     ]}
   ]
@@ -45,6 +53,13 @@ function downloadLogs() {
       zip(source, destination);
     };
   });
+}
+
+function openContainersFolder() {
+
+  const containersFolderDir = app.getUserContainersPath();
+
+  shell.showItemInFolder(containersFolderDir);
 }
 
 function zip(source, destination) {

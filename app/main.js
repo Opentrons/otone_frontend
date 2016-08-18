@@ -1,21 +1,20 @@
 if (require('electron-squirrel-startup')) return;
-const $ = jQuery = require('jquery')
-const http       = require('http')
-, CLogger  = require('node-clogger')
-const path = require('path')
-const nightlife  = require('nightlife-rabbit')
-    , autobahn = require('autobahn')
+
+const fs = require('fs')
 const child_process = require('child_process')
+const http       = require('http')
+const path = require('path')
+
 const electron = require('electron')
-const {app, powerSaveBlocker, BrowserWindow} = electron
+const {app, BrowserWindow, powerSaveBlocker} = electron
+
+const autobahn = require('autobahn')
+const $ = jQuery = require('jquery')
+const nightlife  = require('nightlife-rabbit')
+const winston = require('winston')
 
 const addMenu = require('./menu').addMenu;
 const initAutoUpdater = require('./update_helpers').initAutoUpdater;
-
-const fs = require('fs')
-
-
-const winston = require('winston')
 
 let backendProcess = undefined
 let powerSaverID = undefined
@@ -42,6 +41,14 @@ function startWampRouter() {
 
     // winston seems to not create the file if it doesn't exist already
     // to avoid this, .appendFileSync() will create the file incase it's not there
+
+    try {
+      fs.mkdirSync(app.getPath('userData') + '/otone_data');
+    }
+    catch(e) {
+      //file already exists
+    }
+
     fs.appendFileSync(app.getPath('userData') + '/otone_data/router_logfile.txt', '');
 
     var wamp_logger = new (winston.Logger)({
@@ -126,12 +133,34 @@ function blockPowerSaver() {
   powerSaverID = powerSaveBlocker.start('prevent-display-sleep')
 }
 
+function createContainersFolder() {
+  try{
+    fs.mkdirSync(app.getUserContainersPath());
+  }
+  catch(e) {
+    //file already exists
+  }
+}
+
+app.getUserContainersPath = function(){
+  return path.join(app.getPath('userData'), 'containers');
+}
+
+app.getUserJSONFiles = function(){
+  var filenames = fs.readdirSync(app.getUserContainersPath());
+
+  return filenames.map(function(fileName){
+    return path.join(app.getUserContainersPath(), fileName);
+  });
+}
+
 app.on('ready', createWindow)
 app.on('ready', startWampRouter)
 app.on('ready', startBackend)
 app.on('ready', addMenu)
 app.on('ready', blockPowerSaver)
 app.on('ready', initAutoUpdater)
+app.on('ready', createContainersFolder)
 
 app.on('window-all-closed', function () {
     app.quit()
