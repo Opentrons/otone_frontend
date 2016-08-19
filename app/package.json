@@ -6,13 +6,15 @@
   "main": "main.js",
   "dependencies": {
     "autobahn": "^0.10.1",
+    "electron-json-storage": "^2.0.0",
+    "electron-settings": "^2.1.1",
     "electron-squirrel-startup": "^1.0.0",
     "fs": "0.0.2",
     "jquery": "^1.11.1",
     "nightlife-rabbit": "git+https://github.com/opentrons/nightlife-rabbit",
     "node-clogger": "git+https://github.com/christian-raedel/node-clogger.git#v0.3.3",
-    "zip-folder": "^1.0.0",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "zip-folder": "^1.0.0"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 const electron = require("electron");
 const {app, dialog, autoUpdater} = electron;
-
+const {autoUpdateToggle, getAutoUpdateToggle} = require('./preferences')
 var UPDATE_SERVER_URL =  'http://ot-app-releases.herokuapp.com';
 
 
@@ -56,11 +56,9 @@ function initAutoUpdater () {
   }
   console.log('Setting AUTO UPDATE URL to ' + AUTO_UPDATE_URL)
   autoUpdater.setFeedURL(AUTO_UPDATE_URL)
-  autoUpdater.checkForUpdates()
+  if (getAutoUpdateToggle()) autoUpdater.checkForUpdates()
 }
 
 module.exports = {
     initAutoUpdater
 };
-
-
