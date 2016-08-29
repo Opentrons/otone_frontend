@@ -6,7 +6,7 @@ const http       = require('http')
 const path = require('path')
 
 const electron = require('electron')
-const {app, BrowserWindow, powerSaveBlocker} = electron
+const {app, BrowserWindow, powerSaveBlocker, crashReporter} = electron
 
 const autobahn = require('autobahn')
 const $ = jQuery = require('jquery')
@@ -15,6 +15,7 @@ const winston = require('winston')
 
 const addMenu = require('./menu').addMenu;
 const initAutoUpdater = require('./update_helpers').initAutoUpdater;
+const {toggleSetting, getSetting} = require('./preferences')
 
 let backendProcess = undefined
 let powerSaverID = undefined
@@ -142,6 +143,20 @@ function createContainersFolder() {
   }
 }
 
+function startCrashReporter() {
+  if (getSetting("crashReport")) {
+    console.log("Crash Reporter Enabled")
+    crashReporter.start({
+      productName: 'OpenTrons App',
+      companyName: 'OpenTrons',
+      submitURL: 'http://54.213.42.102:1127/post',
+      autoSubmit: true
+    });
+  } else {
+    console.log("Crash Reporter Disabled")
+  }
+}
+
 app.getUserContainersPath = function(){
   return path.join(app.getPath('userData'), 'containers');
 }
@@ -161,6 +176,7 @@ app.on('ready', addMenu)
 app.on('ready', blockPowerSaver)
 app.on('ready', initAutoUpdater)
 app.on('ready', createContainersFolder)
+app.on('ready', startCrashReporter)
 
 app.on('window-all-closed', function () {
     app.quit()

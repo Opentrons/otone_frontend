@@ -3,7 +3,7 @@ module.exports.addMenu = addMenu;
 const electron = require("electron");
 const {app, dialog, Menu, MenuItem, shell} = electron;
 const zipFolder = require('zip-folder');
-const {getAutoUpdateToggle, toggleAutoUpdating} = require('./preferences')
+const {getSetting, toggleSetting} = require('./preferences')
 
 function addMenu() {
   const template =  [{
@@ -37,8 +37,14 @@ function addMenu() {
       {
         label: `Auto Update this App`,
         type: "checkbox",
-        checked: getAutoUpdateToggle(),
-        click() { toggleAutoUpdating() }
+        checked: getSetting("autoUpdate"),
+        click() { toggleSetting("autoUpdate") }
+      },
+      {
+        label: `Anonymously Report Crashes`,
+        type: "checkbox",
+        checked: getSetting("crashReport"),
+        click() { toggleSetting("crashReport") }
       }
     ]}
   ]
