@@ -15,15 +15,15 @@ settings.on('create', pathToSettings => {
   }
 })
 
-function getAutoUpdateToggle() {
-  return settings.getSync('autoUpdate')
+function getSetting(setting) {
+  return settings.getSync(setting)
 }
 
-function toggleAutoUpdating() {
-  settings.setSync('autoUpdate', !getAutoUpdateToggle())
+function toggleSetting(setting) {
+  settings.setSync(setting, !getSetting(setting))
 }
 
 module.exports = {
-  getAutoUpdateToggle,
-  toggleAutoUpdating
+  getSetting,
+  toggleSetting
 }

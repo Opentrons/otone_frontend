@@ -1,6 +1,6 @@
 const electron = require("electron");
 const {app, dialog, autoUpdater} = electron;
-const {autoUpdateToggle, getAutoUpdateToggle} = require('./preferences')
+const {toggleSetting, getSetting} = require('./preferences')
 var UPDATE_SERVER_URL =  'http://ot-app-releases.herokuapp.com';
 
 
@@ -48,7 +48,7 @@ function initAutoUpdater () {
   )
 
   var AUTO_UPDATE_URL = UPDATE_SERVER_URL + '?version=' + app.getVersion()
-   
+
   //  If platform is Windows, use S3 file server instead of update server.
   //  please see /docs/windows_updating.txt for more information
   if (process.platform === 'win32') {
@@ -56,7 +56,7 @@ function initAutoUpdater () {
   }
   console.log('Setting AUTO UPDATE URL to ' + AUTO_UPDATE_URL)
   autoUpdater.setFeedURL(AUTO_UPDATE_URL)
-  if (getAutoUpdateToggle()) autoUpdater.checkForUpdates()
+  if (getSetting("autoUpdate")) autoUpdater.checkForUpdates()
 }
 
 module.exports = {
