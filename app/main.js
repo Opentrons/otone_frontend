@@ -50,24 +50,9 @@ function startWampRouter() {
       //file already exists
     }
 
-    fs.appendFileSync(app.getPath('userData') + '/otone_data/router_logfile.txt', '');
-
-    var wamp_logger = new (winston.Logger)({
-        transports: [
-            new (winston.transports.File)({
-                level: 'verbose',
-                name: 'wamp-router',
-                filename: app.getPath('userData') + '/otone_data/router_logfile.txt',
-                json: false,
-                maxsize: 10*1024*1024,
-                maxFiles: 5,
-                timestamp: function(){
-                  const d = new Date();
-                  return d.toISOString();
-                }
-            })
-        ]
-    });
+    var wampLoggerPath = app.getPath('userData') + '/otone_data/router_logfile.txt'
+    fs.appendFileSync(wampLoggerPath, '');
+    var wamp_logger = createLogger(wampLoggerPath, 'wamp_logger')
 
     var router = nightlife.createRouter({
         httpServer: http.createServer(),
@@ -157,6 +142,38 @@ function startCrashReporter() {
   }
 }
 
+function createLogger(path, name) {
+  fs.appendFileSync(path, '');
+
+  return new (winston.Logger)({
+      transports: [
+          new (winston.transports.File)({
+              level: 'verbose',
+              name: name,
+              filename: path,
+              json: false,
+              maxsize: 10*1024*1024,
+              maxFiles: 5,
+              timestamp: function(){
+                const d = new Date();
+                return d.toISOString();
+              }
+          })
+      ]
+  });
+}
+
+function startElectronLogger() {
+  const electronLoggerPath = app.getPath('userData') + '/otone_data/electron_logfile.txt'
+  const electronLogger = createLogger(electronLoggerPath, 'electron-main')
+
+  process.on('uncaughtException', function(error) {
+    if (process.listeners("uncaughtException").length > 1) {
+      electronLogger.info(error);
+    }
+  });
+}
+
 app.getUserContainersPath = function(){
   return path.join(app.getPath('userData'), 'containers');
 }
@@ -177,20 +194,13 @@ app.on('ready', blockPowerSaver)
 app.on('ready', initAutoUpdater)
 app.on('ready', createContainersFolder)
 app.on('ready', startCrashReporter)
+app.on('ready', startElectronLogger)
 
 app.on('window-all-closed', function () {
-    app.quit()
+  app.quit()
 })
 
 app.on('quit', function(){
-    process.once("uncaughtException", function (error) {
-      // Ugly but convenient. If we have more than one uncaught exception
-      // then re-raise. Otherwise Do nothing as that exception is caused by
-      // an attempt to shutdown the backend process
-      if (process.listeners("uncaughtException").length > 1) {
-          throw error;
-      }
-    });
     backendProcess.shutdown();
     if (powerSaveBlocker.isStarted(powerSaverID)) {
       powerSaveBlocker.stop(powerSaverID);
