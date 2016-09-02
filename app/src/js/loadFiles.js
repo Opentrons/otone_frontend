@@ -593,10 +593,6 @@ function convert_csv_to_json(filetext) {
   var current_head = {};
   var current_instructions = [];
 
-
-
-
-
   var pipette_template = {
     "tool" : "pipette",
     "tip-racks" : [          // tipracks are added after all tips are counted below
@@ -650,6 +646,7 @@ function convert_csv_to_json(filetext) {
   };
 
   var current_pipette = undefined;
+  var current_group = undefined;
 
   for(var i=0; i<line_array.length; i++) {
     var cells = line_array[i].split(',');
@@ -678,26 +675,26 @@ function convert_csv_to_json(filetext) {
             // if we changed pipette, make a new instruction for it
             current_instructions.push({
               'tool' : pname,
-              'groups' : []
+              'groups' : [{
+                'transfer': []
+              }]
             });
+
+            current_group = current_instructions[current_instructions.length-1]['groups'][0]['transfer']
           }
           current_pipette = pname;
 
-          current_instructions[current_instructions.length-1]['groups'].push({
-            "transfer": [
-              {
-                "from": {
-                  "container": sPlate,
-                  "location": sWell
-                },
-                "to": {
-                  "container": dPlate,
-                  "location": dWell
-                },
-                "volume": volume,
-                "blowout" : true
-              }
-            ]
+          current_group.push({
+            "from": {
+              "container": sPlate,
+              "location": sWell
+            },
+            "to": {
+              "container": dPlate,
+              "location": dWell
+            },
+            "volume": volume,
+            "blowout" : true
           });
         }
       }
