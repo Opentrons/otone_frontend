@@ -80,6 +80,8 @@ class Smoothie(object):
         self.connected = False
         self.pool = ThreadPoolExecutor(max_workers=5)
         self.delay_future = None
+        self.needs_M999 = False
+        self.sent_M112 = False
 
         def close_port():
             if self.serial_port and self.serial_port.is_open:
@@ -270,7 +272,10 @@ class Smoothie(object):
 
         if self.ack_msg_rcvd in msg:
             self.already_trying = False
-        if msg.find('{')>=0:
+        if 'Emergency Stop Requested' in msg:
+            self.needs_M999 = True
+            self.sent_M112 = False
+        if msg.find('{')>=0 and not self.sent_M112:
             msg = msg[msg.index('{'):]
 
             try:
@@ -563,10 +568,13 @@ class Smoothie(object):
         self.smoothieQueue = list()
 
         # send directly to smoothie board (bypass smoothie queue)
+        self.sent_M112 = True
         self.send(self._dict['off'] + '\r\n')
 
-        # the smoothie seems to require some time after resetting
-        time.sleep(0.5)
+        while not self.needs_M999:
+            time.sleep(0.1)
+
+        self.needs_M999 = False
         
         self.send(self._dict['on'] + '\r\n')
         time.sleep(0.5)
