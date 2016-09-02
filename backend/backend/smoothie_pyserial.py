@@ -274,7 +274,6 @@ class Smoothie(object):
             self.already_trying = False
         if 'Emergency Stop Requested' in msg:
             self.needs_M999 = True
-            self.sent_M112 = False
         if msg.find('{')>=0 and not self.sent_M112:
             msg = msg[msg.index('{'):]
 
@@ -575,6 +574,7 @@ class Smoothie(object):
             time.sleep(0.1)
 
         self.needs_M999 = False
+        self.sent_M112 = False
         
         self.send(self._dict['on'] + '\r\n')
         time.sleep(0.5)
