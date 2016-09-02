@@ -634,9 +634,9 @@ function convert_csv_to_json(filetext) {
 
         pipette_transfer_count[pname] = 0;
       }
-      else if (cells[0].trim().toLowerCase() == 'Container') {
+      else if (cells[0].trim().toLowerCase() == 'container') {
         const cname = cells[1].trim();
-        current_head[cname] = {
+        current_deck[cname] = {
           'labware' : cells[2].trim()
         };
       }
