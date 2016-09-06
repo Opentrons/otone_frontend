@@ -159,29 +159,29 @@ function handleContainers (newContainers) {
 
       if(theContainerLocations.a[nameA].x!==null && theContainerLocations.a[nameA].y!==null && theContainerLocations.a[nameA].z!==null){
         
-        PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
+        PA.innerHTML = "<button type=\"button\" class=\"btn tron-green\" onclick=\"saveContainer('a');\" disabled>Save</button> \
         <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" disabled>Move To</button> \
-        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+        <button type=\"button\" class=\"btn tron-green\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
       
       } else {
         
-        PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
+        PA.innerHTML = "<button type=\"button\" class=\"btn tron-green\" onclick=\"saveContainer('a');\" disabled>Save</button> \
         <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button> \
-        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+        <button type=\"button\" class=\"btn tron-green\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
       }
 
       if (nameA in theContainerLocations.b){
         if(theContainerLocations.b[nameA].x!==null && theContainerLocations.b[nameA].y!==null && theContainerLocations.b[nameA].z!==null){
 
-          PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
-          <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" disabled>Move To</button> \
-          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+          PB.innerHTML = "<button type=\"button\" class=\"btn tron-green\" onclick=\"saveContainer('b');\" disabled>Save</button> \
+          <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('b');\" disabled>Move To</button> \
+          <button type=\"button\" class=\"btn tron-green\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
 
         } else {
           
-          PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
-          <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button> \
-          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+          PB.innerHTML = "<button type=\"button\" class=\"btn tron-green\" onclick=\"saveContainer('b');\" disabled>Save</button> \
+          <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button> \
+          <button type=\"button\" class=\"btn tron-green\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
 
         }
       }
@@ -254,30 +254,30 @@ function handleContainers (newContainers) {
 
       if(theContainerLocations.b[name].x!==null && theContainerLocations.b[name].y!==null && theContainerLocations.b[name].z!==null){
 
-        PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
-        <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" disabled>Move To</button> \
-        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+        PB.innerHTML = "<button type=\"button\" class=\"btn tron-green\" onclick=\"saveContainer('b');\" disabled>Save</button> \
+        <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('b');\" disabled>Move To</button> \
+        <button type=\"button\" class=\"btn tron-green\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
 
       } else {
         
-        PB.innerHTML = "<button type=\"button\" class=\"btn tron-black\" onclick=\"saveContainer('b');\" disabled>Save</button> \
-        <button type=\"button\" class=\"btn tron-black\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button> \
-        <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+        PB.innerHTML = "<button type=\"button\" class=\"btn tron-green\" onclick=\"saveContainer('b');\" disabled>Save</button> \
+        <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('b');\" style=\"display:none;\" disabled>Move To</button> \
+        <button type=\"button\" class=\"btn tron-green\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
 
       }
 
       if (name in theContainerLocations.a){
         if(theContainerLocations.a[name].x!==null && theContainerLocations.a[name].y!==null && theContainerLocations.a[name].z!==null){
          
-          PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
+          PA.innerHTML = "<button type=\"button\" class=\"btn tron-green\" onclick=\"saveContainer('a');\" disabled>Save</button> \
           <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" disabled>Move To</button> \
-          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+          <button type=\"button\" class=\"btn tron-green\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
         
         } else {
           
-          PA.innerHTML = "<button type=\"button\" class=\"btn tron-blue\" onclick=\"saveContainer('a');\" disabled>Save</button> \
+          PA.innerHTML = "<button type=\"button\" class=\"btn tron-green\" onclick=\"saveContainer('a');\" disabled>Save</button> \
           <button type=\"button\" class=\"btn tron-blue\" onclick=\"movetoContainer('a');\" style=\"display:none;\" disabled>Move To</button> \
-          <button type=\"button\" class=\"btn tron-red\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
+          <button type=\"button\" class=\"btn tron-green\" onclick=\"relativeCoords();\" style=\"display:none;\" disabled>Reset</button>";
         
         }
       }
@@ -666,7 +666,7 @@ var socketHandler = {
     alert('Job finished in '+minutes+' minutes, '+seconds+' seconds');
 
     document.getElementById('runButton').disabled = false;
-    document.getElementById('runButton').classList.add('tron-red');
+    document.getElementById('runButton').classList.add('tron-blue');
   },
   'networks' : function(data) {
     alert(JSON.stringify(data));
@@ -981,7 +981,7 @@ function erase () {
 
   if(CURRENT_PROTOCOL){
     document.getElementById('runButton').disabled = false;
-    document.getElementById('runButton').classList.add('tron-red');
+    document.getElementById('runButton').classList.add('tron-blue');
   }
 
   var msg = {
@@ -1007,12 +1007,12 @@ function toggleMosfet(pin) {
   mosfetState[pin] = !mosfetState[pin];
 
   if(mosfetState[pin]) {
-    document.getElementById('mosfet-'+pin).classList.remove('tron-black');
+    document.getElementById('mosfet-'+pin).classList.remove('tron-blue');
     document.getElementById('mosfet-'+pin).classList.add('tron-white');
   }
   else {
     document.getElementById('mosfet-'+pin).classList.remove('tron-white');
-    document.getElementById('mosfet-'+pin).classList.add('tron-black');
+    document.getElementById('mosfet-'+pin).classList.add('tron-blue');
   }
 
   sendMessage({

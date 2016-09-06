@@ -306,7 +306,7 @@ function loadFile(e) {
         if(tempProtocol.deck && tempProtocol.head && tempProtocol.instructions && tempProtocol.ingredients) {
 
           document.getElementById('runButton').disabled = false;
-          document.getElementById('runButton').classList.add('tron-red');
+          document.getElementById('runButton').classList.add('tron-blue');
 
           CURRENT_PROTOCOL = tempProtocol;
           for (var k in tempProtocol.head){
@@ -504,7 +504,7 @@ function createAndSend () {
           timeSentJob = new Date().getTime();
 
           document.getElementById('runButton').disabled = true;
-          document.getElementById('runButton').classList.remove('tron-red');
+          document.getElementById('runButton').classList.remove('tron-blue');
         }
 
         shouldInfinity = false;

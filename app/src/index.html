@@ -79,7 +79,7 @@
               <div class="row">
                 <div class="col-xs-4 col-sm-4  col-md-4  col-lg-4">
                   <button disabled="true" id="runButton" class="btn" type="button" data-toggle="dropdown" onclick="createAndSend()">Run Job</button>
-                  <span id="fileName">
+                  <span id="fileName" style="overflow:hidden;margin-bottom:10px">
                     [empty] </span><br>
                   <button type="button" class="btn tron-white" onclick="pause()">Pause</button>
                   <button type="button" class="btn tron-white" onclick="resume()">Resume</button>
@@ -124,10 +124,10 @@
               <fieldset>
                 <legend class="UI-Title">Jog Axis</legend>
 
-                <div class="btn-group fblock" id="jogAB">
+                <div class="btn-group fblock" id="jogAB" style="margin-left:44px">
 
-                  <button type="button" class="btn col-lg-6 shortform pipette-Left" id="jogB" onclick="toggleJog('b');">Left</button>
-                  <button type="button" class="btn col-lg-6 shortform pipette-Center" id="jogA" onclick="toggleJog('a');">Center</button>
+                  <button type="button" class="btn col-lg-6 shortform" id="jogB" onclick="toggleJog('b');">Left</button>
+                  <button type="button" class="btn col-lg-6 shortform" id="jogA" onclick="toggleJog('a');" style="padding-right:20px">Center</button>
                 </div>
 
 
@@ -200,12 +200,12 @@
                           <td class="col-md-4"><a href="#"data-toggle="modal" data-target="#myModal">Top</a></td>
 
                           <td class="col-md-4">
-                            <button type="button" class="btn btn-sm tron-black b" onclick="calibrate('b','top', this)" >Save</button>
-                            <button type="button" id="btn_top_b" class="btn btn-sm tron-black b" onclick="movePipette('b','top')" style="visibility:hidden;" >Move To</button>
+                            <button type="button" class="btn btn-sm tron-green b" onclick="calibrate('b','top', this)" >Save</button>
+                            <button type="button" id="btn_top_b" class="btn btn-sm tron-blue b" onclick="movePipette('b','top')" style="visibility:hidden;" >Move To</button>
                           </td>
 
                           <td class="col-md-4">
-                            <button type="button" class="btn btn-sm tron-blue a" onclick="calibrate('a','top',this)" >Save</button>
+                            <button type="button" class="btn btn-sm tron-green a" onclick="calibrate('a','top',this)" >Save</button>
                             <button type="button" id="btn_top_a" class="btn btn-sm tron-blue a" onclick="movePipette('a','top')" style="visibility:hidden;">Move To</button>
                           </td>
 
@@ -216,12 +216,12 @@
                           <td class="col-md-4"><a href="#"data-toggle="modal" data-target="#myModal">Bottom</a></td>
 
                           <td class="col-md-4">
-                            <button type="button" class="btn btn-sm tron-black b" onclick="calibrate('b','bottom', this)" >Save</button>
-                            <button type="button" id="btn_bottom_b" class="btn btn-sm tron-black b" onclick="movePipette('b','bottom')" style="visibility:hidden;" >Move To</button>
+                            <button type="button" class="btn btn-sm tron-green b" onclick="calibrate('b','bottom', this)" >Save</button>
+                            <button type="button" id="btn_bottom_b" class="btn btn-sm tron-blue b" onclick="movePipette('b','bottom')" style="visibility:hidden;" >Move To</button>
                           </td>
 
                           <td class="col-md-4">
-                            <button type="button" class="btn btn-sm tron-blue a" onclick="calibrate('a','bottom',this)" >Save</button>
+                            <button type="button" class="btn btn-sm tron-green a" onclick="calibrate('a','bottom',this)" >Save</button>
                             <button type="button" id="btn_bottom_a" class="btn btn-sm tron-blue a" onclick="movePipette('a','bottom')" style="visibility:hidden;">Move To</button>
                           </td>
 
@@ -232,12 +232,12 @@
                           <td class="col-md-4"><a href="#"data-toggle="modal" data-target="#myModal">Blowout</a></td>
 
                           <td class="col-md-4">
-                            <button type="button" class="btn btn-sm tron-black b" onclick="calibrate('b','blowout', this)" >Save</button>
-                            <button type="button" id="btn_blowout_b" class="btn btn-sm tron-black b" onclick="movePipette('b','blowout')" style="visibility:hidden;" >Move To</button>
+                            <button type="button" class="btn btn-sm tron-green b" onclick="calibrate('b','blowout', this)" >Save</button>
+                            <button type="button" id="btn_blowout_b" class="btn btn-sm tron-blue b" onclick="movePipette('b','blowout')" style="visibility:hidden;" >Move To</button>
                           </td>
 
                           <td class="col-md-4">
-                            <button type="button" class="btn btn-sm tron-blue a" onclick="calibrate('a','blowout',this)" >Save</button>
+                            <button type="button" class="btn btn-sm tron-green a" onclick="calibrate('a','blowout',this)" >Save</button>
                             <button type="button" id="btn_blowout_a" class="btn btn-sm tron-blue a" onclick="movePipette('a','blowout')" style="visibility:hidden;">Move To</button>
                           </td>
 
@@ -248,12 +248,12 @@
                           <td class="col-md-4"><a href="#"data-toggle="modal" data-target="#myModal">Drop Tip</a></td>
 
                           <td class="col-md-4">
-                            <button type="button" class="btn btn-sm tron-black b" onclick="calibrate('b','droptip', this)" >Save</button>
-                            <button type="button" id="btn_droptip_b" class="btn btn-sm tron-black b" onclick="movePipette('b','droptip')" style="visibility:hidden;" >Move To</button>
+                            <button type="button" class="btn btn-sm tron-green b" onclick="calibrate('b','droptip', this)" >Save</button>
+                            <button type="button" id="btn_droptip_b" class="btn btn-sm tron-blue b" onclick="movePipette('b','droptip')" style="visibility:hidden;" >Move To</button>
                           </td>
 
                           <td class="col-md-4">
-                            <button type="button" class="btn btn-sm tron-blue a" onclick="calibrate('a','droptip',this)" >Save</button>
+                            <button type="button" class="btn btn-sm tron-green a" onclick="calibrate('a','droptip',this)" >Save</button>
                             <button type="button" id="btn_droptip_a" class="btn btn-sm tron-blue a" onclick="movePipette('a','droptip')" style="visibility:hidden;">Move To</button>
                           </td>
 
@@ -367,9 +367,9 @@
                       <input type="text" id="volume_input_b" style="width:60px">
                       </input>
                     </div>
-                    <button type="button" class="btn btn-sm tron-black b" onclick="saveVolume('b')">Save</button>
-                    <button type="button" class="btn btn-sm tron-black b" onclick="moveVolume('b')">Test</button>
-                    <button type="button" class="btn btn-sm tron-black b" onclick="pickupTip('b')">Pickup-Tip</button>
+                    <button type="button" class="btn btn-sm tron-green b" onclick="saveVolume('b')">Save</button>
+                    <button type="button" class="btn btn-sm tron-blue b" onclick="moveVolume('b')">Test</button>
+                    <button type="button" class="btn btn-sm tron-blue b" onclick="pickupTip('b')">Pickup-Tip</button>
                   </div>
                   <br />
                   <div style="display:inline-block; margin-top:30px;">
@@ -382,7 +382,7 @@
                       <input type="text" id="volume_input_a" style="width:60px">
                       </input>
                     </div>
-                    <button type="button" class="btn btn-sm tron-blue a" onclick="saveVolume('a')">Save</button>
+                    <button type="button" class="btn btn-sm tron-green a" onclick="saveVolume('a')">Save</button>
                     <button type="button" class="btn btn-sm tron-blue a" onclick="moveVolume('a')">Test</button>
                     <button type="button" class="btn btn-sm tron-blue a" onclick="pickupTip('a')">Pickup-Tip</button>
                   </div>

@@ -20,7 +20,7 @@ html,body,.container{
 
 code {
 	background-color: #ddd;
-	color:#0f3ffb;
+	color:#006fff;
 }
 
 .UI-block{
@@ -65,6 +65,10 @@ code {
 	border: 1px solid #ccc;
 }
 
+.btn[disabled]{
+	background-color: #777;
+}
+
 /*
 .navbar-brand img{
 	padding:5px;
@@ -77,7 +81,7 @@ code {
 */
 
 .tron-blue {
-	background-color: #0f3ffb;
+	background-color: #006fff;
 	color:#fdfdfd;
 }
 
@@ -98,8 +102,18 @@ code {
 	box-shadow: 1px 1px 1px #888888;
 }
 
+.tron-green {
+	background-color: #05C1B3;
+	color:#fdfdfd;
+}
+
+.tron-green:hover, .tron-green:active, .tron-green:focus {
+	box-shadow: 1px 1px 1px #888888;
+	color:white;
+}
+
 .tron-black {
-	background-color: #222;
+	background-color: #006fff;
 	color:#fdfdfd;
 }
 
