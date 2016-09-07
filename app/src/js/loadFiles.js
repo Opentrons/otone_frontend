@@ -306,7 +306,7 @@ function loadFile(e) {
         if(tempProtocol.deck && tempProtocol.head && tempProtocol.instructions && tempProtocol.ingredients) {
 
           document.getElementById('runButton').disabled = false;
-          document.getElementById('runButton').classList.add('tron-red');
+          document.getElementById('runButton').classList.add('tron-blue');
 
           CURRENT_PROTOCOL = tempProtocol;
           for (var k in tempProtocol.head){
@@ -504,7 +504,7 @@ function createAndSend () {
           timeSentJob = new Date().getTime();
 
           document.getElementById('runButton').disabled = true;
-          document.getElementById('runButton').classList.remove('tron-red');
+          document.getElementById('runButton').classList.remove('tron-blue');
         }
 
         shouldInfinity = false;
@@ -587,113 +587,145 @@ function convert_csv_to_json(filetext) {
   var current_ingredients = {};
   var current_deck = {
     'trash' : {
-      'labware' : 'point'
+      'labware' : 'point'    // always have 1 trash container
     }
   };
-  var current_head = {
-    "p10-single" : {
-      "tool" : "pipette",
-      "tip-racks" : [
-      ],
-      "trash-container" : {
-        "container" : "trash"
-      },
-      "multi-channel" : false,
-      "axis" : "a",
-      "volume" : 10,
-      "down-plunger-speed" : 300,
-      "up-plunger-speed" : 500,
-      "tip-plunge" : 8,
-      "extra-pull-volume" : 0.5,
-      "extra-pull-delay" : 1,
-      "distribute-percentage" : 0.1,
-      "points" : [
-      ]
+  var current_head = {};
+  var current_instructions = [];
+
+  var pipette_template = {
+    "tool" : "pipette",
+    "tip-racks" : [          // tipracks are added after all tips are counted below
+    ],
+    "trash-container" : {
+      "container" : "trash"
+    },
+    "multi-channel" : false,
+    "axis" : undefined,      // axis is set by the CSV
+    "volume" : undefined,    // volume can remain unchanged by the file
+    "down-plunger-speed" : 300,
+    "up-plunger-speed" : 500,
+    "tip-plunge" : 7,
+    "extra-pull-volume" : 0.5,
+    "extra-pull-delay" : 1,
+    "distribute-percentage" : 0.1,
+    "points" : []
+  }
+
+  var pipette_transfer_count = {};
+
+  // get all pipettes and their axis
+  // get all containers and labware type
+
+  for(var i=0; i<line_array.length; i++) {
+    if (line_array[i].trim().charAt(0) != '#') {
+
+      let cells = line_array[i].split(',');
+
+      if (cells[0].trim().toLowerCase() == 'pipette') {
+        const pname = cells[1].trim();
+        current_head[pname] = JSON.parse(JSON.stringify(pipette_template));
+        current_head[pname].axis = cells[2].trim().toLowerCase();
+        current_head[pname].volume = robotState.pipettes[current_head[pname].axis].volume || 200
+
+        pipette_transfer_count[pname] = 0;
+      }
+      else if (cells[0].trim().toLowerCase() == 'container') {
+        const cname = cells[1].trim();
+        current_deck[cname] = {
+          'labware' : cells[2].trim()
+        };
+      }
     }
-  };
-  var current_instructions = [{
+  }
+
+
+  var instruction_template = {
     'tool': 'p10-single',
     'groups': []
-  }];
+  };
 
-  var total_transfers = 0;
+  var current_pipette = undefined;
+  var current_group = undefined;
 
   for(var i=0; i<line_array.length; i++) {
     var cells = line_array[i].split(',');
-    if(cells.length>4) {
+    if(cells.length>6) {
       if(cells[0].trim().indexOf('#')==0) {
-        // it's a commented line
+      }
+      if(cells[0].trim().toLowerCase()=='pipette') {
+      }
+      if(cells[0].trim().toLowerCase()=='container') {
       }
       else {
 
-        var volume = Number(cells[4]);
+        var pname = cells[6].trim();
+        var volume = Number(cells[4].trim());
+        var dWell = cells[3].trim().toUpperCase();
+        var dPlate = cells[2].trim();
+        var sWell = cells[1].trim().toUpperCase();
+        var sPlate = cells[0].trim();
 
-        if(volume>0) {
-          total_transfers++;
+        if(volume>0 && !isNaN(pipette_transfer_count[pname])) {
 
-          var s_plate = cells[0];
-          var d_plate = cells[2];
+          // count how many transfers this pipette will do
+          pipette_transfer_count[pname]++;
 
-          // create a new 96 plate on the deck if it doesn't already exist
-          if(!current_deck[s_plate]){
-            current_deck[s_plate] = {
-              'labware' : '96-PCR-flat'
-            }
+          if (pname != current_pipette) {
+            // if we changed pipette, make a new instruction for it
+            current_instructions.push({
+              'tool' : pname,
+              'groups' : [{
+                'transfer': []
+              }]
+            });
+
+            current_group = current_instructions[current_instructions.length-1]['groups'][0]['transfer']
           }
-          if(!current_deck[d_plate]){
-            current_deck[d_plate] = {
-              'labware' : '96-PCR-flat'
-            }
-          }
+          current_pipette = pname;
 
-          var s_well = cells[1];
-          var d_well = cells[3];
-
-          current_instructions[0]['groups'].push({
-            "transfer": [
-              {
-                "from": {
-                  "container": s_plate,
-                  "location": s_well,
-                  "tip-offset": -1
-                },
-                "to": {
-                  "container": d_plate,
-                  "location": d_well
-                },
-                "volume": volume,
-                "blowout" : true
-              }
-            ]
+          current_group.push({
+            "from": {
+              "container": sPlate,
+              "location": sWell
+            },
+            "to": {
+              "container": dPlate,
+              "location": dWell
+            },
+            "volume": volume,
+            "blowout" : true
           });
         }
       }
     }
   }
 
-  if(total_transfers > 0) {
-    var total_plates = Math.floor(total_transfers/96) + 1
-    for(var p=0; p<total_plates; p++) {
-      var tiprack_name = 'tiprack_' + (p+1);
-      current_deck[tiprack_name] = {
-        'labware' : 'tiprack-10ul'
+  for (var pip in current_head) {
+    if(pipette_transfer_count[pip] > 0) {
+      var total_plates = Math.floor(pipette_transfer_count[pip]/96) + 1
+      for(var p=0; p<total_plates; p++) {
+        var tiprack_name = 'tiprack_'+pip+'_'+(p+1);
+        current_deck[tiprack_name] = {
+          'labware' : 'tiprack-200ul'      // there is no dimensional difference between our tipracks
+        }
+        current_head[pip]['tip-racks'].push({
+          'container' : tiprack_name
+        });
       }
-      current_head['p10-single']['tip-racks'].push({
-        'container' : tiprack_name
-      });
     }
-
-    var new_protocol = {
-      'deck' : current_deck,
-      'head' : current_head,
-      'ingredients' : current_ingredients,
-      'instructions' : current_instructions
-    }
-
-    //console.log(JSON.stringify(new_protocol,undefined,2));
-
-    return new_protocol;
   }
+
+  var new_protocol = {
+    'deck' : current_deck,
+    'head' : current_head,
+    'ingredients' : current_ingredients,
+    'instructions' : current_instructions
+  }
+
+  //console.log(JSON.stringify(new_protocol,undefined,2));
+
+  return new_protocol;
 }
 
 /////////////////////////////////

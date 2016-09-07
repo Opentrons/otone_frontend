@@ -100,8 +100,8 @@ function toggleJog(jogGroup){
 		b.classList.remove('tron-black');
 		}
 		for(var i=0; i<aBtns.length; i++){
-			aBtns[i].disabled=false;
-			bBtns[i].disabled=true;
+			aBtns[i].disabled = false;
+			bBtns[i].disabled = true;
 		}
 		active_pipette = jogGroup;
 	}
