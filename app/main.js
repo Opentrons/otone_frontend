@@ -182,7 +182,8 @@ app.getUserJSONFiles = function(){
   var filenames = fs.readdirSync(app.getUserContainersPath());
 
   filenames = filenames.filter(function(fileName) {
-    return fileName.indexOf('.json') > 0;
+    var temp = fileName.split('.');
+    return temp[temp.length-1] == 'json';
   });
 
   return filenames.map(function(fileName){
