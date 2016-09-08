@@ -299,8 +299,6 @@ function loadFile(e) {
 
       if(tempProtocol) {
 
-        TIPRACKS = {'a':[],'b':[]}; // clear tipracks
-
         //if we find the info generate html elements
         if(tempProtocol.deck && tempProtocol.head && tempProtocol.instructions && tempProtocol.ingredients) {
 
@@ -316,6 +314,8 @@ function loadFile(e) {
           }
 
           CURRENT_PROTOCOL = tempProtocol;
+
+          TIPRACKS = {'a':[],'b':[]}; // clear tipracks
 
           document.getElementById('runButton').disabled = false;
           document.getElementById('runButton').classList.add('tron-blue');
