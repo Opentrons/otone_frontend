@@ -299,16 +299,29 @@ function loadFile(e) {
 
       if(tempProtocol) {
 
-        TIPRACKS = {'a':[],'b':[]}; // clear tipracks
-
-        setPipetteNames(tempProtocol); // set the names of the pipettes in the container table
         //if we find the info generate html elements
         if(tempProtocol.deck && tempProtocol.head && tempProtocol.instructions && tempProtocol.ingredients) {
+
+          // test to see if there's any compile errors
+          // but don't actually run the compiled output returned from "createRobotProtocol"
+          try {
+            createRobotProtocol(tempProtocol);
+          }
+          catch (error) {
+            console.log(error);
+            alert(error);
+            return;
+          }
+
+          CURRENT_PROTOCOL = tempProtocol;
+
+          TIPRACKS = {'a':[],'b':[]}; // clear tipracks
 
           document.getElementById('runButton').disabled = false;
           document.getElementById('runButton').classList.add('tron-blue');
 
-          CURRENT_PROTOCOL = tempProtocol;
+          setPipetteNames(CURRENT_PROTOCOL); // set the names of the pipettes in the container table
+
           for (var k in tempProtocol.head){
             console.log('the k: ',k);
             console.log('the head:')
