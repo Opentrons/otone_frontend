@@ -595,7 +595,7 @@ function getAJAX(filepath,callback) {
 
 function convert_csv_to_json(filetext) {
 
-  var line_array = filetext.split('\n');
+  var line_array = filetext.split(/\r\n|\r|\n/g);
 
   var current_ingredients = {};
   var current_deck = {
