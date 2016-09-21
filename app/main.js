@@ -84,7 +84,7 @@ function execFile(filePath, extraArgs) {
     )
 
     backendProcess.shutdown = function (){
-        if (process.platform == "darwin") {
+        if (process.platform == "darwin" || process.platform == "linux") {
             child_process.spawnSync('pkill', ['-9', backendProcessName]);
         }
         else if (process.platform == "win32") {
@@ -101,8 +101,13 @@ function startBackend() {
     const userDataPath = app.getPath('userData');
     console.log('User Data Path', userDataPath)
 
-    if (process.platform == "darwin" || process.platform == "linux") {
+    if (process.platform == "darwin") {
       var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
+      execFile(backend_path, [userDataPath]);
+    }
+
+    else if (process.platform == "linux") {
+      var backend_path = app.getAppPath() + "../backend/backend/otone_client.py"
       execFile(backend_path, [userDataPath]);
     }
 
