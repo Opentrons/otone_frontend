@@ -101,7 +101,7 @@ function startBackend() {
     const userDataPath = app.getPath('userData');
     console.log('User Data Path', userDataPath)
 
-    if (process.platform == "darwin") {
+    if (process.platform == "darwin" || process.platform == "linux") {
       var backend_path = app.getAppPath() + "/backend-dist/mac/otone_client";
       execFile(backend_path, [userDataPath]);
     }
