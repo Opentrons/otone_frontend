@@ -600,11 +600,13 @@ class Smoothie(object):
             :returns:
                 A list of the serial ports available on the system
         """
+        include_all_ports = False
         if sys.platform.startswith('win'):
             ports = ['COM%s' % (i + 1) for i in range(256)]
         elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
             # this excludes your current terminal "/dev/tty"
             ports = glob.glob('/dev/tty[A-Za-z]*')
+            include_all_ports = True
         elif sys.platform.startswith('darwin'):
             ports = glob.glob('/dev/tty.*')
         else:
@@ -613,7 +615,7 @@ class Smoothie(object):
         result = []
         for port in ports:
             try:
-                if 'usbmodem' in port or 'COM' in port:
+                if include_all_ports or ('usbmodem' in port or 'COM' in port):
                     s = serial.Serial(port)
                     s.close()
                     result.append(port)
